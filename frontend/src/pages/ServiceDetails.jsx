@@ -387,7 +387,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                     <BadgeCheck size={12} />
                     Our Projects
                   </span>
-                  <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+                  <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
                     Built For{' '}
                     <span className="text-transparent bg-clip-text"
                       style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>
@@ -474,7 +474,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                     <Wrench size={12} />
                     Technologies We Use
                   </span>
-                  <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+                  <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
                     Tools Powering{' '}
                     <span className="text-transparent bg-clip-text"
                       style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>

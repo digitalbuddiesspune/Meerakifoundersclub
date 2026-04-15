@@ -463,7 +463,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                 <BadgeCheck size={12} />
                 Our Expert Services
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
                 Solutions Designed For{' '}
                 <span className="text-transparent bg-clip-text"
                   style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>
@@ -577,7 +577,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                 <ChartNoAxesCombined size={12} />
                 Our Impact
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
                 Numbers That Prove The{' '}
                 <span className="text-transparent bg-clip-text"
                   style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>
@@ -643,7 +643,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                 <Rocket size={12} />
                 How We Work
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
                 A Proven Roadmap From{' '}
                 <span className="text-transparent bg-clip-text"
                   style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>
