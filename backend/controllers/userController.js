@@ -41,6 +41,37 @@ export const createUser = async (req, res) => {
   }
 };
 
+export const loginUser = async (req, res) => {
+  try {
+    const { identifier } = req.body;
+
+    if (!identifier) {
+      return res.status(400).json({ message: "Email or phone is required" });
+    }
+
+    const normalizedIdentifier = String(identifier).trim().toLowerCase();
+    const user = await User.findOne({
+      $or: [{ email: normalizedIdentifier }, { phone: normalizedIdentifier }],
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({
+      message: "Login successful",
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to login user" });
+  }
+};
+
 export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
