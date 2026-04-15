@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+.service-card {
+  perspective: 1200px;
+}
+
+.service-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+.service-card:hover .service-card-inner {
+  transform: rotateY(180deg);
+}
+
+.service-card-front,
+.service-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.service-card-back {
+  transform: rotateY(180deg);
+}

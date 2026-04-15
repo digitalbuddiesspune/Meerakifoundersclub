@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import AuthModal from './components/AuthModal'
 import Home from './pages/Home'
+import ServiceDetails from './pages/ServiceDetails'
+import Services from './pages/Services'
 
 const AUTH_STORAGE_KEY = 'mfc_auth_user'
 const API_BASE_URL = import.meta.env.VITE_API_URL
@@ -147,13 +150,42 @@ function App() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-slate-800">
-      <Home
-        isAuthenticated={isAuthenticated}
-        authUser={authUser}
-        onOpenAuth={openAuthModal}
-        onLogout={handleLogout}
-        isBlurred={showAuthModal}
-      />
+      <Routes>
+        <Route
+          path="/"
+          element={(
+            <Home
+              isAuthenticated={isAuthenticated}
+              authUser={authUser}
+              onOpenAuth={openAuthModal}
+              onLogout={handleLogout}
+              isBlurred={showAuthModal}
+            />
+          )}
+        />
+        <Route
+          path="/services"
+          element={(
+            <Services
+              isAuthenticated={isAuthenticated}
+              authUser={authUser}
+              onOpenAuth={openAuthModal}
+              onLogout={handleLogout}
+            />
+          )}
+        />
+        <Route
+          path="/services/:slug"
+          element={(
+            <ServiceDetails
+              isAuthenticated={isAuthenticated}
+              authUser={authUser}
+              onOpenAuth={openAuthModal}
+              onLogout={handleLogout}
+            />
+          )}
+        />
+      </Routes>
       <AuthModal
         visible={showAuthModal && !isAuthenticated}
         authTab={authTab}

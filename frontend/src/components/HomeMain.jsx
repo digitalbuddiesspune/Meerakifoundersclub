@@ -1,43 +1,87 @@
+import { useEffect, useRef, useState } from 'react'
+
+const HERO_IMAGE =
+  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80'
+
 function HomeMain() {
+  const heroRef = useRef(null)
+  const [scrollOffset, setScrollOffset] = useState(0)
+  const [hoverOffset, setHoverOffset] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const hero = heroRef.current
+      if (!hero) return
+
+      const rect = hero.getBoundingClientRect()
+      const windowHeight = window.innerHeight || 1
+      const progress = Math.max(-1, Math.min(1, (windowHeight - rect.top) / (windowHeight + rect.height)))
+
+      setScrollOffset((progress - 0.5) * 24)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleMouseMove = (event) => {
+    const hero = heroRef.current
+    if (!hero) return
+
+    const rect = hero.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 16
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 12
+    setHoverOffset({ x, y })
+  }
+
+  const resetHover = () => setHoverOffset({ x: 0, y: 0 })
+
   return (
     <main id="home">
-      <section className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-16 md:grid-cols-2 md:items-center md:px-8">
-        <div>
-          <p className="mb-3 inline-block rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-300">
-            Startup Growth Partner
-          </p>
-          <h1 className="text-4xl font-black leading-tight md:text-5xl">
+      <style>{`
+        @keyframes heroTextSlideIn {
+          from {
+            opacity: 0;
+            transform: translateX(-52px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      `}</style>
+      <section
+        ref={heroRef}
+        className="relative flex h-[78vh] w-full items-center justify-center overflow-hidden md:h-[82vh]"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={resetHover}
+      >
+        <img
+          src={HERO_IMAGE}
+          alt="Corporate building"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out"
+          style={{
+            transform: `translate3d(${hoverOffset.x}px, ${hoverOffset.y + scrollOffset}px, 0) scale(1.08)`,
+          }}
+        />
+        <div className="absolute inset-0 bg-black/55" />
+
+        <div className="relative z-10 px-4 text-center text-white md:px-8">
+          <h1
+            className="mx-auto max-w-4xl text-4xl font-bold leading-tight md:text-6xl"
+            style={{ animation: 'heroTextSlideIn 0.9s ease-out forwards' }}
+          >
             End-to-End Startup Solutions for Founders
           </h1>
-          <p className="mt-5 max-w-xl text-slate-600">
-            We help startups from zero to scale with strategy, investor readiness,
-            funding support, branding, product development, and growth marketing.
+          <p
+            className="mx-auto mt-5 max-w-2xl text-sm text-slate-200 md:text-base"
+            style={{ animation: 'heroTextSlideIn 1.2s ease-out forwards' }}
+          >
+            We help startups from zero to scale with strategy, investor readiness, funding support, branding,
+            product development, and growth marketing.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="mailto:info@meraakifoundersclub.com"
-              className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-200"
-            >
-              Start Your Journey
-            </a>
-            <a
-              href="#services"
-              className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
-            >
-              Explore Services
-            </a>
-          </div>
-        </div>
-
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
-          <h2 className="text-xl font-bold">What We Cover</h2>
-          <ul className="mt-5 space-y-3 text-sm text-slate-600">
-            <li>Investor pitch deck + fundraising strategy</li>
-            <li>Product roadmap + MVP development guidance</li>
-            <li>Brand positioning + go-to-market planning</li>
-            <li>Marketing execution + growth systems</li>
-            <li>Mentorship + founder decision support</li>
-          </ul>
         </div>
       </section>
 
