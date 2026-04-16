@@ -365,7 +365,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
               ))}
             </svg>
 
-            <div className="mx-auto grid w-full max-w-6xl items-center gap-8 md:gap-10 md:grid-cols-2">
+            <div className="mx-auto grid w-full max-w-7xl items-center gap-8 md:gap-10 md:grid-cols-2">
               {/* Left copy */}
               <div>
                 <p className="hero-badge shimmer-tag badge-pulse inline-flex items-center rounded-full border border-cyan-300/40 bg-cyan-300/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">
@@ -373,7 +373,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                   Premium Startup Services
                 </p>
 
-                <h1 className="hero-h1 mt-5 text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl md:text-[3.25rem]">
+                <h1 className="hero-h1 mt-5 text-2xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-[2.75rem]">
                   Build, Fund and{' '}
                   <span className="relative inline-block">
                     <span className="relative z-10 text-transparent bg-clip-text"
@@ -397,7 +397,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                     { icon: Rocket, label: '100+ Clients' },
                     { icon: TrendingUp, label: '96% Success' },
                     { icon: Target, label: '250+ Projects' },
-                  ].map(({ icon: Icon, label }) => (
+                  ].map(({  label }) => (
                     <div key={label} className="flex items-center gap-2 text-sm font-medium text-slate-600">
                       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-100 text-cyan-600">
                         <Icon size={13} />
@@ -455,15 +455,13 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
             id="expert-services"
             className="relative z-20 bg-slate-100 px-4 py-16 text-slate-900 md:-mt-8 md:rounded-t-[2.5rem] md:sticky md:top-0 md:min-h-screen md:px-8"
           >
-            <DotPattern className="left-0 top-0" />
-
             {/* Section header */}
             <div className="relative text-center">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-700">
                 <BadgeCheck size={12} />
                 Our Expert Services
               </span>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-4xl">
                 Solutions Designed For{' '}
                 <span className="text-transparent bg-clip-text"
                   style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>
@@ -577,7 +575,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                 <ChartNoAxesCombined size={12} />
                 Our Impact
               </span>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-4xl">
                 Numbers That Prove The{' '}
                 <span className="text-transparent bg-clip-text"
                   style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>
@@ -623,7 +621,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                   iconColor: 'text-amber-600',
                   iconBg: 'bg-amber-100',
                 },
-              ].map(({ icon: Icon, value, label, gradient, iconColor, iconBg }) => (
+              ].map(({  value, label, gradient, iconColor, iconBg }) => (
                 <article
                   key={label}
                   className={`stat-card min-w-[84vw] snap-start rounded-2xl border border-slate-100 bg-gradient-to-br ${gradient} p-7 text-center shadow-sm sm:min-w-[260px] md:min-w-0`}
@@ -631,7 +629,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                   <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${iconBg} ${iconColor} mb-3`}>
                     <Icon size={20} />
                   </span>
-                  <p className="text-4xl font-extrabold tracking-tight text-slate-900">{value}</p>
+                  <p className="text-3xl font-extrabold tracking-tight text-slate-900">{value}</p>
                   <p className="mt-2 text-sm font-medium text-slate-500">{label}</p>
                 </article>
               ))}
@@ -643,7 +641,7 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                 <Rocket size={12} />
                 How We Work
               </span>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-4xl">
                 A Proven Roadmap From{' '}
                 <span className="text-transparent bg-clip-text"
                   style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>

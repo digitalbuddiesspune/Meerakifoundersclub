@@ -70,7 +70,7 @@ function HomeMain() {
 
         <div className="relative z-10 px-4 text-center text-white md:px-8">
           <h1
-            className="mx-auto max-w-4xl text-4xl font-bold leading-tight md:text-6xl"
+            className="mx-auto max-w-4xl text-3xl font-bold leading-tight md:text-5xl"
             style={{ animation: 'heroTextSlideIn 0.9s ease-out forwards' }}
           >
             End-to-End Startup Solutions for Founders
@@ -86,8 +86,8 @@ function HomeMain() {
       </section>
 
       <section id="services" className="border-y border-slate-200 bg-stone-100 py-14">
-        <div className="mx-auto w-full max-w-6xl px-4 md:px-8">
-          <h2 className="text-3xl font-bold">Our Core Services</h2>
+        <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+          <h2 className="text-2xl font-bold">Our Core Services</h2>
           <p className="mt-3 max-w-2xl text-slate-600">
             Everything a startup needs under one roof to build faster, raise smarter, and grow sustainably.
           </p>
@@ -114,8 +114,8 @@ function HomeMain() {
         </div>
       </section>
 
-      <section id="process" className="mx-auto w-full max-w-6xl px-4 py-14 md:px-8">
-        <h2 className="text-3xl font-bold">How We Work</h2>
+      <section id="process" className="mx-auto w-full max-w-7xl px-4 py-14 md:px-8">
+        <h2 className="text-2xl font-bold">How We Work</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-4">
           {[
             'Discovery Call',

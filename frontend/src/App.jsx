@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AuthModal from './components/AuthModal'
 import Home from './pages/Home'
+import Profile from './pages/Profile'
+import ProblemsSolutions from './pages/ProblemsSolutions'
 import ServiceDetails from './pages/ServiceDetails'
 import Services from './pages/Services'
 
@@ -182,6 +184,27 @@ function App() {
               authUser={authUser}
               onOpenAuth={openAuthModal}
               onLogout={handleLogout}
+            />
+          )}
+        />
+        <Route
+          path="/profile"
+          element={(
+            <Profile
+              isAuthenticated={isAuthenticated}
+              authUser={authUser}
+              onOpenAuth={openAuthModal}
+              onLogout={handleLogout}
+            />
+          )}
+        />
+        <Route
+          path="/problems-solutions"
+          element={(
+            <ProblemsSolutions
+              isAuthenticated={isAuthenticated}
+              authUser={authUser}
+              onOpenAuth={openAuthModal}
             />
           )}
         />

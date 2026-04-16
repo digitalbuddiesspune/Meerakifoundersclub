@@ -11,7 +11,7 @@ const toSlug = (value) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
-function Header({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
+function Header({ isAuthenticated, authUser, onOpenAuth }) {
   const [services, setServices] = useState([])
   const [isServicesOpen, setIsServicesOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -62,10 +62,18 @@ function Header({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
   }
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false)
+  const handleAccountClick = () => {
+    if (isAuthenticated) {
+      navigate('/profile')
+      closeMobileMenu()
+      return
+    }
+    onOpenAuth()
+  }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-500  text-white backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 md:px-8">
+    <header className="sticky  top-0 z-80 bg-white backdrop-blur">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-1.5 md:px-8">
         <div className="flex w-full items-center justify-between md:hidden">
           <button
             type="button"
@@ -80,13 +88,13 @@ function Header({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
             <img
               src={LOGO_URL}
               alt="Meraaki Founders Club logo"
-              className="h-10 w-auto max-w-[120px] rounded-lg object-contain"
+              className="h-16 w-auto  rounded-lg object-contain"
             />
           </Link>
 
           <button
             type="button"
-            onClick={onOpenAuth}
+            onClick={handleAccountClick}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-800 text-white"
             aria-label="User account"
           >
@@ -98,12 +106,12 @@ function Header({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
           <img
             src={LOGO_URL}
             alt="Meraaki Founders Club logo"
-            className="h-12 w-auto max-w-[150px] rounded-lg object-contain"
+            className="h-16 w-auto max-w-[220px] rounded-lg object-contain"
           />
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-          <Link to="/" className="text-black transition hover:text-emerald-200">Home</Link>
+          <Link to="/" className="text-black transition hover:text-[#F26527]">Home</Link>
           <div
             ref={servicesMenuRef}
             className="relative"
@@ -113,7 +121,7 @@ function Header({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
             <button
               type="button"
               onClick={goToServicesPage}
-              className="text-black transition hover:text-slate-700"
+              className="text-black transition hover:text-[#F26527]"
             >
               Services
             </button>
@@ -136,35 +144,30 @@ function Header({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
               </div>
             ) : null}
           </div>
-          <a href="#process" className="text-black transition hover:text-slate-700">How It Works</a>
-          <a href="#contact" className="text-black transition hover:text-slate-700">Contact</a>
+          <Link to="/problems-solutions" className="text-black transition hover:text-[#F26527]">
+            Problems & Solutions
+          </Link>
+          <a href="#process" className="text-black transition hover:text-[#F26527]">How It Works</a>
+          <a href="#contact" className="text-black transition hover:text-[#F26527]">Contact</a>
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
           <button
             type="button"
-            onClick={onOpenAuth}
+            onClick={handleAccountClick}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-800 text-white transition hover:border-white"
             aria-label="User account"
           >
             {isAuthenticated && authUser?.name ? authUser.name[0].toUpperCase() : 'U'}
           </button>
-          {isAuthenticated ? (
-            <button
-              type="button"
-              onClick={onLogout}
-              className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-200"
-            >
-              Logout
-            </button>
-          ) : (
+          {!isAuthenticated ? (
             <a
               href="mailto:info@meraakifoundersclub.com"
               className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-emerald-400"
             >
               Book a Call
             </a>
-          )}
+          ) : null}
         </div>
       </div>
 
@@ -181,6 +184,13 @@ function Header({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
             >
               Services
             </button>
+            <Link
+              to="/problems-solutions"
+              onClick={closeMobileMenu}
+              className="rounded-lg px-3 py-2 transition hover:bg-slate-100"
+            >
+              Problems & Solutions
+            </Link>
             {services.length > 0 ? (
               <div className="ml-3 flex flex-col gap-1">
                 {services.map((service) => (
@@ -205,13 +215,10 @@ function Header({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
             {isAuthenticated ? (
               <button
                 type="button"
-                onClick={() => {
-                  onLogout()
-                  closeMobileMenu()
-                }}
+                onClick={handleAccountClick}
                 className="rounded-lg px-3 py-2 text-left transition hover:bg-slate-100"
               >
-                Logout
+                Profile
               </button>
             ) : null}
           </div>

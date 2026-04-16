@@ -1,5 +1,44 @@
 @import "tailwindcss";
 
+:root {
+  --brand-primary: #f26527;
+  --brand-primary-dark: #d9551f;
+  --brand-primary-light: #fff1ea;
+  --brand-primary-soft: #ffe2d4;
+}
+
+/* Global brand accents: remap existing cyan/emerald utility usage */
+.text-cyan-500,
+.text-cyan-600,
+.text-cyan-700,
+.text-cyan-800,
+.text-emerald-300,
+.text-emerald-600,
+.text-emerald-700 {
+  color: var(--brand-primary) !important;
+}
+
+.bg-cyan-50,
+.bg-cyan-100,
+.bg-cyan-300\/20,
+.bg-emerald-50 {
+  background-color: var(--brand-primary-light) !important;
+}
+
+.bg-emerald-500 {
+  background-color: var(--brand-primary) !important;
+}
+
+.hover\:bg-emerald-400:hover {
+  background-color: var(--brand-primary-dark) !important;
+}
+
+.border-cyan-200,
+.border-cyan-300\/40,
+.border-emerald-200 {
+  border-color: var(--brand-primary-soft) !important;
+}
+
 .service-card {
   perspective: 1200px;
 }

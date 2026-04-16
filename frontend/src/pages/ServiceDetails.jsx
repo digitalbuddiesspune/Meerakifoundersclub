@@ -230,7 +230,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
 
         {/* ── Loading ── */}
         {loading ? (
-          <main className="mx-auto max-w-6xl px-4 py-24 text-center md:px-8">
+          <main className="mx-auto max-w-7xl px-4 py-24 text-center md:px-8">
             <div className="flex justify-center gap-2">
               {[0, 1, 2].map((i) => (
                 <div key={i} className="h-2.5 w-2.5 rounded-full bg-cyan-400"
@@ -243,7 +243,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
 
         {/* ── Error ── */}
         {error ? (
-          <main className="mx-auto max-w-6xl px-4 py-16 text-center md:px-8">
+          <main className="mx-auto max-w-7xl px-4 py-16 text-center md:px-8">
             <p className="text-red-500">{error}</p>
             <Link to="/services"
               className="mt-5 inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow"
@@ -280,7 +280,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                 </svg>
               </div>
 
-              <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-2">
+              <div className="mx-auto grid w-full max-w-7xl items-center gap-10 md:grid-cols-2">
                 {/* Left */}
                 <div>
                   <p className="fade-up-1 shimmer-badge inline-flex items-center rounded-full border border-cyan-300/40 bg-cyan-100/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">
@@ -288,7 +288,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                     {service.name}
                   </p>
 
-                  <h1 className="fade-up-2 mt-5 text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl md:text-[3.1rem]">
+                  <h1 className="fade-up-2 mt-5 text-2xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-[2.75rem]">
                     <span className="text-transparent bg-clip-text"
                       style={{ backgroundImage: 'linear-gradient(135deg,#0e7490,#6366f1)' }}>
                       {service.name}
@@ -319,7 +319,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                         icon: Clock3, value: service.avgDelivery || '15 Days',
                         label: 'Avg Delivery', color: 'text-orange-600', bg: 'bg-orange-50', iconBg: 'bg-orange-100',
                       },
-                    ].map(({ icon: Icon, value, label, color, bg, iconBg }) => (
+                    ].map(({  value, label, color, bg, iconBg }) => (
                       <article key={label}
                         className={`stat-mini rounded-xl border border-slate-100 ${bg} p-3 text-center shadow-sm`}>
                         <span className={`inline-flex h-7 w-7 items-center justify-center rounded-lg ${iconBg} ${color} mb-1`}>
@@ -379,7 +379,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
               className="relative z-20 bg-slate-100 px-4 py-16 md:sticky md:top-0 md:min-h-screen md:px-8">
               <DotPattern className="right-0 top-0" />
 
-              <div className="mx-auto w-full max-w-6xl">
+              <div className="mx-auto w-full max-w-7xl">
 
                 {/* Section header */}
                 <div className="text-center">
@@ -387,7 +387,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                     <BadgeCheck size={12} />
                     Our Projects
                   </span>
-                  <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
+                  <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-4xl">
                     Built For{' '}
                     <span className="text-transparent bg-clip-text"
                       style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>
@@ -474,7 +474,7 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                     <Wrench size={12} />
                     Technologies We Use
                   </span>
-                  <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
+                  <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-4xl">
                     Tools Powering{' '}
                     <span className="text-transparent bg-clip-text"
                       style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#6366f1)' }}>
