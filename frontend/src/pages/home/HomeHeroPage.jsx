@@ -5,12 +5,21 @@ import Lottie from 'lottie-react'
 const LOTTIE_URL =
   'https://cdn.prod.website-files.com/686c3195802b0228dca014a8/687059e9021f0c2322f49a77_hero-animation.json'
 
-const heroBadgeReplacements = [
-  { label: 'CA', animation: 'arcTravel 22s linear infinite', delay: 0 },
-  { label: 'CS', animation: 'arcTravel 22s linear infinite', delay: -5.5 },
-  { label: 'GST', animation: 'arcTravel 22s linear infinite', delay: -11 },
-  { label: 'LLP', animation: 'arcTravel 22s linear infinite', delay: -16.5 },
+// ✅ Dynamic labels (easy to scale)
+const labels = [
+  'CA','CS','GST','LLP','INC','TDS','ROC','PAN',
+  'ITR','TM','ISO'
 ]
+
+// ✅ Better spacing
+const duration = 30
+const step = duration / labels.length
+
+const heroBadgeReplacements = labels.map((label, i) => ({
+  label,
+  animation: `arcTravel ${duration}s linear infinite`,
+  delay: -(i * step),
+}))
 
 const LottieComponent = typeof Lottie === 'function' ? Lottie : Lottie?.default
 
@@ -46,12 +55,14 @@ function HomeHeroPage() {
           from { opacity: 0; transform: translateX(-52px); }
           to { opacity: 1; transform: translateX(0); }
         }
+
+        /* ✅ Increased arc spacing */
         @keyframes arcTravel {
-          0% { transform: translate3d(-72vw, 8px, 0) scale(1); }
-          25% { transform: translate3d(-36vw, 66px, 0) scale(1.01); }
-          50% { transform: translate3d(0vw, 104px, 0) scale(1.02); }
-          75% { transform: translate3d(36vw, 66px, 0) scale(1.01); }
-          100% { transform: translate3d(72vw, 8px, 0) scale(1); }
+          0%   { transform: translate3d(-80vw, 8px, 0) scale(1); }
+          25%  { transform: translate3d(-40vw, 80px, 0) scale(1.01); }
+          50%  { transform: translate3d(0vw, 120px, 0) scale(1.02); }
+          75%  { transform: translate3d(40vw, 80px, 0) scale(1.01); }
+          100% { transform: translate3d(80vw, 8px, 0) scale(1); }
         }
       `}</style>
 
@@ -60,7 +71,7 @@ function HomeHeroPage() {
           <LottieComponent
             animationData={animationData}
             loop
-            className="-ml-[24%] -mt-[8%] h-[138%] w-[148%] min-w-[148%] md:-ml-[1%] md:mt-16 md:h-full md:w-[102%] md:min-w-[102%]"
+            className="-ml-[22%] -mt-[24%] w-[144%] min-w-[144%] md:-ml-[1%] md:mt-16 md:h-full md:w-[102%] md:min-w-[102%]"
             rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
           />
         </div>
@@ -73,7 +84,7 @@ function HomeHeroPage() {
       {!animationError ? (
         <div className="pointer-events-none absolute inset-0 z-10 block">
           {heroBadgeReplacements.map((badge) => (
-            <div key={badge.label} className="absolute left-1/2 top-[67%] md:top-[62%]">
+            <div key={badge.label} className="absolute left-1/2">
               <div
                 style={{
                   animation: badge.animation,
@@ -89,9 +100,9 @@ function HomeHeroPage() {
         </div>
       ) : null}
 
-      <div className="relative z-20 mx-auto flex min-h-[64vh] w-full max-w-7xl flex-col items-center justify-center px-4 text-center text-[#31393C] md:min-h-[58vh] md:px-8">
+      <div className="relative z-20 mx-auto flex min-h-[64vh] -mt-30 w-full max-w-7xl flex-col items-center justify-center px-4 text-center text-[#31393C] md:min-h-[58vh] md:px-8">
         <h1
-          className="mx-auto w-full max-w-6xl text-center leading-tight"
+          className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center text-center leading-tight"
           style={{ animation: 'heroTextSlideIn 0.9s ease-out forwards' }}
         >
           <span className="block text-3xl font-bold leading-tight md:text-6xl">
