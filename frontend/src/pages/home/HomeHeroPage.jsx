@@ -23,7 +23,7 @@ function HomeHeroPage() {
   }, [])
 
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-white">
+    <section className="relative flex min-h-screen w-full content-center items-center justify-center overflow-hidden bg-white text-center">
       <style>{`
         @keyframes heroTextSlideIn {
           from { opacity: 0; transform: translateX(-52px); }
@@ -91,28 +91,28 @@ function HomeHeroPage() {
         </div>
       </div>
 
-      <div className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-4 py-20 text-center text-[#31393C] md:px-8 md:py-24">
+      <div className="relative z-20 flex min-h-screen w-full max-w-7xl flex-col content-center items-center justify-center px-4 text-center text-[#31393C] md:px-8">
         <h1
-          className="mx-auto flex w-full max-w-4xl flex-col items-center justify-center text-center leading-tight"
+          className="flex w-full max-w-4xl flex-col content-center items-center justify-center text-center leading-tight"
           style={{ animation: 'heroTextSlideIn 0.9s ease-out forwards' }}
         >
           <span className="block text-3xl font-bold leading-tight md:text-5xl">
             Build Your Business with <span className="hidden md:inline"><br /></span> Founders-First platform.
           </span>
-          <span className="mt-2 block text-2xl font-semibold md:text-3xl">
+          <span className="block text-2xl font-semibold md:text-3xl">
             Connect • Inspire • Achieve
           </span>
         </h1>
 
         <p
-          className="mx-auto mt-4 max-w-2xl text-base text-slate-600"
+          className="max-w-2xl text-base text-slate-600"
           style={{ animation: 'heroTextSlideIn 1.2s ease-out forwards' }}
         >
           Discover, build and scale your ideas with a seamless digital experience.
         </p>
 
         <div
-          className="mt-8 flex flex-wrap justify-center gap-4"
+          className="flex flex-wrap content-center items-center justify-center gap-4"
           style={{ animation: 'heroTextSlideIn 1.4s ease-out forwards' }}
         >
           <Link
