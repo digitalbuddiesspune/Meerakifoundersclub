@@ -108,7 +108,7 @@ function HomeHeroPage() {
            Founders-First platform.
            </p> 
           </span>
-          <span className="block text-xl font-semibold md:text-3xl pb-2">
+          <span className="block text-base md:text-3xl pb-2">
             Connect • Inspire • Achieve
           </span>
         </h1>
@@ -120,14 +120,14 @@ function HomeHeroPage() {
         >
           <Link
             to="/services"
-            className="bg-[#F26527] px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90"
+            className="bg-[#F26527] px-3 py-1.5 md:px-6 md:py-3 rounded-xl text-xs md:text-sm font-semibold text-white shadow-md transition hover:opacity-90"
           >
             Get Started
           </Link>
 
           <a
             href="#services"
-            className="border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+            className="border border-slate-300 md:px-6 md:py-3 px-3 py-1.5 text-xs md:text-sm font-semibold text-slate-700 transition hover:bg-slate-100 rounded-xl "
           >
             Learn More
           </a>
