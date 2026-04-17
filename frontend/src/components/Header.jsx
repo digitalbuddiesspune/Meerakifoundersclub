@@ -148,7 +148,7 @@ function Header({ isAuthenticated, authUser, onOpenAuth }) {
             Problems & Solutions
           </Link>
           <a href="#process" className="text-black transition hover:text-[#F26527]">How It Works</a>
-          <a href="#contact" className="text-black transition hover:text-[#F26527]">Contact</a>
+          <Link to="/contact-us" className="text-black transition hover:text-[#F26527]">Contact</Link>
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -205,13 +205,13 @@ function Header({ isAuthenticated, authUser, onOpenAuth }) {
                 ))}
               </div>
             ) : null}
-            <a
-              href="mailto:info@meraakifoundersclub.com"
+            <Link
+              to="/contact-us"
               onClick={closeMobileMenu}
               className="rounded-lg px-3 py-2 transition hover:bg-slate-100"
             >
               Contact
-            </a>
+            </Link>
             {isAuthenticated ? (
               <button
                 type="button"

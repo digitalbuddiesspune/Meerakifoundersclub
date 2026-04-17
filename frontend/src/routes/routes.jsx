@@ -1,5 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import App from '../App'
+import ContactUs from '../pages/ContactUs'
 import Home from '../pages/Home'
 import ProblemsSolutions from '../pages/ProblemsSolutions'
 import Profile from '../pages/Profile'
@@ -13,6 +14,7 @@ const router = createBrowserRouter(
       <Route path="services" element={<Services />} />
       <Route path="services/:slug" element={<ServiceDetails />} />
       <Route path="problems-solutions" element={<ProblemsSolutions />} />
+      <Route path="contact-us" element={<ContactUs />} />
       <Route path="profile" element={<Profile />} />
     </Route>,
   ),

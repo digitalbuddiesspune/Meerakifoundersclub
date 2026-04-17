@@ -5,7 +5,7 @@ const LOGO_URL =
 
 function Footer() {
   return (
-    <footer id="contact" className="border-t border-slate-200 bg-stone-100">
+    <footer className="border-t border-slate-200 bg-stone-100">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-10 md:grid-cols-3 md:px-8">
         <div>
           <div className="flex items-center gap-3">
@@ -26,10 +26,10 @@ function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-700">Quick Links</h3>
           <ul className="mt-3 space-y-2 text-sm text-slate-600">
-            <li><a href="#home" className="hover:text-slate-950">Home</a></li>
-            <li><a href="#services" className="hover:text-slate-950">Services</a></li>
+            <li><Link to="/" className="hover:text-slate-950">Home</Link></li>
+            <li><Link to="/services" className="hover:text-slate-950">Services</Link></li>
             <li><Link to="/problems-solutions" className="hover:text-slate-950">Problems & Solutions</Link></li>
-            <li><a href="#process" className="hover:text-slate-950">How It Works</a></li>
+            <li><Link to="/contact-us" className="hover:text-slate-950">Contact</Link></li>
           </ul>
         </div>
 
