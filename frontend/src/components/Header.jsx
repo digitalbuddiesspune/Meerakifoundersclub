@@ -73,7 +73,7 @@ function Header({ isAuthenticated, authUser, onOpenAuth }) {
 
   return (
     <header className="sticky  top-0 z-80 bg-white backdrop-blur">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-1.5 md:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 md:px-8 md:py-3 lg:px-10">
         <div className="flex w-full items-center justify-between md:hidden">
           <button
             type="button"
@@ -88,7 +88,7 @@ function Header({ isAuthenticated, authUser, onOpenAuth }) {
             <img
               src={LOGO_URL}
               alt="Meraaki Founders Club logo"
-              className="h-16 w-auto  rounded-lg object-contain"
+              className="h-12 w-auto max-w-[190px] object-contain sm:h-14"
             />
           </Link>
 
@@ -106,7 +106,7 @@ function Header({ isAuthenticated, authUser, onOpenAuth }) {
           <img
             src={LOGO_URL}
             alt="Meraaki Founders Club logo"
-            className="h-16 w-auto max-w-[220px] rounded-lg object-contain"
+            className="h-14 w-auto max-w-[240px] object-contain lg:h-16"
           />
         </Link>
 

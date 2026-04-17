@@ -89,13 +89,13 @@ function HomeHeroPage() {
         </div>
       ) : null}
 
-      <div className="relative z-20 mx-auto flex min-h-[58vh] w-full max-w-7xl flex-col items-center justify-center px-4 text-center text-[#31393C] md:px-8">
+      <div className="relative z-20 mx-auto flex min-h-[64vh] w-full max-w-7xl flex-col items-center justify-center px-4 text-center text-[#31393C] md:min-h-[58vh] md:px-8">
         <h1
-          className="mx-auto max-w-6xl leading-tight"
+          className="mx-auto w-full max-w-6xl text-center leading-tight"
           style={{ animation: 'heroTextSlideIn 0.9s ease-out forwards' }}
         >
           <span className="block text-3xl font-bold leading-tight md:text-6xl">
-            Build Your Business with <br /> Founders-First platform.
+            Build Your Business with <span className="hidden md:inline"><br /></span> Founders-First platform.
           </span>
           <span className="mt-2 block text-2xl font-semibold md:text-3xl">
             Connect • Inspire • Achieve
