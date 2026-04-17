@@ -84,8 +84,13 @@ function HomeMain() {
         className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-white"
       >
         {!animationError && animationData && LottieComponent ? (
-          <div className="pointer-events-none absolute inset-0 z-0 opacity-">
-            <LottieComponent animationData={animationData} loop className="h-full w-full" />
+          <div className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-hidden opacity-80">
+            <LottieComponent
+              animationData={animationData}
+              loop
+              className="-ml-[1%] h-full w-[102%] min-w-[102%]"
+              rendererSettings={{ preserveAspectRatio: 'xMinYMid slice' }}
+            />
           </div>
         ) : null}
         {animationError || !LottieComponent ? (
