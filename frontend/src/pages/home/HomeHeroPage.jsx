@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Lottie from 'lottie-react'
-
-const LOTTIE_URL =
-  'https://cdn.prod.website-files.com/686c3195802b0228dca014a8/687059e9021f0c2322f49a77_hero-animation.json'
+import orbitAnimation from '../../assets/orbit-arcs.json'
 
 // ✅ Dynamic labels (easy to scale)
 const labels = [
@@ -11,41 +9,17 @@ const labels = [
   'ITR','TM','ISO'
 ]
 
-// ✅ Better spacing
-const duration = 30
-const step = duration / labels.length
-
-const heroBadgeReplacements = labels.map((label, i) => ({
-  label,
-  animation: `arcTravel ${duration}s linear infinite`,
-  delay: -(i * step),
-}))
-
+const ORBIT_DURATION_SECONDS = 18
+const ORBIT_RADIUS_DESKTOP = 320
+const ORBIT_RADIUS_MOBILE = 225
 const LottieComponent = typeof Lottie === 'function' ? Lottie : Lottie?.default
 
 function HomeHeroPage() {
-  const [animationData, setAnimationData] = useState(null)
-  const [animationError, setAnimationError] = useState(false)
+  const angleStep = 360 / labels.length
+  const orbitLottieRef = useRef(null)
 
   useEffect(() => {
-    let isMounted = true
-
-    const loadAnimation = async () => {
-      try {
-        const response = await fetch(LOTTIE_URL)
-        if (!response.ok) throw new Error('Failed to load animation')
-        const data = await response.json()
-        if (isMounted) setAnimationData(data)
-      } catch {
-        if (isMounted) setAnimationError(true)
-      }
-    }
-
-    loadAnimation()
-
-    return () => {
-      isMounted = false
-    }
+    orbitLottieRef.current?.setSpeed(0.6)
   }, [])
 
   return (
@@ -56,56 +30,73 @@ function HomeHeroPage() {
           to { opacity: 1; transform: translateX(0); }
         }
 
-        /* ✅ Increased arc spacing */
-        @keyframes arcTravel {
-          0%   { transform: translate3d(-80vw, 8px, 0) scale(1); }
-          25%  { transform: translate3d(-40vw, 80px, 0) scale(1.01); }
-          50%  { transform: translate3d(0vw, 120px, 0) scale(1.02); }
-          75%  { transform: translate3d(40vw, 80px, 0) scale(1.01); }
-          100% { transform: translate3d(80vw, 8px, 0) scale(1); }
+        @keyframes orbitSpin {
+          from {
+            transform: rotate(var(--orbit-start-angle)) translateX(var(--orbit-radius)) rotate(calc(-1 * var(--orbit-start-angle)));
+          }
+          to {
+            transform: rotate(calc(var(--orbit-start-angle) + 360deg)) translateX(var(--orbit-radius)) rotate(calc(-1 * (var(--orbit-start-angle) + 360deg)));
+          }
         }
       `}</style>
 
-      {!animationError && animationData && LottieComponent ? (
-        <div className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-hidden opacity-80">
-          <LottieComponent
-            animationData={animationData}
-            loop
-            className="-ml-[22%] -mt-[24%] w-[144%] min-w-[144%] md:-ml-[1%] md:mt-16 md:h-full md:w-[102%] md:min-w-[102%]"
-            rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
-          />
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 opacity-60 md:h-[760px] md:w-[760px]">
+          {LottieComponent ? (
+            <LottieComponent
+              lottieRef={orbitLottieRef}
+              animationData={orbitAnimation}
+              loop
+              className="h-full w-full"
+            />
+          ) : (
+            <div className="h-full w-full rounded-full border border-[#3E96F4]/30" />
+          )}
         </div>
-      ) : null}
 
-      {animationError || !LottieComponent ? (
-        <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-100 to-white" />
-      ) : null}
-
-      {!animationError ? (
-        <div className="pointer-events-none absolute inset-0 z-10 block">
-          {heroBadgeReplacements.map((badge) => (
-            <div key={badge.label} className="absolute left-1/2">
-              <div
-                style={{
-                  animation: badge.animation,
-                  animationDelay: `${badge.delay}s`,
-                }}
-              >
-                <div className="flex h-12 min-w-12 w-fit items-center justify-center rounded-full bg-white/95 px-3.5 text-xs font-bold text-[#31393C] shadow-sm ring-1 ring-slate-200 md:h-20 md:min-w-20 md:px-5 md:text-base md:shadow-md">
-                  <span>{badge.label}</span>
-                </div>
+        <div className="absolute left-1/2 top-1/2 h-0 w-0 md:hidden">
+          {labels.map((label, index) => (
+            <div
+              key={`${label}-mobile`}
+              className="absolute left-0 top-0"
+              style={{
+                '--orbit-start-angle': `${index * angleStep}deg`,
+                '--orbit-radius': `${ORBIT_RADIUS_MOBILE}px`,
+                animation: `orbitSpin ${ORBIT_DURATION_SECONDS}s linear infinite`,
+              }}
+            >
+              <div className="flex h-9 min-w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 px-3 text-[11px] font-bold text-[#31393C] shadow-sm ring-1 ring-slate-200 md:hidden">
+                {label}
               </div>
             </div>
           ))}
         </div>
-      ) : null}
 
-      <div className="relative z-20 mx-auto flex min-h-[64vh] -mt-30 w-full max-w-7xl flex-col items-center justify-center px-4 text-center text-[#31393C] md:min-h-[58vh] md:px-8">
+        <div className="absolute left-1/2 top-1/2 hidden h-0 w-0 md:block">
+          {labels.map((label, index) => (
+            <div
+              key={`${label}-desktop`}
+              className="absolute left-0 top-0"
+              style={{
+                '--orbit-start-angle': `${index * angleStep}deg`,
+                '--orbit-radius': `${ORBIT_RADIUS_DESKTOP}px`,
+                animation: `orbitSpin ${ORBIT_DURATION_SECONDS}s linear infinite`,
+              }}
+            >
+              <div className="flex h-12 min-w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 px-3.5 text-xs font-bold text-[#31393C] shadow-sm ring-1 ring-slate-200">
+                {label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-4 py-20 text-center text-[#31393C] md:px-8 md:py-24">
         <h1
-          className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center text-center leading-tight"
+          className="mx-auto flex w-full max-w-4xl flex-col items-center justify-center text-center leading-tight"
           style={{ animation: 'heroTextSlideIn 0.9s ease-out forwards' }}
         >
-          <span className="block text-3xl font-bold leading-tight md:text-6xl">
+          <span className="block text-3xl font-bold leading-tight md:text-5xl">
             Build Your Business with <span className="hidden md:inline"><br /></span> Founders-First platform.
           </span>
           <span className="mt-2 block text-2xl font-semibold md:text-3xl">
@@ -138,6 +129,7 @@ function HomeHeroPage() {
             Learn More
           </a>
         </div>
+
       </div>
     </section>
   )
