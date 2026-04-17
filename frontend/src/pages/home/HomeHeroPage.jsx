@@ -6,10 +6,10 @@ const LOTTIE_URL =
   'https://cdn.prod.website-files.com/686c3195802b0228dca014a8/687059e9021f0c2322f49a77_hero-animation.json'
 
 const heroBadgeReplacements = [
-  { label: 'CA', animation: 'arcTravel 32s linear infinite', delay: 0 },
-  { label: 'CS', animation: 'arcTravel 32s linear infinite', delay: -8 },
-  { label: 'GST', animation: 'arcTravel 32s linear infinite', delay: -16 },
-  { label: 'LLP', animation: 'arcTravel 32s linear infinite', delay: -24 },
+  { label: 'CA', animation: 'arcTravel 22s linear infinite', delay: 0 },
+  { label: 'CS', animation: 'arcTravel 22s linear infinite', delay: -5.5 },
+  { label: 'GST', animation: 'arcTravel 22s linear infinite', delay: -11 },
+  { label: 'LLP', animation: 'arcTravel 22s linear infinite', delay: -16.5 },
 ]
 
 const LottieComponent = typeof Lottie === 'function' ? Lottie : Lottie?.default
@@ -60,8 +60,8 @@ function HomeHeroPage() {
           <LottieComponent
             animationData={animationData}
             loop
-            className="-ml-[1%] mt-16 w-[102%] min-w-[102%]"
-            rendererSettings={{ preserveAspectRatio: 'xMinYMid slice' }}
+            className="-ml-[24%] -mt-[8%] h-[138%] w-[148%] min-w-[148%] md:-ml-[1%] md:mt-16 md:h-full md:w-[102%] md:min-w-[102%]"
+            rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
           />
         </div>
       ) : null}
@@ -71,16 +71,16 @@ function HomeHeroPage() {
       ) : null}
 
       {!animationError ? (
-        <div className="pointer-events-none absolute inset-0 z-10 hidden md:block">
+        <div className="pointer-events-none absolute inset-0 z-10 block">
           {heroBadgeReplacements.map((badge) => (
-            <div key={badge.label} className="absolute left-1/2 top-[62%]">
+            <div key={badge.label} className="absolute left-1/2 top-[67%] md:top-[62%]">
               <div
                 style={{
                   animation: badge.animation,
                   animationDelay: `${badge.delay}s`,
                 }}
               >
-                <div className="flex h-16 min-w-16 w-fit items-center justify-center rounded-full bg-white/95 px-4 text-sm font-bold text-[#31393C] shadow-md ring-1 ring-slate-200">
+                <div className="flex h-12 min-w-12 w-fit items-center justify-center rounded-full bg-white/95 px-3.5 text-xs font-bold text-[#31393C] shadow-sm ring-1 ring-slate-200 md:h-20 md:min-w-20 md:px-5 md:text-base md:shadow-md">
                   <span>{badge.label}</span>
                 </div>
               </div>

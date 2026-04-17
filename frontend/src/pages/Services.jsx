@@ -389,14 +389,17 @@ function Services() {
                     { icon: Rocket, label: '100+ Clients' },
                     { icon: TrendingUp, label: '96% Success' },
                     { icon: Target, label: '250+ Projects' },
-                  ].map(({  label }) => (
-                    <div key={label} className="flex items-center gap-2 text-sm font-medium text-slate-600">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-100 text-cyan-600">
-                        <Icon size={13} />
-                      </span>
-                      {label}
-                    </div>
-                  ))}
+                  ].map((item) => {
+                    const ServiceIcon = item.icon
+                    return (
+                      <div key={item.label} className="flex items-center gap-2 text-sm font-medium text-slate-600">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-100 text-cyan-600">
+                          <ServiceIcon size={13} />
+                        </span>
+                        {item.label}
+                      </div>
+                    )
+                  })}
                 </div>
 
                 <div className="hero-btns mt-9 flex flex-wrap gap-4">
@@ -613,18 +616,21 @@ function Services() {
                   iconColor: 'text-amber-600',
                   iconBg: 'bg-amber-100',
                 },
-              ].map(({  value, label, gradient, iconColor, iconBg }) => (
-                <article
-                  key={label}
-                  className={`stat-card min-w-[84vw] snap-start rounded-2xl border border-slate-100 bg-gradient-to-br ${gradient} p-7 text-center shadow-sm sm:min-w-[260px] md:min-w-0`}
-                >
-                  <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${iconBg} ${iconColor} mb-3`}>
-                    <Icon size={20} />
-                  </span>
-                  <p className="text-3xl font-extrabold tracking-tight text-slate-900">{value}</p>
-                  <p className="mt-2 text-sm font-medium text-slate-500">{label}</p>
-                </article>
-              ))}
+              ].map((item) => {
+                const StatIcon = item.icon
+                return (
+                  <article
+                    key={item.label}
+                    className={`stat-card min-w-[84vw] snap-start rounded-2xl border border-slate-100 bg-gradient-to-br ${item.gradient} p-7 text-center shadow-sm sm:min-w-[260px] md:min-w-0`}
+                  >
+                    <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${item.iconBg} ${item.iconColor} mb-3`}>
+                      <StatIcon size={20} />
+                    </span>
+                    <p className="text-3xl font-extrabold tracking-tight text-slate-900">{item.value}</p>
+                    <p className="mt-2 text-sm font-medium text-slate-500">{item.label}</p>
+                  </article>
+                )
+              })}
             </div>
 
             {/* ── Process header ── */}
