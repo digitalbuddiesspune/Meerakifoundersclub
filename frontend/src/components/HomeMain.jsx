@@ -1,42 +1,62 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Lottie from 'lottie-react'
+import {
+  BadgeCheck,
+  BriefcaseBusiness,
+  Building2,
+  Calculator,
+  FileText,
+  Receipt,
+  Scale,
+} from 'lucide-react'
 
-const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80'
+const LOTTIE_URL =
+  'https://cdn.prod.website-files.com/686c3195802b0228dca014a8/687059e9021f0c2322f49a77_hero-animation.json'
+
+const LottieComponent = typeof Lottie === 'function' ? Lottie : Lottie?.default
+
+const coreServices = [
+  { title: 'CA', icon: Calculator },
+  { title: 'CS', icon: Scale },
+  { title: 'Trademark', icon: BadgeCheck },
+  { title: 'GST', icon: Receipt },
+  { title: 'LLP', icon: Building2 },
+  { title: 'Company Registration', icon: BriefcaseBusiness },
+  { title: 'LLP Registration', icon: FileText },
+]
+
+const heroBadgeReplacements = [
+  { label: 'CA', animation: 'arcTravel 32s linear infinite', delay: 0 },
+  { label: 'CS', animation: 'arcTravel 32s linear infinite', delay: -8 },
+  { label: 'GST', animation: 'arcTravel 32s linear infinite', delay: -16 },
+  { label: 'LLP', animation: 'arcTravel 32s linear infinite', delay: -24 },
+]
 
 function HomeMain() {
-  const heroRef = useRef(null)
-  const [scrollOffset, setScrollOffset] = useState(0)
-  const [hoverOffset, setHoverOffset] = useState({ x: 0, y: 0 })
+  const [animationData, setAnimationData] = useState(null)
+  const [animationError, setAnimationError] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const hero = heroRef.current
-      if (!hero) return
+    let isMounted = true
 
-      const rect = hero.getBoundingClientRect()
-      const windowHeight = window.innerHeight || 1
-      const progress = Math.max(-1, Math.min(1, (windowHeight - rect.top) / (windowHeight + rect.height)))
-
-      setScrollOffset((progress - 0.5) * 24)
+    const loadAnimation = async () => {
+      try {
+        const response = await fetch(LOTTIE_URL)
+        if (!response.ok) throw new Error('Failed to load animation')
+        const data = await response.json()
+        if (isMounted) setAnimationData(data)
+      } catch {
+        if (isMounted) setAnimationError(true)
+      }
     }
 
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    loadAnimation()
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      isMounted = false
+    }
   }, [])
-
-  const handleMouseMove = (event) => {
-    const hero = heroRef.current
-    if (!hero) return
-
-    const rect = hero.getBoundingClientRect()
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 16
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 12
-    setHoverOffset({ x, y })
-  }
-
-  const resetHover = () => setHoverOffset({ x: 0, y: 0 })
 
   return (
     <main id="home">
@@ -51,37 +71,80 @@ function HomeMain() {
             transform: translateX(0);
           }
         }
+        /* Bottom curve circumference travel */
+        @keyframes arcTravel {
+          0% { transform: translate3d(-72vw, 8px, 0) scale(1); }
+          25% { transform: translate3d(-36vw, 66px, 0) scale(1.01); }
+          50% { transform: translate3d(0vw, 104px, 0) scale(1.02); }
+          75% { transform: translate3d(36vw, 66px, 0) scale(1.01); }
+          100% { transform: translate3d(72vw, 8px, 0) scale(1); }
+        }
       `}</style>
       <section
-        ref={heroRef}
-        className="relative flex h-[78vh] w-full items-center justify-center overflow-hidden md:h-[82vh]"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={resetHover}
+        className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-white"
       >
-        <img
-          src={HERO_IMAGE}
-          alt="Corporate building"
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out"
-          style={{
-            transform: `translate3d(${hoverOffset.x}px, ${hoverOffset.y + scrollOffset}px, 0) scale(1.08)`,
-          }}
-        />
-        <div className="absolute inset-0 bg-black/55" />
+        {!animationError && animationData && LottieComponent ? (
+          <div className="pointer-events-none absolute inset-0 z-0 opacity-">
+            <LottieComponent animationData={animationData} loop className="h-full w-full" />
+          </div>
+        ) : null}
+        {animationError || !LottieComponent ? (
+          <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-100 to-white" />
+        ) : null}
 
-        <div className="relative z-10 px-4 text-center text-white md:px-8">
+        {!animationError ? (
+          <div className="pointer-events-none absolute inset-0 z-10 hidden md:block">
+            {heroBadgeReplacements.map((badge) => {
+              return (
+                <div key={badge.label} className="absolute left-1/2 top-[56%]">
+                  <div
+                    style={{
+                      animation: badge.animation,
+                      animationDelay: `${badge.delay}s`,
+                    }}
+                  >
+                    <div className="flex h-16 min-w-16 w-fit items-center justify-center rounded-full bg-white/95 px-4 text-sm font-bold text-[#31393C] shadow-md ring-1 ring-slate-200">
+                      <span>{badge.label}</span>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        ) : null}
+
+        <div className="relative z-20 mx-auto w-full max-w-7xl px-4 text-center text-[#31393C] md:px-8">
           <h1
-            className="mx-auto max-w-4xl text-3xl font-bold leading-tight md:text-5xl"
+            className="mx-auto max-w-5xl leading-tight"
             style={{ animation: 'heroTextSlideIn 0.9s ease-out forwards' }}
           >
-            End-to-End Startup Solutions for Founders
+            <span className="block -mt-2 text-3xl font-extrabold md:text-5xl">
+              Build Your Business with Founders-First platform.
+            </span>
+            <span className="mt-2 block whitespace-nowrap text-xl font-semibold md:text-3xl">
+              Connect • Inspire • Achieve
+            </span>
           </h1>
           <p
-            className="mx-auto mt-5 max-w-2xl text-sm text-slate-200 md:text-base"
+            className="mx-auto mt-4 max-w-2xl text-base text-slate-600"
             style={{ animation: 'heroTextSlideIn 1.2s ease-out forwards' }}
           >
-            We help startups from zero to scale with strategy, investor readiness, funding support, branding,
-            product development, and growth marketing.
+            Discover, build and scale your ideas with a seamless digital experience.
           </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link
+              to="/services"
+              className="bg-[#F26527] px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90"
+            >
+              Get Started
+            </Link>
+            <a
+              href="#services"
+              className="border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+            >
+              Learn More
+            </a>
+          </div>
         </div>
       </section>
 
@@ -92,24 +155,23 @@ function HomeMain() {
             Everything a startup needs under one roof to build faster, raise smarter, and grow sustainably.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              'Startup Strategy & Validation',
-              'Investor Funding Readiness',
-              'Branding & Positioning',
-              'MVP / Product Development',
-              'Performance Marketing',
-              'Sales & Scale Systems',
-            ].map((service) => (
-              <article
-                key={service}
-                className="rounded-2xl border border-slate-200 bg-white p-5"
-              >
-                <h3 className="text-lg font-semibold">{service}</h3>
-                <p className="mt-2 text-sm text-slate-600">
-                  Tailored support for your current growth stage with practical implementation.
-                </p>
-              </article>
-            ))}
+            {coreServices.map((service) => {
+              const ServiceIcon = service.icon
+              return (
+                <article
+                  key={service.title}
+                  className="rounded-2xl border border-slate-200 bg-white p-5"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#F26527]/10 text-[#F26527]">
+                    <ServiceIcon size={18} />
+                  </span>
+                  <h3 className="mt-3 text-lg font-semibold">{service.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600">
+                    Tailored support for your current growth stage with practical implementation.
+                  </p>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>

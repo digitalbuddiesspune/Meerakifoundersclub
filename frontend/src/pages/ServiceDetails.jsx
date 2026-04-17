@@ -64,6 +64,35 @@ function DotPattern({ className = '' }) {
   )
 }
 
+const TECHNOLOGY_ICON_MAP = {
+  'next.js': 'nextdotjs',
+  nextjs: 'nextdotjs',
+  stripe: 'stripe',
+  react: 'react',
+  'node.js': 'nodedotjs',
+  nodejs: 'nodedotjs',
+  express: 'express',
+  mongodb: 'mongodb',
+  tailwind: 'tailwindcss',
+  tailwindcss: 'tailwindcss',
+  javascript: 'javascript',
+  typescript: 'typescript',
+  firebase: 'firebase',
+  aws: 'amazonaws',
+  shopify: 'shopify',
+  wordpress: 'wordpress',
+}
+
+const getTechnologyIconUrl = (technology) => {
+  const normalized = String(technology || '')
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '')
+  const iconSlug = TECHNOLOGY_ICON_MAP[normalized]
+  if (!iconSlug) return null
+  return `https://cdn.simpleicons.org/${iconSlug}/F26527`
+}
+
 /* ─── Wave divider ──────────────────────────────────────────────── */
 function WaveDivider({ color = '#f1f5f9' }) {
   return (
@@ -433,7 +462,17 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                           <div className="mt-3 flex flex-wrap gap-1.5">
                             {(project.technologiesUsed || []).map((technology) => (
                               <span key={`${project.name}-${technology}`}
-                                className="rounded-full border border-cyan-200 bg-cyan-50 px-2.5 py-0.5 text-[11px] font-medium text-cyan-700">
+                                className="inline-flex items-center gap-1.5 rounded-full border border-cyan-200 bg-cyan-50 px-2.5 py-0.5 text-[11px] font-medium text-cyan-700">
+                                {getTechnologyIconUrl(technology) ? (
+                                  <img
+                                    src={getTechnologyIconUrl(technology)}
+                                    alt={`${technology} icon`}
+                                    className="h-3.5 w-3.5"
+                                    loading="lazy"
+                                  />
+                                ) : (
+                                  <Wrench size={10} className="text-cyan-600" />
+                                )}
                                 {technology}
                               </span>
                             ))}
@@ -491,7 +530,16 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
                       className="tech-pill pop-in inline-flex cursor-default items-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm"
                       style={{ animationDelay: `${i * 0.05}s` }}>
                       <span className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-cyan-100">
-                        <Wrench size={11} className="text-cyan-600" />
+                        {getTechnologyIconUrl(technology) ? (
+                          <img
+                            src={getTechnologyIconUrl(technology)}
+                            alt={`${technology} icon`}
+                            className="h-3.5 w-3.5"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <Wrench size={11} className="text-cyan-600" />
+                        )}
                       </span>
                       {technology}
                     </span>
