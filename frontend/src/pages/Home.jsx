@@ -1,18 +1,11 @@
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import HomeMain from '../components/HomeMain'
+import { useOutletContext } from 'react-router-dom'
+import HomePageLayout from './HomePageLayout'
 
-function Home({ isAuthenticated, authUser, onOpenAuth, onLogout, isBlurred }) {
+function Home() {
+  const { isBlurred } = useOutletContext()
   return (
     <div className={isBlurred ? 'pointer-events-none select-none blur-sm' : ''}>
-      <Header
-        isAuthenticated={isAuthenticated}
-        authUser={authUser}
-        onOpenAuth={onOpenAuth}
-        onLogout={onLogout}
-      />
-      <HomeMain />
-      <Footer />
+      <HomePageLayout />
     </div>
   )
 }

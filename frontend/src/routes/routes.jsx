@@ -1,0 +1,21 @@
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
+import App from '../App'
+import Home from '../pages/Home'
+import ProblemsSolutions from '../pages/ProblemsSolutions'
+import Profile from '../pages/Profile'
+import ServiceDetails from '../pages/ServiceDetails'
+import Services from '../pages/Services'
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route index element={<Home />} />
+      <Route path="services" element={<Services />} />
+      <Route path="services/:slug" element={<ServiceDetails />} />
+      <Route path="problems-solutions" element={<ProblemsSolutions />} />
+      <Route path="profile" element={<Profile />} />
+    </Route>,
+  ),
+)
+
+export default router

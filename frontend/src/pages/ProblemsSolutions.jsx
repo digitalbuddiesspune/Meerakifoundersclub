@@ -6,8 +6,6 @@ import {
   ShieldAlert,
   Users,
 } from 'lucide-react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
 
 const questionCards = [
   {
@@ -47,7 +45,7 @@ const questionCards = [
   },
 ]
 
-function ProblemsSolutions({ isAuthenticated, authUser, onOpenAuth }) {
+function ProblemsSolutions() {
   const [flippedCards, setFlippedCards] = useState({})
 
   const toggleCard = (index) => {
@@ -56,12 +54,6 @@ function ProblemsSolutions({ isAuthenticated, authUser, onOpenAuth }) {
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
-      <Header
-        isAuthenticated={isAuthenticated}
-        authUser={authUser}
-        onOpenAuth={onOpenAuth}
-      />
-
       <main>
         <section className="bg-white px-4 py-10 md:px-8">
           <div className="mx-auto w-full max-w-7xl">
@@ -121,7 +113,6 @@ function ProblemsSolutions({ isAuthenticated, authUser, onOpenAuth }) {
         </section>
       </main>
 
-      <Footer />
     </div>
   )
 }

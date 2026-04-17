@@ -16,7 +16,6 @@ import {
   Play,
   BarChart3,
 } from 'lucide-react'
-import Header from '../components/Header'
 
 const toSlug = (value) =>
   String(value || '')
@@ -122,7 +121,7 @@ function WaveDivider({ flip = false, color = '#f1f5f9' }) {
 /* ─── Step icon map ─────────────────────────────────────────────── */
 const stepIcons = [Phone, Map, Play, BarChart3]
 
-function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
+function Services() {
   const [services, setServices] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -317,13 +316,6 @@ function Services({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
       `}</style>
 
       <div className="min-h-screen overflow-x-hidden bg-slate-50 text-slate-900">
-        <Header
-          isAuthenticated={isAuthenticated}
-          authUser={authUser}
-          onOpenAuth={onOpenAuth}
-          onLogout={onLogout}
-        />
-
         <main className="relative">
 
           {/* ══════════════════════════════════════════════════════════

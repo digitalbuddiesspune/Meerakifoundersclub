@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 import AuthModal from './components/AuthModal'
-import Home from './pages/Home'
-import Profile from './pages/Profile'
-import ProblemsSolutions from './pages/ProblemsSolutions'
-import ServiceDetails from './pages/ServiceDetails'
-import Services from './pages/Services'
+import Footer from './components/Footer'
+import Header from './components/Header'
 
 const AUTH_STORAGE_KEY = 'mfc_auth_user'
 const API_BASE_URL = import.meta.env.VITE_API_URL
@@ -13,23 +10,26 @@ const API_BASE_URL = import.meta.env.VITE_API_URL
 const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 const isValidPhone = (value) => /^[9876]\d{9}$/.test(value)
 const isValidName = (value) => value.trim().length >= 3
+const NETWORK_ERROR_MESSAGE = 'Cannot reach server. Please start backend on port 5000.'
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [authUser, setAuthUser] = useState(null)
+  const [authUser, setAuthUser] = useState(() => {
+    const savedUser = localStorage.getItem(AUTH_STORAGE_KEY)
+    if (!savedUser) return null
+
+    try {
+      return JSON.parse(savedUser)
+    } catch {
+      localStorage.removeItem(AUTH_STORAGE_KEY)
+      return null
+    }
+  })
+  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(authUser))
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [authTab, setAuthTab] = useState('signup')
   const [authError, setAuthError] = useState('')
   const [signupForm, setSignupForm] = useState({ name: '', email: '', phone: '' })
   const [loginForm, setLoginForm] = useState({ identifier: '' })
-
-  useEffect(() => {
-    const savedUser = localStorage.getItem(AUTH_STORAGE_KEY)
-    if (!savedUser) return
-    const parsedUser = JSON.parse(savedUser)
-    setAuthUser(parsedUser)
-    setIsAuthenticated(true)
-  }, [])
 
   const openAuthModal = () => {
     if (isAuthenticated) return
@@ -40,6 +40,13 @@ function App() {
   const closeAuthModal = () => {
     setAuthError('')
     setShowAuthModal(false)
+  }
+
+  const persistAndLoginUser = (user) => {
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user))
+    setAuthUser(user)
+    setIsAuthenticated(true)
+    closeAuthModal()
   }
 
   const handleSignup = async (event) => {
@@ -86,13 +93,10 @@ function App() {
         email: data.user?.email || email,
         phone: data.user?.phone || phone,
       }
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(createdUser))
-      setAuthUser(createdUser)
-      setIsAuthenticated(true)
-      closeAuthModal()
+      persistAndLoginUser(createdUser)
       setSignupForm({ name: '', email: '', phone: '' })
     } catch {
-      setAuthError('Cannot reach server. Please start backend on port 5000.')
+      setAuthError(NETWORK_ERROR_MESSAGE)
     }
   }
 
@@ -134,13 +138,10 @@ function App() {
         email: data.user?.email || '',
         phone: data.user?.phone || '',
       }
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(loggedInUser))
-      setAuthUser(loggedInUser)
-      setIsAuthenticated(true)
-      closeAuthModal()
+      persistAndLoginUser(loggedInUser)
       setLoginForm({ identifier: '' })
     } catch {
-      setAuthError('Cannot reach server. Please start backend on port 5000.')
+      setAuthError(NETWORK_ERROR_MESSAGE)
     }
   }
 
@@ -150,65 +151,25 @@ function App() {
     setIsAuthenticated(false)
   }
 
+  const sharedAuthProps = {
+    isAuthenticated,
+    authUser,
+    onOpenAuth: openAuthModal,
+    onLogout: handleLogout,
+  }
+
   return (
     <div className="min-h-screen bg-stone-50 text-slate-800">
-      <Routes>
-        <Route
-          path="/"
-          element={(
-            <Home
-              isAuthenticated={isAuthenticated}
-              authUser={authUser}
-              onOpenAuth={openAuthModal}
-              onLogout={handleLogout}
-              isBlurred={showAuthModal}
-            />
-          )}
-        />
-        <Route
-          path="/services"
-          element={(
-            <Services
-              isAuthenticated={isAuthenticated}
-              authUser={authUser}
-              onOpenAuth={openAuthModal}
-              onLogout={handleLogout}
-            />
-          )}
-        />
-        <Route
-          path="/services/:slug"
-          element={(
-            <ServiceDetails
-              isAuthenticated={isAuthenticated}
-              authUser={authUser}
-              onOpenAuth={openAuthModal}
-              onLogout={handleLogout}
-            />
-          )}
-        />
-        <Route
-          path="/profile"
-          element={(
-            <Profile
-              isAuthenticated={isAuthenticated}
-              authUser={authUser}
-              onOpenAuth={openAuthModal}
-              onLogout={handleLogout}
-            />
-          )}
-        />
-        <Route
-          path="/problems-solutions"
-          element={(
-            <ProblemsSolutions
-              isAuthenticated={isAuthenticated}
-              authUser={authUser}
-              onOpenAuth={openAuthModal}
-            />
-          )}
-        />
-      </Routes>
+      <Header
+        isAuthenticated={isAuthenticated}
+        authUser={authUser}
+        onOpenAuth={openAuthModal}
+      />
+
+      <Outlet context={{ ...sharedAuthProps, isBlurred: showAuthModal }} />
+
+      <Footer />
+
       <AuthModal
         visible={showAuthModal && !isAuthenticated}
         authTab={authTab}

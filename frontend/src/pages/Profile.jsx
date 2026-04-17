@@ -1,8 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 
-function Profile({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
+function Profile() {
+  const { isAuthenticated, authUser, onOpenAuth, onLogout } = useOutletContext()
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -12,12 +11,6 @@ function Profile({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
 
   return (
     <div className="min-h-screen bg-stone-50 text-slate-900">
-      <Header
-        isAuthenticated={isAuthenticated}
-        authUser={authUser}
-        onOpenAuth={onOpenAuth}
-      />
-
       <main className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8">
         {isAuthenticated ? (
           <section className="mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
@@ -80,7 +73,6 @@ function Profile({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
         )}
       </main>
 
-      <Footer />
     </div>
   )
 }

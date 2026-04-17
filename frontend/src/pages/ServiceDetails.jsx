@@ -13,8 +13,6 @@ import {
   Star,
   ExternalLink,
 } from 'lucide-react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
 
 /* ─── Floating orbs ─────────────────────────────────────────────── */
 function FloatingOrbs() {
@@ -104,7 +102,7 @@ function WaveDivider({ color = '#f1f5f9' }) {
   )
 }
 
-function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
+function ServiceDetails() {
   const { slug } = useParams()
   const [service, setService] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -250,13 +248,6 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
       `}</style>
 
       <div className="min-h-screen overflow-x-hidden bg-slate-50 text-slate-900">
-        <Header
-          isAuthenticated={isAuthenticated}
-          authUser={authUser}
-          onOpenAuth={onOpenAuth}
-          onLogout={onLogout}
-        />
-
         {/* ── Loading ── */}
         {loading ? (
           <main className="mx-auto max-w-7xl px-4 py-24 text-center md:px-8">
@@ -553,8 +544,6 @@ function ServiceDetails({ isAuthenticated, authUser, onOpenAuth, onLogout }) {
             </section>
           </main>
         ) : null}
-
-        <Footer />
       </div>
     </>
   )
