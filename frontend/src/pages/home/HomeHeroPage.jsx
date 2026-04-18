@@ -5,8 +5,8 @@ import orbitAnimation from '../../assets/orbit-arcs.json'
 
 // ✅ Dynamic labels (easy to scale)
 const labels = [
-  'CA','CS','GST','LLP','INC','TDS','ROC','PAN',
-  'ITR','TM','ISO'
+  'CA','CS','GST','LLP','.in','.com','TDS','ROC','DSC',
+  'ITR','TM','IEC','APP', 
 ]
 
 const ORBIT_DURATION_SECONDS = 18
@@ -23,7 +23,7 @@ function HomeHeroPage() {
   }, [])
 
   return (
-    <section className="relative isolate flex min-h-screen w-full max-w-full content-center items-center justify-center overflow-x-hidden overflow-y-hidden bg-white text-center">
+    <section className="relative isolate flex min-h-screen w-full max-w-full content-center items-center justify-center overflow-x-hidden overflow-y-hidden bg-[#0E213F] text-center">
       <style>{`
         @keyframes heroTextSlideIn {
           from { opacity: 0; transform: translateX(-52px); }
@@ -68,7 +68,7 @@ function HomeHeroPage() {
                   animation: `orbitSpin ${ORBIT_DURATION_SECONDS}s linear infinite`,
                 }}
               >
-                <div className="flex h-9 min-w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 px-3 text-[11px] font-bold text-[#31393C] shadow-sm ring-1 ring-slate-200 md:hidden">
+                <div className="flex h-9 min-w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 px-3 text-[11px] font-bold text-[#F26527] shadow-sm ring-1 ring-slate-200 md:hidden">
                   {label}
                 </div>
               </div>
@@ -88,7 +88,7 @@ function HomeHeroPage() {
                   animation: `orbitSpin ${ORBIT_DURATION_SECONDS}s linear infinite`,
                 }}
               >
-                <div className="flex h-12 min-w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 px-3.5 text-xs font-bold text-[#31393C] shadow-sm ring-1 ring-slate-200">
+                <div className="flex h-12 min-w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 px-3.5 text-xs font-bold text-[#F26527] shadow-sm ring-1 ring-slate-200">
                   {label}
                 </div>
               </div>
@@ -102,13 +102,16 @@ function HomeHeroPage() {
           className="flex w-full max-w-4xl flex-col content-center items-center justify-center text-center leading-tight"
           style={{ animation: 'heroTextSlideIn 0.9s ease-out forwards' }}
         >
-          <span className="block text-xl font-bold leading-tight md:text-5xl">
+          <span
+            className="block text-xl font-bold leading-tight text-[#F26527] md:text-5xl"
+            style={{ fontFamily: 'Montserrat, sans-serif' }}
+          >
             Build Your Business with 
            <p className="pb-2">
-           Founders-First platform.
+           Founders-First platform
            </p> 
           </span>
-          <span className="block text-base md:text-3xl pb-2">
+          <span className="block text-base md:text-3xl pb-2 text-white">
             Connect • Inspire • Achieve
           </span>
         </h1>
@@ -127,7 +130,7 @@ function HomeHeroPage() {
 
           <a
             href="#services"
-            className="border border-slate-300 md:px-6 md:py-3 px-3 py-1.5 text-xs md:text-sm font-semibold text-slate-700 transition hover:bg-slate-100 rounded-xl "
+            className="border border-slate-300 md:px-6 md:py-3 px-3 py-1.5 text-xs md:text-sm font-semibold text-white transition hover:bg-slate-100 rounded-xl "
           >
             Learn More
           </a>
