@@ -6,6 +6,7 @@ import ProblemsSolutions from '../pages/ProblemsSolutions'
 import Profile from '../pages/Profile'
 import ServiceDetails from '../pages/ServiceDetails'
 import Services from '../pages/Services'
+import WhyMeraakiFoundersClub from '../pages/WhyMeraakiFoundersClub'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path="problems-solutions" element={<ProblemsSolutions />} />
       <Route path="contact-us" element={<ContactUs />} />
       <Route path="profile" element={<Profile />} />
+      <Route path="why-meraaki-founders-club" element={<WhyMeraakiFoundersClub />} />
     </Route>,
   ),
 )
