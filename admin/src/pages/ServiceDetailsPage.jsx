@@ -9,7 +9,7 @@ function formatValue(value) {
   return value;
 }
 
-function ServiceDetailsPage({ servicesList, serviceMessage, onDeleteService, onDeleteProject }) {
+function ServiceDetailsPage({ servicesList, serviceMessage, onDeleteProject }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { serviceId } = useParams();
@@ -27,15 +27,6 @@ function ServiceDetailsPage({ servicesList, serviceMessage, onDeleteService, onD
   const filteredProjects = (service?.projects || [])
     .map((project, index) => ({ project, index }))
     .filter(({ project }) => (project.name || "").toLowerCase().includes(searchQuery));
-
-  const handleServiceDelete = async () => {
-    if (!service || !window.confirm("Delete this service?")) {
-      return;
-    }
-
-    await onDeleteService(service._id);
-    navigate("/admin/services/my-services");
-  };
 
   const handleProjectDelete = async (projectIndex) => {
     if (!service || !window.confirm("Delete this project from the service?")) {

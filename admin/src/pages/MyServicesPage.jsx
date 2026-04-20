@@ -8,7 +8,7 @@ function formatValue(value) {
   return value;
 }
 
-function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceMessage, onDeleteService, onDeleteProject }) {
+function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceMessage, onDeleteService }) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const searchQuery = (searchParams.get("q") || "").trim().toLowerCase();

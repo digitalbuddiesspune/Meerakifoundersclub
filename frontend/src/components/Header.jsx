@@ -11,7 +11,7 @@ const toSlug = (value) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
-function Header({ isAuthenticated, authUser, onOpenAuth }) {
+function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
   const [services, setServices] = useState([])
   const [isServicesOpen, setIsServicesOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -72,7 +72,11 @@ function Header({ isAuthenticated, authUser, onOpenAuth }) {
   }
 
   return (
-    <header className="sticky  top-0 z-80 bg-white backdrop-blur">
+    <header
+      className={`sticky top-0 z-80 bg-white backdrop-blur transition-transform duration-300 ease-out ${
+        hidden ? '-translate-y-full pointer-events-none' : 'translate-y-0'
+      }`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 md:px-8 md:py-3 lg:px-10">
         <div className="flex w-full items-center justify-between md:hidden">
           <button

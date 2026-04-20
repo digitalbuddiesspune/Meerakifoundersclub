@@ -1,24 +1,35 @@
-import { BriefcaseIcon, FileTextIcon } from "../components/AdminIcons";
+import { BriefcaseIcon, FileTextIcon, UsersIcon } from "../components/AdminIcons";
+
+const DASH_META = [
+  {
+    bg: "bg-gradient-to-br from-white to-[#dff9f7]",
+    icon: BriefcaseIcon,
+  },
+  {
+    bg: "bg-gradient-to-br from-white to-[#fff0de]",
+    icon: FileTextIcon,
+  },
+  {
+    bg: "bg-gradient-to-br from-white to-[#e8f4ff]",
+    icon: UsersIcon,
+  },
+];
 
 function DashboardPage({ dashboardStats }) {
-  const quickStats = [
-    {
-      label: dashboardStats[0]?.label || "Services",
-      value: dashboardStats[0]?.value || 0,
-      bg: "bg-gradient-to-br from-white to-[#dff9f7]",
-      icon: <BriefcaseIcon className="h-6 w-6" />,
-    },
-    {
-      label: dashboardStats[1]?.label || "Blogs",
-      value: dashboardStats[1]?.value || 0,
-      bg: "bg-gradient-to-br from-white to-[#fff0de]",
-      icon: <FileTextIcon className="h-6 w-6" />,
-    },
-  ];
+  const quickStats = (dashboardStats || []).map((stat, index) => {
+    const meta = DASH_META[index] || DASH_META[0];
+    const Icon = meta.icon;
+    return {
+      label: stat?.label || "—",
+      value: stat?.value ?? 0,
+      bg: meta.bg,
+      icon: <Icon className="h-6 w-6" />,
+    };
+  });
 
   return (
     <section className="grid gap-6">
-      <div className="grid gap-3 sm:grid-cols-2 xl:max-w-md">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 xl:max-w-4xl">
         {quickStats.map((item) => (
           <div key={item.label} className={`grid justify-items-center rounded-3xl px-4 py-3 text-center text-slate-900 ${item.bg}`}>
             <p className="m-0 text-sm font-semibold text-slate-700">{item.label}</p>

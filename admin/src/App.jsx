@@ -6,6 +6,7 @@ import DashboardPage from "./pages/DashboardPage";
 import MyBlogsPage from "./pages/MyBlogsPage";
 import MyServicesPage from "./pages/MyServicesPage";
 import ServiceDetailsPage from "./pages/ServiceDetailsPage";
+import UsersPage from "./pages/UsersPage";
 import useAdminPanel from "./hooks/useAdminPanel";
 
 function App() {
@@ -20,10 +21,18 @@ function App() {
         <Route
           path="dashboard"
           element={
-            <DashboardPage
-              dashboardStats={admin.dashboardStats}
-              servicesList={admin.servicesList}
-              blogsList={admin.blogsList}
+            <DashboardPage dashboardStats={admin.dashboardStats} />
+          }
+        />
+        <Route
+          path="users"
+          element={
+            <UsersPage
+              usersLoading={admin.usersLoading}
+              usersError={admin.usersError}
+              usersList={admin.usersList}
+              userMessage={admin.userMessage}
+              onDeleteUser={admin.handleDeleteUser}
             />
           }
         />
@@ -36,7 +45,6 @@ function App() {
               servicesList={admin.servicesList}
               serviceMessage={admin.serviceMessage}
               onDeleteService={admin.handleDeleteService}
-              onDeleteProject={admin.handleDeleteProject}
             />
           }
         />
@@ -46,7 +54,6 @@ function App() {
             <ServiceDetailsPage
               servicesList={admin.servicesList}
               serviceMessage={admin.serviceMessage}
-              onDeleteService={admin.handleDeleteService}
               onDeleteProject={admin.handleDeleteProject}
             />
           }

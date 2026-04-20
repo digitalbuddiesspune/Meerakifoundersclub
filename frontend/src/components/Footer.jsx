@@ -45,8 +45,27 @@ function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-200 py-4 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} Meraaki Founders Club. All rights reserved.
+      <div className="border-t border-slate-200 px-4 py-4">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-3 text-xs text-slate-500 md:flex-row md:flex-wrap md:gap-x-6 md:gap-y-2">
+          <span>© {new Date().getFullYear()} Meraaki Founders Club. All rights reserved.</span>
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <Link to="/privacy-policy" className="hover:text-slate-800">
+              Privacy Policy
+            </Link>
+            <span className="hidden text-slate-300 sm:inline" aria-hidden>
+              |
+            </span>
+            <Link to="/terms-and-conditions" className="hover:text-slate-800">
+              Terms &amp; Conditions
+            </Link>
+            <span className="hidden text-slate-300 sm:inline" aria-hidden>
+              |
+            </span>
+            <Link to="/cookie-policy" className="hover:text-slate-800">
+              Cookie Policy
+            </Link>
+          </nav>
+        </div>
       </div>
     </footer>
   )

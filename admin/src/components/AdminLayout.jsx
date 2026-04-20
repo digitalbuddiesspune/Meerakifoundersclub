@@ -8,6 +8,7 @@ import {
   PenSquareIcon,
   PlusSquareIcon,
   SearchIcon,
+  UsersIcon,
 } from "./AdminIcons";
 
 function AdminLayout() {
@@ -54,6 +55,20 @@ function AdminLayout() {
           >
             <GridIcon className="h-5 w-5 shrink-0" />
             <span>Dashboard</span>
+          </NavLink>
+
+          <NavLink
+            to="/admin/users"
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-2xl border px-4 py-3.5 text-left text-sm transition ${
+                isActive
+                  ? "border-white/20 bg-gradient-to-br from-cyan-400 to-teal-500 text-white shadow-[0_14px_25px_rgba(22,199,209,0.26)]"
+                  : "border-white/10 bg-white/5 text-cyan-100 hover:translate-x-1"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5 shrink-0" />
+            <span>Users</span>
           </NavLink>
 
           <button

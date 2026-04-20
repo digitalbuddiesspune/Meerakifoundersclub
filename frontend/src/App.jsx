@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import AuthModal from './components/AuthModal'
 import Footer from './components/Footer'
@@ -26,6 +26,8 @@ function App() {
   })
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(authUser))
   const [showAuthModal, setShowAuthModal] = useState(false)
+  const [hideHeader, setHideHeader] = useState(false)
+  const lastScrollYRef = useRef(0)
   const [authTab, setAuthTab] = useState('signup')
   const [authError, setAuthError] = useState('')
   const [signupForm, setSignupForm] = useState({ name: '', email: '', phone: '' })
@@ -158,9 +160,38 @@ function App() {
     onLogout: handleLogout,
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY || 0
+      const delta = currentScrollY - lastScrollYRef.current
+      const SCROLL_THRESHOLD = 8
+
+      // Keep header visible at the very top.
+      if (currentScrollY <= 10) {
+        setHideHeader(false)
+        lastScrollYRef.current = currentScrollY
+        return
+      }
+
+      if (delta > SCROLL_THRESHOLD) {
+        // Scrolling down -> hide header immediately.
+        setHideHeader((prev) => (prev ? prev : true))
+      } else if (delta < -SCROLL_THRESHOLD) {
+        // Scrolling up -> show header from anywhere.
+        setHideHeader((prev) => (prev ? false : prev))
+      }
+
+      lastScrollYRef.current = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div className="min-h-screen bg-stone-50 text-slate-800">
       <Header
+        hidden={hideHeader}
         isAuthenticated={isAuthenticated}
         authUser={authUser}
         onOpenAuth={openAuthModal}

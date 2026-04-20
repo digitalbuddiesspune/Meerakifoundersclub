@@ -138,14 +138,18 @@ function useAdminPanel() {
   const [blogForm, setBlogForm] = useState(initialBlogForm);
   const [servicesList, setServicesList] = useState([]);
   const [blogsList, setBlogsList] = useState([]);
+  const [usersList, setUsersList] = useState([]);
   const [servicesLoading, setServicesLoading] = useState(false);
   const [blogsLoading, setBlogsLoading] = useState(false);
+  const [usersLoading, setUsersLoading] = useState(false);
   const [servicesError, setServicesError] = useState("");
   const [blogsError, setBlogsError] = useState("");
+  const [usersError, setUsersError] = useState("");
   const [isSubmittingService, setIsSubmittingService] = useState(false);
   const [isSubmittingBlog, setIsSubmittingBlog] = useState(false);
   const [serviceMessage, setServiceMessage] = useState("");
   const [blogMessage, setBlogMessage] = useState("");
+  const [userMessage, setUserMessage] = useState("");
   const [editingServiceId, setEditingServiceId] = useState("");
   const [editingBlogId, setEditingBlogId] = useState("");
   const [editingProjectIndex, setEditingProjectIndex] = useState(null);
@@ -154,8 +158,9 @@ function useAdminPanel() {
     () => [
       { label: "Total Services", value: servicesList.length },
       { label: "Total Blogs", value: blogsList.length },
+      { label: "Total Users", value: usersList.length },
     ],
-    [servicesList.length, blogsList.length]
+    [servicesList.length, blogsList.length, usersList.length]
   );
 
   const fetchServices = async () => {
@@ -194,9 +199,28 @@ function useAdminPanel() {
     }
   };
 
+  const fetchUsers = async () => {
+    setUsersLoading(true);
+    setUsersError("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/get-users`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch users");
+      }
+      const result = await response.json();
+      setUsersList(Array.isArray(result) ? result : []);
+    } catch (error) {
+      setUsersList([]);
+      setUsersError(error.message || "Cannot connect to user API");
+    } finally {
+      setUsersLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchServices();
     fetchBlogs();
+    fetchUsers();
   }, []);
 
   useEffect(() => {
@@ -434,20 +458,44 @@ function useAdminPanel() {
     }
   };
 
+  const handleDeleteUser = async (userId) => {
+    setUserMessage("");
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/delete-user/${userId}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to delete user");
+      }
+
+      setUserMessage("User deleted successfully.");
+      fetchUsers();
+    } catch (error) {
+      setUserMessage(error.message || "Failed to delete user");
+    }
+  };
+
   return {
     dashboardStats,
     servicesList,
     blogsList,
+    usersList,
     servicesLoading,
     blogsLoading,
+    usersLoading,
     servicesError,
     blogsError,
+    usersError,
     serviceForm,
     blogForm,
     isSubmittingService,
     isSubmittingBlog,
     serviceMessage,
     blogMessage,
+    userMessage,
     editingServiceId,
     editingBlogId,
     editingProjectIndex,
@@ -458,6 +506,7 @@ function useAdminPanel() {
     handleDeleteService,
     handleDeleteProject,
     handleDeleteBlog,
+    handleDeleteUser,
     handleBlogChange,
     handleServiceSubmit,
     handleBlogSubmit,

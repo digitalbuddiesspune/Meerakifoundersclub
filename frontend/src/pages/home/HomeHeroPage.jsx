@@ -23,7 +23,10 @@ function HomeHeroPage() {
   }, [])
 
   return (
-    <section className="relative isolate flex min-h-screen w-full max-w-full content-center items-center justify-center overflow-x-hidden overflow-y-hidden bg-[#0E213F] text-center">
+    <section
+      id="home-hero"
+      className="relative isolate flex min-h-screen w-full max-w-full content-center items-center justify-center overflow-x-hidden overflow-y-hidden bg-[#0E213F] text-center"
+    >
       <style>{`
         @keyframes heroTextSlideIn {
           from { opacity: 0; transform: translateX(-52px); }

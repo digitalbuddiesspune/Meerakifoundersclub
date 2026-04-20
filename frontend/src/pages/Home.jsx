@@ -3,6 +3,7 @@ import HomePageLayout from './HomePageLayout'
 
 function Home() {
   const { isBlurred } = useOutletContext()
+
   return (
     <div className={isBlurred ? 'pointer-events-none select-none blur-sm' : ''}>
       <HomePageLayout />
