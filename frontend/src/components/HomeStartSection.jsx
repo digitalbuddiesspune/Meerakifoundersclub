@@ -28,13 +28,16 @@ function HomeStartSection({ items, loading, error }) {
             const descriptionClasses = isDark ? 'text-white/75' : 'text-slate-600'
 
             return (
-              <div key={group.category} className={`${sectionClasses} flex min-h-screen items-center py-10 md:py-14`}>
+              <div
+                key={group.category}
+                className={`${sectionClasses} sticky top-0 z-10 flex min-h-screen items-center justify-center py-10 md:py-14`}
+              >
                 <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
-                  <div className="-mt-4 mb-8 flex justify-center md:-mt-6 md:mb-10">
+                  <div className="mb-8 flex justify-center md:mb-10">
                     <h3
                       className={`border-t px-10 pt-3 text-center text-xl font-semibold uppercase tracking-[0.45em] md:text-2xl ${headingClasses}`}
                     >
-                      {group.category}
+                      {group.category} 
                     </h3>
                   </div>
 
