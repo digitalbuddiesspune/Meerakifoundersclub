@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import AuthModal from './components/AuthModal'
 import Footer from './components/Footer'
 import Header from './components/Header'
 
 const AUTH_STORAGE_KEY = 'mfc_auth_user'
 const API_BASE_URL = import.meta.env.VITE_API_URL
+const LEGAL_PAGE_PATHS = new Set(['/privacy-policy', '/terms-and-conditions', '/cookie-policy'])
 
 const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 const isValidPhone = (value) => /^[9876]\d{9}$/.test(value)
@@ -13,6 +14,7 @@ const isValidName = (value) => value.trim().length >= 3
 const NETWORK_ERROR_MESSAGE = 'Cannot reach server. Please start backend on port 5000.'
 
 function App() {
+  const { pathname } = useLocation()
   const [authUser, setAuthUser] = useState(() => {
     const savedUser = localStorage.getItem(AUTH_STORAGE_KEY)
     if (!savedUser) return null
@@ -187,6 +189,11 @@ function App() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (!LEGAL_PAGE_PATHS.has(pathname)) return
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [pathname])
 
   return (
     <div className="min-h-screen bg-stone-50 text-slate-800">

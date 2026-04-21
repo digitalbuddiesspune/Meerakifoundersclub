@@ -53,11 +53,15 @@ const PROCESS_STEPS = [
   },
 ]
 
+const PROCESS_STEP_GROUPS = [PROCESS_STEPS.slice(0, 2), PROCESS_STEPS.slice(2, 5)]
+
 function HomeProcessSection() {
   return (
     <section id="process" className="w-full">
-      {PROCESS_STEPS.map((step, index) => {
-        const isDark = index % 2 !== 0
+      {PROCESS_STEP_GROUPS.map((stepGroup, groupIndex) => {
+        const isDark = groupIndex % 2 !== 0
+        const gridClasses =
+          stepGroup.length === 3 ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2'
         const sectionClasses = isDark ? 'bg-[#131014]' : 'bg-white'
         const badgeClasses = isDark ? 'text-[#FF8B5A]' : 'text-[#F26527]'
         const titleClasses = isDark ? 'text-white' : 'text-slate-900'
@@ -72,36 +76,43 @@ function HomeProcessSection() {
 
         return (
           <div
-            key={step.title}
+            key={`group-${groupIndex}`}
             className={`${sectionClasses} sticky top-0 flex min-h-screen items-center justify-center px-4 py-14 md:px-8`}
-            style={{ zIndex: 10 + index }}
+            style={{ zIndex: 10 + groupIndex }}
           >
-            <div className="mx-auto w-full max-w-4xl text-center">
+            <div className="mx-auto w-full max-w-6xl text-center">
               <p className={`text-xs font-semibold uppercase tracking-[0.25em] md:text-sm ${badgeClasses}`}>
                 How We Work
               </p>
 
-              <article className={`mx-auto mt-5 max-w-3xl rounded-2xl border p-7 shadow-sm md:p-10 ${cardClasses}`}>
-                <p className={`text-sm font-bold ${badgeClasses}`}>Step {index + 1}</p>
-                <h2 className={`mt-3 text-3xl font-bold md:text-5xl ${titleClasses}`}>{step.title}</h2>
-                <p className={`mx-auto mt-4 max-w-2xl text-sm leading-relaxed md:text-base ${descriptionClasses}`}>
-                  {step.description}
-                </p>
+              <div className={`mt-5 grid gap-5 md:gap-6 ${gridClasses}`}>
+                {stepGroup.map((step, stepIndex) => {
+                  const absoluteStepNumber = groupIndex * 2 + stepIndex + 1
+                  return (
+                    <article key={step.title} className={`rounded-2xl border p-7 shadow-sm md:p-8 ${cardClasses}`}>
+                      <p className={`text-sm font-bold ${badgeClasses}`}>Step {absoluteStepNumber}</p>
+                      <h2 className={`mt-3 text-3xl font-bold md:text-4xl ${titleClasses}`}>{step.title}</h2>
+                      <p className={`mx-auto mt-4 max-w-2xl text-sm leading-relaxed md:text-base ${descriptionClasses}`}>
+                        {step.description}
+                      </p>
 
-                <p className={`mt-6 text-xs font-semibold uppercase tracking-[0.2em] md:text-sm ${actionsLabelClasses}`}>
-                  User Actions
-                </p>
-                <div className="mt-3 flex flex-wrap items-center justify-center gap-2.5">
-                  {step.userActions.map((action) => (
-                    <span
-                      key={action}
-                      className={`rounded-full border px-3 py-1 text-xs font-medium md:px-4 md:py-1.5 md:text-sm ${actionChipClasses}`}
-                    >
-                      {action}
-                    </span>
-                  ))}
+                      <p className={`mt-6 text-xs font-semibold uppercase tracking-[0.2em] md:text-sm ${actionsLabelClasses}`}>
+                        User Actions
+                      </p>
+                      <div className="mt-3 flex flex-wrap items-center justify-center gap-2.5">
+                        {step.userActions.map((action) => (
+                          <span
+                            key={action}
+                            className={`rounded-full border px-3 py-1 text-xs font-medium md:px-4 md:py-1.5 md:text-sm ${actionChipClasses}`}
+                          >
+                            {action}
+                          </span>
+                        ))}
+                      </div>
+                    </article>
+                  )
+                })}
                 </div>
-              </article>
             </div>
           </div>
         )

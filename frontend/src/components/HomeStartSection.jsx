@@ -30,7 +30,7 @@ function HomeStartSection({ items, loading, error }) {
             return (
               <div
                 key={group.category}
-                className={`${sectionClasses} sticky top-0 z-10 flex min-h-screen items-center justify-center py-10 md:py-14`}
+                className={`${sectionClasses} relative flex items-start py-10 md:sticky md:top-0 md:z-10 md:min-h-screen md:items-center md:justify-center md:py-14`}
               >
                 <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
                   <div className="mb-8 flex justify-center md:mb-10">
@@ -44,7 +44,7 @@ function HomeStartSection({ items, loading, error }) {
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {group.items.map((item) => (
                       <article key={item._id} className={`rounded-2xl border p-6 ${cardClasses}`}>
-                        <h4 className="text-2xl font-semibold leading-tight">{item.name}</h4>
+                        <h4 className="text-xl font-semibold leading-tight md:text-2xl">{item.name}</h4>
                         <p className={`mt-3 text-sm leading-relaxed ${descriptionClasses}`}>
                           {item.description}
                         </p>

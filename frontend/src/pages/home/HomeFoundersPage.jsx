@@ -5,13 +5,6 @@ const MILLION_LOTTIE_URL =
   'https://cdn.prod.website-files.com/686c3195802b0228dca014a8/68705eaf39042c64b0a7d1d5_million.json'
 
 const LottieComponent = typeof Lottie === 'function' ? Lottie : Lottie?.default
-const whyMeraakiPoints = [
-  'By Founders, for Founders',
-  'Focus on Tier II/III',
-  '1st Marketplace for Startups',
-  'Community',
-  'Verified Ecosystem',
-]
 
 function HomeFoundersPage() {
   const [millionAnimationData, setMillionAnimationData] = useState(null)
@@ -66,28 +59,11 @@ function HomeFoundersPage() {
           We are building the startup system we wished existed. Want to be one of the first cohorts who get to use it? Join our newsletter to find out more.
         </p>
 
-        <div className="mx-auto mt-10 w-full max-w-5xl rounded-3xl border border-[#F26527]/20 bg-[#FFF1EA] p-6 text-left md:mt-12 md:p-10">
-          <h3 className="text-center text-xl font-bold text-[#F26527] md:text-3xl">
-            Why Meraaki Founders Club
-          </h3>
-          <div className="mt-6 grid gap-3 md:mt-8 md:grid-cols-2 md:gap-4">
-            {whyMeraakiPoints.map((point) => (
-              <div
-                key={point}
-                className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm ring-1 ring-[#F26527]/15 md:text-base"
-              >
-                <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F26527] text-xs font-bold text-white">
-                  ✓
-                </span>
-                <span>{point}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+       
 
         <button
           type="button"
-          className="mt-8 inline-flex items-center rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-slate-800"
+          className="mt-8 hover:cursor-pointer hover:scale-105 hover:shadow-lg inline-flex items-center rounded-full bg-slate-900 px-8 py-3 text-sm md:text-base font-semibold uppercase tracking-wide text-white transition hover:bg-slate-800"
         >
           Subscribe
         </button>
