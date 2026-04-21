@@ -15,6 +15,7 @@ function HomePageLayout() {
       <HomeProcessPage />
       <HomeOurClientsPage />
       <HomeFoundersPage />
+      <WhyMeraakiFoundersClub />
     </main>
   )
 }
