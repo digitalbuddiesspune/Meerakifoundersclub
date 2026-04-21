@@ -26,7 +26,7 @@ export default function WhyMeraakiFoundersClub() {
 
       <div className="mb-10 px-4 text-center md:mb-14">
         <h2 className="mx-auto max-w-5xl text-4xl font-semibold leading-[1.02] tracking-tight text-[#26272f] md:text-7xl">
-          Founders makes business admin effortless.
+          Founders makes business admin effortless
         </h2>
       </div>
 
