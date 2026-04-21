@@ -9,7 +9,7 @@ import Profile from '../pages/Profile'
 import ServiceDetails from '../pages/ServiceDetails'
 import Services from '../pages/Services'
 import TermsAndConditions from '../pages/TermsAndConditions'
-import WhyMeraakiFoundersClub from '../pages/WhyMeraakiFoundersClub'
+import WhyMeraakiFoundersClub from '../pages/home/WhyMeraakiFoundersClub'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
