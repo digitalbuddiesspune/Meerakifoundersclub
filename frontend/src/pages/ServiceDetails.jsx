@@ -197,17 +197,17 @@ function ServiceDetails() {
                   })}
                 </div>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-8 flex flex-nowrap items-center gap-2 md:gap-3">
                   <a
                     href="#projects"
-                    className="inline-flex items-center rounded-full bg-[#F26527] px-6 py-3 text-sm font-semibold text-white shadow transition hover:opacity-90"
+                    className="inline-flex items-center whitespace-nowrap rounded-full bg-[#F26527] px-4 py-2.5 text-[10px] font-semibold text-white shadow transition hover:opacity-90 md:px-6 md:py-3 md:text-xs"
                   >
                     Explore Projects
                     <ArrowRight size={14} className="ml-2" />
                   </a>
                   <a
                     href="mailto:info@meraakifoundersclub.com"
-                    className="inline-flex items-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#F26527]/40 hover:text-[#F26527]"
+                    className="inline-flex items-center whitespace-nowrap rounded-full border border-slate-200 bg-white px-4 py-2.5 text-[10px] font-semibold text-slate-700 transition hover:border-[#F26527]/40 hover:text-[#F26527] md:px-6 md:py-3 md:text-xs"
                   >
                     Get Free Consultation
                   </a>
