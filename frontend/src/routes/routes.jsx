@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
 import ProblemsSolutions from '../pages/ProblemsSolutions'
 import Profile from '../pages/Profile'
+import RefundPolicy from '../pages/RefundPolicy'
 import ServiceDetails from '../pages/ServiceDetails'
 import Services from '../pages/Services'
 import TermsAndConditions from '../pages/TermsAndConditions'
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="cookie-policy" element={<CookiePolicy />} />
+      <Route path="refund-policy" element={<RefundPolicy />} />
       <Route path="profile" element={<Profile />} />
       <Route path="why-meraaki-founders-club" element={<WhyMeraakiFoundersClub />} />
     </Route>,
