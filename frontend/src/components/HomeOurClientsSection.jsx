@@ -5,7 +5,7 @@ function HomeOurClientsSection({ clients, loading, error }) {
   const marqueeItems = [...clients, ...clients, ...clients];
 
   return (
-    <section className="flex min-h-screen w-full items-center overflow-hidden bg-[#131014] py-12 md:py-16">
+    <section className="flex w-full items-center overflow-hidden bg-white py-12 md:py-16">
       <style>{`
         @keyframes clientsMarquee {
           from { transform: translateX(0); }
@@ -15,11 +15,11 @@ function HomeOurClientsSection({ clients, loading, error }) {
 
       <div className="w-full">
         <div className="mx-auto -mt-10 mb-14 w-full max-w-7xl px-4 md:-mt-20 md:mb-20 md:px-8">
-          <h2 className="text-5xl tracking-tight text-white md:text-7xl">Our Clients:</h2>
+          <h2 className="text-3xl tracking-tight text-slate-900 md:text-5xl">Our Clients:</h2>
         </div>
 
-        {loading ? <p className="px-4 text-sm text-white/70 md:px-8">Loading clients...</p> : null}
-        {error ? <p className="px-4 text-sm text-red-300 md:px-8">{error}</p> : null}
+        {loading ? <p className="px-4 text-xs text-slate-600 md:px-8 md:text-sm">Loading clients...</p> : null}
+        {error ? <p className="px-4 text-xs text-red-600 md:px-8 md:text-sm">{error}</p> : null}
 
         {!loading && !error && clients.length > 0 ? (
           <div
@@ -38,7 +38,7 @@ function HomeOurClientsSection({ clients, loading, error }) {
               {marqueeItems.map((client, index) => (
                 <div
                   key={`${client._id}-${index}`}
-                  className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white p-3 md:h-24 md:w-24"
+                  className="flex h-20 w-20 items-center justify-center rounded-full border border-slate-200 bg-white p-3 md:h-24 md:w-24"
                 >
                   <img
                     src={client.logo}
@@ -53,7 +53,7 @@ function HomeOurClientsSection({ clients, loading, error }) {
         ) : null}
 
         {!loading && !error && clients.length === 0 ? (
-          <p className="px-4 text-sm text-white/70 md:px-8">No client logos found.</p>
+          <p className="px-4 text-xs text-slate-600 md:px-8 md:text-sm">No client logos found.</p>
         ) : null}
       </div>
     </section>

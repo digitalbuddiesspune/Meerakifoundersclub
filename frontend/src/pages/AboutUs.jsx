@@ -20,13 +20,8 @@ const teamMembers = [
     role: 'CMO & Co-Founder',
     description:
       'Chahul brings deep expertise in scaling brands in Tier II/III markets, having helped a QSR chain grow to 60+ locations across India. He is passionate about grassroots entrepreneurship and leads Meraaki Founders Club go-to-market, community-building, and brand strategy, always staying connected to the needs of local founders.',
-  },
-  {
-    name: 'Mohit Arora',
-    role: 'CTO & Co-Founder',
-    description:
-      "With more than 30 years of experience in technology, Mohit has built and scaled advanced digital platforms, including architecting his first marketplace from the ground up. He ensures Meraaki Founders Club technology is robust, secure, and designed to deliver a seamless experience for founders in emerging startup ecosystems.",
-  },
+  }
+ 
 ]
 
 function AboutUs() {
@@ -103,7 +98,7 @@ function AboutUs() {
             Operations, technology, vendor relations, community, support—all focused on founder success.
           </p>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
             {teamMembers.map((member) => (
               <article key={member.name} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                 <h3 className="text-lg font-semibold text-slate-900">{member.name}</h3>

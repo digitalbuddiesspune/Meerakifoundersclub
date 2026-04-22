@@ -152,7 +152,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             ) : null}
           </div>
           <Link to="/problems-solutions" className="text-black transition hover:text-[#F26527]">
-            Problems & Solutions
+            Challenges & Solutions
           </Link>
           <a href="#process" className="text-black transition hover:text-[#F26527]">How It Works</a>
           <Link to="/contact-us" className="text-black transition hover:text-[#F26527]">Contact</Link>
@@ -205,7 +205,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
               onClick={closeMobileMenu}
               className="rounded-lg px-3 py-2 transition hover:bg-slate-100"
             >
-              Problems & Solutions
+              Challenges & Solutions
             </Link>
             {services.length > 0 ? (
               <div className="ml-3 flex flex-col gap-1">

@@ -59,7 +59,7 @@ export default function WhyMeraakiFoundersClub() {
           Why Meraaki Founders Club
         </p>
         <h2 className="mx-auto max-w-5xl text-4xl font-semibold leading-[1.02] tracking-tight text-[#26272f] md:text-7xl">
-          Founders makes business admin effortless
+         One-Stop Solution Platform For Founders
         </h2>
       </div>
 

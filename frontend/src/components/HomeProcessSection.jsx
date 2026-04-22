@@ -20,24 +20,14 @@ const PROCESS_STEPS = [
       'Check mentor profiles',
     ],
   },
-  {
-    title: 'GET HELP',
-    description: 'Post questions and get real answers from mentors.',
-    userActions: [
-      'Post to Q&A forum',
-      'Browse vendors',
-      'Message directly',
-      'Check ratings',
-    ],
-  },
+  
   {
     title: 'ORDER',
     description: 'Order service with complete transparency and protection.',
     userActions: [
       'Select service',
-      'See total cost',
       'Pay via Razorpay',
-      'Escrow holds funds',
+      
     ],
   },
   {
