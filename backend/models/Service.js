@@ -53,6 +53,20 @@ const serviceSchema = new mongoose.Schema(
         trim: true,
       },
     ],
+    features: [
+      {
+        featureName: {
+          type: String,
+          trim: true,
+          required: true,
+        },
+        featureDiscription: {
+          type: String,
+          trim: true,
+          required: true,
+        },
+      },
+    ],
     projects: [
       {
         image: {

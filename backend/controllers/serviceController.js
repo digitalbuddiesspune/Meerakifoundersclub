@@ -22,6 +22,17 @@ const normalizeToolsWeUsed = (input) => {
   return [];
 };
 
+const normalizeFeatures = (input) => {
+  if (!Array.isArray(input)) return [];
+
+  return input
+    .map((feature) => ({
+      featureName: String(feature?.featureName || "").trim(),
+      featureDiscription: String(feature?.featureDiscription || "").trim(),
+    }))
+    .filter((feature) => feature.featureName && feature.featureDiscription);
+};
+
 export const getServices = async (req, res) => {
   try {
     const services = await Service.find().sort({ createdAt: -1 });
@@ -61,6 +72,7 @@ export const addService = async (req, res) => {
       support = "",
       avgDelivery = "",
       toolsWeUsed = [],
+      features = [],
     } = req.body;
 
     if (
@@ -87,6 +99,7 @@ export const addService = async (req, res) => {
       support,
       avgDelivery,
       toolsWeUsed: normalizeToolsWeUsed(toolsWeUsed),
+      features: normalizeFeatures(features),
       projects,
     });
 
@@ -114,6 +127,7 @@ export const updateServiceById = async (req, res) => {
       support,
       avgDelivery,
       toolsWeUsed,
+      features,
     } = req.body;
 
     const updatedService = await Service.findByIdAndUpdate(
@@ -132,6 +146,7 @@ export const updateServiceById = async (req, res) => {
         ...(toolsWeUsed !== undefined
           ? { toolsWeUsed: normalizeToolsWeUsed(toolsWeUsed) }
           : {}),
+        ...(features !== undefined ? { features: normalizeFeatures(features) } : {}),
       },
       { new: true, runValidators: true }
     );
