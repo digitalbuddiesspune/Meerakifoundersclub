@@ -96,14 +96,14 @@ function HomeProcessSection() {
                         {step.description}
                       </p>
 
-                      <p className={`mt-6 text-xs font-semibold uppercase tracking-[0.2em] md:text-sm ${actionsLabelClasses}`}>
+                      <p className={`mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] md:mt-6 md:text-sm md:tracking-[0.2em] ${actionsLabelClasses}`}>
                         User Actions
                       </p>
-                      <div className="mt-3 flex flex-wrap items-center justify-center gap-2.5">
-                        {step.userActions.map((action) => (
+                      <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5 md:mt-3 md:gap-2.5">
+                        {step.userActions.slice(0, 4).map((action) => (
                           <span
                             key={action}
-                            className={`rounded-full border px-3 py-1 text-xs font-medium md:px-4 md:py-1.5 md:text-sm ${actionChipClasses}`}
+                            className={`rounded-full border px-2.5 py-0.5 text-[10px] font-medium md:px-4 md:py-1.5 md:text-xs ${actionChipClasses}`}
                           >
                             {action}
                           </span>
