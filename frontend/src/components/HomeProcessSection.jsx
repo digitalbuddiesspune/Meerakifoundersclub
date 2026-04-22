@@ -89,7 +89,7 @@ function HomeProcessSection() {
                 {stepGroup.map((step, stepIndex) => {
                   const absoluteStepNumber = groupIndex * 2 + stepIndex + 1
                   return (
-                    <article key={step.title} className={`rounded-2xl border p-6 shadow-sm md:p-8 ${cardClasses}`}>
+                    <article key={step.title} className={`rounded-2xl border p-3 shadow-sm md:p-6 ${cardClasses}`}>
                       <p className={`text-xs font-bold md:text-sm ${badgeClasses}`}>Step {absoluteStepNumber}</p>
                       <h2 className={`mt-3 text-xl font-bold md:text-4xl ${titleClasses}`}>{step.title}</h2>
                       <p className={`mx-auto mt-4 max-w-2xl text-sm leading-relaxed md:text-base ${descriptionClasses}`}>
