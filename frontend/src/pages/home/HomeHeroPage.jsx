@@ -167,7 +167,7 @@ function HomeHeroPage() {
         .hero-headline {
           font-family: 'Montserrat', 'DM Sans', sans-serif;
           font-weight: 800;
-          font-size: clamp(2.1rem, 5.5vw, 4.8rem);
+          font-size: clamp(1.8rem, 4.7vw, 4rem);
           line-height: 1.08;
           letter-spacing: -0.02em;
           color: #f0f4ff;
@@ -189,7 +189,7 @@ function HomeHeroPage() {
           font-weight: 300;
           color: rgba(200,215,255,0.65);
           letter-spacing: 0.06em;
-          margin-bottom: 36px;
+          margin-bottom: 24px;
           animation: fadeUp 0.8s 0.28s ease-out forwards;
           opacity: 0;
         }
@@ -203,15 +203,15 @@ function HomeHeroPage() {
           justify-content: center;
           animation: fadeUp 0.8s 0.4s ease-out forwards;
           opacity: 0;
-          margin-bottom: 64px;
+          margin-bottom: 28px;
         }
 
         .cta-primary {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 12px 28px;
-          font-size: 0.85rem;
+          padding: 9px 20px;
+          font-size: 0.78rem;
           font-weight: 600;
           color: #fff;
           background: linear-gradient(135deg, #F26527 0%, #d94e12 100%);
@@ -233,8 +233,8 @@ function HomeHeroPage() {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          padding: 11px 24px;
-          font-size: 0.85rem;
+          padding: 8px 18px;
+          font-size: 0.78rem;
           font-weight: 500;
           color: rgba(200,215,255,0.8);
           border: 1px solid rgba(200,215,255,0.18);
@@ -320,7 +320,7 @@ function HomeHeroPage() {
           width: 1px;
           height: 32px;
           background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.12), transparent);
-          margin: 0 auto 28px;
+          margin: 0 auto 16px;
         }
       `}</style>
 
@@ -349,7 +349,7 @@ function HomeHeroPage() {
       {/* ── content ── */}
       <div
         className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-5 py-20"
-        style={{ paddingTop: 'clamp(80px,12vh,140px)', paddingBottom: 'clamp(60px,10vh,120px)' }}
+        style={{ paddingTop: 'clamp(20px,3.5vh,52px)', paddingBottom: 'clamp(28px,6vh,72px)' }}
       >
         {/* eyebrow */}
         <span className="hero-eyebrow">
@@ -362,8 +362,8 @@ function HomeHeroPage() {
 
         {/* headline */}
         <h1 className="hero-headline">
-          Build Your Business<br />
-          <span className="accent">with Confidence</span>
+          Build Your Business With India's<br />
+          <span className="accent">First Marketplace For Founders</span>
         </h1>
 
         {/* sub */}
