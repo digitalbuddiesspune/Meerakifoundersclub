@@ -43,9 +43,9 @@ function HomeStartSection({ items, loading, error }) {
 
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {group.items.map((item) => (
-                      <article key={item._id} className={`rounded-2xl border p-6 ${cardClasses}`}>
-                        <h4 className="text-xl font-semibold leading-tight md:text-2xl">{item.name}</h4>
-                        <p className={`mt-3 text-sm leading-relaxed ${descriptionClasses}`}>
+                      <article key={item._id} className={`rounded-2xl border p-3 md:p-6 ${cardClasses}`}>
+                        <h4 className="text-base font-semibold leading-tight md:text-2xl">{item.name}</h4>
+                        <p className={`mt-3 text-xs md:text-sm leading-relaxed ${descriptionClasses}`}>
                           {item.description}
                         </p>
                       </article>

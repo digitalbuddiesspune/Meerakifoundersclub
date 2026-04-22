@@ -315,13 +315,13 @@ function Services() {
         }
       `}</style>
 
-      <div className="min-h-screen overflow-x-hidden bg-slate-50 text-slate-900">
+      <div className="min-h-screen overflow-x-hidden bg-white text-slate-900">
         <main className="relative">
 
           {/* ══════════════════════════════════════════════════════════
               HERO SECTION
           ══════════════════════════════════════════════════════════ */}
-          <section className="relative z-10 flex min-h-screen items-start overflow-hidden bg-gradient-to-br from-white via-cyan-50 to-indigo-50 px-4 pt-8 pb-16 md:sticky md:top-0 md:px-8 md:pt-12 md:pb-20">
+          <section className="relative z-10 flex min-h-screen items-start overflow-hidden bg-white px-4 pt-8 pb-16 md:sticky md:top-0 md:px-8 md:pt-12 md:pb-20">
             <FloatingOrbs />
             <GridLines />
             <DotPattern className="right-10 top-24" />
@@ -448,7 +448,7 @@ function Services() {
           ══════════════════════════════════════════════════════════ */}
           <section
             id="expert-services"
-            className="relative z-20 bg-slate-100 px-4 py-16 text-slate-900 md:-mt-8 md:rounded-t-[2.5rem] md:sticky md:top-0 md:min-h-screen md:px-8"
+            className="relative z-20 bg-white px-4 py-16 text-slate-900 md:-mt-8 md:rounded-t-[2.5rem] md:sticky md:top-0 md:min-h-screen md:px-8"
           >
             {/* Section header */}
             <div className="relative text-center">
