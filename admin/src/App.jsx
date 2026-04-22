@@ -69,9 +69,12 @@ function App() {
               editingProjectIndex={admin.editingProjectIndex}
               onServiceChange={admin.handleServiceChange}
               onProjectChange={admin.handleProjectChange}
+              onServiceImageUpload={admin.handleServiceImageUpload}
+              onProjectImageUpload={admin.handleProjectImageUpload}
               onAddProject={admin.addProject}
               onRemoveProject={admin.removeProject}
               onSubmit={admin.handleServiceSubmit}
+              uploadingImageFor={admin.uploadingImageFor}
             />
           }
         />
@@ -96,7 +99,10 @@ function App() {
               blogMessage={admin.blogMessage}
               isEditingBlog={Boolean(admin.editingBlogId)}
               onBlogChange={admin.handleBlogChange}
+              onFeaturedImageUpload={admin.handleBlogFeaturedImageUpload}
+              onAuthorAvatarUpload={admin.handleBlogAuthorAvatarUpload}
               onSubmit={admin.handleBlogSubmit}
+              uploadingImageFor={admin.uploadingImageFor}
             />
           }
         />

@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import ourClientRoutes from "./routes/ourClientRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use("/api/v1", userRoutes);
 app.use("/api/v1", serviceRoutes);
 app.use("/api/v1", blogRoutes);
 app.use("/api/v1", ourClientRoutes);
+app.use("/api/v1", uploadRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend server is running" });

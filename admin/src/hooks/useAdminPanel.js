@@ -150,6 +150,7 @@ function useAdminPanel() {
   const [serviceMessage, setServiceMessage] = useState("");
   const [blogMessage, setBlogMessage] = useState("");
   const [userMessage, setUserMessage] = useState("");
+  const [uploadingImageFor, setUploadingImageFor] = useState("");
   const [editingServiceId, setEditingServiceId] = useState("");
   const [editingBlogId, setEditingBlogId] = useState("");
   const [editingProjectIndex, setEditingProjectIndex] = useState(null);
@@ -295,6 +296,111 @@ function useAdminPanel() {
   const handleBlogChange = (event) => {
     const { name, value } = event.target;
     setBlogForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const uploadImageToCloudinary = async (file, folder) => {
+    if (!file) {
+      throw new Error("Please select an image.");
+    }
+
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("folder", folder);
+
+    const response = await fetch(`${API_BASE_URL}/uploads/image`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const responseText = await response.text();
+    let result = {};
+    try {
+      result = responseText ? JSON.parse(responseText) : {};
+    } catch (error) {
+      result = {};
+    }
+
+    if (!response.ok) {
+      throw new Error(result.message || "Image upload failed");
+    }
+
+    return result.url;
+  };
+
+  const handleServiceImageUpload = async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImageFor("service-main");
+    setServiceMessage("");
+    try {
+      const uploadedUrl = await uploadImageToCloudinary(file, "services");
+      setServiceForm((prev) => ({ ...prev, image: uploadedUrl }));
+      setServiceMessage("Service image uploaded successfully.");
+    } catch (error) {
+      setServiceMessage(error.message || "Failed to upload service image.");
+    } finally {
+      setUploadingImageFor("");
+      event.target.value = "";
+    }
+  };
+
+  const handleProjectImageUpload = async (index, event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImageFor(`project-${index}`);
+    setServiceMessage("");
+    try {
+      const uploadedUrl = await uploadImageToCloudinary(file, "services/projects");
+      setServiceForm((prev) => {
+        const updatedProjects = [...prev.projects];
+        updatedProjects[index] = { ...updatedProjects[index], image: uploadedUrl };
+        return { ...prev, projects: updatedProjects };
+      });
+      setServiceMessage(`Project ${index + 1} image uploaded successfully.`);
+    } catch (error) {
+      setServiceMessage(error.message || "Failed to upload project image.");
+    } finally {
+      setUploadingImageFor("");
+      event.target.value = "";
+    }
+  };
+
+  const handleBlogFeaturedImageUpload = async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImageFor("blog-featured");
+    setBlogMessage("");
+    try {
+      const uploadedUrl = await uploadImageToCloudinary(file, "blogs/featured");
+      setBlogForm((prev) => ({ ...prev, featuredImage: uploadedUrl }));
+      setBlogMessage("Featured image uploaded successfully.");
+    } catch (error) {
+      setBlogMessage(error.message || "Failed to upload featured image.");
+    } finally {
+      setUploadingImageFor("");
+      event.target.value = "";
+    }
+  };
+
+  const handleBlogAuthorAvatarUpload = async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImageFor("blog-author-avatar");
+    setBlogMessage("");
+    try {
+      const uploadedUrl = await uploadImageToCloudinary(file, "blogs/authors");
+      setBlogForm((prev) => ({ ...prev, authorAvatar: uploadedUrl }));
+      setBlogMessage("Author avatar uploaded successfully.");
+    } catch (error) {
+      setBlogMessage(error.message || "Failed to upload author avatar.");
+    } finally {
+      setUploadingImageFor("");
+      event.target.value = "";
+    }
   };
 
   const handleServiceSubmit = async (event) => {
@@ -499,8 +605,11 @@ function useAdminPanel() {
     editingServiceId,
     editingBlogId,
     editingProjectIndex,
+    uploadingImageFor,
     handleServiceChange,
     handleProjectChange,
+    handleServiceImageUpload,
+    handleProjectImageUpload,
     addProject,
     removeProject,
     handleDeleteService,
@@ -508,6 +617,8 @@ function useAdminPanel() {
     handleDeleteBlog,
     handleDeleteUser,
     handleBlogChange,
+    handleBlogFeaturedImageUpload,
+    handleBlogAuthorAvatarUpload,
     handleServiceSubmit,
     handleBlogSubmit,
   };

@@ -6,9 +6,12 @@ function AddServicePage({
   editingProjectIndex,
   onServiceChange,
   onProjectChange,
+  onServiceImageUpload,
+  onProjectImageUpload,
   onAddProject,
   onRemoveProject,
   onSubmit,
+  uploadingImageFor,
 }) {
   const inputClassName =
     "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100";
@@ -31,7 +34,24 @@ function AddServicePage({
               onChange={onServiceChange}
               required
             />
-            <input className={inputClassName} name="image" placeholder="Image URL" value={serviceForm.image} onChange={onServiceChange} required />
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">Service image</label>
+              <input
+                className={inputClassName}
+                type="file"
+                accept="image/*"
+                onChange={onServiceImageUpload}
+              />
+              {uploadingImageFor === "service-main" ? <p className="text-xs text-cyan-600">Uploading image...</p> : null}
+              {!serviceForm.image ? <p className="text-xs text-slate-500">Please upload a service image from gallery.</p> : null}
+              {serviceForm.image ? (
+                <img
+                  src={serviceForm.image}
+                  alt="Service preview"
+                  className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
+                />
+              ) : null}
+            </div>
             <input
               className={inputClassName}
               type="number"
@@ -83,12 +103,19 @@ function AddServicePage({
               />
               <input
                 className={inputClassName}
-                name="image"
-                placeholder="Project image URL"
-                value={project.image}
-                onChange={(event) => onProjectChange(index, event)}
-                required
+                type="file"
+                accept="image/*"
+                onChange={(event) => onProjectImageUpload(index, event)}
               />
+              {uploadingImageFor === `project-${index}` ? <p className="text-xs text-cyan-600">Uploading project image...</p> : null}
+              {!project.image ? <p className="text-xs text-slate-500">Please upload project image from gallery.</p> : null}
+              {project.image ? (
+                <img
+                  src={project.image}
+                  alt={`Project ${index + 1} preview`}
+                  className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
+                />
+              ) : null}
               <textarea
                 className={inputClassName}
                 name="description"

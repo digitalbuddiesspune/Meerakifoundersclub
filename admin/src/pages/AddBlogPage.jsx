@@ -1,4 +1,14 @@
-function AddBlogPage({ blogForm, isSubmittingBlog, blogMessage, isEditingBlog, onBlogChange, onSubmit }) {
+function AddBlogPage({
+  blogForm,
+  isSubmittingBlog,
+  blogMessage,
+  isEditingBlog,
+  onBlogChange,
+  onFeaturedImageUpload,
+  onAuthorAvatarUpload,
+  onSubmit,
+  uploadingImageFor,
+}) {
   return (
     <section className="grid gap-5">
       <div className="rounded-3xl border border-slate-200/50 bg-white/90 p-6 shadow-[0_16px_34px_rgba(15,23,42,0.06)]">
@@ -19,7 +29,12 @@ function AddBlogPage({ blogForm, isSubmittingBlog, blogMessage, isEditingBlog, o
             <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="title" placeholder="Blog title" value={blogForm.title} onChange={onBlogChange} required />
             <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="slug" placeholder="Slug (e.g. my-first-blog)" value={blogForm.slug} onChange={onBlogChange} required />
             <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="excerpt" placeholder="Excerpt" value={blogForm.excerpt} onChange={onBlogChange} />
-            <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="featuredImage" placeholder="Featured image URL" value={blogForm.featuredImage} onChange={onBlogChange} />
+            <div className="grid gap-2">
+              <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" type="file" accept="image/*" onChange={onFeaturedImageUpload} />
+              {uploadingImageFor === "blog-featured" ? <p className="text-xs text-cyan-600">Uploading featured image...</p> : null}
+              {!blogForm.featuredImage ? <p className="text-xs text-slate-500">Please upload featured image from gallery.</p> : null}
+              {blogForm.featuredImage ? <img src={blogForm.featuredImage} alt="Featured preview" className="h-20 w-20 rounded-xl border border-slate-200 object-cover" /> : null}
+            </div>
             <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="category" placeholder="Category" value={blogForm.category} onChange={onBlogChange} />
             <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="tags" placeholder="Tags (comma separated)" value={blogForm.tags} onChange={onBlogChange} />
           </div>
@@ -30,7 +45,12 @@ function AddBlogPage({ blogForm, isSubmittingBlog, blogMessage, isEditingBlog, o
           <h4 className="mb-4 text-lg font-semibold text-slate-900">Author and publish settings</h4>
           <div className="grid gap-3.5 md:grid-cols-2">
             <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="authorName" placeholder="Author name" value={blogForm.authorName} onChange={onBlogChange} />
-            <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="authorAvatar" placeholder="Author avatar URL" value={blogForm.authorAvatar} onChange={onBlogChange} />
+            <div className="grid gap-2">
+              <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" type="file" accept="image/*" onChange={onAuthorAvatarUpload} />
+              {uploadingImageFor === "blog-author-avatar" ? <p className="text-xs text-cyan-600">Uploading avatar...</p> : null}
+              {!blogForm.authorAvatar ? <p className="text-xs text-slate-500">Upload author avatar from gallery (optional).</p> : null}
+              {blogForm.authorAvatar ? <img src={blogForm.authorAvatar} alt="Author avatar preview" className="h-20 w-20 rounded-xl border border-slate-200 object-cover" /> : null}
+            </div>
             <select className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="status" value={blogForm.status} onChange={onBlogChange}>
               <option value="draft">Draft</option>
               <option value="published">Published</option>
