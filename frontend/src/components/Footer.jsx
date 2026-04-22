@@ -7,8 +7,8 @@ const LOGO_URL =
 function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-white text-slate-800">
-      <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+      <div className="mx-auto  max-w-7xl px-4 py-12 md:px-8 md:py-14">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 justify-between">
           <div>
             <Link to="/" className="inline-flex items-center">
               <img
@@ -116,8 +116,8 @@ function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-200 px-4 py-4">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 text-xs text-slate-500 md:flex-row">
+      <div className="border-t border-slate-200 px-4 py-4 md:px-8">
+        <div className="mx-auto flex  max-w-7xl flex-col items-center justify-between gap-3 text-xs text-slate-500 md:flex-row">
           <span>© {new Date().getFullYear()} Meraaki Founders Club. All rights reserved.</span>
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
             <span>Startup India Certified</span>
