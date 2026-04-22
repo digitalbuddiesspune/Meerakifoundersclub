@@ -30,7 +30,7 @@ function HomeStartSection({ items, loading, error }) {
             return (
               <div
                 key={group.category}
-                className={`${sectionClasses} relative flex items-start py-10 md:sticky md:top-0 md:z-10 md:min-h-screen md:items-center md:justify-center md:py-14`}
+                className={`${sectionClasses} relative flex items-start py-10 md:sticky md:top-0 md:z-10 min-h-screen md:items-center md:justify-center md:py-14`}
               >
                 <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
                   <div className="mb-8 flex justify-center md:mb-10">
