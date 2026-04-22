@@ -11,7 +11,7 @@ function Profile() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-slate-900">
-      <main className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8">
+      <main className="mx-auto w-full max-w-7xl px-4 py-12 md:px-0">
         {isAuthenticated ? (
           <section className="mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
             <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">My Profile</h1>

@@ -1,6 +1,10 @@
+import { Link } from 'react-router-dom'
+
 const communityBenefits = [
   {
     title: 'Live Q&A Forum',
+    icon: '💬',
+    accent: '#FF6B35',
     points: [
       'Ask any business question',
       'Mentors respond within 24 hours',
@@ -10,6 +14,8 @@ const communityBenefits = [
   },
   {
     title: 'WhatsApp Groups',
+    icon: '📱',
+    accent: '#F26527',
     points: [
       'City-specific founder chats',
       'Real-time support and advice',
@@ -19,6 +25,8 @@ const communityBenefits = [
   },
   {
     title: 'Monthly Meetups',
+    icon: '🤝',
+    accent: '#E8521F',
     points: [
       'In-person founder hangouts',
       '2-3 mentors sharing practical wisdom',
@@ -27,27 +35,33 @@ const communityBenefits = [
     ],
   },
   {
-    title: 'Monthly Ask-Me-Anything (AMA)',
+    title: 'Monthly AMAs',
+    icon: '🎙️',
+    accent: '#FF8C42',
     points: [
       'Live sessions with successful founders',
-      'Topics: fundraising, hiring, marketing, scaling, compliance',
+      'Topics: fundraising, hiring, marketing',
       'Recorded for later viewing',
       'Q&A opportunity for all members',
     ],
   },
   {
     title: 'Events & Workshops',
+    icon: '⚡',
+    accent: '#F26527',
     points: [
-      'Skill-building sessions (compliance, marketing, HR, etc.)',
+      'Skill-building sessions',
       'Online and in-person options',
-      'Upcoming: December meetups, January funding workshop',
+      'Compliance, marketing, HR & more',
     ],
   },
   {
-    title: 'Partner Recommendations',
+    title: 'Partner Network',
+    icon: '🌐',
+    accent: '#FF6B35',
     points: [
-      'Ask community for service recommendations',
-      'Mentors introduce trusted partners',
+      'Trusted service recommendations',
+      'Mentor-vetted partners',
       'Leverage peer experience',
       'Avoid bad services',
     ],
@@ -55,135 +69,537 @@ const communityBenefits = [
 ]
 
 const values = [
-  'Honest advice over flattery',
-  'Action over endless talk',
-  'Help-first mindset',
-  'Respect for all founders',
-  'Zero judgment',
+  { text: 'Honest advice over flattery', icon: '✦' },
+  { text: 'Action over endless talk', icon: '✦' },
+  { text: 'Help-first mindset', icon: '✦' },
+  { text: 'Respect for all founders', icon: '✦' },
+  { text: 'Zero judgment', icon: '✦' },
 ]
 
 const notAllowed = [
   'Spam or self-promotion',
   'Harassment or disrespect',
   'Asking for free work',
-  'Partner pitches (use partner marketplace)',
+  'Partner pitches',
   'Off-topic discussions',
 ]
 
 const events = [
   {
-    name: 'Meetup 1: "Building Your First Team"',
-    date: 'Saturday, Dec 21, 2025, 05:00 PM',
-    details: ['Topics: Overcome Founders Challenges', 'Location: Meraaki Founders Club Hub, Nagpur'],
-    cta: 'RSVP',
+    name: 'Building Your First Team',
+    date: 'Sat, Dec 21 · 5:00 PM',
+    tag: 'Meetup',
+    tagColor: '#F26527',
+    details: ['Overcome Founders Challenges', 'Meraaki Hub, Nagpur'],
+    cta: 'RSVP Now',
   },
   {
-    name: 'Meetup 2: "Compliance Without the Chaos"',
-    date: 'Wednesday, Dec 10, 2025, 5:30 PM',
-    details: ['Topics: GST, tax, registration, compliance timelines', 'Location: Meraaki Founders Club Hub, Nagpur'],
-    cta: 'RSVP',
+    name: 'Compliance Without the Chaos',
+    date: 'Wed, Dec 10 · 5:30 PM',
+    tag: 'Workshop',
+    tagColor: '#E8521F',
+    details: ['GST, tax, registration, timelines', 'Meraaki Hub, Nagpur'],
+    cta: 'RSVP Now',
   },
   {
-    name: 'AMA: "From Zero to Registered Business"',
-    date: 'Thursday, Dec 12, 2025, 7:00 PM',
-    details: ['Host: Nagpur founder (compliance expert)', 'Duration: 90 min live + Q&A'],
+    name: 'From Zero to Registered Business',
+    date: 'Thu, Dec 12 · 7:00 PM',
+    tag: 'AMA',
+    tagColor: '#FF8C42',
+    details: ['Nagpur founder (compliance expert)', '90 min live + Q&A'],
     cta: 'Register',
   },
 ]
 
+const steps = [
+  { num: '01', title: 'Sign Up', desc: 'Get Meraaki Founders Club membership' },
+  { num: '02', title: 'Get Invited', desc: 'WhatsApp group invite via email' },
+  { num: '03', title: 'Introduce', desc: 'Say hello to the community' },
+  { num: '04', title: 'Connect', desc: 'Ask, share, and grow together' },
+]
+
+const style = `
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+  .com-root * { box-sizing: border-box; margin: 0; padding: 0; }
+  .com-root { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #0F0F0D; }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: #0F0F0D;
+    padding: 100px 0 80px;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(242,101,39,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242,101,39,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-orb-1 {
+    position: absolute; top: -80px; right: 10%;
+    width: 480px; height: 480px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,101,39,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-orb-2 {
+    position: absolute; bottom: -60px; left: -80px;
+    width: 360px; height: 360px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  }
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(242,101,39,0.4);
+    background: rgba(242,101,39,0.1);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #FF9C73;
+    font-family: 'Syne', sans-serif;
+  }
+  .hero-pill::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #F26527; animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(38px, 6vw, 76px);
+    font-weight: 800; line-height: 1.0; margin-top: 20px;
+    color: #ffffff; letter-spacing: -0.02em;
+  }
+  .hero-title em {
+    font-style: normal;
+    background: linear-gradient(110deg, #F26527, #FFB382 60%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    margin-top: 20px; font-size: 16px; line-height: 1.65;
+    color: rgba(255,255,255,0.55); max-width: 560px; font-weight: 300;
+  }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 48px; flex-wrap: wrap;
+  }
+  .hero-stat-val {
+    font-family: 'Syne', sans-serif; font-size: 36px;
+    font-weight: 800; color: #fff;
+  }
+  .hero-stat-val span { color: #F26527; }
+  .hero-stat-label {
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px;
+  }
+
+  /* ── Section wrapper ── */
+  .section { padding: 80px 0; }
+  .section + .section { border-top: 1px solid #EBEBEA; }
+  .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── Section label ── */
+  .sec-label {
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #F26527; margin-bottom: 12px;
+  }
+  .sec-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(26px, 3.5vw, 40px);
+    font-weight: 800; letter-spacing: -0.02em; color: #0F0F0D; line-height: 1.1;
+  }
+
+  /* ── Benefit cards ── */
+  .benefits-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin-top: 48px;
+  }
+  .benefit-card {
+    background: #fff;
+    border: 1px solid #EBEBEA;
+    border-radius: 20px;
+    padding: 28px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    position: relative; overflow: hidden;
+  }
+  .benefit-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .benefit-card:hover::before { transform: scaleX(1); }
+  .benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    border-color: transparent;
+  }
+  .benefit-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 16px;
+    background: color-mix(in srgb, var(--accent) 10%, white);
+  }
+  .benefit-title {
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+    color: #0F0F0D; margin-bottom: 14px;
+  }
+  .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .benefit-list li {
+    font-size: 13.5px; color: #666; line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .benefit-list li::before {
+    content: '—'; color: var(--accent); font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── Guidelines ── */
+  .guide-grid {
+    display: grid; gap: 16px; grid-template-columns: 1fr 1fr; margin-top: 40px;
+  }
+  @media (max-width: 640px) { .guide-grid { grid-template-columns: 1fr; } }
+  .guide-card {
+    border-radius: 24px; padding: 36px;
+    position: relative; overflow: hidden;
+  }
+  .guide-card-values {
+    background: #0F0F0D; color: #fff;
+  }
+  .guide-card-notallowed {
+    background: #FFF4EE;
+    border: 1px solid rgba(242,101,39,0.15);
+  }
+  .guide-card-title {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    margin-bottom: 24px;
+  }
+  .guide-card-values .guide-card-title { color: #fff; }
+  .guide-card-notallowed .guide-card-title { color: #0F0F0D; }
+  .value-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 14px; color: rgba(255,255,255,0.8);
+  }
+  .value-item:last-child { border-bottom: none; }
+  .value-dot {
+    width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(242,101,39,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #F26527;
+  }
+  .notallowed-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0; border-bottom: 1px solid rgba(242,101,39,0.1);
+    font-size: 14px; color: #444;
+  }
+  .notallowed-item:last-child { border-bottom: none; }
+  .no-icon {
+    width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(242,101,39,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #F26527;
+  }
+
+  /* ── Steps ── */
+  .steps-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; margin-top: 48px;
+    background: #EBEBEA; border-radius: 20px; overflow: hidden;
+  }
+  @media (max-width: 768px) {
+    .steps-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  .step-card {
+    background: #fff; padding: 32px 24px;
+    position: relative; transition: background 0.2s;
+  }
+  .step-card:hover { background: #FFF4EE; }
+  .step-num {
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-weight: 700; letter-spacing: 0.15em; color: #F26527;
+    margin-bottom: 16px; text-transform: uppercase;
+  }
+  .step-title {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    color: #0F0F0D; margin-bottom: 8px;
+  }
+  .step-desc { font-size: 13.5px; color: #888; line-height: 1.5; }
+
+  /* ── Events ── */
+  .events-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    margin-top: 48px;
+  }
+  .event-card {
+    background: #fff; border: 1px solid #EBEBEA; border-radius: 20px;
+    padding: 28px; display: flex; flex-direction: column;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .event-card:hover {
+    box-shadow: 0 24px 64px rgba(0,0,0,0.09);
+    transform: translateY(-3px);
+  }
+  .event-tag {
+    display: inline-flex; align-items: center;
+    padding: 4px 12px; border-radius: 100px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    background: color-mix(in srgb, var(--tag-color) 12%, white);
+    color: var(--tag-color);
+    width: fit-content; margin-bottom: 14px;
+    font-family: 'Syne', sans-serif;
+  }
+  .event-name {
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+    color: #0F0F0D; line-height: 1.25; margin-bottom: 8px;
+  }
+  .event-date {
+    font-size: 12.5px; font-weight: 600; color: #F26527;
+    margin-bottom: 16px; letter-spacing: 0.03em;
+  }
+  .event-details { list-style: none; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .event-details li { font-size: 13px; color: #777; display: flex; align-items: center; gap: 7px; }
+  .event-details li::before { content: '·'; color: #F26527; font-size: 18px; line-height: 0; }
+  .event-cta {
+    margin-top: 24px; display: inline-flex; align-items: center; gap: 8px;
+    background: #0F0F0D; color: #fff; border: none; cursor: pointer;
+    padding: 11px 22px; border-radius: 100px;
+    font-size: 11.5px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    font-family: 'Syne', sans-serif; width: fit-content;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .event-cta:hover { background: #F26527; transform: scale(1.02); }
+  .event-cta::after { content: '→'; font-size: 14px; transition: transform 0.2s; }
+  .event-cta:hover::after { transform: translateX(3px); }
+
+  /* ── CTA Banner ── */
+  .cta-wrap { padding: 24px; }
+  .cta-banner {
+    background: #0F0F0D; border-radius: 28px;
+    padding: 72px 40px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-orb-l {
+    position: absolute; bottom: -80px; left: -60px;
+    width: 380px; height: 380px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,101,39,0.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-orb-r {
+    position: absolute; top: -80px; right: -60px;
+    width: 380px; height: 380px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,140,66,0.16) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner { position: relative; max-width: 680px; margin: 0 auto; }
+  .cta-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    border: 1px solid rgba(242,101,39,0.3); background: rgba(242,101,39,0.08);
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #FF9C73;
+    font-family: 'Syne', sans-serif; margin-bottom: 22px;
+  }
+  .cta-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(28px, 4.5vw, 52px);
+    font-weight: 800; color: #fff; line-height: 1.1;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .cta-title em {
+    font-style: normal;
+    background: linear-gradient(110deg, #F26527, #FFB382);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .cta-desc {
+    font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7;
+    margin-bottom: 36px; font-weight: 300;
+  }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #F26527; color: #fff; text-decoration: none;
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; font-family: 'Syne', sans-serif;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: scale(1.02); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.07); color: #fff; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; font-family: 'Syne', sans-serif;
+    transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.12); }
+`
+
 function Community() {
   return (
-    <main className="w-full bg-white text-slate-900">
-      <section className="border-b border-slate-200 bg-gradient-to-b from-[#FFF4EE] to-white">
-        <div className="mx-auto w-full max-w-7xl px-4 py-14 md:px-8 md:py-20">
-          <p className="inline-flex rounded-full border border-[#F26527]/20 bg-[#F26527]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#F26527]">
-            Community
-          </p>
-          <h1 className="mt-4 text-3xl font-bold leading-tight md:text-5xl">The Meraaki Founders Club Community</h1>
-          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-600 md:text-lg">
-            500+ founders, mentors, and service providers building together. Real support. Real connections. Real growth.
-          </p>
-        </div>
-      </section>
+    <>
+      <style>{style}</style>
+      <main className="com-root">
 
-      <section className="border-b border-slate-200">
-        <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16">
-          <h2 className="text-2xl font-bold md:text-3xl">What You Get In Community</h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {communityBenefits.map((item) => (
-              <article key={item.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                <h3 className="text-lg font-semibold text-slate-900">{item.title}</h3>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
-                  {item.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+        {/* ── HERO ── */}
+        <section className="hero">
+          <div className="hero-grid" />
+          <div className="hero-orb-1" />
+          <div className="hero-orb-2" />
+          <div className="hero-inner">
+            <div className="hero-pill">Community</div>
+            <h1 className="hero-title">
+              Where Founders<br /><em>Build Together</em>
+            </h1>
+            <p className="hero-sub">
+              500+ founders, mentors, and partners in one tight-knit ecosystem. Real support. Real connections. Real growth.
+            </p>
+            <div className="hero-stats">
+              <div>
+                <div className="hero-stat-val">500<span>+</span></div>
+                <div className="hero-stat-label">Active Members</div>
+              </div>
+              <div>
+                <div className="hero-stat-val">24<span>h</span></div>
+                <div className="hero-stat-label">Mentor Response</div>
+              </div>
+              <div>
+                <div className="hero-stat-val">12<span>+</span></div>
+                <div className="hero-stat-label">Events Per Year</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="border-b border-slate-200">
-        <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-12 md:grid-cols-2 md:px-8 md:py-16">
-          <article className="rounded-2xl border border-slate-200 bg-[#F7FAFF] p-6">
-            <h2 className="text-xl font-semibold text-[#F26527] md:text-2xl">Community Guidelines</h2>
-            <p className="mt-4 text-sm font-semibold uppercase tracking-[0.15em] text-slate-600">We Value</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-slate-700">
-              {values.map((value) => (
-                <li key={value}>{value}</li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="rounded-2xl border border-slate-200 bg-[#FFF8F3] p-6">
-            <h2 className="text-xl font-semibold text-[#F26527] md:text-2xl">We Don&apos;t Allow</h2>
-            <ul className="mt-6 list-disc space-y-2 pl-5 text-sm text-slate-700">
-              {notAllowed.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section className="border-b border-slate-200">
-        <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16">
-          <h2 className="text-2xl font-bold md:text-3xl">How To Join</h2>
-          <ol className="mt-6 space-y-3 text-sm text-slate-700 md:text-base">
-            <li>1. Sign up for Meraaki Founders Club membership</li>
-            <li>2. Get WhatsApp group invite via email</li>
-            <li>3. Introduce yourself to the community</li>
-            <li>4. Start asking, sharing, connecting</li>
-          </ol>
-        </div>
-      </section>
-
-      <section>
-        <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16">
-          <h2 className="text-2xl font-bold md:text-3xl">Upcoming Events</h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {events.map((event) => (
-              <article key={event.name} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-900">{event.name}</h3>
-                <p className="mt-2 text-sm font-medium text-[#F26527]">{event.date}</p>
-                <ul className="mt-3 space-y-2 text-sm text-slate-600">
-                  {event.details.map((detail) => (
-                    <li key={detail}>{detail}</li>
-                  ))}
-                </ul>
-                <button
-                  type="button"
-                  className="mt-5 inline-flex rounded-full bg-[#F26527] px-5 py-2 text-xs font-semibold uppercase tracking-wide text-white transition hover:opacity-90"
+        {/* ── BENEFITS ── */}
+        <section className="section">
+          <div className="inner">
+            <p className="sec-label">What You Get</p>
+            <h2 className="sec-title">Everything In Your Corner</h2>
+            <div className="benefits-grid">
+              {communityBenefits.map((item) => (
+                <article
+                  key={item.title}
+                  className="benefit-card"
+                  style={{ '--accent': item.accent }}
                 >
-                  {event.cta}
-                </button>
-              </article>
-            ))}
+                  <div className="benefit-icon">{item.icon}</div>
+                  <h3 className="benefit-title">{item.title}</h3>
+                  <ul className="benefit-list">
+                    {item.points.map((p) => (
+                      <li key={p}>{p}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        {/* ── GUIDELINES ── */}
+        <section className="section">
+          <div className="inner">
+            <p className="sec-label">Community Standards</p>
+            <h2 className="sec-title">How We Show Up</h2>
+            <div className="guide-grid">
+              <div className="guide-card guide-card-values">
+                <h3 className="guide-card-title">Our Values</h3>
+                {values.map((v) => (
+                  <div key={v.text} className="value-item">
+                    <span className="value-dot">{v.icon}</span>
+                    {v.text}
+                  </div>
+                ))}
+              </div>
+              <div className="guide-card guide-card-notallowed">
+                <h3 className="guide-card-title" style={{ color: '#0F0F0D' }}>We Don't Allow</h3>
+                {notAllowed.map((item) => (
+                  <div key={item} className="notallowed-item">
+                    <span className="no-icon">✕</span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── HOW TO JOIN ── */}
+        <section className="section">
+          <div className="inner">
+            <p className="sec-label">Getting Started</p>
+            <h2 className="sec-title">Four Steps In</h2>
+            <div className="steps-row">
+              {steps.map((s) => (
+                <div key={s.num} className="step-card">
+                  <div className="step-num">{s.num}</div>
+                  <div className="step-title">{s.title}</div>
+                  <div className="step-desc">{s.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── EVENTS ── */}
+        <section className="section">
+          <div className="inner">
+            <p className="sec-label">What's Coming</p>
+            <h2 className="sec-title">Upcoming Events</h2>
+            <div className="events-grid">
+              {events.map((event) => (
+                <article key={event.name} className="event-card">
+                  <span className="event-tag" style={{ '--tag-color': event.tagColor }}>
+                    {event.tag}
+                  </span>
+                  <h3 className="event-name">{event.name}</h3>
+                  <p className="event-date">📅 {event.date}</p>
+                  <ul className="event-details">
+                    {event.details.map((d) => <li key={d}>{d}</li>)}
+                  </ul>
+                  <button type="button" className="event-cta">{event.cta}</button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── CTA BANNER ── */}
+        <section className="cta-wrap">
+          <div className="cta-banner">
+            <div className="cta-orb-l" />
+            <div className="cta-orb-r" />
+            <div className="cta-inner">
+              <div className="cta-badge">Ready to Join?</div>
+              <h2 className="cta-title">
+                Build Faster With The<br /><em>Founder Community</em>
+              </h2>
+              <p className="cta-desc">
+                Join conversations, attend events, and connect with mentors and founders who are building like you.
+              </p>
+              <div className="cta-btns">
+                <Link to="/contact-us" className="btn-primary">Join Community</Link>
+                <Link to="/services" className="btn-secondary">Explore Services</Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </>
   )
 }
 

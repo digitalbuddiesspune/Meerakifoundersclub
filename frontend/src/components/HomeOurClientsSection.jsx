@@ -14,7 +14,7 @@ function HomeOurClientsSection({ clients, loading, error }) {
       `}</style>
 
       <div className="w-full">
-        <div className="mx-auto -mt-10 mb-14 w-full max-w-7xl px-4 md:-mt-20 md:mb-20 md:px-8">
+        <div className="mx-auto -mt-10 mb-14 w-full max-w-7xl px-4 md:-mt-20 md:mb-20 md:px-0">
           <h2 className="text-3xl tracking-tight text-slate-900 md:text-5xl">Our Clients:</h2>
         </div>
 

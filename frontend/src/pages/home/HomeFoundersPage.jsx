@@ -50,7 +50,7 @@ function HomeFoundersPage() {
         </div>
       )}
 
-      <div className="relative z-10 mx-auto mt-20 w-full max-w-7xl px-4 text-center md:mt-40 md:px-8">
+      <div className="relative z-10 mx-auto mt-20 w-full max-w-7xl px-4 text-center md:mt-40 md:px-0">
         <h2 className="mx-auto max-w-4xl text-[2.85rem] font-semibold leading-[1.02] tracking-tight text-slate-900 md:max-w-7xl md:text-[6rem]">
           Be one of the first <span className="block text-slate-400">founders.</span>
         </h2>
@@ -68,7 +68,7 @@ function HomeFoundersPage() {
           Subscribe
         </button>
 
-        <div className="mx-auto mt-10 w-full max-w-md overflow-hidden bg-white md:relative md:left-1/2 md:mt-12 md:w-screen md:max-w-none md:-translate-x-1/2">
+        <div className="mx-auto mt-10 w-full max-w-7xl overflow-hidden bg-white md:mt-12">
           <video
             className="h-full w-full"
             src="https://res.cloudinary.com/dd0imqx3p/video/upload/q_auto/f_auto/v1776419568/686c3195802b0228dca014a8_687522c25faf9ca7aee11221_1-million-video-transcode_fqqdik.mp4"

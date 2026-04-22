@@ -11,7 +11,7 @@ function Footer() {
 
   return (
     <footer className="border-t border-slate-200 bg-white text-slate-800">
-      <div className="mx-auto  max-w-7xl px-4 py-12 md:px-8 md:py-14">
+      <div className="mx-auto  max-w-7xl px-4 py-12 md:px-0 md:py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 justify-between">
           <div>
             <Link to="/" className="inline-flex items-center">

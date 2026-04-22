@@ -41,7 +41,7 @@ function HomeStartSection({ items, loading, error }) {
                 key={group.category}
                 className={`${sectionClasses} relative flex items-start py-10 md:sticky md:top-0 md:z-10 min-h-screen md:items-center md:justify-center md:py-14`}
               >
-                <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+                <div className="mx-auto w-full max-w-7xl px-4 md:px-0">
                   <div className="mb-8 flex justify-center md:mb-10">
                     <h3
                       className={`border-t px-10 pt-3 text-center text-xl font-semibold uppercase tracking-[0.45em] md:text-2xl ${headingClasses}`}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Building2,
   HandCoins,
@@ -56,7 +57,7 @@ function ProblemsSolutions() {
     <div className="min-h-screen bg-slate-100 text-slate-900">
       <main>
         <section className="bg-white px-4 py-10 md:px-8">
-          <div className="mx-auto w-full max-w-7xl">
+          <div className=" mx-auto max-w-7xl">
             <p className="inline-flex rounded-lg bg-[#0f2247]/5 px-3 py-1 text-xs font-medium uppercase tracking-wide text-[#0f2247]">
               Questions & Answers
             </p>
@@ -108,6 +109,43 @@ function ProblemsSolutions() {
                   </div>
                 )
               })}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-4 py-12 md:px-8 md:py-16">
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#070D1A] p-6 text-white shadow-[0_25px_70px_rgba(7,13,26,0.45)] md:p-10">
+              <div className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-[#F26527]/30 blur-3xl" />
+              <div className="pointer-events-none absolute -right-20 top-0 h-56 w-56 rounded-full bg-[#F26527]/30 blur-3xl" />
+              <div className="mx-auto max-w-3xl text-center">
+                <span className="inline-flex items-center rounded-full border border-[#F26527]/35 bg-[#F26527]/12 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#FF9C73] md:text-xs">
+                  Need A Clear Plan?
+                </span>
+                <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">
+                  Let&apos;s Solve Your{' '}
+                  <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(110deg, #F26527, #FFB382)' }}>
+                    Startup Challenges
+                  </span>
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+                  Talk to our team for practical guidance, right services, and execution support tailored to your stage.
+                </p>
+                <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                  <Link
+                    to="/contact-us"
+                    className="inline-flex items-center rounded-full bg-[#F26527] px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-white transition hover:opacity-90 md:px-6 md:text-sm"
+                  >
+                    Get Free Consultation
+                  </Link>
+                  <Link
+                    to="/services"
+                    className="inline-flex items-center rounded-full border border-white/20 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-slate-800 transition hover:bg-slate-100 md:px-6 md:text-sm"
+                  >
+                    Explore Services
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>

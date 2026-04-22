@@ -1,7 +1,7 @@
 function HomeServicesSection({ services }) {
   return (
     <section id="services" className="border-y border-slate-200 bg-stone-100 py-14">
-      <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-0">
         <h2 className="text-2xl font-bold text-slate-900">Our Core Services</h2>
         <p className="mt-3 max-w-2xl text-slate-600">
           Everything a startup needs under one roof to build faster, raise smarter, and grow sustainably.

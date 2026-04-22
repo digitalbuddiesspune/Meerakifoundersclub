@@ -77,6 +77,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
   const handleAccountClick = () => {
     if (isAuthenticated) {
       navigate('/profile')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
       closeMobileMenu()
       return
     }
@@ -89,7 +90,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
         hidden && !isMobileMenuOpen ? '-translate-y-full pointer-events-none' : ''
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 md:px-8 md:py-3 lg:px-10">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-2.5 md:px-0 md:py-3">
         <div className="flex w-full items-center justify-between md:hidden">
           <button
             type="button"
@@ -108,17 +109,27 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             />
           </Link>
 
-          <button
-            type="button"
-            onClick={handleAccountClick}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-800 text-white"
-            aria-label="User account"
-          >
-            {isAuthenticated && authUser?.name ? authUser.name[0].toUpperCase() : 'U'}
-          </button>
+          {isAuthenticated ? (
+            <button
+              type="button"
+              onClick={handleAccountClick}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-800 text-white"
+              aria-label="User account"
+            >
+              {authUser?.name ? authUser.name[0].toUpperCase() : 'U'}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={onOpenAuth}
+              className="rounded-full border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-800"
+            >
+              Login
+            </button>
+          )}
         </div>
 
-        <Link to="/" className="hidden items-center gap-3 md:flex">
+        <Link to="/" className="hidden shrink-0 items-center gap-3 md:flex">
           <img
             src={LOGO_URL}
             alt="Meraaki Founders Club logo"
@@ -126,7 +137,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-5 text-sm font-medium md:flex">
           <Link to="/" className="text-black transition hover:text-[#F26527]">Home</Link>
           <Link to="/about-us" className="text-black transition hover:text-[#F26527]">About Us</Link>
           <Link to="/community" className="text-black transition hover:text-[#F26527]">Community</Link>
@@ -170,21 +181,31 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           <Link to="/contact-us" className="text-black transition hover:text-[#F26527]">Contact</Link>
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <button
-            type="button"
-            onClick={handleAccountClick}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-800 text-white transition hover:border-white"
-            aria-label="User account"
-          >
-            {isAuthenticated && authUser?.name ? authUser.name[0].toUpperCase() : 'U'}
-          </button>
+        <div className="hidden shrink-0 items-center gap-2.5 md:flex">
+          {isAuthenticated ? (
+            <button
+              type="button"
+              onClick={handleAccountClick}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-800 text-white transition hover:border-white"
+              aria-label="User account"
+            >
+              {authUser?.name ? authUser.name[0].toUpperCase() : 'U'}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={onOpenAuth}
+              className="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-[#F26527] hover:text-[#F26527]"
+            >
+              Login
+            </button>
+          )}
           {!isAuthenticated ? (
             <a
               href="mailto:info@meraakifoundersclub.com"
               className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-emerald-400"
             >
-              Book a Call
+              Become a Partner
             </a>
           ) : null}
         </div>
@@ -294,6 +315,18 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             >
               Contact
             </Link>
+            {!isAuthenticated ? (
+              <button
+                type="button"
+                onClick={() => {
+                  closeMobileMenu()
+                  onOpenAuth()
+                }}
+                className="rounded-lg px-3 py-2 text-left transition hover:bg-slate-100"
+              >
+                Login
+              </button>
+            ) : null}
             </div>
           </div>
         </div>

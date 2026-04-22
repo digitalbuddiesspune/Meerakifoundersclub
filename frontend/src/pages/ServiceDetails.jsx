@@ -132,7 +132,7 @@ function ServiceDetails() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       {loading ? (
-        <main className="mx-auto max-w-7xl px-4 py-24 md:px-8">
+        <main className="mx-auto max-w-7xl px-4 py-24 md:px-0">
           <div className="h-8 w-44 animate-pulse rounded-full bg-slate-200" />
           <div className="mt-6 h-12 w-3/4 animate-pulse rounded-xl bg-slate-200" />
           <div className="mt-3 h-5 w-full animate-pulse rounded bg-slate-200" />
@@ -146,7 +146,7 @@ function ServiceDetails() {
       ) : null}
 
       {error ? (
-        <main className="mx-auto max-w-7xl px-4 py-16 text-center md:px-8">
+        <main className="mx-auto max-w-7xl px-4 py-16 text-center md:px-0">
           <p className="text-red-500">{error}</p>
           <Link
             to="/services"
@@ -164,7 +164,7 @@ function ServiceDetails() {
             <div className="absolute -left-16 top-16 h-56 w-56 rounded-full bg-[#F26527]/10 blur-3xl" />
             <div className="absolute -right-16 top-1/3 h-56 w-56 rounded-full bg-cyan-100/70 blur-3xl" />
 
-            <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 md:grid-cols-[1.2fr,0.8fr] md:px-8 md:py-16">
+            <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 md:grid-cols-[1.2fr,0.8fr] md:px-0 md:py-16">
               <div className="relative">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#F26527]/20 bg-[#FFF4EE] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#F26527]">
                   <BadgeCheck size={12} />
@@ -234,7 +234,7 @@ function ServiceDetails() {
 
           {features.length > 0 ? (
             <section className="border-b border-slate-200 bg-slate-50/70">
-              <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16">
+              <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-0 md:py-16">
                 <div className="mb-8 flex items-center gap-2 text-[#F26527]">
                   <Sparkles size={16} />
                   <h2 className="text-lg font-semibold uppercase tracking-[0.15em]">Key Features</h2>
@@ -255,7 +255,7 @@ function ServiceDetails() {
           ) : null}
 
           <section id="projects" className="bg-white">
-            <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16">
+            <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-0 md:py-16">
               <div className="mb-8 flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Portfolio</p>
@@ -341,7 +341,41 @@ function ServiceDetails() {
           </section>
 
           <section className="border-t border-slate-200 bg-slate-50">
-            <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16">
+            <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-0 md:py-16">
+              <div className="relative mb-12 overflow-hidden rounded-[28px] border border-white/10 bg-[#070D1A] p-6 text-white shadow-[0_25px_70px_rgba(7,13,26,0.45)] md:mb-16 md:p-10">
+                <div className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-[#F26527]/30 blur-3xl" />
+                <div className="pointer-events-none absolute -right-20 top-0 h-56 w-56 rounded-full bg-[#F26527]/30 blur-3xl" />
+                <div className="mx-auto max-w-3xl text-center">
+                  <span className="inline-flex items-center rounded-full border border-[#F26527]/35 bg-[#F26527]/12 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#FF9C73] md:text-xs">
+                    Ready to Start?
+                  </span>
+                  <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">
+                    Let&apos;s Build Something{' '}
+                    <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(110deg, #F26527, #FFB382)' }}>
+                      Extraordinary
+                    </span>
+                  </h2>
+                  <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+                    Get a free consultation and tailored quote for your project. No commitments, just clarity.
+                  </p>
+                  <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                    <a
+                      href="mailto:info@meraakifoundersclub.com"
+                      className="inline-flex items-center rounded-full bg-[#F26527] px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-white transition hover:opacity-90 md:px-6 md:text-sm"
+                    >
+                      Get Free Consultation
+                    </a>
+                    <Link
+                      to="/services"
+                      className="inline-flex items-center rounded-full border border-white/20 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-slate-800 transition hover:bg-slate-100 md:px-6 md:text-sm"
+                    >
+                      View Our Work
+                      <ArrowRight size={14} className="ml-2" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
               <h2 className="text-xl font-bold text-slate-900 md:text-2xl">Technologies We Use</h2>
               {allTechnologies.length > 0 ? (
                 <div className="mt-5 flex flex-wrap gap-3">
