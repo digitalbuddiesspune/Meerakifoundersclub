@@ -82,7 +82,7 @@ function ProblemsSolutions() {
                           isFlipped ? '[transform:rotateY(180deg)]' : ''
                         }`}
                       >
-                        <article className="absolute inset-0 rounded-xl border border-slate-200 bg-white p-2.5 shadow-sm [backface-visibility:hidden]">
+                        <article className="absolute inset-0 rounded-xl border border-slate-200 bg-white p-3 shadow-sm [backface-visibility:hidden] md:p-6">
                           <p className="text-xs font-medium uppercase tracking-wide text-[#F26527]">
                             QUESTION
                           </p>
@@ -93,7 +93,7 @@ function ProblemsSolutions() {
                           </p>
                         </article>
 
-                        <article className="absolute inset-0 rounded-xl border border-[#F26527]/30 bg-[#0f2247] p-2.5 text-white shadow-sm [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                        <article className="absolute inset-0 rounded-xl border border-[#F26527]/30 bg-[#0f2247] p-3 text-white shadow-sm [backface-visibility:hidden] [transform:rotateY(180deg)] md:p-6">
                           <p className="text-xs font-medium uppercase tracking-wide text-[#F26527]">
                             Solution
                           </p>

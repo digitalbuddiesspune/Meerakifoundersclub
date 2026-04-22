@@ -46,6 +46,9 @@ function Footer() {
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
               <li><Link to="/" className="transition hover:text-cyan-600">Home</Link></li>
+              <li><Link to="/about-us" className="transition hover:text-cyan-600">About Us</Link></li>
+              <li><Link to="/community" className="transition hover:text-cyan-600">Community</Link></li>
+              <li><Link to="/vendors" className="transition hover:text-cyan-600">Vendors</Link></li>
               <li><Link to="/services" className="transition hover:text-cyan-600">Services</Link></li>
               <li><Link to="/problems-solutions" className="transition hover:text-cyan-600">Problems &amp; Solutions</Link></li>
               <li><Link to="/contact-us" className="transition hover:text-cyan-600">Contact Us</Link></li>

@@ -116,6 +116,9 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
 
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
           <Link to="/" className="text-black transition hover:text-[#F26527]">Home</Link>
+          <Link to="/about-us" className="text-black transition hover:text-[#F26527]">About Us</Link>
+          <Link to="/community" className="text-black transition hover:text-[#F26527]">Community</Link>
+          <Link to="/vendors" className="text-black transition hover:text-[#F26527]">Vendors</Link>
           <div
             ref={servicesMenuRef}
             className="relative"
@@ -179,7 +182,16 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
         <div ref={mobileMenuRef} className="border-t border-slate-200 bg-white px-4 py-3 md:hidden">
           <div className="flex flex-col gap-2 text-sm font-medium text-slate-700">
             <Link to="/" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
-              About
+              Home
+            </Link>
+            <Link to="/about-us" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+              About Us
+            </Link>
+            <Link to="/community" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+              Community
+            </Link>
+            <Link to="/vendors" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+              Vendors
             </Link>
             <button
               type="button"

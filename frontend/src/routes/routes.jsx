@@ -1,5 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import App from '../App'
+import AboutUs from '../pages/AboutUs'
+import Community from '../pages/Community'
 import ContactUs from '../pages/ContactUs'
 import CookiePolicy from '../pages/CookiePolicy'
 import Home from '../pages/Home'
@@ -10,12 +12,16 @@ import RefundPolicy from '../pages/RefundPolicy'
 import ServiceDetails from '../pages/ServiceDetails'
 import Services from '../pages/Services'
 import TermsAndConditions from '../pages/TermsAndConditions'
+import Vendor from '../pages/Vendor'
 import WhyMeraakiFoundersClub from '../pages/home/WhyMeraakiFoundersClub'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Home />} />
+      <Route path="about-us" element={<AboutUs />} />
+      <Route path="community" element={<Community />} />
+      <Route path="vendors" element={<Vendor />} />
       <Route path="services" element={<Services />} />
       <Route path="services/:slug" element={<ServiceDetails />} />
       <Route path="problems-solutions" element={<ProblemsSolutions />} />
