@@ -21,10 +21,10 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="about-us" element={<AboutUs />} />
       <Route path="community" element={<Community />} />
-      <Route path="vendors" element={<Vendor />} />
+      <Route path="partners" element={<Vendor />} />
       <Route path="services" element={<Services />} />
       <Route path="services/:slug" element={<ServiceDetails />} />
-      <Route path="problems-solutions" element={<ProblemsSolutions />} />
+      <Route path="challenges-solutions" element={<ProblemsSolutions />} />
       <Route path="contact-us" element={<ContactUs />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="terms-and-conditions" element={<TermsAndConditions />} />

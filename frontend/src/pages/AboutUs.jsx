@@ -95,7 +95,7 @@ function AboutUs() {
         <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16">
           <h2 className="text-2xl font-bold md:text-3xl">The Team</h2>
           <p className="mt-2 text-sm text-slate-600 md:text-base">
-            Operations, technology, vendor relations, community, support—all focused on founder success.
+            Operations, technology, partner relations, community, support—all focused on founder success.
           </p>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2">

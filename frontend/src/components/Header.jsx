@@ -130,7 +130,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           <Link to="/" className="text-black transition hover:text-[#F26527]">Home</Link>
           <Link to="/about-us" className="text-black transition hover:text-[#F26527]">About Us</Link>
           <Link to="/community" className="text-black transition hover:text-[#F26527]">Community</Link>
-          <Link to="/vendors" className="text-black transition hover:text-[#F26527]">Vendors</Link>
+          <Link to="/partners" className="text-black transition hover:text-[#F26527]">Partners</Link>
           <div
             ref={servicesMenuRef}
             className="relative"
@@ -163,7 +163,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
               </div>
             ) : null}
           </div>
-          <Link to="/problems-solutions" className="text-black transition hover:text-[#F26527]">
+          <Link to="/challenges-solutions" className="text-black transition hover:text-[#F26527]">
             Challenges & Solutions
           </Link>
           <a href="#process" className="text-black transition hover:text-[#F26527]">How It Works</a>
@@ -220,8 +220,8 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             <Link to="/community" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
               Community
             </Link>
-            <Link to="/vendors" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
-              Vendors
+            <Link to="/partners" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+              Partners
             </Link>
             <div className="rounded-lg">
               <button
@@ -278,7 +278,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
               ) : null}
             </div>
             <Link
-              to="/problems-solutions"
+              to="/challenges-solutions"
               onClick={closeMobileMenu}
               className="rounded-lg px-3 py-2 transition hover:bg-slate-100"
             >

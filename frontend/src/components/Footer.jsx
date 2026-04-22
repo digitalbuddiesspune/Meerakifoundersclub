@@ -5,6 +5,10 @@ const LOGO_URL =
   'https://res.cloudinary.com/dd0imqx3p/image/upload/q_auto/f_auto/v1776157629/IMG_1857-removebg-preview_kerwe5.png'
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <footer className="border-t border-slate-200 bg-white text-slate-800">
       <div className="mx-auto  max-w-7xl px-4 py-12 md:px-8 md:py-14">
@@ -19,7 +23,7 @@ function Footer() {
             </Link>
 
             <p className="mt-4 max-w-sm text-sm leading-7 text-slate-600">
-              Built by founders, for founders. We help startups launch faster, build stronger
+              Built by Founders, for Founders. We help startups launch faster, build stronger
               brands, and scale with confidence.
             </p>
 
@@ -45,13 +49,13 @@ function Footer() {
               Quick Links
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
-              <li><Link to="/" className="transition hover:text-cyan-600">Home</Link></li>
-              <li><Link to="/about-us" className="transition hover:text-cyan-600">About Us</Link></li>
-              <li><Link to="/community" className="transition hover:text-cyan-600">Community</Link></li>
-              <li><Link to="/vendors" className="transition hover:text-cyan-600">Vendors</Link></li>
-              <li><Link to="/services" className="transition hover:text-cyan-600">Services</Link></li>
-              <li><Link to="/problems-solutions" className="transition hover:text-cyan-600">Problems &amp; Solutions</Link></li>
-              <li><Link to="/contact-us" className="transition hover:text-cyan-600">Contact Us</Link></li>
+              <li><Link to="/" onClick={scrollToTop} className="transition hover:text-cyan-600">Home</Link></li>
+              <li><Link to="/about-us" onClick={scrollToTop} className="transition hover:text-cyan-600">About Us</Link></li>
+              <li><Link to="/community" onClick={scrollToTop} className="transition hover:text-cyan-600">Community</Link></li>
+              <li><Link to="/partners" onClick={scrollToTop} className="transition hover:text-cyan-600">Partners</Link></li>
+              <li><Link to="/services" onClick={scrollToTop} className="transition hover:text-cyan-600">Services</Link></li>
+              <li><Link to="/challenges-solutions" onClick={scrollToTop} className="transition hover:text-cyan-600">Challenges &amp; Solutions</Link></li>
+              <li><Link to="/contact-us" onClick={scrollToTop} className="transition hover:text-cyan-600">Contact Us</Link></li>
             </ul>
           </div>
 

@@ -9,7 +9,7 @@ const stats = [
   { value: '2000+', label: 'Founders' },
   { value: '4', label: 'Membership Plans' },
   { value: '50+', label: 'Mentors' },
-  { value: '10+', label: 'Vendors' },
+  { value: '10+', label: 'Partners' },
 ]
 
 function useCountUp(target, duration = 1800, start = false) {

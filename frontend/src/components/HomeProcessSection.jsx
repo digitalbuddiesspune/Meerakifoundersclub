@@ -5,7 +5,7 @@ const PROCESS_STEPS = [
     userActions: [
       'Enter phone',
       'OTP verification',
-      'Choose tier',
+      'Choose Plans',
       'Payment',
       'Instant access',
     ],
@@ -14,16 +14,16 @@ const PROCESS_STEPS = [
     title: 'EXPLORE',
     description: 'Access community and browse available services at your pace.',
     userActions: [
-      'Browse vendor directory',
-      'Join WhatsApp groups',
-      'View events',
-      'Check mentor profiles',
+      'Check Events',
+      'Check Partners & Mentors',
+      'Join Whatsapp Groups',
+      
     ],
   },
   
   {
-    title: 'ORDER',
-    description: 'Order service with complete transparency and protection.',
+    title: 'PAYMENT',
+    description: 'Pay for the service you have selected.',
     userActions: [
       'Select service',
       'Pay via Razorpay',
@@ -32,7 +32,7 @@ const PROCESS_STEPS = [
   },
   {
     title: 'COMPLETE',
-    description: 'Receive deliverables and payment releases to vendor.',
+    description: 'Receive delivered and payment releases to partner.',
     userActions: [
       'WhatsApp updates',
       'Review work',

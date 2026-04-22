@@ -8,10 +8,10 @@ function HomePageLayout() {
   return (
     <main id="home" className="w-full">
       <HomeHeroPage />
-      {/* <HomeServicesPage /> */}
+     
       <HomeStartPage />
       <HomeProcessPage />
-      {/* <HomeOurClientsPage /> */}
+     
       <HomeFoundersPage />
       <WhyMeraakiFoundersClub />
     </main>

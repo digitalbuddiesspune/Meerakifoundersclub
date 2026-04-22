@@ -25,7 +25,7 @@ const questionCards = [
   {
     question: 'Can I trust the service quality?',
     context:
-      'Founders often spend money on fragmented, unverified vendors and get poor execution.',
+      'Founders often spend money on fragmented, unverified partners and get poor execution.',
     answer:
       'We provide vetted services across legal, marketing, branding, product, and compliance so execution is reliable and accountable.',
   },

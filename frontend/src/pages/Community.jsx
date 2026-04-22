@@ -44,10 +44,10 @@ const communityBenefits = [
     ],
   },
   {
-    title: 'Vendor Recommendations',
+    title: 'Partner Recommendations',
     points: [
       'Ask community for service recommendations',
-      'Mentors introduce trusted vendors',
+      'Mentors introduce trusted partners',
       'Leverage peer experience',
       'Avoid bad services',
     ],
@@ -66,7 +66,7 @@ const notAllowed = [
   'Spam or self-promotion',
   'Harassment or disrespect',
   'Asking for free work',
-  'Vendor pitches (use vendor marketplace)',
+  'Partner pitches (use partner marketplace)',
   'Off-topic discussions',
 ]
 

@@ -22,7 +22,7 @@ const joinSteps = [
   {
     title: 'Step 3: Go Live (Immediate)',
     points: [
-      'Profile appears in vendor marketplace',
+      'Profile appears in partner marketplace',
       'Founders can find and message you',
       'Your profile includes: name, credentials, services, pricing, availability',
     ],
@@ -49,7 +49,7 @@ const mustHave = [
 const notAccepted = [
   'Middlemen or re-sellers',
   'Unqualified service providers',
-  'Vendors with complaint history',
+  'Partners with complaint history',
   'Anyone unwilling to provide references',
 ]
 
@@ -59,9 +59,9 @@ function Vendor() {
       <section className="border-b border-slate-200 bg-gradient-to-b from-[#FFF4EE] to-white">
         <div className="mx-auto w-full max-w-7xl px-4 py-14 md:px-8 md:py-20">
           <p className="inline-flex rounded-full border border-[#F26527]/20 bg-[#F26527]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#F26527]">
-            Vendors
+            Partners
           </p>
-          <h1 className="mt-4 text-3xl font-bold leading-tight md:text-5xl">Join Our Vendor Network</h1>
+          <h1 className="mt-4 text-3xl font-bold leading-tight md:text-5xl">Join Our Partner Network</h1>
           <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-600 md:text-lg">
             Reach verified founders actively looking for your services. No middlemen. No commissions. Just direct,
             paying clients.
@@ -71,7 +71,7 @@ function Vendor() {
 
       <section className="border-b border-slate-200">
         <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-8 md:py-16">
-          <h2 className="text-2xl font-bold md:text-3xl">Why Become a Meraaki Founders Club Vendor?</h2>
+          <h2 className="text-2xl font-bold md:text-3xl">Why Become a Meraaki Founders Club Partner?</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {[
               'Direct founder access: Reach 200+ Nagpur founders looking for your services.',
@@ -79,7 +79,7 @@ function Vendor() {
               'Build reputation: Every completed job builds your rating. Higher ratings = more bookings.',
               'Zero marketing cost: Founders find you through Meraaki Founders Club. No ads or campaigns needed.',
               'Payment security: Professional process. Payments processed through Meraaki Founders Club. No chasing clients.',
-              'Growing ecosystem: Build relationships with other vendors. Grow together.',
+              'Growing ecosystem: Build relationships with other partners. Grow together.',
             ].map((item) => (
               <div key={item} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
                 {item}
@@ -110,7 +110,7 @@ function Vendor() {
       <section className="border-b border-slate-200">
         <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-12 md:grid-cols-2 md:px-8 md:py-16">
           <article className="rounded-2xl border border-slate-200 bg-[#F7FAFF] p-6">
-            <h2 className="text-xl font-semibold text-[#F26527] md:text-2xl">Vendor Requirements - Must Have</h2>
+            <h2 className="text-xl font-semibold text-[#F26527] md:text-2xl">Partner Requirements - Must Have</h2>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-700">
               {mustHave.map((item) => (
                 <li key={item}>{item}</li>
@@ -132,13 +132,13 @@ function Vendor() {
         <div className="mx-auto w-full max-w-7xl px-4 py-12 text-center md:px-8 md:py-16">
           <h2 className="text-2xl font-bold md:text-3xl">Ready to Reach Serious Founders?</h2>
           <p className="mt-3 text-sm text-slate-600 md:text-base">
-            Apply today and join 80+ verified vendors already serving Meraaki Founders Club&apos;s growing founder community.
+            Apply today and join 80+ verified partners already serving Meraaki Founders Club&apos;s growing founder community.
           </p>
           <Link
             to="/contact-us"
             className="mt-6 inline-flex items-center rounded-full bg-[#F26527] px-7 py-3 text-sm font-semibold text-white transition hover:opacity-90"
           >
-            Apply as Vendor
+            Apply as Partner
           </Link>
         </div>
       </section>
