@@ -81,7 +81,7 @@ function HomeHeroPage() {
       className="hero-section"
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
         .hero-section {
           position: relative;
@@ -95,7 +95,7 @@ function HomeHeroPage() {
           overflow: hidden;
           background: #040d1a;
           text-align: center;
-          font-family: 'Montserrat', 'DM Sans', sans-serif;
+          font-family: 'DM Sans', sans-serif;
         }
 
         /* ── noise grain overlay ── */
@@ -165,7 +165,7 @@ function HomeHeroPage() {
 
         /* ── main headline ── */
         .hero-headline {
-          font-family: 'Montserrat', 'DM Sans', sans-serif;
+          font-family: 'Syne', 'DM Sans', sans-serif;
           font-weight: 800;
           font-size: clamp(1.8rem, 4.7vw, 4rem);
           line-height: 1.08;
@@ -292,7 +292,7 @@ function HomeHeroPage() {
         }
 
         .stat-number {
-          font-family: 'Montserrat', 'DM Sans', sans-serif;
+          font-family: 'Syne', 'DM Sans', sans-serif;
           font-weight: 800;
           font-size: clamp(1.4rem, 3vw, 2rem);
           color: #fff;
