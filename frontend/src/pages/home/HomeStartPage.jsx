@@ -10,11 +10,11 @@ function HomeStartPage() {
   useEffect(() => {
     const fetchStartItems = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/starts`)
+        const response = await fetch(`${API_BASE_URL}/services`)
         const data = await response.json()
 
         if (!response.ok) {
-          setError(data.message || 'Failed to fetch start items.')
+          setError(data.message || 'Failed to fetch services.')
           setLoading(false)
           return
         }
@@ -35,7 +35,10 @@ function HomeStartPage() {
       const category = String(item.category || '').trim()
       if (!category) return acc
       if (!acc[category]) acc[category] = []
-      acc[category].push(item)
+      acc[category].push({
+        ...item,
+        description: String(item.description || item.information || '').trim(),
+      })
       return acc
     }, {})
 

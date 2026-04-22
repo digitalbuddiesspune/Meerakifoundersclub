@@ -1,0 +1,517 @@
+[
+    {
+      "name": "Company Registration",
+      "category": "Start",
+      "information": "Complete company registration services including Private Limited, OPC, and LLP setup with end-to-end support.",
+      "image": "https://example.com/services/company-registration.jpg",
+      "price": 14999,
+      "discountedPrice": 9999,
+      "projectsCount": 250,
+      "satisfaction": "99% Client Satisfaction",
+      "support": "Dedicated Expert Support",
+      "avgDelivery": "5-7 Days",
+      "toolsWeUsed": ["MCA Portal", "DSC Tools", "PAN Services"],
+      "features": [
+        {
+          "featureName": "End-to-End Registration",
+          "featureDiscription": "Complete handling from documentation to approval."
+        },
+        {
+          "featureName": "Legal Compliance",
+          "featureDiscription": "Ensures all legal formalities are properly fulfilled."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/company1.jpg",
+          "name": "Startup Pvt Ltd Setup",
+          "description": "Complete registration for a startup company.",
+          "price": 16000,
+          "discountedPrice": 12000,
+          "technologiesUsed": ["MCA Portal"],
+          "demoLink": "https://example.com/demo/company",
+          "quoteLink": "https://example.com/quote/company"
+        }
+      ]
+    },
+  
+    {
+      "name": "Proprietory & Firm Registration",
+      "category": "Start",
+      "information": "Hassle-free property and firm registration services ensuring legal compliance.",
+      "image": "https://example.com/services/proprietorship.jpg",
+      "price": 7999,
+      "discountedPrice": 4999,
+      "projectsCount": 180,
+      "satisfaction": "98% Satisfaction",
+      "support": "Advisor Support",
+      "avgDelivery": "3-5 Days",
+      "toolsWeUsed": ["GST Portal"],
+      "features": [
+        {
+          "featureName": "Quick Setup",
+          "featureDiscription": "Simple registration process."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/firm.jpg",
+          "name": "Retail Shop Setup",
+          "description": "Firm registration for retail business.",
+          "price": 8000,
+          "discountedPrice": 5500,
+          "technologiesUsed": ["Gov Portal"],
+          "demoLink": "https://example.com/demo/firm",
+          "quoteLink": "https://example.com/quote/firm"
+        }
+      ]
+    },
+  
+    {
+      "name": "MSME Registration",
+      "category": "Start",
+      "information": "Register your business under MSME/Udyam.",
+      "image": "https://example.com/services/msme.jpg",
+      "price": 2999,
+      "discountedPrice": 1499,
+      "projectsCount": 300,
+      "satisfaction": "100% Approval",
+      "support": "Instant Support",
+      "avgDelivery": "1 Day",
+      "toolsWeUsed": ["Udyam Portal"],
+      "features": [
+        {
+          "featureName": "Government Benefits",
+          "featureDiscription": "Access schemes and subsidies."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/msme.jpg",
+          "name": "Small Business MSME",
+          "description": "MSME setup for local business.",
+          "price": 3000,
+          "discountedPrice": 1500,
+          "technologiesUsed": ["Udyam Portal"],
+          "demoLink": "https://example.com/demo/msme",
+          "quoteLink": "https://example.com/quote/msme"
+        }
+      ]
+    },
+  
+    {
+      "name": "LLP Registration",
+      "category": "Start",
+      "information": "Easy LLP registration with expert guidance.",
+      "image": "https://example.com/services/llp.jpg",
+      "price": 11999,
+      "discountedPrice": 8999,
+      "projectsCount": 140,
+      "satisfaction": "97% Satisfaction",
+      "support": "CA Support",
+      "avgDelivery": "7 Days",
+      "toolsWeUsed": ["MCA Portal"],
+      "features": [
+        {
+          "featureName": "Limited Liability",
+          "featureDiscription": "Secure your assets."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/llp.jpg",
+          "name": "Consultancy LLP",
+          "description": "LLP registration for consulting firm.",
+          "price": 12000,
+          "discountedPrice": 9000,
+          "technologiesUsed": ["MCA"],
+          "demoLink": "https://example.com/demo/llp",
+          "quoteLink": "https://example.com/quote/llp"
+        }
+      ]
+    },
+  
+    {
+      "name": "GST Registration",
+      "category": "Start",
+      "information": "Quick GST registration services.",
+      "image": "https://example.com/services/gst.jpg",
+      "price": 2499,
+      "discountedPrice": 999,
+      "projectsCount": 500,
+      "satisfaction": "99% Accuracy",
+      "support": "CA Support",
+      "avgDelivery": "2 Days",
+      "toolsWeUsed": ["GST Portal"],
+      "features": [
+        {
+          "featureName": "Fast Registration",
+          "featureDiscription": "Get GST quickly."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/gst.jpg",
+          "name": "GST Setup",
+          "description": "GST registration for business.",
+          "price": 2500,
+          "discountedPrice": 1000,
+          "technologiesUsed": ["GST Portal"],
+          "demoLink": "https://example.com/demo/gst",
+          "quoteLink": "https://example.com/quote/gst"
+        }
+      ]
+    },
+  
+    {
+      "name": "Trademark Registration",
+      "category": "Start",
+      "information": "Protect your brand identity legally.",
+      "image": "https://example.com/services/trademark.jpg",
+      "price": 6999,
+      "discountedPrice": 3999,
+      "projectsCount": 220,
+      "satisfaction": "98% Approval",
+      "support": "Legal Experts",
+      "avgDelivery": "7-10 Days",
+      "toolsWeUsed": ["IP India"],
+      "features": [
+        {
+          "featureName": "Brand Security",
+          "featureDiscription": "Legal protection."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/tm.jpg",
+          "name": "Brand Trademark",
+          "description": "Trademark for startup brand.",
+          "price": 7000,
+          "discountedPrice": 4000,
+          "technologiesUsed": ["IP India"],
+          "demoLink": "https://example.com/demo/tm",
+          "quoteLink": "https://example.com/quote/tm"
+        }
+      ]
+    },
+
+    {
+      "name": "Website Development",
+      "category": "Launch",
+      "information": "Modern, responsive websites designed to establish your online presence and attract customers.",
+      "image": "https://example.com/services/web-dev.jpg",
+      "price": 49999,
+      "discountedPrice": 29999,
+      "projectsCount": 120,
+      "satisfaction": "99% Satisfaction",
+      "support": "24/7 Tech Support",
+      "avgDelivery": "10-15 Days",
+      "toolsWeUsed": ["React", "Node.js", "MongoDB", "AWS"],
+      "features": [
+        {
+          "featureName": "Responsive Design",
+          "featureDiscription": "Mobile-first responsive UI."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/web.jpg",
+          "name": "Business Website",
+          "description": "Responsive business website with SEO.",
+          "price": 50000,
+          "discountedPrice": 30000,
+          "technologiesUsed": ["React"],
+          "demoLink": "https://example.com/demo/web",
+          "quoteLink": "https://example.com/quote/web"
+        }
+      ]
+    },
+  
+    {
+      "name": "Social Media Marketing",
+      "category": "Launch",
+      "information": "Grow your brand with targeted social media strategies, content, and advertising campaigns.",
+      "image": "https://example.com/services/smm.jpg",
+      "price": 19999,
+      "discountedPrice": 14999,
+      "projectsCount": 200,
+      "satisfaction": "97% Growth",
+      "support": "Manager Support",
+      "avgDelivery": "Monthly",
+      "toolsWeUsed": ["Meta Ads", "Canva"],
+      "features": [
+        {
+          "featureName": "Campaign Management",
+          "featureDiscription": "End-to-end ad campaigns."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/smm.jpg",
+          "name": "Instagram Campaign",
+          "description": "Growth campaign for brand awareness.",
+          "price": 20000,
+          "discountedPrice": 15000,
+          "technologiesUsed": ["Meta Ads"],
+          "demoLink": "https://example.com/demo/smm",
+          "quoteLink": "https://example.com/quote/smm"
+        }
+      ]
+    },
+  
+    {
+      "name": "App Development",
+      "category": "Launch",
+      "information": "Custom mobile and web app development tailored to your business needs.",
+      "image": "https://example.com/services/app.jpg",
+      "price": 89999,
+      "discountedPrice": 69999,
+      "projectsCount": 80,
+      "satisfaction": "96%",
+      "support": "Dev Team",
+      "avgDelivery": "25 Days",
+      "toolsWeUsed": ["Flutter", "Node.js"],
+      "features": [
+        {
+          "featureName": "Cross Platform",
+          "featureDiscription": "Android & iOS apps."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/app.jpg",
+          "name": "Delivery App",
+          "description": "Food delivery mobile application.",
+          "price": 90000,
+          "discountedPrice": 70000,
+          "technologiesUsed": ["Flutter"],
+          "demoLink": "https://example.com/demo/app",
+          "quoteLink": "https://example.com/quote/app"
+        }
+      ]
+    },
+  
+    {
+      "name": "Branding Kit & Logo",
+      "category": "Launch",
+      "information": "Professional logo design and complete branding kit to build a strong brand identity.",
+      "image": "https://example.com/services/logo.jpg",
+      "price": 9999,
+      "discountedPrice": 5999,
+      "projectsCount": 150,
+      "satisfaction": "98%",
+      "support": "Design Team",
+      "avgDelivery": "3-5 Days",
+      "toolsWeUsed": ["Illustrator", "Photoshop"],
+      "features": [
+        {
+          "featureName": "Unique Design",
+          "featureDiscription": "Custom brand identity."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/logo.jpg",
+          "name": "Startup Branding",
+          "description": "Complete branding for startup.",
+          "price": 10000,
+          "discountedPrice": 6000,
+          "technologiesUsed": ["Illustrator"],
+          "demoLink": "https://example.com/demo/logo",
+          "quoteLink": "https://example.com/quote/logo"
+        }
+      ]
+    },
+  
+    {
+      "name": "Influencer Marketing",
+      "category": "Launch",
+      "information": "Collaborate with influencers to boost brand visibility and reach your target audience.",
+      "image": "https://example.com/services/influencer.jpg",
+      "price": 29999,
+      "discountedPrice": 19999,
+      "projectsCount": 90,
+      "satisfaction": "95%",
+      "support": "Campaign Manager",
+      "avgDelivery": "7 Days",
+      "toolsWeUsed": ["Instagram", "YouTube"],
+      "features": [
+        {
+          "featureName": "Influencer Reach",
+          "featureDiscription": "Target audience growth."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/influencer.jpg",
+          "name": "Fashion Campaign",
+          "description": "Influencer promotion campaign.",
+          "price": 30000,
+          "discountedPrice": 20000,
+          "technologiesUsed": ["Instagram"],
+          "demoLink": "https://example.com/demo/influencer",
+          "quoteLink": "https://example.com/quote/influencer"
+        }
+      ]
+    },
+  
+    {
+      "name": "Content Creation",
+      "category": "Launch",
+      "information": "High-quality content creation including graphics, videos, and marketing materials.",
+      "image": "https://example.com/services/content.jpg",
+      "price": 14999,
+      "discountedPrice": 9999,
+      "projectsCount": 170,
+      "satisfaction": "98%",
+      "support": "Creative Team",
+      "avgDelivery": "5 Days",
+      "toolsWeUsed": ["Canva", "Premiere Pro"],
+      "features": [
+        {
+          "featureName": "Creative Assets",
+          "featureDiscription": "High-quality designs."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/content.jpg",
+          "name": "Ad Creatives",
+          "description": "Marketing creatives for campaigns.",
+          "price": 15000,
+          "discountedPrice": 10000,
+          "technologiesUsed": ["Canva"],
+          "demoLink": "https://example.com/demo/content",
+          "quoteLink": "https://example.com/quote/content"
+        }
+      ]
+    },
+  
+    {
+      "name": "Secretarial & Legal Compliance",
+      "category": "Manage",
+      "information": "Ensure your business stays compliant with all legal and regulatory requirements.",
+      "image": "https://example.com/services/legal.jpg",
+      "price": 19999,
+      "discountedPrice": 14999,
+      "projectsCount": 130,
+      "satisfaction": "99%",
+      "support": "Legal Experts",
+      "avgDelivery": "Ongoing",
+      "toolsWeUsed": ["MCA Portal"],
+      "features": [
+        {
+          "featureName": "Compliance Management",
+          "featureDiscription": "Avoid penalties."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/legal.jpg",
+          "name": "Company Compliance",
+          "description": "Handled legal compliance.",
+          "price": 20000,
+          "discountedPrice": 15000,
+          "technologiesUsed": ["MCA"],
+          "demoLink": "https://example.com/demo/legal",
+          "quoteLink": "https://example.com/quote/legal"
+        }
+      ]
+    },
+  
+    {
+      "name": "GST Return Filing",
+      "category": "Manage",
+      "information": "Accurate and timely GST return filing to avoid penalties and maintain compliance.",
+      "image": "https://example.com/services/gst-return.jpg",
+      "price": 2999,
+      "discountedPrice": 1999,
+      "projectsCount": 400,
+      "satisfaction": "99%",
+      "support": "CA Support",
+      "avgDelivery": "Monthly",
+      "toolsWeUsed": ["GST Portal"],
+      "features": [
+        {
+          "featureName": "Timely Filing",
+          "featureDiscription": "Avoid late fees."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/gst-return.jpg",
+          "name": "Monthly GST Filing",
+          "description": "Handled GST filing for business.",
+          "price": 3000,
+          "discountedPrice": 2000,
+          "technologiesUsed": ["GST Portal"],
+          "demoLink": "https://example.com/demo/gst-return",
+          "quoteLink": "https://example.com/quote/gst-return"
+        }
+      ]
+    },
+  
+    {
+      "name": "Income Tax Return",
+      "category": "Manage",
+      "information": "Professional income tax return filing services for individuals and businesses.",
+      "image": "https://example.com/services/itr.jpg",
+      "price": 1999,
+      "discountedPrice": 999,
+      "projectsCount": 350,
+      "satisfaction": "98%",
+      "support": "Tax Experts",
+      "avgDelivery": "2 Days",
+      "toolsWeUsed": ["IT Portal"],
+      "features": [
+        {
+          "featureName": "Accurate Filing",
+          "featureDiscription": "Maximize returns."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/itr.jpg",
+          "name": "ITR Filing",
+          "description": "Filed income tax return.",
+          "price": 2000,
+          "discountedPrice": 1000,
+          "technologiesUsed": ["IT Portal"],
+          "demoLink": "https://example.com/demo/itr",
+          "quoteLink": "https://example.com/quote/itr"
+        }
+      ]
+    },
+  
+    {
+      "name": "Digital Signature Certificate",
+      "category": "Manage",
+      "information": "Get your digital signature certificate quickly for secure online documentation.",
+      "image": "https://example.com/services/dsc.jpg",
+      "price": 1499,
+      "discountedPrice": 999,
+      "projectsCount": 210,
+      "satisfaction": "99%",
+      "support": "Quick Support",
+      "avgDelivery": "1 Day",
+      "toolsWeUsed": ["DSC Portal"],
+      "features": [
+        {
+          "featureName": "Fast Issuance",
+          "featureDiscription": "Quick delivery."
+        }
+      ],
+      "projects": [
+        {
+          "image": "https://example.com/projects/dsc.jpg",
+          "name": "DSC Issue",
+          "description": "Issued digital signature.",
+          "price": 1500,
+          "discountedPrice": 1000,
+          "technologiesUsed": ["DSC Portal"],
+          "demoLink": "https://example.com/demo/dsc",
+          "quoteLink": "https://example.com/quote/dsc"
+        }
+      ]
+    }
+  ]

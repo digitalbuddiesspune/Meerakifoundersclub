@@ -7,6 +7,11 @@ const serviceSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    category: {
+      type: String,
+      trim: true,
+      required: true,
+    },
     information: {
       type: String,
       required: true,

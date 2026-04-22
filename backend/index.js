@@ -5,7 +5,6 @@ import connectDB from "./config/db.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import ourClientRoutes from "./routes/ourClientRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
-import startRoutes from "./routes/startRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 
@@ -19,7 +18,6 @@ app.use(express.json());
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", serviceRoutes);
 app.use("/api/v1", blogRoutes);
-app.use("/api/v1", startRoutes);
 app.use("/api/v1", ourClientRoutes);
 
 app.get("/", (req, res) => {

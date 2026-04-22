@@ -1,3 +1,12 @@
+import { Link } from 'react-router-dom'
+
+const toSlug = (value) =>
+  String(value || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
 function HomeStartSection({ items, loading, error }) {
   return (
     <section className="w-full">
@@ -43,12 +52,18 @@ function HomeStartSection({ items, loading, error }) {
 
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {group.items.map((item) => (
-                      <article key={item._id} className={`rounded-2xl border p-3 md:p-6 ${cardClasses}`}>
-                        <h4 className="text-base font-semibold leading-tight md:text-2xl">{item.name}</h4>
-                        <p className={`mt-3 text-xs md:text-sm leading-relaxed ${descriptionClasses}`}>
-                          {item.description}
-                        </p>
-                      </article>
+                      <Link
+                        key={item._id}
+                        to={`/services/${toSlug(item.name)}`}
+                        className={`block rounded-2xl border p-3 transition-transform duration-200 hover:-translate-y-1 md:p-6 ${cardClasses}`}
+                      >
+                        <article>
+                          <h4 className="text-base font-semibold leading-tight md:text-2xl">{item.name}</h4>
+                          <p className={`mt-3 text-xs md:text-sm leading-relaxed ${descriptionClasses}`}>
+                            {item.description}
+                          </p>
+                        </article>
+                      </Link>
                     ))}
                   </div>
                 </div>

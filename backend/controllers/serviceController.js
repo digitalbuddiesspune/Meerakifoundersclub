@@ -33,6 +33,8 @@ const normalizeFeatures = (input) => {
     .filter((feature) => feature.featureName && feature.featureDiscription);
 };
 
+const normalizeCategory = (value) => String(value || "").trim();
+
 export const getServices = async (req, res) => {
   try {
     const services = await Service.find().sort({ createdAt: -1 });
@@ -62,6 +64,7 @@ export const addService = async (req, res) => {
   try {
     const {
       name,
+      category = "",
       information,
       image,
       discountedPrice,
@@ -90,6 +93,7 @@ export const addService = async (req, res) => {
 
     const newService = await Service.create({
       name,
+      ...(category !== undefined ? { category: normalizeCategory(category) || "Start" } : {}),
       information,
       image,
       discountedPrice,
@@ -117,6 +121,7 @@ export const updateServiceById = async (req, res) => {
     const { id } = req.params;
     const {
       name,
+      category,
       information,
       image,
       discountedPrice,
@@ -134,6 +139,7 @@ export const updateServiceById = async (req, res) => {
       id,
       {
         name,
+        ...(category !== undefined ? { category: normalizeCategory(category) || "Start" } : {}),
         information,
         image,
         discountedPrice,
