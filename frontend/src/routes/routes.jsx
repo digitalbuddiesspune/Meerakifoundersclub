@@ -13,6 +13,7 @@ import RefundPolicy from '../pages/RefundPolicy'
 import ServiceDetails from '../pages/ServiceDetails'
 import Services from '../pages/Services'
 import TermsAndConditions from '../pages/TermsAndConditions'
+import UserDashboard from '../user/UserDashboard'
 import Vendor from '../pages/Vendor'
 import WhyMeraakiFoundersClub from '../pages/home/WhyMeraakiFoundersClub'
 
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       <Route path="cookie-policy" element={<CookiePolicy />} />
       <Route path="refund-policy" element={<RefundPolicy />} />
       <Route path="profile" element={<Profile />} />
+      <Route path="user/dashboard" element={<UserDashboard />} />
       <Route path="why-meraaki-founders-club" element={<WhyMeraakiFoundersClub />} />
     </Route>,
   ),

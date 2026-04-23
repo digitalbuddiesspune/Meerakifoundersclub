@@ -15,6 +15,7 @@ const NETWORK_ERROR_MESSAGE = 'Cannot reach server. Please start backend on port
 
 function App() {
   const { pathname } = useLocation()
+  const isUserDashboardRoute = pathname.startsWith('/user/')
   const [authUser, setAuthUser] = useState(() => {
     const savedUser = localStorage.getItem(AUTH_STORAGE_KEY)
     if (!savedUser) return null
@@ -197,16 +198,18 @@ function App() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-slate-800">
-      <Header
-        hidden={hideHeader}
-        isAuthenticated={isAuthenticated}
-        authUser={authUser}
-        onOpenAuth={openAuthModal}
-      />
+      {!isUserDashboardRoute ? (
+        <Header
+          hidden={hideHeader}
+          isAuthenticated={isAuthenticated}
+          authUser={authUser}
+          onOpenAuth={openAuthModal}
+        />
+      ) : null}
 
       <Outlet context={{ ...sharedAuthProps, isBlurred: showAuthModal }} />
 
-      <Footer />
+      {!isUserDashboardRoute ? <Footer /> : null}
 
       <AuthModal
         visible={showAuthModal && !isAuthenticated}
