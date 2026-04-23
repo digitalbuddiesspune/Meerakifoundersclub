@@ -71,7 +71,7 @@ const style = `
   .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(242,101,39,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.08) 1px, transparent 1px); background-size: 60px 60px; }
   .hero-orb-1 { position: absolute; top: -80px; right: 10%; width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, rgba(242,101,39,0.25) 0%, transparent 70%); }
   .hero-orb-2 { position: absolute; bottom: -60px; left: -80px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%); }
-  .hero-inner, .inner { max-width: 1200px; margin: 0 auto; position: relative; }
+  .hero-inner, .inner { max-width: 1280px; margin: 0 auto; position: relative; }
   .hero-pill, .sec-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F26527; }
   .hero-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(242,101,39,0.4); background: rgba(242,101,39,0.1); padding: 6px 14px; border-radius: 999px; color: #FF9C73; }
   .hero-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #F26527; }
@@ -111,7 +111,7 @@ const style = `
   .value-item { display: flex; gap: 10px; background: #fff; border: 1px solid #EBEBEA; border-radius: 14px; padding: 14px; color: #444; font-size: 14px; }
   .value-dot { color: #F26527; font-weight: 700; }
   .cta-wrap { padding: 60px 24px 90px; }
-  .cta-banner { max-width: 1200px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 28px; background: #070D1A; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 25px 70px rgba(7,13,26,0.45); }
+  .cta-banner { max-width: 1280px; margin: 0 auto; position: relative; overflow: hidden; border-radius: 28px; background: #070D1A; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 25px 70px rgba(7,13,26,0.45); }
   .cta-orb-l, .cta-orb-r { position: absolute; width: 280px; height: 280px; border-radius: 50%; background: rgba(242,101,39,0.25); filter: blur(60px); }
   .cta-orb-l { left: -120px; bottom: -120px; } .cta-orb-r { right: -120px; top: -120px; }
   .cta-inner { position: relative; text-align: center; padding: 56px 24px; color: #fff; }
@@ -134,7 +134,7 @@ function AboutUs() {
           <div className="hero-grid" />
           <div className="hero-orb-1" />
           <div className="hero-orb-2" />
-          <div className="hero-inner px-6 md:px-0">
+          <div className="hero-inner px-4 md:px-0">
             <div className="hero-pill">About Us</div>
             <h1 className="hero-title">
               Built By Founders,<br /><em>For Founders</em>

@@ -149,7 +149,7 @@ const style = `
     pointer-events: none;
   }
   .hero-inner {
-    position: relative; max-width: 1200px; margin: 0 auto;
+    position: relative; max-width: 1280px; margin: 0 auto;
   }
   .hero-pill {
     display: inline-flex; align-items: center; gap: 8px;
@@ -200,7 +200,7 @@ const style = `
   /* ── Section wrapper ── */
   .section { padding: 80px 0; }
   .section + .section { border-top: 1px solid #EBEBEA; }
-  .inner { max-width: 1200px; margin: 0 auto; }
+  .inner { max-width: 1280px; margin: 0 auto; }
 
   /* ── Section label ── */
   .sec-label {
