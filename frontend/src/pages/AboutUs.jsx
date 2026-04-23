@@ -84,6 +84,12 @@ const style = `
   .hero-stat-val { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 800; color: #fff; line-height: 1.05; }
   .hero-stat-val span { color: #F26527; }
   .hero-stat-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; white-space: nowrap; }
+  @media (max-width: 768px) {
+    .hero-stats { margin-top: 22px; gap: 10px 14px; flex-wrap: wrap; }
+    .hero-stats > div { flex: 0 0 calc(50% - 7px); min-width: 0; }
+    .hero-stat-val { font-size: 22px; line-height: 1; }
+    .hero-stat-label { margin-top: 2px; font-size: 8px; letter-spacing: 0.04em; }
+  }
   .section { padding: 80px 0; }
   .section + .section { border-top: 1px solid #EBEBEA; }
   .sec-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: #0F0F0D; margin-top: 10px; }
