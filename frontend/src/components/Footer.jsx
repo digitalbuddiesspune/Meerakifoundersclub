@@ -125,8 +125,8 @@ function Footer() {
           <span>© {new Date().getFullYear()} Meraaki Founders Club. All rights reserved.</span>
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
             <span>Startup India Certified</span>
-            <span className="text-slate-300">|</span>
-            <span>IEC Certified</span>
+            
+           
           </div>
           <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
             <Link to="/privacy-policy" className="hover:text-slate-800">

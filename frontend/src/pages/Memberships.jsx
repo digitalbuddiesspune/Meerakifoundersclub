@@ -93,7 +93,7 @@ function Memberships() {
                 <button
                   type="button"
                   onClick={handleSubscribe}
-                  className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#F26527] px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
+                  className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#F26527] px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 hover:cursor-pointer"
                 >
                   Subscribe Plan
                 </button>

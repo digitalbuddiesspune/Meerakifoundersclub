@@ -20,6 +20,9 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
   const mobileMenuRef = useRef(null)
   const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_URL
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -58,6 +61,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
 
   const goToServicesPage = () => {
     navigate('/services')
+    scrollToTop()
     setIsServicesOpen(false)
     setIsMobileMenuOpen(false)
     setIsMobileServicesOpen(false)
@@ -65,6 +69,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
 
   const goToServiceDetails = (serviceName) => {
     navigate(`/services/${toSlug(serviceName)}`)
+    scrollToTop()
     setIsServicesOpen(false)
     setIsMobileMenuOpen(false)
     setIsMobileServicesOpen(false)
@@ -73,6 +78,10 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
     setIsMobileServicesOpen(false)
+  }
+  const handleMobileNavLinkClick = () => {
+    closeMobileMenu()
+    scrollToTop()
   }
   const handleAccountClick = () => {
     if (isAuthenticated) {
@@ -101,7 +110,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             ☰
           </button>
 
-          <Link to="/" className="absolute left-1/2 -translate-x-1/2" onClick={closeMobileMenu}>
+          <Link to="/" className="absolute left-1/2 -translate-x-1/2" onClick={handleMobileNavLinkClick}>
             <img
               src={LOGO_URL}
               alt="Meraaki Founders Club logo"
@@ -129,7 +138,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           )}
         </div>
 
-        <Link to="/" className="hidden shrink-0 items-center gap-3 md:flex">
+        <Link to="/" className="hidden shrink-0 items-center gap-3 md:flex" onClick={scrollToTop}>
           <img
             src={LOGO_URL}
             alt="Meraaki Founders Club logo"
@@ -138,11 +147,11 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
         </Link>
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-5 text-sm font-medium md:flex">
-          <Link to="/" className="text-black transition hover:text-[#F26527]">Home</Link>
-          <Link to="/about-us" className="text-black transition hover:text-[#F26527]">About Us</Link>
-          <Link to="/community" className="text-black transition hover:text-[#F26527]">Community</Link>
-          <Link to="/partners" className="text-black transition hover:text-[#F26527]">Partners</Link>
-          <Link to="/memberships" className="text-black transition hover:text-[#F26527]">Memberships</Link>
+          <Link to="/" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Home</Link>
+          <Link to="/about-us" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">About Us</Link>
+          <Link to="/community" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Community</Link>
+          <Link to="/partners" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Partners</Link>
+          <Link to="/memberships" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Memberships</Link>
           <div
             ref={servicesMenuRef}
             className="relative"
@@ -175,11 +184,11 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
               </div>
             ) : null}
           </div>
-          <Link to="/challenges-solutions" className="text-black transition hover:text-[#F26527]">
+          <Link to="/challenges-solutions" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">
             Challenges & Solutions
           </Link>
           <a href="#process" className="text-black transition hover:text-[#F26527]">How It Works</a>
-          <Link to="/contact-us" className="text-black transition hover:text-[#F26527]">Contact</Link>
+          <Link to="/contact-us" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Contact</Link>
         </nav>
 
         <div className="hidden shrink-0 items-center gap-2.5 md:flex">
@@ -204,7 +213,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           {!isAuthenticated ? (
             <a
               href="mailto:info@meraakifoundersclub.com"
-              className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-emerald-400"
+              className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-emerald-400 text-white"
             >
               Become a Partner
             </a>
@@ -236,16 +245,16 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             </div>
 
             <div className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-            <Link to="/about-us" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+            <Link to="/about-us" onClick={handleMobileNavLinkClick} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
               About Us
             </Link>
-            <Link to="/community" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+            <Link to="/community" onClick={handleMobileNavLinkClick} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
               Community
             </Link>
-            <Link to="/partners" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+            <Link to="/partners" onClick={handleMobileNavLinkClick} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
               Partners
             </Link>
-            <Link to="/memberships" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+            <Link to="/memberships" onClick={handleMobileNavLinkClick} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
               Memberships
             </Link>
             <div className="rounded-lg">
@@ -304,7 +313,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             </div>
             <Link
               to="/challenges-solutions"
-              onClick={closeMobileMenu}
+              onClick={handleMobileNavLinkClick}
               className="rounded-lg px-3 py-2 transition hover:bg-slate-100"
             >
               Challenges & Solutions
@@ -314,7 +323,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             </a>
             <Link
               to="/contact-us"
-              onClick={closeMobileMenu}
+              onClick={handleMobileNavLinkClick}
               className="rounded-lg px-3 py-2 transition hover:bg-slate-100"
             >
               Contact
