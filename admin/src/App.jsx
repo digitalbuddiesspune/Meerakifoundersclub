@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import AdminLayout from "./components/AdminLayout";
 import AddBlogPage from "./pages/AddBlogPage";
 import AddServicePage from "./pages/AddServicePage";
+import BlogDetailsPage from "./pages/BlogDetailsPage";
 import DashboardPage from "./pages/DashboardPage";
 import MyBlogsPage from "./pages/MyBlogsPage";
 import MyServicesPage from "./pages/MyServicesPage";
@@ -71,6 +72,8 @@ function App() {
               onProjectChange={admin.handleProjectChange}
               onServiceImageUpload={admin.handleServiceImageUpload}
               onProjectImageUpload={admin.handleProjectImageUpload}
+              onClearServiceImage={admin.clearServiceImage}
+              onClearProjectImage={admin.clearProjectImage}
               onAddProject={admin.addProject}
               onRemoveProject={admin.removeProject}
               onSubmit={admin.handleServiceSubmit}
@@ -91,6 +94,14 @@ function App() {
           }
         />
         <Route
+          path="blogs/details/:blogId"
+          element={
+            <BlogDetailsPage
+              blogsList={admin.blogsList}
+            />
+          }
+        />
+        <Route
           path="blogs/add-blog"
           element={
             <AddBlogPage
@@ -101,6 +112,8 @@ function App() {
               onBlogChange={admin.handleBlogChange}
               onFeaturedImageUpload={admin.handleBlogFeaturedImageUpload}
               onAuthorAvatarUpload={admin.handleBlogAuthorAvatarUpload}
+              onClearFeaturedImage={admin.clearBlogFeaturedImage}
+              onClearAuthorAvatar={admin.clearBlogAuthorAvatar}
               onSubmit={admin.handleBlogSubmit}
               uploadingImageFor={admin.uploadingImageFor}
             />

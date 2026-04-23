@@ -6,6 +6,8 @@ function AddBlogPage({
   onBlogChange,
   onFeaturedImageUpload,
   onAuthorAvatarUpload,
+  onClearFeaturedImage,
+  onClearAuthorAvatar,
   onSubmit,
   uploadingImageFor,
 }) {
@@ -33,7 +35,19 @@ function AddBlogPage({
               <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" type="file" accept="image/*" onChange={onFeaturedImageUpload} />
               {uploadingImageFor === "blog-featured" ? <p className="text-xs text-cyan-600">Uploading featured image...</p> : null}
               {!blogForm.featuredImage ? <p className="text-xs text-slate-500">Please upload featured image from gallery.</p> : null}
-              {blogForm.featuredImage ? <img src={blogForm.featuredImage} alt="Featured preview" className="h-20 w-20 rounded-xl border border-slate-200 object-cover" /> : null}
+              {blogForm.featuredImage ? (
+                <div className="relative h-20 w-20">
+                  <img src={blogForm.featuredImage} alt="Featured preview" className="h-20 w-20 rounded-xl border border-slate-200 object-cover" />
+                  <button
+                    type="button"
+                    aria-label="Remove featured image"
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-rose-200 bg-white text-sm font-bold leading-none text-rose-600 shadow-sm hover:bg-rose-50"
+                    onClick={onClearFeaturedImage}
+                  >
+                    ×
+                  </button>
+                </div>
+              ) : null}
             </div>
             <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="category" placeholder="Category" value={blogForm.category} onChange={onBlogChange} />
             <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="tags" placeholder="Tags (comma separated)" value={blogForm.tags} onChange={onBlogChange} />
@@ -49,7 +63,19 @@ function AddBlogPage({
               <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" type="file" accept="image/*" onChange={onAuthorAvatarUpload} />
               {uploadingImageFor === "blog-author-avatar" ? <p className="text-xs text-cyan-600">Uploading avatar...</p> : null}
               {!blogForm.authorAvatar ? <p className="text-xs text-slate-500">Upload author avatar from gallery (optional).</p> : null}
-              {blogForm.authorAvatar ? <img src={blogForm.authorAvatar} alt="Author avatar preview" className="h-20 w-20 rounded-xl border border-slate-200 object-cover" /> : null}
+              {blogForm.authorAvatar ? (
+                <div className="relative h-20 w-20">
+                  <img src={blogForm.authorAvatar} alt="Author avatar preview" className="h-20 w-20 rounded-xl border border-slate-200 object-cover" />
+                  <button
+                    type="button"
+                    aria-label="Remove author avatar"
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-rose-200 bg-white text-sm font-bold leading-none text-rose-600 shadow-sm hover:bg-rose-50"
+                    onClick={onClearAuthorAvatar}
+                  >
+                    ×
+                  </button>
+                </div>
+              ) : null}
             </div>
             <select className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100" name="status" value={blogForm.status} onChange={onBlogChange}>
               <option value="draft">Draft</option>

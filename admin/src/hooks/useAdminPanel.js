@@ -367,6 +367,23 @@ function useAdminPanel() {
     }
   };
 
+  const clearServiceImage = () => {
+    setServiceForm((prev) => ({ ...prev, image: "" }));
+    setServiceMessage("Service image removed.");
+  };
+
+  const clearProjectImage = (index) => {
+    setServiceForm((prev) => {
+      const updatedProjects = [...prev.projects];
+      if (!updatedProjects[index]) {
+        return prev;
+      }
+      updatedProjects[index] = { ...updatedProjects[index], image: "" };
+      return { ...prev, projects: updatedProjects };
+    });
+    setServiceMessage(`Project ${index + 1} image removed.`);
+  };
+
   const handleBlogFeaturedImageUpload = async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -401,6 +418,16 @@ function useAdminPanel() {
       setUploadingImageFor("");
       event.target.value = "";
     }
+  };
+
+  const clearBlogFeaturedImage = () => {
+    setBlogForm((prev) => ({ ...prev, featuredImage: "" }));
+    setBlogMessage("Featured image removed.");
+  };
+
+  const clearBlogAuthorAvatar = () => {
+    setBlogForm((prev) => ({ ...prev, authorAvatar: "" }));
+    setBlogMessage("Author avatar removed.");
   };
 
   const handleServiceSubmit = async (event) => {
@@ -610,6 +637,8 @@ function useAdminPanel() {
     handleProjectChange,
     handleServiceImageUpload,
     handleProjectImageUpload,
+    clearServiceImage,
+    clearProjectImage,
     addProject,
     removeProject,
     handleDeleteService,
@@ -619,6 +648,8 @@ function useAdminPanel() {
     handleBlogChange,
     handleBlogFeaturedImageUpload,
     handleBlogAuthorAvatarUpload,
+    clearBlogFeaturedImage,
+    clearBlogAuthorAvatar,
     handleServiceSubmit,
     handleBlogSubmit,
   };

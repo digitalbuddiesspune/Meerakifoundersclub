@@ -33,11 +33,11 @@ function AdminLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(46,196,182,0.18),transparent_24%),radial-gradient(circle_at_top_right,rgba(255,159,67,0.14),transparent_18%),#eef4fb] text-slate-900 lg:grid lg:grid-cols-[290px_1fr]">
-      <aside className="flex flex-col gap-6 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),transparent_18%),linear-gradient(180deg,#083344_0%,#0f5b6e_55%,#0b4253_100%)] px-[18px] py-7 text-cyan-50 shadow-none lg:min-h-screen lg:shadow-[18px_0_40px_rgba(8,51,68,0.22)]">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(46,196,182,0.18),transparent_24%),radial-gradient(circle_at_top_right,rgba(255,159,67,0.14),transparent_18%),#eef4fb] text-slate-900 lg:grid lg:h-screen lg:grid-cols-[290px_1fr] lg:overflow-hidden">
+      <aside className="flex flex-col gap-6 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),transparent_18%),linear-gradient(180deg,#083344_0%,#0f5b6e_55%,#0b4253_100%)] px-[18px] py-7 text-cyan-50 shadow-none lg:h-screen lg:shadow-[18px_0_40px_rgba(8,51,68,0.22)]">
         <div className="flex justify-center">
           <img
-            src="https://res.cloudinary.com/dd0imqx3p/image/upload/q_auto/f_auto/v1776147066/IMG_1857_iz7m7a.png"
+            src="https://res.cloudinary.com/dd0imqx3p/image/upload/q_auto/f_auto/v1776157629/IMG_1857-removebg-preview_kerwe5.png"
             alt="Meraaki Founders Club"
             className="h-auto w-full max-w-[220px]"
           />
@@ -153,7 +153,7 @@ function AdminLayout() {
         </div>
       </aside>
 
-      <main className="p-5 lg:p-7">
+      <main className="p-5 lg:min-h-0 lg:overflow-y-auto lg:p-7">
         {showSearch ? (
           <header className="mb-5 flex justify-end">
             <div className="flex min-w-0 w-full max-w-[300px] items-center gap-2.5 rounded-full border border-slate-200/60 bg-white/90 px-4 py-3 shadow-[0_12px_24px_rgba(15,23,42,0.06)]">

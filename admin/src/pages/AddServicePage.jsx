@@ -8,6 +8,8 @@ function AddServicePage({
   onProjectChange,
   onServiceImageUpload,
   onProjectImageUpload,
+  onClearServiceImage,
+  onClearProjectImage,
   onAddProject,
   onRemoveProject,
   onSubmit,
@@ -45,11 +47,21 @@ function AddServicePage({
               {uploadingImageFor === "service-main" ? <p className="text-xs text-cyan-600">Uploading image...</p> : null}
               {!serviceForm.image ? <p className="text-xs text-slate-500">Please upload a service image from gallery.</p> : null}
               {serviceForm.image ? (
-                <img
-                  src={serviceForm.image}
-                  alt="Service preview"
-                  className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
-                />
+                <div className="relative h-20 w-20">
+                  <img
+                    src={serviceForm.image}
+                    alt="Service preview"
+                    className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
+                  />
+                  <button
+                    type="button"
+                    aria-label="Remove service image"
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-rose-200 bg-white text-sm font-bold leading-none text-rose-600 shadow-sm hover:bg-rose-50"
+                    onClick={onClearServiceImage}
+                  >
+                    ×
+                  </button>
+                </div>
               ) : null}
             </div>
             <input
@@ -110,11 +122,21 @@ function AddServicePage({
               {uploadingImageFor === `project-${index}` ? <p className="text-xs text-cyan-600">Uploading project image...</p> : null}
               {!project.image ? <p className="text-xs text-slate-500">Please upload project image from gallery.</p> : null}
               {project.image ? (
-                <img
-                  src={project.image}
-                  alt={`Project ${index + 1} preview`}
-                  className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
-                />
+                <div className="relative h-20 w-20">
+                  <img
+                    src={project.image}
+                    alt={`Project ${index + 1} preview`}
+                    className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
+                  />
+                  <button
+                    type="button"
+                    aria-label={`Remove project ${index + 1} image`}
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-rose-200 bg-white text-sm font-bold leading-none text-rose-600 shadow-sm hover:bg-rose-50"
+                    onClick={() => onClearProjectImage(index)}
+                  >
+                    ×
+                  </button>
+                </div>
               ) : null}
               <textarea
                 className={inputClassName}
