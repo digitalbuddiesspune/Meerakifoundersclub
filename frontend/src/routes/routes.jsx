@@ -5,6 +5,7 @@ import Community from '../pages/Community'
 import ContactUs from '../pages/ContactUs'
 import CookiePolicy from '../pages/CookiePolicy'
 import Home from '../pages/Home'
+import Memberships from '../pages/Memberships'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
 import ProblemsSolutions from '../pages/ProblemsSolutions'
 import Profile from '../pages/Profile'
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="about-us" element={<AboutUs />} />
       <Route path="community" element={<Community />} />
       <Route path="partners" element={<Vendor />} />
+      <Route path="memberships" element={<Memberships />} />
       <Route path="services" element={<Services />} />
       <Route path="services/:slug" element={<ServiceDetails />} />
       <Route path="challenges-solutions" element={<ProblemsSolutions />} />

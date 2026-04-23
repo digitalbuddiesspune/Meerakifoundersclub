@@ -1,5 +1,6 @@
 import HomeFoundersPage from './home/HomeFoundersPage'
 import HomeHeroPage from './home/HomeHeroPage'
+import Memberships from './Memberships'
 import HomeProcessPage from './home/HomeProcessPage'
 import HomeStartPage from './home/HomeStartPage'
 import WhyMeraakiFoundersClub from './home/WhyMeraakiFoundersClub'
@@ -11,6 +12,7 @@ function HomePageLayout() {
      
       <HomeStartPage />
       <HomeProcessPage />
+      <Memberships />
      
       <HomeFoundersPage />
       <WhyMeraakiFoundersClub />

@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/db.js";
 import blogRoutes from "./routes/blogRoutes.js";
+import membershipRoutes from "./routes/membershipRoutes.js";
 import ourClientRoutes from "./routes/ourClientRoutes.js";
+import partnerRoutes from "./routes/partnerRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -19,7 +21,9 @@ app.use(express.json());
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", serviceRoutes);
 app.use("/api/v1", blogRoutes);
+app.use("/api/v1", membershipRoutes);
 app.use("/api/v1", ourClientRoutes);
+app.use("/api/v1", partnerRoutes);
 app.use("/api/v1", uploadRoutes);
 
 app.get("/", (req, res) => {

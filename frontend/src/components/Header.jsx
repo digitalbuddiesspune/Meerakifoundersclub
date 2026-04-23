@@ -142,6 +142,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           <Link to="/about-us" className="text-black transition hover:text-[#F26527]">About Us</Link>
           <Link to="/community" className="text-black transition hover:text-[#F26527]">Community</Link>
           <Link to="/partners" className="text-black transition hover:text-[#F26527]">Partners</Link>
+          <Link to="/memberships" className="text-black transition hover:text-[#F26527]">Memberships</Link>
           <div
             ref={servicesMenuRef}
             className="relative"
@@ -243,6 +244,9 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             </Link>
             <Link to="/partners" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
               Partners
+            </Link>
+            <Link to="/memberships" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
+              Memberships
             </Link>
             <div className="rounded-lg">
               <button

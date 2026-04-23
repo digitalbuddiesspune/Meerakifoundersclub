@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon index.js",
     "dev": "nodemon index.js",
-    "seed:services": "node scripts/seedServices.js"
+    "seed:services": "node scripts/seedServices.js",
+    "seed:memberships": "node scripts/seedMemberships.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.4.1",
-    "multer": "^2.1.1"
+    "multer": "^2.1.1",
+    "razorpay": "^2.9.6"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
