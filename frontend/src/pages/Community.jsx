@@ -119,10 +119,8 @@ const steps = [
 ]
 
 const style = `
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
-
   .com-root * { box-sizing: border-box; margin: 0; padding: 0; }
-  .com-root { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #0F0F0D; }
+  .com-root { font-family: 'Montserrat', sans-serif; background: #FAFAF8; color: #0F0F0D; }
 
   /* ── Hero ── */
   .hero {
@@ -151,7 +149,7 @@ const style = `
     pointer-events: none;
   }
   .hero-inner {
-    position: relative; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    position: relative; max-width: 1200px; margin: 0 auto;
   }
   .hero-pill {
     display: inline-flex; align-items: center; gap: 8px;
@@ -160,7 +158,7 @@ const style = `
     padding: 6px 14px; border-radius: 100px;
     font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
     text-transform: uppercase; color: #FF9C73;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
   .hero-pill::before {
     content: ''; width: 6px; height: 6px; border-radius: 50%;
@@ -171,7 +169,7 @@ const style = `
     50% { opacity: 0.5; transform: scale(1.4); }
   }
   .hero-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(38px, 6vw, 76px);
     font-weight: 800; line-height: 1.0; margin-top: 20px;
     color: #ffffff; letter-spacing: -0.02em;
@@ -190,7 +188,7 @@ const style = `
     display: flex; gap: 40px; margin-top: 48px; flex-wrap: wrap;
   }
   .hero-stat-val {
-    font-family: 'Syne', sans-serif; font-size: 36px;
+    font-family: 'Montserrat', sans-serif; font-size: 36px;
     font-weight: 800; color: #fff;
   }
   .hero-stat-val span { color: #F26527; }
@@ -202,16 +200,16 @@ const style = `
   /* ── Section wrapper ── */
   .section { padding: 80px 0; }
   .section + .section { border-top: 1px solid #EBEBEA; }
-  .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .inner { max-width: 1200px; margin: 0 auto; }
 
   /* ── Section label ── */
   .sec-label {
-    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-family: 'Montserrat', sans-serif; font-size: 11px;
     font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
     color: #F26527; margin-bottom: 12px;
   }
   .sec-title {
-    font-family: 'Syne', sans-serif; font-size: clamp(26px, 3.5vw, 40px);
+    font-family: 'Montserrat', sans-serif; font-size: clamp(26px, 3.5vw, 40px);
     font-weight: 800; letter-spacing: -0.02em; color: #0F0F0D; line-height: 1.1;
   }
 
@@ -249,7 +247,7 @@ const style = `
     background: color-mix(in srgb, var(--accent) 10%, white);
   }
   .benefit-title {
-    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+    font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700;
     color: #0F0F0D; margin-bottom: 14px;
   }
   .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -279,7 +277,7 @@ const style = `
     border: 1px solid rgba(242,101,39,0.15);
   }
   .guide-card-title {
-    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800;
     margin-bottom: 24px;
   }
   .guide-card-values .guide-card-title { color: #fff; }
@@ -324,12 +322,12 @@ const style = `
   }
   .step-card:hover { background: #FFF4EE; }
   .step-num {
-    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-family: 'Montserrat', sans-serif; font-size: 11px;
     font-weight: 700; letter-spacing: 0.15em; color: #F26527;
     margin-bottom: 16px; text-transform: uppercase;
   }
   .step-title {
-    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800;
     color: #0F0F0D; margin-bottom: 8px;
   }
   .step-desc { font-size: 13.5px; color: #888; line-height: 1.5; }
@@ -357,10 +355,10 @@ const style = `
     background: color-mix(in srgb, var(--tag-color) 12%, white);
     color: var(--tag-color);
     width: fit-content; margin-bottom: 14px;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
   .event-name {
-    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+    font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800;
     color: #0F0F0D; line-height: 1.25; margin-bottom: 8px;
   }
   .event-date {
@@ -376,7 +374,7 @@ const style = `
     padding: 11px 22px; border-radius: 100px;
     font-size: 11.5px; font-weight: 700;
     letter-spacing: 0.12em; text-transform: uppercase;
-    font-family: 'Syne', sans-serif; width: fit-content;
+    font-family: 'Montserrat', sans-serif; width: fit-content;
     transition: background 0.2s, transform 0.15s;
   }
   .event-cta:hover { background: #F26527; transform: scale(1.02); }
@@ -409,10 +407,10 @@ const style = `
     padding: 6px 16px; border-radius: 100px;
     font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
     text-transform: uppercase; color: #FF9C73;
-    font-family: 'Syne', sans-serif; margin-bottom: 22px;
+    font-family: 'Montserrat', sans-serif; margin-bottom: 22px;
   }
   .cta-title {
-    font-family: 'Syne', sans-serif; font-size: clamp(28px, 4.5vw, 52px);
+    font-family: 'Montserrat', sans-serif; font-size: clamp(28px, 4.5vw, 52px);
     font-weight: 800; color: #fff; line-height: 1.1;
     letter-spacing: -0.02em; margin-bottom: 16px;
   }
@@ -432,7 +430,7 @@ const style = `
     background: #F26527; color: #fff; text-decoration: none;
     padding: 14px 28px; border-radius: 100px;
     font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; font-family: 'Syne', sans-serif;
+    text-transform: uppercase; font-family: 'Montserrat', sans-serif;
     transition: opacity 0.2s, transform 0.15s;
   }
   .btn-primary:hover { opacity: 0.88; transform: scale(1.02); }
@@ -442,7 +440,7 @@ const style = `
     border: 1px solid rgba(255,255,255,0.12);
     padding: 14px 28px; border-radius: 100px;
     font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; font-family: 'Syne', sans-serif;
+    text-transform: uppercase; font-family: 'Montserrat', sans-serif;
     transition: background 0.2s;
   }
   .btn-secondary:hover { background: rgba(255,255,255,0.12); }
@@ -459,7 +457,7 @@ function Community() {
           <div className="hero-grid" />
           <div className="hero-orb-1" />
           <div className="hero-orb-2" />
-          <div className="hero-inner">
+          <div className="hero-inner px-6 md:px-0">
             <div className="hero-pill">Community</div>
             <h1 className="hero-title">
               Where Founders<br /><em>Build Together</em>
@@ -486,7 +484,7 @@ function Community() {
 
         {/* ── BENEFITS ── */}
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">What You Get</p>
             <h2 className="sec-title">Everything In Your Corner</h2>
             <div className="benefits-grid">
@@ -511,7 +509,7 @@ function Community() {
 
         {/* ── GUIDELINES ── */}
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">Community Standards</p>
             <h2 className="sec-title">How We Show Up</h2>
             <div className="guide-grid">
@@ -539,7 +537,7 @@ function Community() {
 
         {/* ── HOW TO JOIN ── */}
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">Getting Started</p>
             <h2 className="sec-title">Four Steps In</h2>
             <div className="steps-row">
@@ -556,7 +554,7 @@ function Community() {
 
         {/* ── EVENTS ── */}
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">What's Coming</p>
             <h2 className="sec-title">Upcoming Events</h2>
             <div className="events-grid">

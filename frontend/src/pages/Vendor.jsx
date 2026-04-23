@@ -123,23 +123,22 @@ const notAccepted = [
 ]
 
 const style = `
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
   .partners-root * { box-sizing: border-box; }
-  .partners-root { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #0F0F0D; }
+  .partners-root { font-family: 'Montserrat', sans-serif; background: #FAFAF8; color: #0F0F0D; }
   .hero { position: relative; overflow: hidden; background: #0F0F0D; padding: 100px 0 80px; }
   .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(242,101,39,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.08) 1px, transparent 1px); background-size: 60px 60px; }
   .hero-orb-1 { position: absolute; top: -80px; right: 10%; width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, rgba(242,101,39,0.25) 0%, transparent 70%); }
   .hero-orb-2 { position: absolute; bottom: -60px; left: -80px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%); }
-  .hero-inner, .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
-  .hero-pill, .sec-label { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F26527; }
+  .hero-inner, .inner { max-width: 1200px; margin: 0 auto; position: relative; }
+  .hero-pill, .sec-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F26527; }
   .hero-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(242,101,39,0.4); background: rgba(242,101,39,0.1); padding: 6px 14px; border-radius: 999px; color: #FF9C73; }
   .hero-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #F26527; }
-  .hero-title, .sec-title { font-family: 'Syne', sans-serif; letter-spacing: -0.02em; line-height: 1.05; }
+  .hero-title, .sec-title { font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; line-height: 1.05; }
   .hero-title { margin-top: 20px; font-size: clamp(38px, 6vw, 74px); font-weight: 800; color: #fff; }
   .hero-title em { font-style: normal; background: linear-gradient(110deg, #F26527, #FFB382 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .hero-sub { margin-top: 18px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.58); max-width: 720px; }
   .hero-stats { display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
-  .hero-stat-val { font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 800; color: #fff; }
+  .hero-stat-val { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 800; color: #fff; }
   .hero-stat-val span { color: #F26527; }
   .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
   .section { padding: 80px 0; }
@@ -149,20 +148,20 @@ const style = `
   .card { background: #fff; border: 1px solid #EBEBEA; border-radius: 20px; padding: 26px; transition: .25s ease; }
   .card:hover { transform: translateY(-4px); box-shadow: 0 20px 55px rgba(0,0,0,0.08); }
   .card-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
-  .card-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+  .card-title { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 12px; }
   .card-list { list-style: none; display: flex; flex-direction: column; gap: 8px; color: #666; font-size: 13.5px; line-height: 1.5; }
   .card-list li { display: flex; gap: 8px; }
   .card-list li::before { content: '•'; color: #F26527; font-weight: 700; }
   .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 42px; }
   .step-card { background: #fff; border: 1px solid #EBEBEA; border-radius: 18px; padding: 22px; }
-  .step-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: #F26527; margin-bottom: 10px; }
+  .step-title { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #F26527; margin-bottom: 10px; }
   .step-list { list-style: none; display: flex; flex-direction: column; gap: 8px; color: #666; font-size: 13px; line-height: 1.5; }
   .step-list li::before { content: '→ '; color: #F26527; font-weight: 700; }
   .split-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 42px; }
   .split-card { border-radius: 20px; padding: 28px; border: 1px solid #EBEBEA; }
   .split-good { background: linear-gradient(160deg, #F7FAFF 0%, #EDF5FF 100%); }
   .split-bad { background: linear-gradient(160deg, #FFF8F3 0%, #FFF1E8 100%); }
-  .split-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: #F26527; margin-bottom: 14px; }
+  .split-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: #F26527; margin-bottom: 14px; }
   .split-list { list-style: none; display: flex; flex-direction: column; gap: 9px; font-size: 14px; color: #374151; line-height: 1.5; }
   .split-list li::before { content: '✓ '; color: #F26527; font-weight: 700; }
   .split-bad .split-list li::before { content: '✕ '; }
@@ -171,8 +170,8 @@ const style = `
   .cta-orb-l, .cta-orb-r { position: absolute; width: 280px; height: 280px; border-radius: 50%; background: rgba(242,101,39,0.25); filter: blur(60px); }
   .cta-orb-l { left: -120px; bottom: -120px; } .cta-orb-r { right: -120px; top: -120px; }
   .cta-inner { position: relative; text-align: center; padding: 56px 24px; color: #fff; }
-  .cta-badge { display: inline-flex; border: 1px solid rgba(242,101,39,0.35); background: rgba(242,101,39,0.12); color: #FF9C73; padding: 6px 14px; border-radius: 999px; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
-  .cta-title { margin-top: 16px; font-family: 'Syne', sans-serif; font-size: clamp(30px, 4.5vw, 56px); font-weight: 800; line-height: 1.05; }
+  .cta-badge { display: inline-flex; border: 1px solid rgba(242,101,39,0.35); background: rgba(242,101,39,0.12); color: #FF9C73; padding: 6px 14px; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+  .cta-title { margin-top: 16px; font-family: 'Montserrat', sans-serif; font-size: clamp(30px, 4.5vw, 56px); font-weight: 800; line-height: 1.05; }
   .cta-title em { font-style: normal; background: linear-gradient(110deg, #F26527, #FFB382 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .cta-desc { margin: 16px auto 0; max-width: 650px; color: rgba(255,255,255,0.72); font-size: 15px; line-height: 1.6; }
   .cta-btns { margin-top: 26px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
@@ -190,7 +189,7 @@ function Vendor() {
           <div className="hero-grid" />
           <div className="hero-orb-1" />
           <div className="hero-orb-2" />
-          <div className="hero-inner">
+          <div className="hero-inner px-6 md:px-0">
             <div className="hero-pill">Partners</div>
             <h1 className="hero-title">
               Join Our Partner Network<br /><em>And Grow Faster</em>
@@ -216,7 +215,7 @@ function Vendor() {
         </section>
 
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">Why Partner</p>
             <h2 className="sec-title">Built For Sustainable Growth</h2>
             <div className="cards-grid">
@@ -238,7 +237,7 @@ function Vendor() {
         </section>
 
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">How To Join</p>
             <h2 className="sec-title">Simple 4-Step Onboarding</h2>
             <div className="steps-grid">
@@ -257,7 +256,7 @@ function Vendor() {
         </section>
 
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">Requirements</p>
             <h2 className="sec-title">Who Can Join</h2>
             <div className="split-grid">

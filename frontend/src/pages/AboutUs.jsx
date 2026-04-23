@@ -65,23 +65,22 @@ const teamMembers = [
 ]
 
 const style = `
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
   .about-root * { box-sizing: border-box; }
-  .about-root { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #0F0F0D; }
+  .about-root { font-family: 'Montserrat', sans-serif; background: #FAFAF8; color: #0F0F0D; }
   .hero { position: relative; overflow: hidden; background: #0F0F0D; padding: 100px 0 80px; }
   .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(242,101,39,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.08) 1px, transparent 1px); background-size: 60px 60px; }
   .hero-orb-1 { position: absolute; top: -80px; right: 10%; width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, rgba(242,101,39,0.25) 0%, transparent 70%); }
   .hero-orb-2 { position: absolute; bottom: -60px; left: -80px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%); }
-  .hero-inner, .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
-  .hero-pill, .sec-label { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F26527; }
+  .hero-inner, .inner { max-width: 1200px; margin: 0 auto; position: relative; }
+  .hero-pill, .sec-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F26527; }
   .hero-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(242,101,39,0.4); background: rgba(242,101,39,0.1); padding: 6px 14px; border-radius: 999px; color: #FF9C73; }
   .hero-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #F26527; }
-  .hero-title, .sec-title { font-family: 'Syne', sans-serif; letter-spacing: -0.02em; line-height: 1.05; }
+  .hero-title, .sec-title { font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; line-height: 1.05; }
   .hero-title { margin-top: 20px; font-size: clamp(38px, 6vw, 74px); font-weight: 800; color: #fff; }
   .hero-title em { font-style: normal; background: linear-gradient(110deg, #F26527, #FFB382 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .hero-sub { margin-top: 18px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.58); max-width: 700px; }
   .hero-stats { display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
-  .hero-stat-val { font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 800; color: #fff; }
+  .hero-stat-val { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 800; color: #fff; }
   .hero-stat-val span { color: #F26527; }
   .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
   .section { padding: 80px 0; }
@@ -91,7 +90,7 @@ const style = `
   .card { background: #fff; border: 1px solid #EBEBEA; border-radius: 20px; padding: 26px; transition: .25s ease; }
   .card:hover { transform: translateY(-4px); box-shadow: 0 20px 55px rgba(0,0,0,0.08); }
   .card-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
-  .card-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+  .card-title { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 12px; }
   .card-list { list-style: none; display: flex; flex-direction: column; gap: 8px; color: #666; font-size: 13.5px; line-height: 1.5; }
   .card-list li { display: flex; gap: 8px; }
   .card-list li::before { content: '•'; color: #F26527; font-weight: 700; }
@@ -99,13 +98,13 @@ const style = `
   .split-card { border-radius: 20px; padding: 28px; border: 1px solid #EBEBEA; }
   .split-problem { background: linear-gradient(160deg, #FFF8F3 0%, #FFF1E8 100%); }
   .split-solution { background: linear-gradient(160deg, #F7FAFF 0%, #EDF5FF 100%); }
-  .split-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: #F26527; margin-bottom: 14px; }
+  .split-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: #F26527; margin-bottom: 14px; }
   .split-list { list-style: none; display: flex; flex-direction: column; gap: 9px; font-size: 14px; color: #374151; line-height: 1.5; }
   .split-list li::before { content: '→ '; color: #F26527; font-weight: 700; }
   .team-grid, .values-grid { display: grid; gap: 16px; margin-top: 30px; }
   .team-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
   .team-card { background: #fff; border: 1px solid #EBEBEA; border-radius: 20px; padding: 24px; }
-  .team-name { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; }
+  .team-name { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; }
   .team-role { margin-top: 6px; font-size: 13px; color: #F26527; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
   .team-desc { margin-top: 14px; color: #666; font-size: 14px; line-height: 1.6; }
   .values-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
@@ -116,8 +115,8 @@ const style = `
   .cta-orb-l, .cta-orb-r { position: absolute; width: 280px; height: 280px; border-radius: 50%; background: rgba(242,101,39,0.25); filter: blur(60px); }
   .cta-orb-l { left: -120px; bottom: -120px; } .cta-orb-r { right: -120px; top: -120px; }
   .cta-inner { position: relative; text-align: center; padding: 56px 24px; color: #fff; }
-  .cta-badge { display: inline-flex; border: 1px solid rgba(242,101,39,0.35); background: rgba(242,101,39,0.12); color: #FF9C73; padding: 6px 14px; border-radius: 999px; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
-  .cta-title { margin-top: 16px; font-family: 'Syne', sans-serif; font-size: clamp(30px, 4.5vw, 56px); font-weight: 800; line-height: 1.05; }
+  .cta-badge { display: inline-flex; border: 1px solid rgba(242,101,39,0.35); background: rgba(242,101,39,0.12); color: #FF9C73; padding: 6px 14px; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+  .cta-title { margin-top: 16px; font-family: 'Montserrat', sans-serif; font-size: clamp(30px, 4.5vw, 56px); font-weight: 800; line-height: 1.05; }
   .cta-title em { font-style: normal; background: linear-gradient(110deg, #F26527, #FFB382 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .cta-desc { margin: 16px auto 0; max-width: 650px; color: rgba(255,255,255,0.72); font-size: 15px; line-height: 1.6; }
   .cta-btns { margin-top: 26px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
@@ -135,7 +134,7 @@ function AboutUs() {
           <div className="hero-grid" />
           <div className="hero-orb-1" />
           <div className="hero-orb-2" />
-          <div className="hero-inner">
+          <div className="hero-inner px-6 md:px-0">
             <div className="hero-pill">About Us</div>
             <h1 className="hero-title">
               Built By Founders,<br /><em>For Founders</em>
@@ -161,7 +160,7 @@ function AboutUs() {
         </section>
 
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">Our Foundation</p>
             <h2 className="sec-title">Mission And Vision</h2>
             <div className="cards-grid">
@@ -183,7 +182,7 @@ function AboutUs() {
         </section>
 
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">Why We Built This</p>
             <h2 className="sec-title">Problem To Solution</h2>
             <div className="split-grid">
@@ -208,7 +207,7 @@ function AboutUs() {
         </section>
 
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">People Behind Meraaki</p>
             <h2 className="sec-title">The Team</h2>
             <div className="team-grid">
@@ -224,7 +223,7 @@ function AboutUs() {
         </section>
 
         <section className="section">
-          <div className="inner">
+          <div className="inner px-6 md:px-0">
             <p className="sec-label">How We Operate</p>
             <h2 className="sec-title">Our Values</h2>
             <div className="values-grid">
