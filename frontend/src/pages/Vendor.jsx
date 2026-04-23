@@ -67,6 +67,26 @@ const partnerBenefits = [
       'Grow together, sustainably',
     ],
   },
+  {
+    title: 'Pan India Visibility',
+    icon: '📍',
+    accent: '#F26527',
+    points: [
+      'Showcase your brand across  our platform, events, and founders network reaching entrepreneurs across India ',
+     
+     
+    ],
+  },
+  {
+    title: 'Partnership',
+    icon: '🤝',
+    accent: '#FF6B35',
+    points: [
+      'We believe in win-win partnerships where both founders and partners grow together',
+   
+      
+    ],
+  },
 ]
 
 const joinSteps = [
@@ -199,16 +219,16 @@ function Vendor() {
             </p>
             <div className="hero-stats">
               <div>
-                <div className="hero-stat-val">200<span>+</span></div>
-                <div className="hero-stat-label">Active Founders</div>
+                <div className="hero-stat-val">10<span>+</span></div>
+                <div className="hero-stat-label">Active  Partners</div>
               </div>
               <div>
-                <div className="hero-stat-val">80<span>+</span></div>
-                <div className="hero-stat-label">Verified Partners</div>
+                <div className="hero-stat-val">20<span>+</span></div>
+                <div className="hero-stat-label">Services</div>
               </div>
               <div>
-                <div className="hero-stat-val">24<span>h</span></div>
-                <div className="hero-stat-label">Response Expectation</div>
+                <div className="hero-stat-val">10<span>+</span></div>
+                <div className="hero-stat-label">Active Mentors</div>
               </div>
             </div>
           </div>

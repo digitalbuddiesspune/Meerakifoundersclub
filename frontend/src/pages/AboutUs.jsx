@@ -46,7 +46,7 @@ const values = [
   { text: 'Transparency: No hidden fees, no surprises, no corporate BS.', icon: '✦' },
   { text: 'Community Over Competition: Rising tides lift all boats.', icon: '✦' },
   { text: "Tier II/III Matters: Smaller cities deserve equal support.", icon: '✦' },
-  { text: 'Action Over Talk: We build, deliver, and execute.', icon: '✦' },
+ 
 ]
 
 const teamMembers = [
@@ -79,14 +79,15 @@ const style = `
   .hero-title { margin-top: 20px; font-size: clamp(38px, 6vw, 74px); font-weight: 800; color: #fff; }
   .hero-title em { font-style: normal; background: linear-gradient(110deg, #F26527, #FFB382 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .hero-sub { margin-top: 18px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.58); max-width: 700px; }
-  .hero-stats { display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
-  .hero-stat-val { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 800; color: #fff; }
+  .hero-stats { display: flex; gap: 18px; margin-top: 34px; flex-wrap: nowrap; }
+  .hero-stats > div { flex: 0 0 auto; }
+  .hero-stat-val { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 800; color: #fff; line-height: 1.05; }
   .hero-stat-val span { color: #F26527; }
-  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
+  .hero-stat-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; white-space: nowrap; }
   .section { padding: 80px 0; }
   .section + .section { border-top: 1px solid #EBEBEA; }
   .sec-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: #0F0F0D; margin-top: 10px; }
-  .cards-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin-top: 42px; }
+  .cards-grid { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(280px, 340px)); justify-content: center; margin-top: 42px; }
   .card { background: #fff; border: 1px solid #EBEBEA; border-radius: 20px; padding: 26px; transition: .25s ease; }
   .card:hover { transform: translateY(-4px); box-shadow: 0 20px 55px rgba(0,0,0,0.08); }
   .card-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
@@ -144,16 +145,24 @@ function AboutUs() {
             </p>
             <div className="hero-stats">
               <div>
-                <div className="hero-stat-val">15<span>+</span></div>
-                <div className="hero-stat-label">Years Experience</div>
+                <div className="hero-stat-val">500<span>+</span></div>
+                <div className="hero-stat-label">startup consulted</div>
               </div>
               <div>
-                <div className="hero-stat-val">60<span>+</span></div>
-                <div className="hero-stat-label">Markets Scaled</div>
+                <div className="hero-stat-val">20<span>+</span></div>
+                <div className="hero-stat-label">active members across India</div>
               </div>
               <div>
-                <div className="hero-stat-val">1<span>M</span></div>
-                <div className="hero-stat-label">Entrepreneur Vision</div>
+                <div className="hero-stat-val">10<span>+</span></div>
+                <div className="hero-stat-label">trusted partners onboarded</div>
+              </div>
+              <div>
+                <div className="hero-stat-val">10<span>+</span></div>
+                <div className="hero-stat-label">industry mentors onboarded</div>
+              </div>
+              <div>
+                <div className="hero-stat-val">50<span>+</span></div>
+                <div className="hero-stat-label">startups events conducted across India</div>
               </div>
             </div>
           </div>

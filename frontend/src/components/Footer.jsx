@@ -73,7 +73,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-slate-200 pt-6">
+        <div className="-mt-3 pt-0">
           <p className="text-sm text-slate-600">Follow us</p>
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <a

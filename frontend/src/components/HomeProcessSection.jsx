@@ -32,7 +32,7 @@ const PROCESS_STEPS = [
   },
   {
     title: 'COMPLETE',
-    description: 'Receive delivered and payment releases to partner.',
+    description: 'Services delivered and payment releases to partner.',
     userActions: [
       'WhatsApp updates',
       'Review work',
