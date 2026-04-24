@@ -17,6 +17,7 @@ const events = [
 function UserDashboard() {
   const { isAuthenticated, authUser, onOpenAuth } = useOutletContext()
   const navigate = useNavigate()
+  const hasActiveMembership = authUser?.status === 'active' && Boolean(authUser?.plan)
 
   if (!isAuthenticated) {
     return (
@@ -31,6 +32,34 @@ function UserDashboard() {
               className="rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-5 py-2.5 text-sm font-semibold text-white"
             >
               Login / Signup
+            </button>
+            <Link
+              to="/"
+              className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-sm font-semibold text-white"
+            >
+              Back to Home
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!hasActiveMembership) {
+    return (
+      <div className="min-h-screen bg-[#0B1D3A] px-4 py-10 text-[#F5F7FA]">
+        <div className="mx-auto max-w-xl rounded-3xl border border-white/10 bg-white/5 p-7 text-center">
+          <h1 className="text-2xl font-bold">Active membership required</h1>
+          <p className="mt-2 text-sm text-white/70">
+            Subscribe to a plan and complete payment to access your dashboard.
+          </p>
+          <div className="mt-6 flex justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => navigate('/memberships')}
+              className="rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-5 py-2.5 text-sm font-semibold text-white"
+            >
+              Choose Plan
             </button>
             <Link
               to="/"
@@ -89,7 +118,9 @@ function UserDashboard() {
             </div>
             <div>
               <p className="text-sm font-semibold">{authUser?.name || 'Rahul Sharma'}</p>
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#F0B429]">Premium Member</p>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#F0B429]">
+                {(authUser?.plan || 'Premium')} Member
+              </p>
             </div>
           </div>
         </div>
@@ -126,7 +157,7 @@ function UserDashboard() {
               {(authUser?.name || 'Rahul')} <span className="text-[#E8621A]">{(authUser?.name || 'Sharma').split(' ')[1] || ''}</span>
             </h2>
             <span className="mt-2 inline-flex rounded-full border border-[#F0B429]/30 bg-[#F0B429]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#F0B429]">
-              ★ Premium
+              ★ {authUser?.plan || 'Premium'}
             </span>
             <div className="mt-4 flex flex-wrap gap-6 text-xs text-white/60">
               <p><span className="block text-sm font-bold text-white">Apr 2025</span>Member Since</p>

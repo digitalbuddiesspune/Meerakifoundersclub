@@ -10,12 +10,12 @@ function Memberships() {
   const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_URL
 
-  const handleSubscribe = () => {
+  const handleSubscribe = (plan) => {
     if (!isAuthenticated) {
       onOpenAuth()
       return
     }
-    navigate('/checkout')
+    navigate('/checkout', { state: { plan } })
   }
 
   useEffect(() => {
@@ -92,7 +92,7 @@ function Memberships() {
 
                 <button
                   type="button"
-                  onClick={handleSubscribe}
+                  onClick={() => handleSubscribe(plan)}
                   className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#F26527] px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 hover:cursor-pointer"
                 >
                   Subscribe Plan

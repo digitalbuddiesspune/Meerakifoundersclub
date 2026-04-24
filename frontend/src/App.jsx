@@ -12,6 +12,14 @@ const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 const isValidPhone = (value) => /^[9876]\d{9}$/.test(value)
 const isValidName = (value) => value.trim().length >= 3
 const NETWORK_ERROR_MESSAGE = 'Cannot reach server. Please start backend on port 5000.'
+const normalizeUser = (user = {}) => ({
+  _id: user._id || '',
+  name: user.username || user.name || '',
+  email: user.email || '',
+  phone: user.phone || '',
+  plan: user.plan || '',
+  status: user.status || 'inactive',
+})
 
 function App() {
   const { pathname } = useLocation()
@@ -21,7 +29,7 @@ function App() {
     if (!savedUser) return null
 
     try {
-      return JSON.parse(savedUser)
+      return normalizeUser(JSON.parse(savedUser))
     } catch {
       localStorage.removeItem(AUTH_STORAGE_KEY)
       return null
@@ -48,10 +56,20 @@ function App() {
   }
 
   const persistAndLoginUser = (user) => {
-    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user))
-    setAuthUser(user)
+    const normalizedUser = normalizeUser(user)
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(normalizedUser))
+    setAuthUser(normalizedUser)
     setIsAuthenticated(true)
     closeAuthModal()
+  }
+
+  const updateAuthUser = (updates) => {
+    setAuthUser((prev) => {
+      if (!prev) return prev
+      const mergedUser = normalizeUser({ ...prev, ...updates })
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(mergedUser))
+      return mergedUser
+    })
   }
 
   const handleSignup = async (event) => {
@@ -92,12 +110,14 @@ function App() {
         return
       }
 
-      const createdUser = {
+      const createdUser = normalizeUser({
         _id: data.user?._id,
-        name: data.user?.username || name,
+        username: data.user?.username || name,
         email: data.user?.email || email,
         phone: data.user?.phone || phone,
-      }
+        plan: data.user?.plan,
+        status: data.user?.status,
+      })
       persistAndLoginUser(createdUser)
       setSignupForm({ name: '', email: '', phone: '' })
     } catch {
@@ -137,12 +157,14 @@ function App() {
         return
       }
 
-      const loggedInUser = {
+      const loggedInUser = normalizeUser({
         _id: data.user?._id,
-        name: data.user?.username || '',
+        username: data.user?.username || '',
         email: data.user?.email || '',
         phone: data.user?.phone || '',
-      }
+        plan: data.user?.plan,
+        status: data.user?.status,
+      })
       persistAndLoginUser(loggedInUser)
       setLoginForm({ identifier: '' })
     } catch {
@@ -161,6 +183,7 @@ function App() {
     authUser,
     onOpenAuth: openAuthModal,
     onLogout: handleLogout,
+    setAuthUser: updateAuthUser,
   }
 
   useEffect(() => {

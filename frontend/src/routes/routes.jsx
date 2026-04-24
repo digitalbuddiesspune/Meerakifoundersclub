@@ -4,6 +4,7 @@ import AboutUs from '../pages/AboutUs'
 import Community from '../pages/Community'
 import ContactUs from '../pages/ContactUs'
 import CookiePolicy from '../pages/CookiePolicy'
+import Checkout from '../pages/Checkout'
 import Home from '../pages/Home'
 import Memberships from '../pages/Memberships'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       <Route path="services/:slug" element={<ServiceDetails />} />
       <Route path="challenges-solutions" element={<ProblemsSolutions />} />
       <Route path="contact-us" element={<ContactUs />} />
+      <Route path="checkout" element={<Checkout />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="cookie-policy" element={<CookiePolicy />} />
