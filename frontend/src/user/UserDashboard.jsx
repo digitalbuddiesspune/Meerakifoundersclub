@@ -87,11 +87,11 @@ function UserDashboard() {
       ) : null}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-72 border-r border-white/10 bg-[#0B1D3A]/95 backdrop-blur-lg transition-transform duration-300 lg:static lg:min-h-screen lg:w-64 lg:shrink-0 ${
+        className={`fixed inset-y-0 left-0 z-40 w-72 border-r border-white/10 bg-[#0B1D3A]/95 backdrop-blur-lg transition-transform duration-300 lg:static lg:min-h-screen lg:w-[240px] lg:shrink-0 ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0`}
       >
-        <div className="px-6 pb-12 pt-8">
+        <div className="border-b border-white/10 px-6 pb-8 pt-7">
           <div className="mb-4 flex items-center justify-end lg:hidden">
             <button
               type="button"
@@ -102,27 +102,27 @@ function UserDashboard() {
               ✕
             </button>
           </div>
-          <p className="text-[30px] font-extrabold tracking-tight leading-none">
+          <p className="text-[20px] font-extrabold tracking-tight">
             Meraaki <span className="text-[#E8621A]">FC</span>
           </p>
-          <p className="mt-2 text-sm uppercase tracking-[0.18em] text-white/50">Founders Club</p>
+          <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/50">Founders Club</p>
         </div>
 
-        <div className="px-4 pb-4">
-          <p className="px-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/45">Main</p>
+        <div className="flex-1 px-4 pb-2 pt-5">
+          <p className="px-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/45">Main</p>
           <div className="mt-2 space-y-1">
-            <button type="button" className="flex w-full items-center gap-3 rounded-xl bg-[#E8621A]/12 px-3 py-3.5 text-left text-lg leading-7 font-semibold text-white">
+            <button type="button" className="flex w-full items-center gap-2 rounded-xl bg-[#E8621A]/12 px-3 py-2.5 text-left text-[13.5px] font-semibold text-white">
               <span>🏠</span> Dashboard
             </button>
-            <button type="button" className="flex w-full items-center gap-3 rounded-xl px-3 py-3.5 text-left text-lg leading-7 text-white/70 hover:bg-white/5">
+            <button type="button" className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-[13.5px] text-white/70 hover:bg-white/5">
               <span>⚡</span> My Services <span className="ml-auto rounded-full bg-[#E8621A] px-2 py-0.5 text-[10px] font-bold text-white">2</span>
             </button>
-            <button type="button" className="flex w-full items-center gap-3 rounded-xl px-3 py-3.5 text-left text-lg leading-7 text-white/70 hover:bg-white/5">
+            <button type="button" className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-[13.5px] text-white/70 hover:bg-white/5">
               <span>🗂️</span> My Documents
             </button>
           </div>
 
-          <p className="mt-5 px-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/45">Account</p>
+          <p className="mt-[18px] px-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/45">Account</p>
           <div className="mt-2 space-y-1">
             <button
               type="button"
@@ -130,7 +130,7 @@ function UserDashboard() {
                 navigate('/profile')
                 setIsMobileMenuOpen(false)
               }}
-              className="flex w-full items-center gap-3 rounded-xl px-3 py-3.5 text-left text-lg leading-7 text-white/70 hover:bg-white/5"
+              className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-[13.5px] text-white/70 hover:bg-white/5"
             >
               <span>⚙️</span> Settings
             </button>
@@ -140,15 +140,15 @@ function UserDashboard() {
                 navigate('/')
                 setIsMobileMenuOpen(false)
               }}
-              className="flex w-full items-center gap-3 rounded-xl px-3 py-3.5 text-left text-lg leading-7 text-white/70 hover:bg-white/5"
+              className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-[13.5px] text-white/70 hover:bg-white/5"
             >
               <span>↩</span> Back to Home
             </button>
           </div>
         </div>
 
-        <div className="mt-2 border-t border-white/10 p-4">
-          <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
+        <div className="border-t border-white/10 px-4 py-5">
+          <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#E8621A] to-[#c94f10] text-xs font-bold">
               {(authUser?.name || 'RS').slice(0, 2).toUpperCase()}
             </div>
