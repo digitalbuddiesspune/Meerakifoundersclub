@@ -10,6 +10,12 @@ function formatDate(iso) {
   }
 }
 
+function formatPlan(user = {}) {
+  const rawPlan = user.plan || user.membershipPlan || user.membership?.plan;
+  if (!rawPlan) return "—";
+  return String(rawPlan);
+}
+
 function UsersPage({ usersLoading, usersError, usersList, userMessage, onDeleteUser }) {
   const handleDeleteClick = async (user) => {
     const confirmed = window.confirm(`Delete "${user.username}" (${user.email})? This cannot be undone.`);
@@ -49,6 +55,7 @@ function UsersPage({ usersLoading, usersError, usersList, userMessage, onDeleteU
                   <th className="whitespace-nowrap px-5 py-3.5">Name</th>
                   <th className="whitespace-nowrap px-5 py-3.5">Email</th>
                   <th className="whitespace-nowrap px-5 py-3.5">Phone</th>
+                  <th className="whitespace-nowrap px-5 py-3.5">Plan</th>
                   <th className="whitespace-nowrap px-5 py-3.5">Joined</th>
                   <th className="whitespace-nowrap px-5 py-3.5 text-right">Actions</th>
                 </tr>
@@ -59,6 +66,11 @@ function UsersPage({ usersLoading, usersError, usersList, userMessage, onDeleteU
                     <td className="px-5 py-3.5 font-semibold">{user.username || "—"}</td>
                     <td className="max-w-[220px] truncate px-5 py-3.5 text-slate-300">{user.email || "—"}</td>
                     <td className="whitespace-nowrap px-5 py-3.5 text-slate-300">{user.phone || "—"}</td>
+                    <td className="whitespace-nowrap px-5 py-3.5">
+                      <span className="inline-flex rounded-full border border-[#F0B429]/30 bg-[#F0B429]/10 px-2.5 py-1 text-[11px] font-semibold text-[#F0B429]">
+                        {formatPlan(user)}
+                      </span>
+                    </td>
                     <td className="whitespace-nowrap px-5 py-3.5 text-slate-400">{formatDate(user.createdAt)}</td>
                     <td className="px-5 py-3.5 text-right">
                       <button
