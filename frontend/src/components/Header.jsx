@@ -185,10 +185,6 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
               </div>
             ) : null}
           </div>
-          <Link to="/challenges-solutions" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">
-            Challenges & Solutions
-          </Link>
-          <a href="#process" className="text-black transition hover:text-[#F26527]">How It Works</a>
           <Link to="/contact-us" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Contact</Link>
           {isAuthenticated && hasActivePlan ? (
             <Link
@@ -321,16 +317,6 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
                 </div>
               ) : null}
             </div>
-            <Link
-              to="/challenges-solutions"
-              onClick={handleMobileNavLinkClick}
-              className="rounded-lg px-3 py-2 transition hover:bg-slate-100"
-            >
-              Challenges & Solutions
-            </Link>
-            <a href="#process" onClick={closeMobileMenu} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">
-              How It Works
-            </a>
             <Link
               to="/contact-us"
               onClick={handleMobileNavLinkClick}

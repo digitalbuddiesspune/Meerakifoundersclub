@@ -215,7 +215,7 @@ function Vendor() {
   useEffect(() => {
     const fetchPartnerCategories = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/services`)
+        const response = await fetch(`${API_BASE_URL}/partner-list`)
         if (!response.ok) {
           setPartnerCategories([])
           return
@@ -228,7 +228,7 @@ function Vendor() {
         const uniqueCategories = Array.from(
           new Set(
             data
-              .map((service) => String(service?.category || '').trim())
+              .map((item) => String(item?.technology || '').trim())
               .filter(Boolean),
           ),
         )
