@@ -67,7 +67,7 @@ function HomeProcessSection() {
         return (
           <div
             key={`group-${groupIndex}`}
-            className={`${sectionClasses} sticky top-0 flex min-h-screen items-center justify-center px-4 py-14 md:px-8`}
+            className={`${sectionClasses} sticky top-0 flex min-h-screen px-4 py-14 md:items-center md:justify-center md:px-8`}
             style={{ zIndex: 10 + groupIndex }}
           >
             <div className="mx-auto w-full max-w-6xl text-center">
