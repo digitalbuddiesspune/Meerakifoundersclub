@@ -24,23 +24,23 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
 
   return (
     <section className="grid gap-5">
-      {serviceMessage ? <p className="rounded-2xl bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">{serviceMessage}</p> : null}
+      {serviceMessage ? <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{serviceMessage}</p> : null}
       {servicesLoading ? (
-        <p className="text-sm text-slate-500">Loading services...</p>
+        <p className="text-sm text-slate-300">Loading services...</p>
       ) : servicesError ? (
-        <p className="rounded-2xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">{servicesError}. Check backend server and API URL.</p>
+        <p className="rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-200">{servicesError}. Check backend server and API URL.</p>
       ) : servicesList.length === 0 ? (
-        <div className="rounded-3xl border border-slate-200/50 bg-white/90 p-7 shadow-[0_16px_34px_rgba(15,23,42,0.06)]">
-          <h4 className="m-0 text-lg font-semibold text-slate-900">No services found</h4>
-          <p className="mt-2 text-sm text-slate-500">Add your first premium service to populate this stylish portfolio section.</p>
+        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-7">
+          <h4 className="m-0 text-lg font-semibold text-white">No services found</h4>
+          <p className="mt-2 text-sm text-slate-300">Add your first premium service to populate this section.</p>
         </div>
       ) : filteredServices.length === 0 ? (
-        <div className="rounded-3xl border border-slate-200/50 bg-white/90 p-7 shadow-[0_16px_34px_rgba(15,23,42,0.06)]">
-          <h4 className="m-0 text-lg font-semibold text-slate-900">No matching services</h4>
-          <p className="mt-2 text-sm text-slate-500">No service name matches `{searchParams.get("q")}`.</p>
+        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-7">
+          <h4 className="m-0 text-lg font-semibold text-white">No matching services</h4>
+          <p className="mt-2 text-sm text-slate-300">No service name matches `{searchParams.get("q")}`.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-3xl border border-slate-200/60 bg-white shadow-[0_16px_34px_rgba(15,23,42,0.06)]">
+        <div className="overflow-x-auto rounded-3xl border border-[#F0B429]/30 bg-[#0d214d]">
           <table className="min-w-[720px] w-full table-fixed border-collapse text-left">
             <colgroup>
               <col className="w-[100px]" />
@@ -48,8 +48,8 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
               <col className="w-[140px]" />
               <col className="w-[220px]" />
             </colgroup>
-            <thead className="bg-slate-100">
-              <tr className="text-xs uppercase tracking-[0.08em] text-slate-600">
+            <thead className="bg-[#142e62]">
+              <tr className="text-xs uppercase tracking-[0.08em] text-[#F0B429]">
                 <th className="px-4 py-3 font-semibold">Image</th>
                 <th className="px-4 py-3 font-semibold">Name</th>
                 <th className="px-4 py-3 font-semibold text-center">Discount Price</th>
@@ -58,7 +58,7 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
             </thead>
             <tbody>
               {filteredServices.map((service) => (
-                <tr key={service._id} className="border-t border-slate-200 align-middle text-sm text-slate-700">
+                <tr key={service._id} className="border-t border-[#F0B429]/20 align-middle text-sm text-slate-200">
                   <td className="px-4 py-3">
                     {service.image ? (
                       <img src={service.image} alt={service.name} className="h-14 w-14 rounded-xl object-cover" />
@@ -67,30 +67,30 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <p className="truncate font-semibold text-slate-900" title={formatValue(service.name)}>
+                    <p className="truncate font-semibold text-white" title={formatValue(service.name)}>
                       {formatValue(service.name)}
                     </p>
                   </td>
-                  <td className="px-4 py-3 text-center font-semibold text-slate-800">{formatValue(service.discountedPrice)}</td>
+                  <td className="px-4 py-3 text-center font-semibold text-white">{formatValue(service.discountedPrice)}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-2 whitespace-nowrap">
                       <button
                         type="button"
-                        className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700"
+                        className="rounded-xl border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-100"
                         onClick={() => navigate(`/admin/services/details/${service._id}`, { state: { service } })}
                       >
                         Details
                       </button>
                       <button
                         type="button"
-                        className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700"
+                        className="rounded-xl border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-100"
                         onClick={() => navigate("/admin/services/add-service", { state: { service } })}
                       >
                         Edit
                       </button>
                       <button
                         type="button"
-                        className="rounded-xl bg-gradient-to-br from-red-500 to-red-600 px-3 py-1.5 text-xs font-semibold text-white"
+                        className="rounded-xl border border-red-300/30 bg-red-500/10 px-3 py-1.5 text-xs font-semibold text-red-200"
                         onClick={() => handleServiceDelete(service._id)}
                       >
                         Delete

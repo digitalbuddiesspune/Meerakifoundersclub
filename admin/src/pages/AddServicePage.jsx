@@ -1,3 +1,5 @@
+import { BriefcaseIcon, PlusSquareIcon } from "../components/AdminIcons";
+
 function AddServicePage({
   serviceForm,
   isSubmittingService,
@@ -16,16 +18,19 @@ function AddServicePage({
   uploadingImageFor,
 }) {
   const inputClassName =
-    "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-cyan-500 focus:bg-white focus:ring-4 focus:ring-cyan-100";
+    "w-full rounded-2xl border border-[#F0B429]/30 bg-white/5 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-400 focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20";
 
   return (
     <section className="grid gap-5">
       {isEditingService && editingProjectIndex !== null && (
-        <p className="rounded-2xl bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">Project {editingProjectIndex + 1} is ready for editing below.</p>
+        <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">Project {editingProjectIndex + 1} is ready for editing below.</p>
       )}
       <form className="grid gap-[18px]" onSubmit={onSubmit}>
-        <div className="rounded-3xl border border-slate-200/50 bg-white/95 p-[22px] shadow-[0_16px_34px_rgba(15,23,42,0.06)]">
-          <h4 className="mb-4 text-lg font-semibold text-slate-900">Service details</h4>
+        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
+          <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+            <BriefcaseIcon className="h-5 w-5 text-amber-300" />
+            Service details
+          </h4>
           <div className="grid gap-3.5 md:grid-cols-2">
             <input className={inputClassName} name="name" placeholder="Service name" value={serviceForm.name} onChange={onServiceChange} required />
             <input
@@ -37,26 +42,26 @@ function AddServicePage({
               required
             />
             <div className="grid gap-2">
-              <label className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">Service image</label>
+              <label className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-300">Service image</label>
               <input
                 className={inputClassName}
                 type="file"
                 accept="image/*"
                 onChange={onServiceImageUpload}
               />
-              {uploadingImageFor === "service-main" ? <p className="text-xs text-cyan-600">Uploading image...</p> : null}
-              {!serviceForm.image ? <p className="text-xs text-slate-500">Please upload a service image from gallery.</p> : null}
+              {uploadingImageFor === "service-main" ? <p className="text-xs text-cyan-300">Uploading image...</p> : null}
+              {!serviceForm.image ? <p className="text-xs text-slate-300">Please upload a service image from gallery.</p> : null}
               {serviceForm.image ? (
                 <div className="relative h-20 w-20">
                   <img
                     src={serviceForm.image}
                     alt="Service preview"
-                    className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
+                    className="h-20 w-20 rounded-xl border border-[#F0B429]/30 object-cover"
                   />
                   <button
                     type="button"
                     aria-label="Remove service image"
-                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-rose-200 bg-white text-sm font-bold leading-none text-rose-600 shadow-sm hover:bg-rose-50"
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-red-300/30 bg-[#0d214d] text-sm font-bold leading-none text-red-200 hover:bg-red-500/20"
                     onClick={onClearServiceImage}
                   >
                     ×
@@ -95,13 +100,16 @@ function AddServicePage({
           </div>
         </div>
 
-        <div className="rounded-3xl border border-slate-200/50 bg-white/95 p-[22px] shadow-[0_16px_34px_rgba(15,23,42,0.06)]">
-          <h3 className="mb-4 text-lg font-semibold text-slate-900">Projects</h3>
+        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+            <PlusSquareIcon className="h-5 w-5 text-emerald-300" />
+            Projects
+          </h3>
           {serviceForm.projects.map((project, index) => (
-            <div className="mb-4 grid gap-3 rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white p-4" key={index}>
+            <div className="mb-4 grid gap-3 rounded-3xl border border-[#F0B429]/30 bg-[#132c61] p-4" key={index}>
               <div className="flex items-center justify-between gap-3">
-                <h4 className="text-base font-semibold text-slate-900">Project {index + 1}</h4>
-                <button type="button" className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700" onClick={() => onRemoveProject(index)}>
+                <h4 className="text-base font-semibold text-white">Project {index + 1}</h4>
+                <button type="button" className="rounded-2xl border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100" onClick={() => onRemoveProject(index)}>
                   Remove
                 </button>
               </div>
@@ -119,19 +127,19 @@ function AddServicePage({
                 accept="image/*"
                 onChange={(event) => onProjectImageUpload(index, event)}
               />
-              {uploadingImageFor === `project-${index}` ? <p className="text-xs text-cyan-600">Uploading project image...</p> : null}
-              {!project.image ? <p className="text-xs text-slate-500">Please upload project image from gallery.</p> : null}
+              {uploadingImageFor === `project-${index}` ? <p className="text-xs text-cyan-300">Uploading project image...</p> : null}
+              {!project.image ? <p className="text-xs text-slate-300">Please upload project image from gallery.</p> : null}
               {project.image ? (
                 <div className="relative h-20 w-20">
                   <img
                     src={project.image}
                     alt={`Project ${index + 1} preview`}
-                    className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
+                    className="h-20 w-20 rounded-xl border border-[#F0B429]/30 object-cover"
                   />
                   <button
                     type="button"
                     aria-label={`Remove project ${index + 1} image`}
-                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-rose-200 bg-white text-sm font-bold leading-none text-rose-600 shadow-sm hover:bg-rose-50"
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-red-300/30 bg-[#0d214d] text-sm font-bold leading-none text-red-200 hover:bg-red-500/20"
                     onClick={() => onClearProjectImage(index)}
                   >
                     ×
@@ -190,20 +198,20 @@ function AddServicePage({
               />
             </div>
           ))}
-          <button type="button" className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700" onClick={onAddProject}>
+          <button type="button" className="rounded-2xl border border-white/20 bg-white/5 px-4 py-3 text-sm font-semibold text-slate-100" onClick={onAddProject}>
             + Add Another Project
           </button>
         </div>
 
         <button
           type="submit"
-          className="rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 px-5 py-3 text-sm font-bold text-white shadow-[0_16px_28px_rgba(22,199,209,0.24)] disabled:cursor-not-allowed disabled:opacity-65"
+          className="rounded-2xl bg-[#f4b741] px-5 py-3 text-sm font-bold text-[#122652] disabled:cursor-not-allowed disabled:opacity-65"
           disabled={isSubmittingService}
         >
           {isSubmittingService ? "Saving..." : isEditingService ? "Update Service" : "Add Service"}
         </button>
       </form>
-      {serviceMessage && <p className="rounded-2xl bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">{serviceMessage}</p>}
+      {serviceMessage && <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{serviceMessage}</p>}
     </section>
   );
 }

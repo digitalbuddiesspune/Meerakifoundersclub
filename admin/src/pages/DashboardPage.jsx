@@ -1,42 +1,45 @@
-import { BriefcaseIcon, FileTextIcon, UsersIcon } from "../components/AdminIcons";
-
 const DASH_META = [
   {
-    bg: "bg-gradient-to-br from-white to-[#dff9f7]",
-    icon: BriefcaseIcon,
+    icon: "⚡",
+    iconBg: "bg-amber-500/20",
   },
   {
-    bg: "bg-gradient-to-br from-white to-[#fff0de]",
-    icon: FileTextIcon,
+    icon: "📄",
+    iconBg: "bg-cyan-500/20",
   },
   {
-    bg: "bg-gradient-to-br from-white to-[#e8f4ff]",
-    icon: UsersIcon,
+    icon: "👥",
+    iconBg: "bg-violet-500/20",
   },
 ];
 
 function DashboardPage({ dashboardStats }) {
   const quickStats = (dashboardStats || []).map((stat, index) => {
     const meta = DASH_META[index] || DASH_META[0];
-    const Icon = meta.icon;
     return {
       label: stat?.label || "—",
       value: stat?.value ?? 0,
-      bg: meta.bg,
-      icon: <Icon className="h-6 w-6" />,
+      iconBg: meta.iconBg,
+      icon: meta.icon,
     };
   });
 
   return (
     <section className="grid gap-6">
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 xl:max-w-4xl">
+      <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-5">
+        <p className="m-0 text-xs font-bold uppercase tracking-[0.12em] text-[#F0B429]">Overview</p>
+        <h2 className="mt-2 text-2xl font-bold text-[#F0B429]">Admin Dashboard</h2>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 xl:max-w-3xl">
         {quickStats.map((item) => (
-          <div key={item.label} className={`grid justify-items-center rounded-3xl px-4 py-3 text-center text-slate-900 ${item.bg}`}>
-            <p className="m-0 text-sm font-semibold text-slate-700">{item.label}</p>
-            <div className="my-2.5 grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-cyan-400 to-sky-600 text-white shadow-[0_10px_20px_rgba(16,149,178,0.18)]">
-              {item.icon}
+          <div key={item.label} className="grid rounded-2xl border border-[#F0B429]/30 bg-[#132c61] px-3 py-2.5 text-left">
+            <div className={`mb-2 grid h-7 w-7 place-items-center rounded-xl ${item.iconBg}`}>
+              <span className="text-sm leading-none" aria-hidden="true">
+                {item.icon}
+              </span>
             </div>
-            <strong className="block text-2xl">{item.value}</strong>
+            <p className="m-0 text-xs font-medium text-[#F0B429]">{item.label}</p>
+            <strong className="mt-0.5 block text-xl text-white">{item.value}</strong>
           </div>
         ))}
       </div>

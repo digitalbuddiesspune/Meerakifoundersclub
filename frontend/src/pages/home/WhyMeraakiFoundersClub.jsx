@@ -30,7 +30,7 @@ const whyCards = [
     hoverGradient: "hover:from-[#FFF6E5] hover:to-[#FFE9BF]",
   },
   {
-    text: "Built for action, not admin",
+    text: "Dashboard Access",
     rotate: 8,
     icon: "✦",
     hoverGradient: "hover:from-[#FFEAF2] hover:to-[#FFD3E6]",

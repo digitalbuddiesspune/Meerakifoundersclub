@@ -51,53 +51,52 @@ function MyBlogsPage({ blogsLoading, blogsError, blogsList, blogMessage, onDelet
 
   return (
     <section className="grid gap-5">
-    
-      {blogMessage ? <p className="rounded-2xl bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">{blogMessage}</p> : null}
+      {blogMessage ? <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{blogMessage}</p> : null}
       {blogsLoading ? (
-        <p className="text-sm text-slate-500">Loading blogs...</p>
+        <p className="text-sm text-slate-300">Loading blogs...</p>
       ) : blogsError ? (
-        <p className="rounded-2xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">{blogsError}. Check backend server and API URL.</p>
+        <p className="rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-200">{blogsError}. Check backend server and API URL.</p>
       ) : blogsList.length === 0 ? (
-        <div className="rounded-3xl border border-slate-200/50 bg-white/90 p-7 shadow-[0_16px_34px_rgba(15,23,42,0.06)]">
-          <h4 className="m-0 text-lg font-semibold text-slate-900">No blogs found</h4>
-          <p className="mt-2 text-sm text-slate-500">Start adding blogs to fill this section with beautiful content cards.</p>
+        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-7">
+          <h4 className="m-0 text-lg font-semibold text-white">No blogs found</h4>
+          <p className="mt-2 text-sm text-slate-300">Start adding blogs to fill this section.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-[18px] border border-slate-200 bg-white">
+        <div className="overflow-x-auto rounded-[18px] border border-[#F0B429]/30 bg-[#0d214d]">
           <div className="min-w-[940px]">
-            <div className="grid grid-cols-[90px_minmax(220px,1.8fr)_minmax(110px,0.9fr)_minmax(140px,1fr)_220px] gap-3 border-b border-slate-200 bg-sky-50 px-3.5 py-3">
-              <span className="text-xs font-extrabold uppercase text-slate-600">Image</span>
-              <span className="text-xs font-extrabold uppercase text-slate-600">Title</span>
-              <span className="text-xs font-extrabold uppercase text-slate-600">Status</span>
-              <span className="text-xs font-extrabold uppercase text-slate-600">Author</span>
-              <span className="text-center text-xs font-extrabold uppercase text-slate-600">Actions</span>
+            <div className="grid grid-cols-[90px_minmax(220px,1.8fr)_minmax(110px,0.9fr)_minmax(140px,1fr)_220px] gap-3 border-b border-[#F0B429]/30 bg-[#142e62] px-3.5 py-3">
+              <span className="text-xs font-extrabold uppercase text-[#F0B429]">Image</span>
+              <span className="text-xs font-extrabold uppercase text-[#F0B429]">Title</span>
+              <span className="text-xs font-extrabold uppercase text-[#F0B429]">Status</span>
+              <span className="text-xs font-extrabold uppercase text-[#F0B429]">Author</span>
+              <span className="text-center text-xs font-extrabold uppercase text-[#F0B429]">Actions</span>
             </div>
 
             {blogsList.map((blog) => (
               <div
                 key={blog._id}
-                className="grid grid-cols-[90px_minmax(220px,1.8fr)_minmax(110px,0.9fr)_minmax(140px,1fr)_220px] gap-3 border-b border-slate-100 px-3.5 py-3 last:border-b-0"
+                className="grid grid-cols-[90px_minmax(220px,1.8fr)_minmax(110px,0.9fr)_minmax(140px,1fr)_220px] gap-3 border-b border-[#F0B429]/20 px-3.5 py-3 last:border-b-0"
               >
                 <div className="grid content-start">
                   {blog.featuredImage ? (
                     <img src={blog.featuredImage} alt={blog.title || "Blog image"} className="h-[72px] w-[72px] rounded-xl object-cover" />
                   ) : (
-                    <div className="flex h-[72px] w-[72px] items-center justify-center rounded-xl bg-slate-100 text-xs font-semibold text-slate-500">No image</div>
+                    <div className="flex h-[72px] w-[72px] items-center justify-center rounded-xl bg-white/10 text-xs font-semibold text-slate-300">No image</div>
                   )}
                 </div>
 
                 <div className="grid content-start gap-1">
-                  <strong className="line-clamp-2 text-[13px] text-slate-900">{blog.title || "Untitled blog"}</strong>
-                  <p className="line-clamp-2 text-xs text-slate-500">{blog.excerpt || "No excerpt available."}</p>
+                  <strong className="line-clamp-2 text-[13px] text-white">{blog.title || "Untitled blog"}</strong>
+                  <p className="line-clamp-2 text-xs text-slate-300">{blog.excerpt || "No excerpt available."}</p>
                 </div>
 
                 <div className="grid content-start">
-                  <span className={`inline-flex w-fit rounded-full px-2.5 py-1 text-xs font-bold ${blog.status === "published" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
+                  <span className={`inline-flex w-fit rounded-full px-2.5 py-1 text-xs font-bold ${blog.status === "published" ? "bg-emerald-500/20 text-emerald-200" : "bg-amber-500/20 text-amber-200"}`}>
                     {blog.status || "draft"}
                   </span>
                 </div>
 
-                <div className="grid content-start text-xs font-semibold text-slate-700">{blog.author?.name || "Admin"}</div>
+                <div className="grid content-start text-xs font-semibold text-slate-200">{blog.author?.name || "Admin"}</div>
 
                 <div className="flex items-center justify-center gap-2 whitespace-nowrap">
                   <button
@@ -105,7 +104,7 @@ function MyBlogsPage({ blogsLoading, blogsError, blogsList, blogMessage, onDelet
                     onClick={() => handleDetailBlog(blog)}
                     aria-label="View blog details"
                     title="View details"
-                    className="rounded-xl border border-slate-200 bg-white p-2 text-slate-700 hover:bg-slate-50"
+                    className="rounded-xl border border-cyan-300/30 bg-cyan-500/10 p-2 text-cyan-200 hover:bg-cyan-500/20"
                   >
                     <EyeIcon className="h-4 w-4" />
                   </button>
@@ -114,7 +113,7 @@ function MyBlogsPage({ blogsLoading, blogsError, blogsList, blogMessage, onDelet
                     onClick={() => handleEditBlog(blog)}
                     aria-label="Edit blog"
                     title="Edit"
-                    className="rounded-xl bg-cyan-600 p-2 text-white transition hover:bg-cyan-700"
+                    className="rounded-xl border border-violet-300/30 bg-violet-500/20 p-2 text-violet-100 transition hover:bg-violet-500/30"
                   >
                     <EditIcon className="h-4 w-4" />
                   </button>
@@ -123,7 +122,7 @@ function MyBlogsPage({ blogsLoading, blogsError, blogsList, blogMessage, onDelet
                     onClick={() => handleDeleteClick(blog)}
                     aria-label="Delete blog"
                     title="Delete"
-                    className="rounded-xl bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
+                    className="rounded-xl border border-red-300/30 bg-red-500/10 p-2 text-red-200 transition hover:bg-red-500/20"
                   >
                     <TrashIcon className="h-4 w-4" />
                   </button>
