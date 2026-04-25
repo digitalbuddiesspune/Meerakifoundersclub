@@ -4,6 +4,8 @@ import ContactForm from '../components/ContactForm'
 
 function ContactUs() {
   const [showSections, setShowSections] = useState(false)
+  const [services, setServices] = useState([])
+  const API_BASE_URL = import.meta.env.VITE_API_URL
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -12,6 +14,24 @@ function ContactUs() {
 
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/services`)
+        if (!response.ok) {
+          setServices([])
+          return
+        }
+        const data = await response.json()
+        setServices(Array.isArray(data) ? data : [])
+      } catch {
+        setServices([])
+      }
+    }
+
+    fetchServices()
+  }, [API_BASE_URL])
 
   return (
     <section className="min-h-[70vh] bg-white">
@@ -66,7 +86,7 @@ function ContactUs() {
               showSections ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
             }`}
           >
-            <ContactForm />
+            <ContactForm services={services} />
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const partnerBenefits = [
@@ -201,6 +202,74 @@ const style = `
 `
 
 function Vendor() {
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false)
+  const [partnerCategories, setPartnerCategories] = useState([])
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState('')
+  const API_BASE_URL = import.meta.env.VITE_API_URL
+  const WEB3FORMS_ACCESS_KEY = 'bf814e16-a693-44fe-b0c6-cd03128e40c7'
+  const categoryOptions = useMemo(() => {
+    return partnerCategories.filter((category) => typeof category === 'string' && category.trim().length > 0)
+  }, [partnerCategories])
+
+  useEffect(() => {
+    const fetchPartnerCategories = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/services`)
+        if (!response.ok) {
+          setPartnerCategories([])
+          return
+        }
+        const data = await response.json()
+        if (!Array.isArray(data)) {
+          setPartnerCategories([])
+          return
+        }
+        const uniqueCategories = Array.from(
+          new Set(
+            data
+              .map((service) => String(service?.category || '').trim())
+              .filter(Boolean),
+          ),
+        )
+        setPartnerCategories(uniqueCategories)
+      } catch {
+        setPartnerCategories([])
+      }
+    }
+
+    fetchPartnerCategories()
+  }, [API_BASE_URL])
+
+  const handlePartnerSubmit = async (event) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    setSubmitMessage('')
+
+    const formData = new FormData(event.target)
+    formData.append('access_key', WEB3FORMS_ACCESS_KEY)
+    formData.append('subject', 'New Partner Application - Meraaki Founders Club')
+    formData.append('from_name', 'MFC Partner Application Form')
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      })
+      const data = await response.json()
+      if (!data.success) {
+        setSubmitMessage('Unable to submit form right now. Please try again.')
+        return
+      }
+      setSubmitMessage('Application submitted successfully. We will contact you soon.')
+      event.target.reset()
+    } catch {
+      setSubmitMessage('Unable to submit form right now. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <>
       <style>{style}</style>
@@ -313,13 +382,111 @@ function Vendor() {
                 Apply today and join 80+ verified partners already serving Meraaki Founders Club&apos;s growing founder community.
               </p>
               <div className="cta-btns">
-                <Link to="/contact-us" className="btn-primary">Apply As Partner</Link>
+                <button type="button" className="btn-primary" onClick={() => setIsPartnerModalOpen(true)}>
+                  Apply As Partner
+                </button>
                 <Link to="/services" className="btn-secondary">View Opportunities</Link>
               </div>
             </div>
           </div>
         </section>
       </main>
+
+      {isPartnerModalOpen ? (
+        <div className="fixed inset-0 z-[240] flex items-center justify-center bg-black/55 px-4 py-8">
+          <div className="w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-5 shadow-2xl md:p-6">
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F26527]">Become A Partner</p>
+                <h3 className="mt-1 text-xl font-bold text-slate-900 md:text-2xl">Apply as a Partner</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsPartnerModalOpen(false)}
+                className="rounded-lg border border-slate-300 px-2.5 py-1.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+              >
+                Close
+              </button>
+            </div>
+
+            <form onSubmit={handlePartnerSubmit} className="space-y-3">
+              <div>
+                <label htmlFor="partnerName" className="mb-1 block text-sm font-medium text-slate-700">
+                  Name
+                </label>
+                <input
+                  id="partnerName"
+                  type="text"
+                  name="name"
+                  required
+                  className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 outline-none transition focus:border-[#F26527]"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="partnerContact" className="mb-1 block text-sm font-medium text-slate-700">
+                  Contact
+                </label>
+                <input
+                  id="partnerContact"
+                  type="tel"
+                  name="contact"
+                  required
+                  className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 outline-none transition focus:border-[#F26527]"
+                  placeholder="+91 98765 43210"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="partnerEmail" className="mb-1 block text-sm font-medium text-slate-700">
+                  E-mail id
+                </label>
+                <input
+                  id="partnerEmail"
+                  type="email"
+                  name="email"
+                  required
+                  className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 outline-none transition focus:border-[#F26527]"
+                  placeholder="name@example.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="partnerCategory" className="mb-1 block text-sm font-medium text-slate-700">
+                  Partner
+                </label>
+                <select
+                  id="partnerCategory"
+                  name="partner_category"
+                  required
+                  defaultValue=""
+                  className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 outline-none transition focus:border-[#F26527]"
+                >
+                  <option value="" disabled>
+                    Select partner category
+                  </option>
+                  {categoryOptions.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex items-center justify-center rounded-xl bg-[#F26527] px-6 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit'}
+              </button>
+
+              {submitMessage ? <p className="text-sm text-slate-700">{submitMessage}</p> : null}
+            </form>
+          </div>
+        </div>
+      ) : null}
     </>
   )
 }

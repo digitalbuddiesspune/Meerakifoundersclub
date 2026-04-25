@@ -20,6 +20,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
   const mobileMenuRef = useRef(null)
   const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_URL
+  const hasActivePlan = Boolean(authUser?.plan) && String(authUser?.status || '').toLowerCase() === 'active'
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -189,6 +190,15 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           </Link>
           <a href="#process" className="text-black transition hover:text-[#F26527]">How It Works</a>
           <Link to="/contact-us" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Contact</Link>
+          {isAuthenticated && hasActivePlan ? (
+            <Link
+              to="/user/dashboard"
+              onClick={scrollToTop}
+              className="rounded-full border border-[#F26527] bg-[#FFF3EE] px-3 py-1.5 text-[#F26527] transition hover:bg-[#F26527] hover:text-white"
+            >
+              Dashboard
+            </Link>
+          ) : null}
         </nav>
 
         <div className="hidden shrink-0 items-center gap-2.5 md:flex">
@@ -328,6 +338,15 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             >
               Contact
             </Link>
+            {isAuthenticated && hasActivePlan ? (
+              <Link
+                to="/user/dashboard"
+                onClick={handleMobileNavLinkClick}
+                className="rounded-lg border border-[#F26527] bg-[#FFF3EE] px-3 py-2 text-[#F26527] transition hover:bg-[#F26527] hover:text-white"
+              >
+                Dashboard
+              </Link>
+            ) : null}
             {!isAuthenticated ? (
               <button
                 type="button"

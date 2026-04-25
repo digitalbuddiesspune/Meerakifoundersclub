@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
-function ContactForm() {
+function ContactForm({ services = [] }) {
   const [result, setResult] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessToast, setShowSuccessToast] = useState(false)
+  const serviceOptions = useMemo(() => {
+    return services
+      .map((service) => service?.name)
+      .filter((name) => typeof name === 'string' && name.trim().length > 0)
+  }, [services])
 
   const onSubmit = async (event) => {
     event.preventDefault()
@@ -87,14 +92,22 @@ function ContactForm() {
           <label htmlFor="serviceNeed" className="mb-1 block text-sm font-medium text-slate-700">
             Service You Need
           </label>
-          <input
+          <select
             id="serviceNeed"
-            type="text"
             name="service"
             required
             className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-slate-900 outline-none transition focus:border-[#F26527]"
-            placeholder="Funding readiness / legal / strategy"
-          />
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select interested service
+            </option>
+            {serviceOptions.map((serviceName) => (
+              <option key={serviceName} value={serviceName}>
+                {serviceName}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
