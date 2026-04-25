@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import membershipRoutes from "./routes/membershipRoutes.js";
 import ourClientRoutes from "./routes/ourClientRoutes.js";
+import partnerListRoutes from "./routes/partnerListRoutes.js";
 import partnerRoutes from "./routes/partnerRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
@@ -24,6 +25,7 @@ app.use("/api/v1", blogRoutes);
 app.use("/api/v1", membershipRoutes);
 app.use("/api/v1", ourClientRoutes);
 app.use("/api/v1", partnerRoutes);
+app.use("/api/v1", partnerListRoutes);
 app.use("/api/v1", uploadRoutes);
 
 app.get("/", (req, res) => {
