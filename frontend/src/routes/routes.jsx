@@ -1,6 +1,8 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import App from '../App'
 import AboutUs from '../pages/AboutUs'
+import BlogDetail from '../pages/BlogDetail'
+import Blogs from '../pages/Blogs'
 import Community from '../pages/Community'
 import ContactUs from '../pages/ContactUs'
 import CookiePolicy from '../pages/CookiePolicy'
@@ -20,12 +22,15 @@ import UserUploadDocumentsPage from '../user/pages/UserUploadDocumentsPage'
 import UserServicesPage from '../user/pages/UserServicesPage'
 import Vendor from '../pages/Vendor'
 import WhyMeraakiFoundersClub from '../pages/home/WhyMeraakiFoundersClub'
+import ScrollToTop from '../components/scrolltotop';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Home />} />
       <Route path="about-us" element={<AboutUs />} />
+      <Route path="blogs" element={<Blogs />} />
+      <Route path="blogs/:slug" element={<BlogDetail />} />
       <Route path="community" element={<Community />} />
       <Route path="partners" element={<Vendor />} />
       <Route path="memberships" element={<Memberships />} />

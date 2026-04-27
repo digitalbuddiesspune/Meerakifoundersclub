@@ -52,6 +52,7 @@ function Footer() {
               <li><Link to="/" onClick={scrollToTop} className="transition hover:text-cyan-600">Home</Link></li>
               <li><Link to="/about-us" onClick={scrollToTop} className="transition hover:text-cyan-600">About Us</Link></li>
               <li><Link to="/community" onClick={scrollToTop} className="transition hover:text-cyan-600">Community</Link></li>
+              <li><Link to="/blogs" onClick={scrollToTop} className="transition hover:text-cyan-600">Blogs</Link></li>
               <li><Link to="/partners" onClick={scrollToTop} className="transition hover:text-cyan-600">Partners</Link></li>
               <li><Link to="/services" onClick={scrollToTop} className="transition hover:text-cyan-600">Services</Link></li>
               <li><Link to="/challenges-solutions" onClick={scrollToTop} className="transition hover:text-cyan-600">Challenges &amp; Solutions</Link></li>

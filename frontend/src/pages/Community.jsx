@@ -119,7 +119,7 @@ const steps = [
 ]
 
 const style = `
-  .com-root * { box-sizing: border-box; margin: 0; padding: 0; }
+  .com-root * { box-sizing: border-box; }
   .com-root { font-family: 'Montserrat', sans-serif; background: #FAFAF8; color: #0F0F0D; }
 
   /* ── Hero ── */
@@ -457,7 +457,7 @@ function Community() {
           <div className="hero-grid" />
           <div className="hero-orb-1" />
           <div className="hero-orb-2" />
-          <div className="hero-inner px-6 md:px-0">
+          <div className="hero-inner px-4 md:px-0">
             <div className="hero-pill">Community</div>
             <h1 className="hero-title">
               Where Founders<br /><em>Build Together</em>

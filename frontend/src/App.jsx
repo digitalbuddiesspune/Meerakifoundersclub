@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router-dom'
 import AuthModal from './components/AuthModal'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import ScrollToTop from './components/scrolltotop';
+
 
 const AUTH_STORAGE_KEY = 'mfc_auth_user'
 const API_BASE_URL = import.meta.env.VITE_API_URL
@@ -231,9 +233,9 @@ function App() {
       ) : null}
 
       <Outlet context={{ ...sharedAuthProps, isBlurred: showAuthModal }} />
-
+       
       {!isUserDashboardRoute ? <Footer /> : null}
-
+      
       <AuthModal
         visible={showAuthModal && !isAuthenticated}
         authTab={authTab}
