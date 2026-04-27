@@ -26,6 +26,10 @@ function AdminLayout() {
     setSearchParams(nextParams);
   };
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-[#070f26] text-slate-100 lg:grid lg:h-screen lg:grid-cols-[286px_1fr] lg:overflow-hidden">
       <aside className="flex flex-col gap-6 border-r border-[#F0B429]/30 bg-[#081a3f] px-[18px] py-7 lg:h-screen">
@@ -69,6 +73,22 @@ function AdminLayout() {
               👥
             </span>
             <span>Users</span>
+          </NavLink>
+
+          <NavLink
+            to="/admin/payments"
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition ${
+                isActive
+                  ? "border-white/20 bg-[#1c2f59] font-bold text-white"
+                  : "border-transparent bg-transparent font-semibold text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5"
+              }`
+            }
+          >
+            <span className="text-base" aria-hidden="true">
+              💳
+            </span>
+            <span>Payments</span>
           </NavLink>
 
           <button
@@ -132,6 +152,7 @@ function AdminLayout() {
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/blogs/my-blogs"
+                onClick={handleScrollToTop}
                 className={({ isActive }) =>
                   `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
                     isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
@@ -145,6 +166,7 @@ function AdminLayout() {
               </NavLink>
               <NavLink
                 to="/admin/blogs/add-blog"
+                onClick={handleScrollToTop}
                 className={({ isActive }) =>
                   `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
                     isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function renderValue(value) {
@@ -20,6 +20,14 @@ function BlogDetailsPage({ blogsList }) {
     }
     return blogsList.find((item) => item._id === blogId) || null;
   }, [blogId, blogsList, location.state]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const mainContainer = document.querySelector("main");
+    if (mainContainer && typeof mainContainer.scrollTo === "function") {
+      mainContainer.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [blogId]);
 
   if (!blog) {
     return (

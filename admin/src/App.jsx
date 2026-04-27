@@ -6,6 +6,7 @@ import BlogDetailsPage from "./pages/BlogDetailsPage";
 import DashboardPage from "./pages/DashboardPage";
 import MyBlogsPage from "./pages/MyBlogsPage";
 import MyServicesPage from "./pages/MyServicesPage";
+import PaymentsPage from "./pages/PaymentsPage";
 import ServiceDetailsPage from "./pages/ServiceDetailsPage";
 import UsersPage from "./pages/UsersPage";
 import useAdminPanel from "./hooks/useAdminPanel";
@@ -34,6 +35,16 @@ function App() {
               usersList={admin.usersList}
               userMessage={admin.userMessage}
               onDeleteUser={admin.handleDeleteUser}
+            />
+          }
+        />
+        <Route
+          path="payments"
+          element={
+            <PaymentsPage
+              usersLoading={admin.usersLoading}
+              usersError={admin.usersError}
+              usersList={admin.usersList}
             />
           }
         />
