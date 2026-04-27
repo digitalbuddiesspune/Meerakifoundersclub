@@ -118,12 +118,13 @@ function UserLayout() {
               <span>⚡</span> Services
              
             </NavLink>
-            <button
-              type="button"
-              className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-[13.5px] text-white/70 hover:bg-white/5"
+            <NavLink
+              to="/user/documents/upload"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={navClassName}
             >
               <span>🗂️</span> My Documents
-            </button>
+            </NavLink>
           </div>
 
           <p className="mt-[18px] px-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/45">
