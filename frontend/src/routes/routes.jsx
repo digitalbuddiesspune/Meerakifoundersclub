@@ -14,7 +14,9 @@ import RefundPolicy from '../pages/RefundPolicy'
 import ServiceDetails from '../pages/ServiceDetails'
 import Services from '../pages/Services'
 import TermsAndConditions from '../pages/TermsAndConditions'
-import UserDashboard from '../user/UserDashboard'
+import UserLayout from '../user/layouts/UserLayout'
+import UserDashboardPage from '../user/pages/UserDashboardPage'
+import UserServicesPage from '../user/pages/UserServicesPage'
 import Vendor from '../pages/Vendor'
 import WhyMeraakiFoundersClub from '../pages/home/WhyMeraakiFoundersClub'
 
@@ -36,7 +38,10 @@ const router = createBrowserRouter(
       <Route path="cookie-policy" element={<CookiePolicy />} />
       <Route path="refund-policy" element={<RefundPolicy />} />
       <Route path="profile" element={<Profile />} />
-      <Route path="user/dashboard" element={<UserDashboard />} />
+      <Route path="user" element={<UserLayout />}>
+        <Route path="dashboard" element={<UserDashboardPage />} />
+        <Route path="services" element={<UserServicesPage />} />
+      </Route>
       <Route path="why-meraaki-founders-club" element={<WhyMeraakiFoundersClub />} />
     </Route>,
   ),
