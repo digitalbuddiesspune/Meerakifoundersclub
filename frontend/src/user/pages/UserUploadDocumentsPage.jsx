@@ -88,7 +88,7 @@ function UserUploadDocumentsPage() {
         }
         return next
       })
-      setError(`"${selectedFile.name}" is larger than 2MB.`)
+      setError(`"${selectedFile.name}" is invalid. Each document must be less than 2MB.`)
       return
     }
 
@@ -224,7 +224,7 @@ function UserUploadDocumentsPage() {
     <>
       <div className="mb-7">
         <h1 className="text-2xl font-extrabold tracking-tight">Upload Documents</h1>
-        <p className="mt-1 text-sm text-white/65">Max file size: 2MB per file.</p>
+        <p className="mt-1 text-sm text-white/65">Each document must be less than 2MB.</p>
       </div>
 
       <section className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5">

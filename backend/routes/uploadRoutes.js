@@ -63,7 +63,7 @@ uploadRouter.post("/uploads/user-document", (req, res, next) => {
     }
 
     if (error instanceof multer.MulterError && error.code === "LIMIT_FILE_SIZE") {
-      res.status(400).json({ message: "Document too large. Max size is 2MB." });
+      res.status(400).json({ message: "Each document must be less than 2MB." });
       return;
     }
 
