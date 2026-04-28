@@ -8,9 +8,9 @@ import {
 function AdminLayout() {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [servicesOpen, setServicesOpen] = useState(true);
-  const [blogsOpen, setBlogsOpen] = useState(true);
-  const [partnersOpen, setPartnersOpen] = useState(true);
+  const [openMenu, setOpenMenu] = useState("");
+
+  const toggleMenu = (name) => setOpenMenu((prev) => (prev === name ? "" : name));
   const searchValue = searchParams.get("q") || "";
   const showSearch = location.pathname.includes("/services/my-services");
 
@@ -95,7 +95,7 @@ function AdminLayout() {
           <button
             type="button"
             className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
-            onClick={() => setServicesOpen((prev) => !prev)}
+            onClick={() => toggleMenu("services")}
           >
             <span className="flex items-center gap-3">
               <span className="text-base" aria-hidden="true">
@@ -103,9 +103,9 @@ function AdminLayout() {
               </span>
               <span>Services</span>
             </span>
-            <ChevronIcon open={servicesOpen} className="h-[18px] w-[18px] shrink-0" />
+            <ChevronIcon open={openMenu === "services"} className="h-[18px] w-[18px] shrink-0" />
           </button>
-          {servicesOpen && (
+          {openMenu === "services" && (
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/services/my-services"
@@ -139,7 +139,7 @@ function AdminLayout() {
           <button
             type="button"
             className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
-            onClick={() => setBlogsOpen((prev) => !prev)}
+            onClick={() => toggleMenu("blogs")}
           >
             <span className="flex items-center gap-3">
               <span className="text-base" aria-hidden="true">
@@ -147,9 +147,9 @@ function AdminLayout() {
               </span>
               <span>Blogs</span>
             </span>
-            <ChevronIcon open={blogsOpen} className="h-[18px] w-[18px] shrink-0" />
+            <ChevronIcon open={openMenu === "blogs"} className="h-[18px] w-[18px] shrink-0" />
           </button>
-          {blogsOpen && (
+          {openMenu === "blogs" && (
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/blogs/my-blogs"
@@ -199,15 +199,15 @@ function AdminLayout() {
           <button
             type="button"
             className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
-            onClick={() => setPartnersOpen((prev) => !prev)}
+            onClick={() => toggleMenu("partners")}
           >
             <span className="flex items-center gap-3">
               <span className="text-base" aria-hidden="true">🏢</span>
               <span>Partners</span>
             </span>
-            <ChevronIcon open={partnersOpen} className="h-[18px] w-[18px] shrink-0" />
+            <ChevronIcon open={openMenu === "partners"} className="h-[18px] w-[18px] shrink-0" />
           </button>
-          {partnersOpen && (
+          {openMenu === "partners" && (
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/partners"
@@ -230,6 +230,82 @@ function AdminLayout() {
               >
                 <span className="text-sm" aria-hidden="true">➕</span>
                 <span>Add Partner</span>
+              </NavLink>
+            </div>
+          )}
+
+          <button
+            type="button"
+            className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
+            onClick={() => toggleMenu("memberships")}
+          >
+            <span className="flex items-center gap-3">
+              <span className="text-base" aria-hidden="true">💎</span>
+              <span>Membership</span>
+            </span>
+            <ChevronIcon open={openMenu === "memberships"} className="h-[18px] w-[18px] shrink-0" />
+          </button>
+          {openMenu === "memberships" && (
+            <div className="mb-2 grid gap-2 pl-3">
+              <NavLink
+                to="/admin/memberships"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
+                  }`
+                }
+              >
+                <span className="text-sm" aria-hidden="true">⚡</span>
+                <span>Show Memberships</span>
+              </NavLink>
+              <NavLink
+                to="/admin/memberships/add-membership"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
+                  }`
+                }
+              >
+                <span className="text-sm" aria-hidden="true">➕</span>
+                <span>Add Membership</span>
+              </NavLink>
+            </div>
+          )}
+
+          <button
+            type="button"
+            className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
+            onClick={() => toggleMenu("documents")}
+          >
+            <span className="flex items-center gap-3">
+              <span className="text-base" aria-hidden="true">📄</span>
+              <span>Document</span>
+            </span>
+            <ChevronIcon open={openMenu === "documents"} className="h-[18px] w-[18px] shrink-0" />
+          </button>
+          {openMenu === "documents" && (
+            <div className="mb-2 grid gap-2 pl-3">
+              <NavLink
+                to="/admin/documents"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
+                  }`
+                }
+              >
+                <span className="text-sm" aria-hidden="true">⚡</span>
+                <span>Show Documents</span>
+              </NavLink>
+              <NavLink
+                to="/admin/documents/add-document"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
+                  }`
+                }
+              >
+                <span className="text-sm" aria-hidden="true">➕</span>
+                <span>Add Document</span>
               </NavLink>
             </div>
           )}

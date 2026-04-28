@@ -10,6 +10,11 @@ import PartnerListPage from "./pages/PartnerListPage";
 import PartnerPage from "./pages/PartnerPage";
 import PartnerDetailsPage from "./pages/PartnerDetailsPage";
 import AddPartnerPage from "./pages/AddPartnerPage";
+import MembershipsPage from "./pages/MembershipsPage";
+import AddMembershipPage from "./pages/AddMembershipPage";
+import DocumentTypesPage from "./pages/DocumentTypesPage";
+import DocumentTypeDetailsPage from "./pages/DocumentTypeDetailsPage";
+import AddDocumentTypePage from "./pages/AddDocumentTypePage";
 import PaymentsPage from "./pages/PaymentsPage";
 import ServiceDetailsPage from "./pages/ServiceDetailsPage";
 import UsersPage from "./pages/UsersPage";
@@ -175,6 +180,54 @@ function App() {
               onAddPartner={admin.handleAddPartnerRecord}
               onUpdatePartner={admin.handleUpdatePartnerRecord}
               partnerList={admin.partnerList}
+            />
+          }
+        />
+        <Route
+          path="memberships"
+          element={
+            <MembershipsPage
+              membershipsLoading={admin.membershipsLoading}
+              membershipsError={admin.membershipsError}
+              memberships={admin.memberships}
+              membershipMessage={admin.membershipMessage}
+              onDeleteMembership={admin.handleDeleteMembership}
+            />
+          }
+        />
+        <Route
+          path="memberships/add-membership"
+          element={
+            <AddMembershipPage
+              membershipMessage={admin.membershipMessage}
+              onAddMembership={admin.handleAddMembership}
+              onUpdateMembership={admin.handleUpdateMembership}
+            />
+          }
+        />
+        <Route
+          path="documents"
+          element={
+            <DocumentTypesPage
+              documentTypesLoading={admin.documentTypesLoading}
+              documentTypesError={admin.documentTypesError}
+              documentTypes={admin.documentTypes}
+              documentTypeMessage={admin.documentTypeMessage}
+              onDeleteDocumentType={admin.handleDeleteDocumentType}
+            />
+          }
+        />
+        <Route
+          path="documents/details/:docId"
+          element={<DocumentTypeDetailsPage />}
+        />
+        <Route
+          path="documents/add-document"
+          element={
+            <AddDocumentTypePage
+              documentTypeMessage={admin.documentTypeMessage}
+              onAddDocumentType={admin.handleAddDocumentType}
+              onUpdateDocumentType={admin.handleUpdateDocumentType}
             />
           }
         />

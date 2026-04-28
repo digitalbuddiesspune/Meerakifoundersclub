@@ -162,6 +162,14 @@ function useAdminPanel() {
   const [partnersLoading, setPartnersLoading] = useState(false);
   const [partnersError, setPartnersError] = useState("");
   const [partnersMessage, setPartnersMessage] = useState("");
+  const [memberships, setMemberships] = useState([]);
+  const [membershipsLoading, setMembershipsLoading] = useState(false);
+  const [membershipsError, setMembershipsError] = useState("");
+  const [membershipMessage, setMembershipMessage] = useState("");
+  const [documentTypes, setDocumentTypes] = useState([]);
+  const [documentTypesLoading, setDocumentTypesLoading] = useState(false);
+  const [documentTypesError, setDocumentTypesError] = useState("");
+  const [documentTypeMessage, setDocumentTypeMessage] = useState("");
 
   const dashboardStats = useMemo(
     () => [
@@ -356,12 +364,144 @@ function useAdminPanel() {
     }
   };
 
+  const fetchMemberships = async () => {
+    setMembershipsLoading(true);
+    setMembershipsError("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/memberships`);
+      if (!response.ok) throw new Error("Failed to fetch memberships");
+      const result = await response.json();
+      setMemberships(Array.isArray(result) ? result : []);
+    } catch (error) {
+      setMemberships([]);
+      setMembershipsError(error.message || "Cannot connect to memberships API");
+    } finally {
+      setMembershipsLoading(false);
+    }
+  };
+
+  const handleAddMembership = async (payload) => {
+    setMembershipMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/add-membership`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to add membership");
+      setMembershipMessage("Membership added successfully.");
+      fetchMemberships();
+    } catch (error) {
+      setMembershipMessage(error.message || "Failed to add membership");
+    }
+  };
+
+  const handleUpdateMembership = async (id, payload) => {
+    setMembershipMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/update-membership/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to update membership");
+      setMembershipMessage("Membership updated successfully.");
+      fetchMemberships();
+    } catch (error) {
+      setMembershipMessage(error.message || "Failed to update membership");
+    }
+  };
+
+  const handleDeleteMembership = async (id) => {
+    setMembershipMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/delete-membership/${id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to delete membership");
+      setMembershipMessage("Membership deleted successfully.");
+      fetchMemberships();
+    } catch (error) {
+      setMembershipMessage(error.message || "Failed to delete membership");
+    }
+  };
+
+  const fetchDocumentTypes = async () => {
+    setDocumentTypesLoading(true);
+    setDocumentTypesError("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/document-types`);
+      if (!response.ok) throw new Error("Failed to fetch document types");
+      const result = await response.json();
+      setDocumentTypes(Array.isArray(result) ? result : []);
+    } catch (error) {
+      setDocumentTypes([]);
+      setDocumentTypesError(error.message || "Cannot connect to document types API");
+    } finally {
+      setDocumentTypesLoading(false);
+    }
+  };
+
+  const handleAddDocumentType = async (payload) => {
+    setDocumentTypeMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/add-document-type`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to add document type");
+      setDocumentTypeMessage("Document type added successfully.");
+      fetchDocumentTypes();
+    } catch (error) {
+      setDocumentTypeMessage(error.message || "Failed to add document type");
+    }
+  };
+
+  const handleUpdateDocumentType = async (id, payload) => {
+    setDocumentTypeMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/update-document-type/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to update document type");
+      setDocumentTypeMessage("Document type updated successfully.");
+      fetchDocumentTypes();
+    } catch (error) {
+      setDocumentTypeMessage(error.message || "Failed to update document type");
+    }
+  };
+
+  const handleDeleteDocumentType = async (id) => {
+    setDocumentTypeMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/delete-document-type/${id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to delete document type");
+      setDocumentTypeMessage("Document type deleted successfully.");
+      fetchDocumentTypes();
+    } catch (error) {
+      setDocumentTypeMessage(error.message || "Failed to delete document type");
+    }
+  };
+
   useEffect(() => {
     fetchServices();
     fetchBlogs();
     fetchUsers();
     fetchPartnerList();
     fetchPartners();
+    fetchMemberships();
+    fetchDocumentTypes();
   }, []);
 
   useEffect(() => {
@@ -806,6 +946,20 @@ function useAdminPanel() {
     handleAddPartnerRecord,
     handleUpdatePartnerRecord,
     handleDeletePartnerRecord,
+    memberships,
+    membershipsLoading,
+    membershipsError,
+    membershipMessage,
+    handleAddMembership,
+    handleUpdateMembership,
+    handleDeleteMembership,
+    documentTypes,
+    documentTypesLoading,
+    documentTypesError,
+    documentTypeMessage,
+    handleAddDocumentType,
+    handleUpdateDocumentType,
+    handleDeleteDocumentType,
   };
 }
 
