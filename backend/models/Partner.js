@@ -76,11 +76,13 @@ const partnerSchema = new mongoose.Schema(
     logo: {
       type: String,
       trim: true,
+      required: false,
       default: "",
     },
     coverImage: {
       type: String,
       trim: true,
+      required: false,
       default: "",
     },
     description: {

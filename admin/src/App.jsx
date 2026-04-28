@@ -7,6 +7,9 @@ import DashboardPage from "./pages/DashboardPage";
 import MyBlogsPage from "./pages/MyBlogsPage";
 import MyServicesPage from "./pages/MyServicesPage";
 import PartnerListPage from "./pages/PartnerListPage";
+import PartnerPage from "./pages/PartnerPage";
+import PartnerDetailsPage from "./pages/PartnerDetailsPage";
+import AddPartnerPage from "./pages/AddPartnerPage";
 import PaymentsPage from "./pages/PaymentsPage";
 import ServiceDetailsPage from "./pages/ServiceDetailsPage";
 import UsersPage from "./pages/UsersPage";
@@ -142,6 +145,36 @@ function App() {
               onAddPartner={admin.handleAddPartner}
               onUpdatePartner={admin.handleUpdatePartner}
               onDeletePartner={admin.handleDeletePartner}
+            />
+          }
+        />
+        <Route
+          path="partners"
+          element={
+            <PartnerPage
+              partnersLoading={admin.partnersLoading}
+              partnersError={admin.partnersError}
+              partners={admin.partners}
+              partnersMessage={admin.partnersMessage}
+              onAddPartner={admin.handleAddPartnerRecord}
+              onUpdatePartner={admin.handleUpdatePartnerRecord}
+              onDeletePartner={admin.handleDeletePartnerRecord}
+              partnerList={admin.partnerList}
+            />
+          }
+        />
+        <Route
+          path="partners/details/:partnerId"
+          element={<PartnerDetailsPage />}
+        />
+        <Route
+          path="partners/add-partner"
+          element={
+            <AddPartnerPage
+              partnersMessage={admin.partnersMessage}
+              onAddPartner={admin.handleAddPartnerRecord}
+              onUpdatePartner={admin.handleUpdatePartnerRecord}
+              partnerList={admin.partnerList}
             />
           }
         />

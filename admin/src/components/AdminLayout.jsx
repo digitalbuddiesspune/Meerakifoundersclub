@@ -10,6 +10,7 @@ function AdminLayout() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [servicesOpen, setServicesOpen] = useState(true);
   const [blogsOpen, setBlogsOpen] = useState(true);
+  const [partnersOpen, setPartnersOpen] = useState(true);
   const searchValue = searchParams.get("q") || "";
   const showSearch = location.pathname.includes("/services/my-services");
 
@@ -191,11 +192,47 @@ function AdminLayout() {
               }`
             }
           >
-            <span className="text-base" aria-hidden="true">
-              🤝
-            </span>
+            <span className="text-base" aria-hidden="true">🤝</span>
             <span>Partner List</span>
           </NavLink>
+
+          <button
+            type="button"
+            className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
+            onClick={() => setPartnersOpen((prev) => !prev)}
+          >
+            <span className="flex items-center gap-3">
+              <span className="text-base" aria-hidden="true">🏢</span>
+              <span>Partners</span>
+            </span>
+            <ChevronIcon open={partnersOpen} className="h-[18px] w-[18px] shrink-0" />
+          </button>
+          {partnersOpen && (
+            <div className="mb-2 grid gap-2 pl-3">
+              <NavLink
+                to="/admin/partners"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
+                  }`
+                }
+              >
+                <span className="text-sm" aria-hidden="true">🏢</span>
+                <span>Partners</span>
+              </NavLink>
+              <NavLink
+                to="/admin/partners/add-partner"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
+                  }`
+                }
+              >
+                <span className="text-sm" aria-hidden="true">➕</span>
+                <span>Add Partner</span>
+              </NavLink>
+            </div>
+          )}
         </nav>
         <div className="mt-auto rounded-[20px] border border-[#F0B429]/30 bg-[#0f2554] p-[18px]">
           <p className="m-0 text-[11px] font-extrabold uppercase tracking-[0.12em] text-slate-300">Admin Workspace</p>
