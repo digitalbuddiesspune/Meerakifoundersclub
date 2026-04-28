@@ -6,6 +6,7 @@ import BlogDetailsPage from "./pages/BlogDetailsPage";
 import DashboardPage from "./pages/DashboardPage";
 import MyBlogsPage from "./pages/MyBlogsPage";
 import MyServicesPage from "./pages/MyServicesPage";
+import PartnerListPage from "./pages/PartnerListPage";
 import PaymentsPage from "./pages/PaymentsPage";
 import ServiceDetailsPage from "./pages/ServiceDetailsPage";
 import UsersPage from "./pages/UsersPage";
@@ -127,6 +128,20 @@ function App() {
               onClearAuthorAvatar={admin.clearBlogAuthorAvatar}
               onSubmit={admin.handleBlogSubmit}
               uploadingImageFor={admin.uploadingImageFor}
+            />
+          }
+        />
+        <Route
+          path="partner-list"
+          element={
+            <PartnerListPage
+              partnerListLoading={admin.partnerListLoading}
+              partnerListError={admin.partnerListError}
+              partnerList={admin.partnerList}
+              partnerListMessage={admin.partnerListMessage}
+              onAddPartner={admin.handleAddPartner}
+              onUpdatePartner={admin.handleUpdatePartner}
+              onDeletePartner={admin.handleDeletePartner}
             />
           }
         />

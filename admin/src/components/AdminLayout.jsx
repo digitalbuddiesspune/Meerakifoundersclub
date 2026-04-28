@@ -180,6 +180,22 @@ function AdminLayout() {
               </NavLink>
             </div>
           )}
+
+          <NavLink
+            to="/admin/partner-list"
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition ${
+                isActive
+                  ? "border-white/20 bg-[#1c2f59] font-bold text-white"
+                  : "border-transparent bg-transparent font-semibold text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5"
+              }`
+            }
+          >
+            <span className="text-base" aria-hidden="true">
+              🤝
+            </span>
+            <span>Partner List</span>
+          </NavLink>
         </nav>
         <div className="mt-auto rounded-[20px] border border-[#F0B429]/30 bg-[#0f2554] p-[18px]">
           <p className="m-0 text-[11px] font-extrabold uppercase tracking-[0.12em] text-slate-300">Admin Workspace</p>

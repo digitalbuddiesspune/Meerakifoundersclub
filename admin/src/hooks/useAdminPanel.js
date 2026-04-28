@@ -154,6 +154,10 @@ function useAdminPanel() {
   const [editingServiceId, setEditingServiceId] = useState("");
   const [editingBlogId, setEditingBlogId] = useState("");
   const [editingProjectIndex, setEditingProjectIndex] = useState(null);
+  const [partnerList, setPartnerList] = useState([]);
+  const [partnerListLoading, setPartnerListLoading] = useState(false);
+  const [partnerListError, setPartnerListError] = useState("");
+  const [partnerListMessage, setPartnerListMessage] = useState("");
 
   const dashboardStats = useMemo(
     () => [
@@ -218,10 +222,76 @@ function useAdminPanel() {
     }
   };
 
+  const fetchPartnerList = async () => {
+    setPartnerListLoading(true);
+    setPartnerListError("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/partner-list`);
+      if (!response.ok) throw new Error("Failed to fetch partner list");
+      const result = await response.json();
+      setPartnerList(Array.isArray(result) ? result : []);
+    } catch (error) {
+      setPartnerList([]);
+      setPartnerListError(error.message || "Cannot connect to partner list API");
+    } finally {
+      setPartnerListLoading(false);
+    }
+  };
+
+  const handleAddPartner = async (form) => {
+    setPartnerListMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/add-partner-list`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ technology: form.technology.trim(), order: Number(form.order) }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to add partner");
+      setPartnerListMessage("Partner added successfully.");
+      fetchPartnerList();
+    } catch (error) {
+      setPartnerListMessage(error.message || "Failed to add partner");
+    }
+  };
+
+  const handleUpdatePartner = async (id, form) => {
+    setPartnerListMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/update-partner-list/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ technology: form.technology.trim(), order: Number(form.order) }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to update partner");
+      setPartnerListMessage("Partner updated successfully.");
+      fetchPartnerList();
+    } catch (error) {
+      setPartnerListMessage(error.message || "Failed to update partner");
+    }
+  };
+
+  const handleDeletePartner = async (id) => {
+    setPartnerListMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/delete-partner-list/${id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Failed to delete partner");
+      setPartnerListMessage("Partner deleted successfully.");
+      fetchPartnerList();
+    } catch (error) {
+      setPartnerListMessage(error.message || "Failed to delete partner");
+    }
+  };
+
   useEffect(() => {
     fetchServices();
     fetchBlogs();
     fetchUsers();
+    fetchPartnerList();
   }, []);
 
   useEffect(() => {
@@ -652,6 +722,13 @@ function useAdminPanel() {
     clearBlogAuthorAvatar,
     handleServiceSubmit,
     handleBlogSubmit,
+    partnerList,
+    partnerListLoading,
+    partnerListError,
+    partnerListMessage,
+    handleAddPartner,
+    handleUpdatePartner,
+    handleDeletePartner,
   };
 }
 
