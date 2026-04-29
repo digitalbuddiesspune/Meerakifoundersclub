@@ -33,7 +33,7 @@ function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-[#070f26] text-slate-100 lg:grid lg:h-screen lg:grid-cols-[286px_1fr] lg:overflow-hidden">
-      <aside className="flex flex-col gap-6 border-r border-[#F0B429]/30 bg-[#081a3f] px-[18px] py-7 lg:h-screen">
+      <aside className="hide-scrollbar flex flex-col gap-6 overflow-y-auto border-r border-[#F0B429]/30 bg-[#081a3f] px-[18px] py-7 lg:h-screen">
         <div className="px-2">
           <p className="text-xl font-extrabold tracking-tight text-white">
             Meraaki <span className="text-[#E8621A]">FC</span>

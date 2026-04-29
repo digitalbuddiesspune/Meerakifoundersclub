@@ -77,23 +77,20 @@ function DocumentTypesPage({ documentTypesLoading, documentTypesError, documentT
             onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-2xl border border-[#F0B429]/30 bg-[#0d214d] px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-400 focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20"
           />
-          <div className="overflow-x-auto rounded-[18px] border border-[#F0B429]/30 bg-[#0d214d]">
+          <div className="overflow-hidden rounded-[18px] border border-[#F0B429]/30 bg-[#0d214d]">
             <div className="w-full">
-              <div className="grid grid-cols-[500px_280px_280px_280px_280px] border-b border-[#F0B429]/30 bg-[#142e62] px-3.5 py-3">
+              <div className="grid grid-cols-[minmax(0,2.2fr)_0.7fr_0.7fr_minmax(0,1.6fr)] gap-3 border-b border-[#F0B429]/30 bg-[#142e62] px-3.5 py-3">
                 <span className="text-xs font-extrabold uppercase text-[#F0B429]">Category Name</span>
                 <span className="text-left text-xs font-extrabold uppercase text-[#F0B429]">Order</span>
                 <span className="text-left text-xs font-extrabold uppercase text-[#F0B429]">Items</span>
-                <span className="text-left text-xs font-extrabold uppercase text-[#F0B429]">Active</span>
-<span className="text-center text-xs font-extrabold uppercase text-[#F0B429]">
-  Actions
-</span>              </div>
+                <span className="text-center text-xs font-extrabold uppercase text-[#F0B429]">Actions</span>
+              </div>
               {filtered.map((doc) => (
-                <div key={doc._id} className="grid grid-cols-[500px_280px_280px_280px_280px] border-b border-[#F0B429]/20 px-3.5 py-3 last:border-b-0">
+                <div key={doc._id} className="grid grid-cols-[minmax(0,2.2fr)_0.7fr_0.7fr_minmax(0,1.6fr)] gap-3 border-b border-[#F0B429]/20 px-3.5 py-3 last:border-b-0">
                   <span className="self-center text-sm font-medium text-slate-100">{doc.categoryName}</span>
                   <span className="self-center text-left text-sm text-slate-300">{doc.categoryOrder}</span>
                   <span className="self-center text-left text-sm text-slate-300">{Array.isArray(doc.documents) ? doc.documents.length : 0}</span>
-                  <span className="self-center text-left text-sm text-slate-300">{doc.isActive ? "Yes" : "No"}</span>
-<div className="flex items-center justify-center gap-3">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button type="button" aria-label={`View ${doc.categoryName}`} onClick={() => navigate(`/admin/documents/details/${doc._id}`, { state: { doc } })} className="flex items-center gap-2 rounded-xl border border-violet-400/30 bg-violet-500/10 px-2.5 py-1.5 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/20">
                       <EyeIcon className="h-3.5 w-3.5" />View
                     </button>
