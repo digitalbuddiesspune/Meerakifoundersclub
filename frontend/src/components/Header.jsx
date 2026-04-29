@@ -148,11 +148,9 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
         </Link>
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-5 text-sm font-medium md:flex">
-          <Link to="/" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Home</Link>
+         
           <Link to="/about-us" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">About Us</Link>
           <Link to="/community" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Community</Link>
-          <Link to="/partners" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Partners</Link>
-          <Link to="/memberships" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Memberships</Link>
           <div
             ref={servicesMenuRef}
             className="relative"
@@ -218,7 +216,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           )}
           {!isAuthenticated ? (
             <a
-              href="mailto:info@meraakifoundersclub.com"
+              href="/partners"
               className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-emerald-400 text-white"
             >
               Become a Partner
