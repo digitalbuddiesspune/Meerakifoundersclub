@@ -22,10 +22,21 @@ export const addDocumentType = async (req, res) => {
       });
     }
 
+    const normalizedDocs = Array.isArray(documents)
+      ? documents
+          .filter((d) => d && String(d.name || "").trim())
+          .map((d) => ({
+            name: String(d.name).trim(),
+            order: Number(d.order) || 0,
+            isActive: d.isActive !== false,
+            image: d.image ? String(d.image).trim() : "",
+          }))
+      : [];
+
     const documentType = await DocumentType.create({
       categoryName,
       categoryOrder,
-      documents: Array.isArray(documents) ? documents : [],
+      documents: normalizedDocs,
       isActive,
     });
     return res.status(201).json({
@@ -133,7 +144,7 @@ export const seedDefaultDocumentTypes = async (req, res) => {
 export const addDocumentItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, order, isActive = true } = req.body;
+    const { name, order, isActive = true, image = "" } = req.body;
 
     if (!name || order === undefined || order === null) {
       return res.status(400).json({ message: "name and order are required" });
@@ -151,7 +162,12 @@ export const addDocumentItem = async (req, res) => {
       return res.status(409).json({ message: "Document name already exists in this category" });
     }
 
-    documentType.documents.push({ name, order, isActive });
+    documentType.documents.push({
+      name,
+      order,
+      isActive,
+      image: image ? String(image).trim() : "",
+    });
     await documentType.save();
 
     return res.status(201).json({
@@ -169,7 +185,7 @@ export const addDocumentItem = async (req, res) => {
 export const updateDocumentItem = async (req, res) => {
   try {
     const { id, itemId } = req.params;
-    const { name, order, isActive } = req.body;
+    const { name, order, isActive, image } = req.body;
 
     const documentType = await DocumentType.findById(id);
     if (!documentType) {
@@ -184,6 +200,7 @@ export const updateDocumentItem = async (req, res) => {
     if (name !== undefined) targetItem.name = name;
     if (order !== undefined) targetItem.order = order;
     if (isActive !== undefined) targetItem.isActive = isActive;
+    if (image !== undefined) targetItem.image = String(image || "").trim();
 
     await documentType.save();
     return res.status(200).json({

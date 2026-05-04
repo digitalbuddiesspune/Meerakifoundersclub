@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL
 
@@ -12,6 +13,7 @@ const formatCurrency = (value) => {
 }
 
 function UserServicesPage() {
+  const navigate = useNavigate()
   const [services, setServices] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
@@ -58,10 +60,23 @@ function UserServicesPage() {
     )
   }, [services, searchQuery])
 
+  const openService = (service) => {
+    if (!service._id) return
+    navigate(`/user/services/${service._id}`, { state: { service } })
+  }
+
+  const handleRowKeyDown = (event, service) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      openService(service)
+    }
+  }
+
   return (
     <>
       <div className="mb-7">
         <h1 className="text-2xl font-extrabold tracking-tight">Services</h1>
+        <p className="mt-1 text-sm text-white/55">Select a service to open its full form and document checklist.</p>
       </div>
 
       <section className="mb-5 rounded-2xl border border-white/10 bg-white/5 p-4">
@@ -104,7 +119,14 @@ function UserServicesPage() {
               </thead>
               <tbody>
                 {filteredServices.map((service) => (
-                  <tr key={service._id || service.name} className="border-t border-white/10 align-top">
+                  <tr
+                    key={service._id || service.name}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => openService(service)}
+                    onKeyDown={(e) => handleRowKeyDown(e, service)}
+                    className="cursor-pointer border-t border-white/10 align-top transition-colors hover:bg-[#E8621A]/10 focus:bg-[#E8621A]/15 focus:outline-none"
+                  >
                     <td className="px-4 py-3">
                       <img
                         src={service.image}

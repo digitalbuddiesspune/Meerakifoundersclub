@@ -14,6 +14,17 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
   const searchQuery = (searchParams.get("q") || "").trim().toLowerCase();
   const filteredServices = servicesList.filter((service) => service.name?.toLowerCase().includes(searchQuery));
 
+  const goToDetails = (service) => {
+    navigate(`/admin/services/details/${service._id}`, { state: { service } });
+  };
+
+  const handleRowKeyDown = (event, service) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      goToDetails(service);
+    }
+  };
+
   const handleServiceDelete = async (serviceId) => {
     if (!window.confirm("Delete this service?")) {
       return;
@@ -58,7 +69,14 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
             </thead>
             <tbody>
               {filteredServices.map((service) => (
-                <tr key={service._id} className="border-t border-[#F0B429]/20 align-middle text-sm text-slate-200">
+                <tr
+                  key={service._id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => goToDetails(service)}
+                  onKeyDown={(event) => handleRowKeyDown(event, service)}
+                  className="cursor-pointer border-t border-[#F0B429]/20 align-middle text-sm text-slate-200 transition-colors hover:bg-[#142e62]/80 focus:bg-[#142e62]/80 focus:outline-none"
+                >
                   <td className="px-4 py-3">
                     {service.image ? (
                       <img src={service.image} alt={service.name} className="h-14 w-14 rounded-xl object-cover" />
@@ -72,15 +90,8 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
                     </p>
                   </td>
                   <td className="px-4 py-3 text-center font-semibold text-white">{formatValue(service.discountedPrice)}</td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3" onClick={(event) => event.stopPropagation()} onKeyDown={(event) => event.stopPropagation()}>
                     <div className="flex items-center justify-end gap-2 whitespace-nowrap">
-                      <button
-                        type="button"
-                        className="rounded-xl border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-100"
-                        onClick={() => navigate(`/admin/services/details/${service._id}`, { state: { service } })}
-                      >
-                        Details
-                      </button>
                       <button
                         type="button"
                         className="rounded-xl border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-100"

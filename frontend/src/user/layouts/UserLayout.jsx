@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import { Link, NavLink, Outlet, useNavigate, useOutletContext } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation, useNavigate, useOutletContext } from 'react-router-dom'
 
 function UserLayout() {
   const parentContext = useOutletContext()
   const { isAuthenticated, authUser, onOpenAuth } = parentContext
   const navigate = useNavigate()
+  const location = useLocation()
+  const isServicesSection =
+    location.pathname === '/user/services' || location.pathname.startsWith('/user/services/')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const hasActiveMembership = authUser?.status === 'active' && Boolean(authUser?.plan)
 
@@ -62,9 +65,9 @@ function UserLayout() {
     )
   }
 
-  const navClassName = ({ isActive }) =>
+  const navClassName = (isActive) =>
     `flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-[13.5px] transition ${
-      isActive ? 'bg-[#E8621A]/12 font-semibold text-white' : 'text-white/70 hover:bg-white/5'
+      isActive ? 'bg-[#E8621A]/12 font-semibold text-white ring-1 ring-[#E8621A]/25' : 'text-white/70 hover:bg-white/5'
     }`
 
   return (
@@ -106,22 +109,21 @@ function UserLayout() {
             <NavLink
               to="/user/dashboard"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={navClassName}
+              className={({ isActive }) => navClassName(isActive)}
             >
               <span>🏠</span> Dashboard
             </NavLink>
             <NavLink
               to="/user/services"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={navClassName}
+              className={() => navClassName(isServicesSection)}
             >
               <span>⚡</span> Services
-             
             </NavLink>
             <NavLink
               to="/user/documents/upload"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={navClassName}
+              className={({ isActive }) => navClassName(isActive)}
             >
               <span>🗂️</span> My Documents
             </NavLink>

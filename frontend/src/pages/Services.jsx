@@ -204,7 +204,7 @@ function Services() {
     section?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const servicesToRender = services.slice(0, 9)
+  const servicesToRender = useMemo(() => services.slice(0, 9), [services])
 
   return (
     <>

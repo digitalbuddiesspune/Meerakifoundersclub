@@ -19,6 +19,7 @@ import TermsAndConditions from '../pages/TermsAndConditions'
 import UserLayout from '../user/layouts/UserLayout'
 import UserDashboardPage from '../user/pages/UserDashboardPage'
 import UserUploadDocumentsPage from '../user/pages/UserUploadDocumentsPage'
+import UserServiceFormPage from '../user/pages/UserServiceFormPage'
 import UserServicesPage from '../user/pages/UserServicesPage'
 import Vendor from '../pages/Vendor'
 import WhyMeraakiFoundersClub from '../pages/home/WhyMeraakiFoundersClub'
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
       <Route path="user" element={<UserLayout />}>
         <Route path="dashboard" element={<UserDashboardPage />} />
         <Route path="services" element={<UserServicesPage />} />
+        <Route path="services/:serviceId" element={<UserServiceFormPage />} />
         <Route path="documents/upload" element={<UserUploadDocumentsPage />} />
       </Route>
       <Route path="why-meraaki-founders-club" element={<WhyMeraakiFoundersClub />} />

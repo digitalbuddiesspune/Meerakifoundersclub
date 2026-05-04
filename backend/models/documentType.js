@@ -76,6 +76,11 @@ const documentItemSchema = new mongoose.Schema(
       min: 0,
       default: 0,
     },
+    image: {
+      type: String,
+      trim: true,
+      default: "",
+    },
     isActive: {
       type: Boolean,
       default: true,

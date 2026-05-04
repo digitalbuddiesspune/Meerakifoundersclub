@@ -75,7 +75,15 @@ function App() {
             <ServiceDetailsPage
               servicesList={admin.servicesList}
               serviceMessage={admin.serviceMessage}
-              onDeleteProject={admin.handleDeleteProject}
+              documentTypes={admin.documentTypes}
+              documentTypeMessage={admin.documentTypeMessage}
+              serviceDetailsMessage={admin.serviceDetailsMessage}
+              setServiceDetailsMessage={admin.setServiceDetailsMessage}
+              onLoadServiceDetails={admin.loadServiceDetails}
+              onSaveServiceDetails={admin.saveServiceDetails}
+              onDeleteServiceDetailsConfig={admin.deleteServiceDetailsConfig}
+              onAddDocumentType={admin.handleAddDocumentType}
+              uploadAdminImage={admin.uploadAdminImage}
             />
           }
         />
@@ -228,6 +236,7 @@ function App() {
               documentTypeMessage={admin.documentTypeMessage}
               onAddDocumentType={admin.handleAddDocumentType}
               onUpdateDocumentType={admin.handleUpdateDocumentType}
+              uploadAdminImage={admin.uploadAdminImage}
             />
           }
         />

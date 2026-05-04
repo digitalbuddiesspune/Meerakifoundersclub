@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const initialItem = { name: "", order: "", isActive: true };
+const initialItem = { name: "", order: "", isActive: true, image: "" };
 const initialForm = { categoryName: "", categoryOrder: "", isActive: true, documents: [] };
 
 const inputCls = "w-full rounded-2xl border border-[#F0B429]/30 bg-white/5 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-400 focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20";
 
-function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateDocumentType }) {
+function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateDocumentType, uploadAdminImage }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState(initialForm);
   const [editingId, setEditingId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadingItemIndex, setUploadingItemIndex] = useState(null);
+  const [itemUploadError, setItemUploadError] = useState("");
 
   useEffect(() => {
     const d = location.state?.doc;
@@ -22,7 +24,12 @@ function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateD
         categoryOrder: d.categoryOrder ?? "",
         isActive: d.isActive !== undefined ? d.isActive : true,
         documents: Array.isArray(d.documents)
-          ? d.documents.map((item) => ({ name: item.name || "", order: item.order ?? "", isActive: item.isActive !== undefined ? item.isActive : true }))
+          ? d.documents.map((item) => ({
+              name: item.name || "",
+              order: item.order ?? "",
+              isActive: item.isActive !== undefined ? item.isActive : true,
+              image: item.image || "",
+            }))
           : [],
       });
     } else {
@@ -53,7 +60,12 @@ function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateD
       isActive: form.isActive,
       documents: form.documents
         .filter((d) => d.name.trim())
-        .map((d) => ({ name: d.name.trim(), order: Number(d.order) || 0, isActive: d.isActive })),
+        .map((d) => ({
+          name: d.name.trim(),
+          order: Number(d.order) || 0,
+          isActive: d.isActive,
+          image: String(d.image || "").trim(),
+        })),
     };
     if (editingId) {
       await onUpdateDocumentType(editingId, payload);
@@ -80,6 +92,9 @@ function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateD
       {documentTypeMessage ? (
         <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{documentTypeMessage}</p>
       ) : null}
+      {itemUploadError ? (
+        <p className="rounded-2xl border border-amber-400/30 bg-amber-500/10 px-4 py-3 text-sm font-semibold text-amber-100">{itemUploadError}</p>
+      ) : null}
 
       <form className="grid gap-5" onSubmit={handleSubmit}>
         <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
@@ -105,6 +120,39 @@ function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateD
                 <div className="grid gap-2.5 md:grid-cols-2">
                   <input className={inputCls} placeholder="Item name *" value={item.name} onChange={(e) => updateItem(i, "name", e.target.value)} />
                   <input className={inputCls} type="number" min="0" placeholder="Order" value={item.order} onChange={(e) => updateItem(i, "order", e.target.value)} />
+                </div>
+                <input
+                  className={`${inputCls} mt-2`}
+                  placeholder="Image URL (optional)"
+                  value={item.image || ""}
+                  onChange={(e) => updateItem(i, "image", e.target.value)}
+                />
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <label className="text-xs text-slate-400">
+                    <span className="mr-2 font-semibold text-slate-300">Upload</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      disabled={uploadingItemIndex === i || !uploadAdminImage}
+                      className="max-w-[220px] text-xs file:mr-2 file:rounded-lg file:border-0 file:bg-white/10 file:px-2 file:py-1"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        e.target.value = "";
+                        if (!file || !uploadAdminImage) return;
+                        setItemUploadError("");
+                        setUploadingItemIndex(i);
+                        try {
+                          const url = await uploadAdminImage(file, "documents/types");
+                          if (url) updateItem(i, "image", url);
+                        } catch (err) {
+                          setItemUploadError(err.message || "Image upload failed.");
+                        } finally {
+                          setUploadingItemIndex(null);
+                        }
+                      }}
+                    />
+                  </label>
+                  {uploadingItemIndex === i ? <span className="text-xs text-slate-500">Uploading…</span> : null}
                 </div>
                 <div className="mt-2 flex items-center justify-between">
                   <label className="flex items-center gap-2 text-sm text-slate-300">

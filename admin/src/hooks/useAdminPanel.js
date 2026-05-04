@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -170,6 +170,7 @@ function useAdminPanel() {
   const [documentTypesLoading, setDocumentTypesLoading] = useState(false);
   const [documentTypesError, setDocumentTypesError] = useState("");
   const [documentTypeMessage, setDocumentTypeMessage] = useState("");
+  const [serviceDetailsMessage, setServiceDetailsMessage] = useState("");
 
   const dashboardStats = useMemo(
     () => [
@@ -457,8 +458,10 @@ function useAdminPanel() {
       if (!response.ok) throw new Error(result.message || "Failed to add document type");
       setDocumentTypeMessage("Document type added successfully.");
       fetchDocumentTypes();
+      return true;
     } catch (error) {
       setDocumentTypeMessage(error.message || "Failed to add document type");
+      return false;
     }
   };
 
@@ -493,6 +496,52 @@ function useAdminPanel() {
       setDocumentTypeMessage(error.message || "Failed to delete document type");
     }
   };
+
+  const loadServiceDetails = useCallback(async (serviceId) => {
+    const response = await fetch(`${API_BASE_URL}/service-details/service/${serviceId}`);
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to load service form configuration");
+    }
+    return result;
+  }, []);
+
+  const saveServiceDetails = useCallback(async (serviceId, { formFields, linkedDocuments }) => {
+    setServiceDetailsMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/service-details/service/${serviceId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formFields, linkedDocuments }),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to save service form configuration");
+      }
+      setServiceDetailsMessage("Service form configuration saved.");
+      return result;
+    } catch (error) {
+      setServiceDetailsMessage(error.message || "Failed to save service form configuration");
+      throw error;
+    }
+  }, []);
+
+  const deleteServiceDetailsConfig = useCallback(async (serviceId) => {
+    setServiceDetailsMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/service-details/service/${serviceId}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to delete service form configuration");
+      }
+      setServiceDetailsMessage("Service form configuration removed.");
+    } catch (error) {
+      setServiceDetailsMessage(error.message || "Failed to delete service form configuration");
+      throw error;
+    }
+  }, []);
 
   useEffect(() => {
     fetchServices();
@@ -606,6 +655,8 @@ function useAdminPanel() {
 
     return result.url;
   };
+
+  const uploadAdminImage = (file, folder) => uploadImageToCloudinary(file, folder);
 
   const handleServiceImageUpload = async (event) => {
     const file = event.target.files?.[0];
@@ -960,6 +1011,12 @@ function useAdminPanel() {
     handleAddDocumentType,
     handleUpdateDocumentType,
     handleDeleteDocumentType,
+    uploadAdminImage,
+    serviceDetailsMessage,
+    setServiceDetailsMessage,
+    loadServiceDetails,
+    saveServiceDetails,
+    deleteServiceDetailsConfig,
   };
 }
 
