@@ -25,6 +25,7 @@ function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateD
         isActive: d.isActive !== undefined ? d.isActive : true,
         documents: Array.isArray(d.documents)
           ? d.documents.map((item) => ({
+              _id: item._id,
               name: item.name || "",
               order: item.order ?? "",
               isActive: item.isActive !== undefined ? item.isActive : true,
@@ -60,19 +61,23 @@ function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateD
       isActive: form.isActive,
       documents: form.documents
         .filter((d) => d.name.trim())
-        .map((d) => ({
-          name: d.name.trim(),
-          order: Number(d.order) || 0,
-          isActive: d.isActive,
-          image: String(d.image || "").trim(),
-        })),
+        .map((d) => {
+          const row = {
+            name: d.name.trim(),
+            order: Number(d.order) || 0,
+            isActive: d.isActive,
+            image: String(d.image || "").trim(),
+          };
+          if (d._id) row._id = d._id;
+          return row;
+        }),
     };
     if (editingId) {
-      await onUpdateDocumentType(editingId, payload);
-      navigate("/admin/documents");
+      const updated = await onUpdateDocumentType(editingId, payload);
+      if (updated) navigate("/admin/documents");
     } else {
-      await onAddDocumentType(payload);
-      setForm(initialForm);
+      const added = await onAddDocumentType(payload);
+      if (added) setForm(initialForm);
     }
     setIsSubmitting(false);
   };
@@ -116,7 +121,7 @@ function AddDocumentTypePage({ documentTypeMessage, onAddDocumentType, onUpdateD
           </div>
           <div className="grid gap-3">
             {form.documents.map((item, i) => (
-              <div key={i} className="rounded-2xl border border-[#F0B429]/20 bg-white/5 p-3">
+              <div key={item._id ? String(item._id) : `new-${i}`} className="rounded-2xl border border-[#F0B429]/20 bg-white/5 p-3">
                 <div className="grid gap-2.5 md:grid-cols-2">
                   <input className={inputCls} placeholder="Item name *" value={item.name} onChange={(e) => updateItem(i, "name", e.target.value)} />
                   <input className={inputCls} type="number" min="0" placeholder="Order" value={item.order} onChange={(e) => updateItem(i, "order", e.target.value)} />

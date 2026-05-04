@@ -3,6 +3,18 @@ import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom"
 import {
   ChevronIcon,
   SearchIcon,
+  SidebarBlogIcon,
+  SidebarBuildingIcon,
+  SidebarPartnerListIcon,
+  SidebarDashboardIcon,
+  SidebarDocumentIcon,
+  SidebarMembershipIcon,
+  SidebarPaymentsIcon,
+  SidebarServiceEnquiryIcon,
+  SidebarServicesIcon,
+  SidebarUsersIcon,
+  SubmenuBoltIcon,
+  SubmenuPlusIcon,
 } from "./AdminIcons";
 
 function AdminLayout() {
@@ -138,9 +150,7 @@ function AdminLayout() {
             to="/admin/dashboard"
             className={primaryLinkClass}
           >
-            <span className="text-base" aria-hidden="true">
-              🏠
-            </span>
+            <SidebarDashboardIcon />
             <span className={isDesktopCollapsed ? "hidden" : ""}>Dashboard</span>
           </NavLink>
 
@@ -148,9 +158,7 @@ function AdminLayout() {
             to="/admin/users"
             className={primaryLinkClass}
           >
-            <span className="text-base" aria-hidden="true">
-              👥
-            </span>
+            <SidebarUsersIcon />
             <span className={isDesktopCollapsed ? "hidden" : ""}>Users</span>
           </NavLink>
 
@@ -158,9 +166,7 @@ function AdminLayout() {
             to="/admin/payments"
             className={primaryLinkClass}
           >
-            <span className="text-base" aria-hidden="true">
-              💳
-            </span>
+            <SidebarPaymentsIcon />
             <span className={isDesktopCollapsed ? "hidden" : ""}>Payments</span>
           </NavLink>
 
@@ -168,9 +174,7 @@ function AdminLayout() {
             to="/admin/services/inquiry"
             className={primaryLinkClass}
           >
-            <span className="text-base" aria-hidden="true">
-              📨
-            </span>
+            <SidebarServiceEnquiryIcon />
             <span className={isDesktopCollapsed ? "hidden" : ""}>Services Inquiry</span>
           </NavLink>
 
@@ -180,9 +184,7 @@ function AdminLayout() {
             onClick={() => toggleMenu("services")}
           >
             <span className="flex items-center gap-3">
-              <span className="text-base" aria-hidden="true">
-                💼
-              </span>
+              <SidebarServicesIcon />
               <span className={isDesktopCollapsed ? "hidden" : ""}>Services</span>
             </span>
             {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "services"} className="h-[18px] w-[18px] shrink-0" /> : null}
@@ -193,18 +195,14 @@ function AdminLayout() {
                 to="/admin/services/my-services"
                 className={submenuLinkClass}
               >
-                <span className="text-sm" aria-hidden="true">
-                  ⚡
-                </span>
+                <SubmenuBoltIcon />
                 <span>My Services</span>
               </NavLink>
               <NavLink
                 to="/admin/services/add-service"
                 className={submenuLinkClass}
               >
-                <span className="text-sm" aria-hidden="true">
-                  ➕
-                </span>
+                <SubmenuPlusIcon />
                 <span>Add Service</span>
               </NavLink>
             </div>
@@ -216,9 +214,7 @@ function AdminLayout() {
             onClick={() => toggleMenu("blogs")}
           >
             <span className="flex items-center gap-3">
-              <span className="text-base" aria-hidden="true">
-                📝
-              </span>
+              <SidebarBlogIcon />
               <span className={isDesktopCollapsed ? "hidden" : ""}>Blogs</span>
             </span>
             {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "blogs"} className="h-[18px] w-[18px] shrink-0" /> : null}
@@ -232,9 +228,7 @@ function AdminLayout() {
                   submenuLinkClass({ isActive })
                 }
               >
-                <span className="text-sm" aria-hidden="true">
-                  📄
-                </span>
+                <SidebarDocumentIcon className="h-5 w-5 shrink-0" />
                 <span>My Blogs</span>
               </NavLink>
               <NavLink
@@ -244,9 +238,7 @@ function AdminLayout() {
                   submenuLinkClass({ isActive })
                 }
               >
-                <span className="text-sm" aria-hidden="true">
-                  ✍️
-                </span>
+                <SidebarBlogIcon className="h-5 w-5 shrink-0" />
                 <span>Add Blog</span>
               </NavLink>
             </div>
@@ -256,7 +248,7 @@ function AdminLayout() {
             to="/admin/partner-list"
             className={primaryLinkClass}
           >
-            <span className="text-base" aria-hidden="true">🤝</span>
+            <SidebarPartnerListIcon />
             <span className={isDesktopCollapsed ? "hidden" : ""}>Partner List</span>
           </NavLink>
 
@@ -266,7 +258,7 @@ function AdminLayout() {
             onClick={() => toggleMenu("partners")}
           >
             <span className="flex items-center gap-3">
-              <span className="text-base" aria-hidden="true">🏢</span>
+              <SidebarBuildingIcon />
               <span className={isDesktopCollapsed ? "hidden" : ""}>Partners</span>
             </span>
             {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "partners"} className="h-[18px] w-[18px] shrink-0" /> : null}
@@ -277,14 +269,14 @@ function AdminLayout() {
                 to="/admin/partners"
                 className={submenuLinkClass}
               >
-                <span className="text-sm" aria-hidden="true">🏢</span>
+                <SidebarBuildingIcon className="h-5 w-5 shrink-0" />
                 <span>Partners</span>
               </NavLink>
               <NavLink
                 to="/admin/partners/add-partner"
                 className={submenuLinkClass}
               >
-                <span className="text-sm" aria-hidden="true">➕</span>
+                <SubmenuPlusIcon />
                 <span>Add Partner</span>
               </NavLink>
             </div>
@@ -296,7 +288,7 @@ function AdminLayout() {
             onClick={() => toggleMenu("memberships")}
           >
             <span className="flex items-center gap-3">
-              <span className="text-base" aria-hidden="true">💎</span>
+              <SidebarMembershipIcon />
               <span className={isDesktopCollapsed ? "hidden" : ""}>Membership</span>
             </span>
             {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "memberships"} className="h-[18px] w-[18px] shrink-0" /> : null}
@@ -307,14 +299,14 @@ function AdminLayout() {
                 to="/admin/memberships"
                 className={submenuLinkClass}
               >
-                <span className="text-sm" aria-hidden="true">⚡</span>
+                <SubmenuBoltIcon />
                 <span>Show Memberships</span>
               </NavLink>
               <NavLink
                 to="/admin/memberships/add-membership"
                 className={submenuLinkClass}
               >
-                <span className="text-sm" aria-hidden="true">➕</span>
+                <SubmenuPlusIcon />
                 <span>Add Membership</span>
               </NavLink>
             </div>
@@ -326,7 +318,7 @@ function AdminLayout() {
             onClick={() => toggleMenu("documents")}
           >
             <span className="flex items-center gap-3">
-              <span className="text-base" aria-hidden="true">📄</span>
+              <SidebarDocumentIcon />
               <span className={isDesktopCollapsed ? "hidden" : ""}>Document</span>
             </span>
             {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "documents"} className="h-[18px] w-[18px] shrink-0" /> : null}
@@ -337,14 +329,14 @@ function AdminLayout() {
                 to="/admin/documents"
                 className={submenuLinkClass}
               >
-                <span className="text-sm" aria-hidden="true">⚡</span>
+                <SidebarDocumentIcon className="h-5 w-5 shrink-0" />
                 <span>Show Documents</span>
               </NavLink>
               <NavLink
                 to="/admin/documents/add-document"
                 className={submenuLinkClass}
               >
-                <span className="text-sm" aria-hidden="true">➕</span>
+                <SubmenuPlusIcon />
                 <span>Add Document</span>
               </NavLink>
             </div>

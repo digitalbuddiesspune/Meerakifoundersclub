@@ -1,4 +1,24 @@
+import mongoose from "mongoose";
 import DocumentType, { DEFAULT_DOCUMENT_TYPE_GROUPS } from "../models/documentType.js";
+
+function normalizeDocumentItems(documents) {
+  if (!Array.isArray(documents)) return undefined;
+  return documents
+    .filter((d) => d && String(d.name || "").trim())
+    .map((d) => {
+      const item = {
+        name: String(d.name).trim(),
+        order: Number(d.order) || 0,
+        isActive: d.isActive !== false,
+        image: d.image ? String(d.image).trim() : "",
+      };
+      const rawId = d._id != null ? String(d._id).trim() : "";
+      if (rawId && mongoose.Types.ObjectId.isValid(rawId)) {
+        item._id = rawId;
+      }
+      return item;
+    });
+}
 
 export const getDocumentTypes = async (req, res) => {
   try {
@@ -22,16 +42,7 @@ export const addDocumentType = async (req, res) => {
       });
     }
 
-    const normalizedDocs = Array.isArray(documents)
-      ? documents
-          .filter((d) => d && String(d.name || "").trim())
-          .map((d) => ({
-            name: String(d.name).trim(),
-            order: Number(d.order) || 0,
-            isActive: d.isActive !== false,
-            image: d.image ? String(d.image).trim() : "",
-          }))
-      : [];
+    const normalizedDocs = normalizeDocumentItems(documents) ?? [];
 
     const documentType = await DocumentType.create({
       categoryName,
@@ -54,29 +65,36 @@ export const addDocumentType = async (req, res) => {
 export const updateDocumentTypeById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { categoryName, categoryOrder, isActive } = req.body;
+    const { categoryName, categoryOrder, isActive, documents } = req.body;
 
     const payload = {};
     if (categoryName !== undefined) payload.categoryName = categoryName;
     if (categoryOrder !== undefined) payload.categoryOrder = categoryOrder;
     if (isActive !== undefined) payload.isActive = isActive;
 
+    if (Array.isArray(documents)) {
+      payload.documents = normalizeDocumentItems(documents);
+    }
+
     if (!Object.keys(payload).length) {
       return res.status(400).json({ message: "No fields provided for update" });
     }
 
-    const updatedDocumentType = await DocumentType.findByIdAndUpdate(id, payload, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!updatedDocumentType) {
+    const documentType = await DocumentType.findById(id);
+    if (!documentType) {
       return res.status(404).json({ message: "Document type not found" });
     }
 
+    if (payload.categoryName !== undefined) documentType.categoryName = payload.categoryName;
+    if (payload.categoryOrder !== undefined) documentType.categoryOrder = payload.categoryOrder;
+    if (payload.isActive !== undefined) documentType.isActive = payload.isActive;
+    if (payload.documents !== undefined) documentType.documents = payload.documents;
+
+    await documentType.save();
+
     return res.status(200).json({
       message: "Document category updated successfully",
-      documentType: updatedDocumentType,
+      documentType: documentType,
     });
   } catch (error) {
     if (error.name === "CastError") {

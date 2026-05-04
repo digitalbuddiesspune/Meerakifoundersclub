@@ -480,8 +480,10 @@ function useAdminPanel() {
       if (!response.ok) throw new Error(result.message || "Failed to update document type");
       setDocumentTypeMessage("Document type updated successfully.");
       fetchDocumentTypes();
+      return true;
     } catch (error) {
       setDocumentTypeMessage(error.message || "Failed to update document type");
+      return false;
     }
   };
 
