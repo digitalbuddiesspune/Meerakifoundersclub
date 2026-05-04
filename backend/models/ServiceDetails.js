@@ -36,6 +36,22 @@ const linkedDocumentSchema = new mongoose.Schema(
     documentItem: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      index: true,
+    },
+    documentTypeName: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    documentItemName: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    documentItemImage: {
+      type: String,
+      trim: true,
+      default: "",
     },
   },
   { _id: true }
@@ -66,6 +82,12 @@ const userIntakeSubmissionSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    progressStatus: {
+      type: String,
+      enum: ["Pending", "In Progress", "Applied", "Issued", "Closed"],
+      default: "Pending",
+      trim: true,
+    },
   },
   { _id: true }
 );
@@ -94,6 +116,18 @@ const serviceDetailsSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+serviceDetailsSchema.path("linkedDocuments").validate(function validateUniqueLinkedDocuments(value) {
+  if (!Array.isArray(value)) return true;
+  const seen = new Set();
+  for (const row of value) {
+    const key = `${String(row?.documentType || "")}:${String(row?.documentItem || "")}`;
+    if (!row?.documentType || !row?.documentItem) return false;
+    if (seen.has(key)) return false;
+    seen.add(key);
+  }
+  return true;
+}, "Each linked document pair must be unique and valid.");
 
 const ServiceDetails = mongoose.model("ServiceDetails", serviceDetailsSchema);
 

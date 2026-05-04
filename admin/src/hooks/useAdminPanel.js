@@ -171,6 +171,9 @@ function useAdminPanel() {
   const [documentTypesError, setDocumentTypesError] = useState("");
   const [documentTypeMessage, setDocumentTypeMessage] = useState("");
   const [serviceDetailsMessage, setServiceDetailsMessage] = useState("");
+  const [serviceInquiries, setServiceInquiries] = useState([]);
+  const [serviceInquiriesLoading, setServiceInquiriesLoading] = useState(false);
+  const [serviceInquiriesError, setServiceInquiriesError] = useState("");
 
   const dashboardStats = useMemo(
     () => [
@@ -543,6 +546,46 @@ function useAdminPanel() {
     }
   }, []);
 
+  const fetchServiceInquiries = useCallback(async () => {
+      setServiceInquiriesLoading(true);
+      setServiceInquiriesError("");
+      try {
+        const response = await fetch(`${API_BASE_URL}/service-details/inquiries`);
+        const result = await response.json().catch(() => []);
+        if (!response.ok) {
+          throw new Error(result.message || "Failed to fetch service inquiries");
+        }
+        setServiceInquiries(Array.isArray(result) ? result : []);
+      } catch (error) {
+        setServiceInquiries([]);
+        setServiceInquiriesError(error.message || "Failed to fetch service inquiries");
+      } finally {
+        setServiceInquiriesLoading(false);
+      }
+    }, []);
+
+  const loadServiceInquiryById = useCallback(async (inquiryId) => {
+    const response = await fetch(`${API_BASE_URL}/service-details/inquiries/${inquiryId}`);
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to fetch service inquiry");
+    }
+    return result;
+  }, []);
+
+  const updateServiceInquiryProgressStatus = useCallback(async (inquiryId, progressStatus) => {
+    const response = await fetch(`${API_BASE_URL}/service-details/inquiries/${inquiryId}/progress`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ progressStatus }),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to update inquiry progress");
+    }
+    return result?.inquiry || null;
+  }, []);
+
   useEffect(() => {
     fetchServices();
     fetchBlogs();
@@ -551,7 +594,8 @@ function useAdminPanel() {
     fetchPartners();
     fetchMemberships();
     fetchDocumentTypes();
-  }, []);
+    fetchServiceInquiries();
+  }, [fetchServiceInquiries]);
 
   useEffect(() => {
     if (!location.pathname.includes("/services/add-service")) {
@@ -645,7 +689,7 @@ function useAdminPanel() {
     let result = {};
     try {
       result = responseText ? JSON.parse(responseText) : {};
-    } catch (error) {
+    } catch {
       result = {};
     }
 
@@ -1017,6 +1061,11 @@ function useAdminPanel() {
     loadServiceDetails,
     saveServiceDetails,
     deleteServiceDetailsConfig,
+    serviceInquiries,
+    serviceInquiriesLoading,
+    serviceInquiriesError,
+    loadServiceInquiryById,
+    updateServiceInquiryProgressStatus,
   };
 }
 

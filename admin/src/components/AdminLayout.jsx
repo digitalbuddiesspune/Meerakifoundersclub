@@ -9,6 +9,9 @@ function AdminLayout() {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [openMenu, setOpenMenu] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true);
+  const isDesktopCollapsed = !desktopSidebarOpen;
 
   const toggleMenu = (name) => setOpenMenu((prev) => (prev === name ? "" : name));
   const searchValue = searchParams.get("q") || "";
@@ -31,89 +34,164 @@ function AdminLayout() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const primaryLinkClass = ({ isActive }) =>
+    `group relative flex items-center rounded-xl border text-left text-sm transition-all duration-200 ${
+      isDesktopCollapsed ? "justify-center px-2 py-3" : "gap-3 px-4 py-3.5"
+    } ${
+      isActive
+        ? "border-[#F0B429]/60 bg-gradient-to-r from-[#1d3364] to-[#1a2a4d] font-bold text-white shadow-[0_0_0_1px_rgba(240,180,41,0.15)]"
+        : "border-transparent bg-transparent font-semibold text-slate-300 hover:border-[#F0B429]/35 hover:bg-white/5 hover:text-slate-100"
+    }`;
+
+  const submenuLinkClass = ({ isActive }) =>
+    `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+      isActive
+        ? "border border-[#F0B429]/40 bg-[#F0B429]/10 font-bold text-[#FFE199]"
+        : "border border-transparent font-semibold text-slate-300 hover:border-white/10 hover:bg-white/5 hover:text-white"
+    }`;
+
+  const menuToggleClass = (isOpen) =>
+    `flex w-full items-center rounded-xl border text-left text-sm font-semibold transition ${
+      isDesktopCollapsed ? "justify-center px-2 py-3" : "justify-between px-4 py-3.5"
+    } ${
+      isOpen
+        ? "border-[#F0B429]/45 bg-[#152b59] text-white"
+        : "border-transparent bg-transparent text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5 hover:text-slate-100"
+    }`;
+
   return (
-    <div className="min-h-screen bg-[#070f26] text-slate-100 lg:grid lg:h-screen lg:grid-cols-[286px_1fr] lg:overflow-hidden">
-      <aside className="hide-scrollbar flex flex-col gap-6 overflow-y-auto border-r border-[#F0B429]/30 bg-[#081a3f] px-[18px] py-7 lg:h-screen">
-        <div className="px-2">
-          <p className="text-xl font-extrabold tracking-tight text-white">
-            Meraaki <span className="text-[#E8621A]">FC</span>
-          </p>
-          <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50">Founders Club</p>
+    <div
+      className={`min-h-screen bg-[#070f26] text-slate-100 lg:grid lg:h-screen lg:overflow-hidden ${
+        desktopSidebarOpen ? "lg:grid-cols-[286px_1fr]" : "lg:grid-cols-[88px_1fr]"
+      }`}
+    >
+      {sidebarOpen ? (
+        <button
+          type="button"
+          className="fixed inset-0 z-30 bg-black/45 lg:hidden"
+          aria-label="Close sidebar overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      ) : null}
+
+      {!sidebarOpen ? (
+        <button
+          type="button"
+          className="fixed left-3 top-3 z-40 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#F0B429]/40 bg-[#132b5c] text-xl text-white shadow-lg transition hover:border-[#F0B429]/70 lg:hidden"
+          aria-label="Open sidebar"
+          onClick={() => {
+            setSidebarOpen(true);
+          }}
+        >
+          ☰
+        </button>
+      ) : null}
+
+      <aside
+        className={`hide-scrollbar fixed left-0 top-0 z-40 flex h-screen w-[286px] flex-col gap-6 overflow-y-auto border-r border-[#F0B429]/35 bg-gradient-to-b from-[#091b44] via-[#081a3f] to-[#061430] px-[18px] py-7 shadow-[inset_-1px_0_0_rgba(240,180,41,0.16)] transition-transform duration-300 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } ${
+          desktopSidebarOpen
+            ? "lg:static lg:z-auto lg:w-auto lg:translate-x-0 lg:opacity-100 lg:pointer-events-auto"
+            : "lg:static lg:z-auto lg:w-[88px] lg:translate-x-0 lg:px-3 lg:py-5 lg:opacity-100 lg:pointer-events-auto"
+        } lg:h-screen`}
+      >
+        <div className={`${isDesktopCollapsed ? "px-0" : "px-2"}`}>
+          <div className="flex items-start justify-between gap-3">
+            {isDesktopCollapsed ? (
+              <div className="hidden lg:flex h-9 w-9 items-center justify-center rounded-lg border border-[#F0B429]/45 bg-white/5 text-base font-extrabold text-white">
+                M
+              </div>
+            ) : (
+              <div>
+                <p className="text-xl font-extrabold tracking-tight text-white">
+                  Meraaki <span className="text-[#E8621A]">FC</span>
+                </p>
+                <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50">Founders Club</p>
+              </div>
+            )}
+            <button
+              type="button"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#F0B429]/35 bg-white/5 text-lg text-white transition hover:border-[#F0B429]/65 hover:bg-white/10 lg:hidden"
+              aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+              onClick={() => {
+                setSidebarOpen((prev) => !prev);
+              }}
+            >
+              {sidebarOpen ? "✕" : "☰"}
+            </button>
+            <button
+              type="button"
+              className="hidden h-9 w-9 items-center justify-center rounded-lg border border-[#F0B429]/35 bg-white/5 text-lg text-white transition hover:border-[#F0B429]/65 hover:bg-white/10 lg:inline-flex"
+              aria-label={isDesktopCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              onClick={() => setDesktopSidebarOpen((prev) => !prev)}
+            >
+              {isDesktopCollapsed ? "☰" : "✕"}
+            </button>
+          </div>
         </div>
-        <div>
-          <p className="m-0 text-[10px] font-extrabold uppercase tracking-[0.24em] text-slate-400">Main</p>
+        <div className={`px-2 ${isDesktopCollapsed ? "hidden lg:block" : ""}`}>
+          <div className="mt-2 h-px w-full bg-gradient-to-r from-[#F0B429]/45 via-[#F0B429]/15 to-transparent" />
         </div>
         <nav className="flex flex-col gap-2.5 font-semibold">
           <NavLink
             to="/admin/dashboard"
-            className={({ isActive }) =>
-              `flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition ${
-                isActive
-                  ? "border-white/20 bg-[#1c2f59] font-bold text-white"
-                  : "border-transparent bg-transparent font-semibold text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5"
-              }`
-            }
+            className={primaryLinkClass}
           >
             <span className="text-base" aria-hidden="true">
               🏠
             </span>
-            <span>Dashboard</span>
+            <span className={isDesktopCollapsed ? "hidden" : ""}>Dashboard</span>
           </NavLink>
 
           <NavLink
             to="/admin/users"
-            className={({ isActive }) =>
-              `flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition ${
-                isActive
-                  ? "border-white/20 bg-[#1c2f59] font-bold text-white"
-                  : "border-transparent bg-transparent font-semibold text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5"
-              }`
-            }
+            className={primaryLinkClass}
           >
             <span className="text-base" aria-hidden="true">
               👥
             </span>
-            <span>Users</span>
+            <span className={isDesktopCollapsed ? "hidden" : ""}>Users</span>
           </NavLink>
 
           <NavLink
             to="/admin/payments"
-            className={({ isActive }) =>
-              `flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition ${
-                isActive
-                  ? "border-white/20 bg-[#1c2f59] font-bold text-white"
-                  : "border-transparent bg-transparent font-semibold text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5"
-              }`
-            }
+            className={primaryLinkClass}
           >
             <span className="text-base" aria-hidden="true">
               💳
             </span>
-            <span>Payments</span>
+            <span className={isDesktopCollapsed ? "hidden" : ""}>Payments</span>
+          </NavLink>
+
+          <NavLink
+            to="/admin/services/inquiry"
+            className={primaryLinkClass}
+          >
+            <span className="text-base" aria-hidden="true">
+              📨
+            </span>
+            <span className={isDesktopCollapsed ? "hidden" : ""}>Services Inquiry</span>
           </NavLink>
 
           <button
             type="button"
-            className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
+            className={menuToggleClass(openMenu === "services")}
             onClick={() => toggleMenu("services")}
           >
             <span className="flex items-center gap-3">
               <span className="text-base" aria-hidden="true">
                 💼
               </span>
-              <span>Services</span>
+              <span className={isDesktopCollapsed ? "hidden" : ""}>Services</span>
             </span>
-            <ChevronIcon open={openMenu === "services"} className="h-[18px] w-[18px] shrink-0" />
+            {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "services"} className="h-[18px] w-[18px] shrink-0" /> : null}
           </button>
-          {openMenu === "services" && (
+          {openMenu === "services" && !isDesktopCollapsed && (
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/services/my-services"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
-                }
+                className={submenuLinkClass}
               >
                 <span className="text-sm" aria-hidden="true">
                   ⚡
@@ -122,11 +200,7 @@ function AdminLayout() {
               </NavLink>
               <NavLink
                 to="/admin/services/add-service"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
-                }
+                className={submenuLinkClass}
               >
                 <span className="text-sm" aria-hidden="true">
                   ➕
@@ -138,26 +212,24 @@ function AdminLayout() {
 
           <button
             type="button"
-            className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
+            className={menuToggleClass(openMenu === "blogs")}
             onClick={() => toggleMenu("blogs")}
           >
             <span className="flex items-center gap-3">
               <span className="text-base" aria-hidden="true">
                 📝
               </span>
-              <span>Blogs</span>
+              <span className={isDesktopCollapsed ? "hidden" : ""}>Blogs</span>
             </span>
-            <ChevronIcon open={openMenu === "blogs"} className="h-[18px] w-[18px] shrink-0" />
+            {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "blogs"} className="h-[18px] w-[18px] shrink-0" /> : null}
           </button>
-          {openMenu === "blogs" && (
+          {openMenu === "blogs" && !isDesktopCollapsed && (
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/blogs/my-blogs"
                 onClick={handleScrollToTop}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
+                  submenuLinkClass({ isActive })
                 }
               >
                 <span className="text-sm" aria-hidden="true">
@@ -169,9 +241,7 @@ function AdminLayout() {
                 to="/admin/blogs/add-blog"
                 onClick={handleScrollToTop}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
+                  submenuLinkClass({ isActive })
                 }
               >
                 <span className="text-sm" aria-hidden="true">
@@ -184,49 +254,35 @@ function AdminLayout() {
 
           <NavLink
             to="/admin/partner-list"
-            className={({ isActive }) =>
-              `flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition ${
-                isActive
-                  ? "border-white/20 bg-[#1c2f59] font-bold text-white"
-                  : "border-transparent bg-transparent font-semibold text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5"
-              }`
-            }
+            className={primaryLinkClass}
           >
             <span className="text-base" aria-hidden="true">🤝</span>
-            <span>Partner List</span>
+            <span className={isDesktopCollapsed ? "hidden" : ""}>Partner List</span>
           </NavLink>
 
           <button
             type="button"
-            className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
+            className={menuToggleClass(openMenu === "partners")}
             onClick={() => toggleMenu("partners")}
           >
             <span className="flex items-center gap-3">
               <span className="text-base" aria-hidden="true">🏢</span>
-              <span>Partners</span>
+              <span className={isDesktopCollapsed ? "hidden" : ""}>Partners</span>
             </span>
-            <ChevronIcon open={openMenu === "partners"} className="h-[18px] w-[18px] shrink-0" />
+            {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "partners"} className="h-[18px] w-[18px] shrink-0" /> : null}
           </button>
-          {openMenu === "partners" && (
+          {openMenu === "partners" && !isDesktopCollapsed && (
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/partners"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
-                }
+                className={submenuLinkClass}
               >
                 <span className="text-sm" aria-hidden="true">🏢</span>
                 <span>Partners</span>
               </NavLink>
               <NavLink
                 to="/admin/partners/add-partner"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
-                }
+                className={submenuLinkClass}
               >
                 <span className="text-sm" aria-hidden="true">➕</span>
                 <span>Add Partner</span>
@@ -236,35 +292,27 @@ function AdminLayout() {
 
           <button
             type="button"
-            className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
+            className={menuToggleClass(openMenu === "memberships")}
             onClick={() => toggleMenu("memberships")}
           >
             <span className="flex items-center gap-3">
               <span className="text-base" aria-hidden="true">💎</span>
-              <span>Membership</span>
+              <span className={isDesktopCollapsed ? "hidden" : ""}>Membership</span>
             </span>
-            <ChevronIcon open={openMenu === "memberships"} className="h-[18px] w-[18px] shrink-0" />
+            {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "memberships"} className="h-[18px] w-[18px] shrink-0" /> : null}
           </button>
-          {openMenu === "memberships" && (
+          {openMenu === "memberships" && !isDesktopCollapsed && (
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/memberships"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
-                }
+                className={submenuLinkClass}
               >
                 <span className="text-sm" aria-hidden="true">⚡</span>
                 <span>Show Memberships</span>
               </NavLink>
               <NavLink
                 to="/admin/memberships/add-membership"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
-                }
+                className={submenuLinkClass}
               >
                 <span className="text-sm" aria-hidden="true">➕</span>
                 <span>Add Membership</span>
@@ -274,35 +322,27 @@ function AdminLayout() {
 
           <button
             type="button"
-            className="flex w-full items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-left text-sm font-semibold text-slate-300 transition hover:border-[#F0B429]/30 hover:bg-white/5"
+            className={menuToggleClass(openMenu === "documents")}
             onClick={() => toggleMenu("documents")}
           >
             <span className="flex items-center gap-3">
               <span className="text-base" aria-hidden="true">📄</span>
-              <span>Document</span>
+              <span className={isDesktopCollapsed ? "hidden" : ""}>Document</span>
             </span>
-            <ChevronIcon open={openMenu === "documents"} className="h-[18px] w-[18px] shrink-0" />
+            {!isDesktopCollapsed ? <ChevronIcon open={openMenu === "documents"} className="h-[18px] w-[18px] shrink-0" /> : null}
           </button>
-          {openMenu === "documents" && (
+          {openMenu === "documents" && !isDesktopCollapsed && (
             <div className="mb-2 grid gap-2 pl-3">
               <NavLink
                 to="/admin/documents"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
-                }
+                className={submenuLinkClass}
               >
                 <span className="text-sm" aria-hidden="true">⚡</span>
                 <span>Show Documents</span>
               </NavLink>
               <NavLink
                 to="/admin/documents/add-document"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
-                    isActive ? "bg-white/15 font-bold text-white" : "font-semibold text-slate-300 hover:bg-white/5"
-                  }`
-                }
+                className={submenuLinkClass}
               >
                 <span className="text-sm" aria-hidden="true">➕</span>
                 <span>Add Document</span>
@@ -310,9 +350,16 @@ function AdminLayout() {
             </div>
           )}
         </nav>
-        <div className="mt-auto rounded-[20px] border border-[#F0B429]/30 bg-[#0f2554] p-[18px]">
-          <p className="m-0 text-[11px] font-extrabold uppercase tracking-[0.12em] text-slate-300">Admin Workspace</p>
+        <div className={`mt-auto rounded-[20px] border border-[#F0B429]/40 bg-gradient-to-br from-[#102a60] to-[#0a1e46] p-[18px] shadow-[0_8px_24px_rgba(5,10,30,0.35)] ${isDesktopCollapsed ? "hidden lg:block lg:p-2" : ""}`}>
+          {isDesktopCollapsed ? (
+            <p className="m-0 text-center text-lg">⚡</p>
+          ) : (
+            <>
+          <p className="m-0 text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#C8D6FF]">Admin Workspace</p>
           <strong className="mt-2.5 block text-[15px] font-bold leading-6 text-white">Manage services, blogs and users from one dashboard.</strong>
+          <p className="mt-2 text-xs text-slate-300">Improved navigation for faster daily operations.</p>
+            </>
+          )}
         </div>
       </aside>
 

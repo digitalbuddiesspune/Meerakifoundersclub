@@ -17,6 +17,8 @@ import DocumentTypeDetailsPage from "./pages/DocumentTypeDetailsPage";
 import AddDocumentTypePage from "./pages/AddDocumentTypePage";
 import PaymentsPage from "./pages/PaymentsPage";
 import ServiceDetailsPage from "./pages/ServiceDetailsPage";
+import ServiceInquiryDetailsPage from "./pages/ServiceInquiryDetailsPage";
+import ServicesInquiryPage from "./pages/ServicesInquiryPage";
 import UsersPage from "./pages/UsersPage";
 import useAdminPanel from "./hooks/useAdminPanel";
 
@@ -54,6 +56,25 @@ function App() {
               usersLoading={admin.usersLoading}
               usersError={admin.usersError}
               usersList={admin.usersList}
+            />
+          }
+        />
+        <Route
+          path="services/inquiry"
+          element={
+            <ServicesInquiryPage
+              serviceInquiriesLoading={admin.serviceInquiriesLoading}
+              serviceInquiriesError={admin.serviceInquiriesError}
+              serviceInquiries={admin.serviceInquiries}
+            />
+          }
+        />
+        <Route
+          path="services/inquiry/:id"
+          element={
+            <ServiceInquiryDetailsPage
+              onLoadServiceInquiry={admin.loadServiceInquiryById}
+              onUpdateProgressStatus={admin.updateServiceInquiryProgressStatus}
             />
           }
         />

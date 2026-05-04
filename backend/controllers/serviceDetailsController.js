@@ -2,9 +2,11 @@ import mongoose from "mongoose";
 import DocumentType from "../models/documentType.js";
 import Service from "../models/Service.js";
 import ServiceDetails from "../models/ServiceDetails.js";
+import User from "../models/User.js";
 import UserDocument from "../models/UserDocument.js";
 
 const FIELD_TYPES = new Set(["text", "email", "number", "tel", "textarea"]);
+const INQUIRY_PROGRESS_STATUSES = new Set(["Pending", "In Progress", "Applied", "Issued", "Closed"]);
 
 const normalizeFormFields = (input) => {
   if (!Array.isArray(input)) return [];
@@ -31,10 +33,19 @@ const normalizeLinkedDocuments = (input) => {
 };
 
 const validateLinkedDocuments = async (linkedDocuments) => {
+  const validatedLinks = [];
+  const seen = new Set();
+
   for (const link of linkedDocuments) {
     if (!mongoose.Types.ObjectId.isValid(link.documentType) || !mongoose.Types.ObjectId.isValid(link.documentItem)) {
       return { ok: false, message: "Invalid document reference id" };
     }
+
+    const dedupeKey = `${String(link.documentType)}:${String(link.documentItem)}`;
+    if (seen.has(dedupeKey)) {
+      return { ok: false, message: "Duplicate linked document is not allowed" };
+    }
+    seen.add(dedupeKey);
 
     const docType = await DocumentType.findById(link.documentType).lean();
     if (!docType) {
@@ -45,9 +56,17 @@ const validateLinkedDocuments = async (linkedDocuments) => {
     if (!item) {
       return { ok: false, message: "Document does not belong to the selected category" };
     }
+
+    validatedLinks.push({
+      documentType: docType._id,
+      documentItem: item._id,
+      documentTypeName: String(docType.categoryName || "").trim(),
+      documentItemName: String(item.name || "").trim(),
+      documentItemImage: String(item.image || "").trim(),
+    });
   }
 
-  return { ok: true };
+  return { ok: true, links: validatedLinks };
 };
 
 const enrichLinkedDocuments = (record) => {
@@ -60,10 +79,10 @@ const enrichLinkedDocuments = (record) => {
     return {
       _id: ld._id,
       documentType: dt?._id ?? ld.documentType,
-      documentTypeName: dt?.categoryName,
+      documentTypeName: dt?.categoryName || ld.documentTypeName || "",
       documentItem: ld.documentItem,
-      documentItemName: item?.name ?? null,
-      documentItemImage: item?.image || null,
+      documentItemName: item?.name || ld.documentItemName || null,
+      documentItemImage: item?.image || ld.documentItemImage || null,
     };
   });
 };
@@ -168,6 +187,109 @@ export const getUserIntakeSubmission = async (req, res) => {
   }
 };
 
+export const getAllServiceInquiries = async (req, res) => {
+  try {
+    const records = await ServiceDetails.find({
+      intakeSubmissions: { $exists: true, $not: { $size: 0 } },
+    })
+      .select("serviceId intakeSubmissions")
+      .populate("serviceId", "name")
+      .lean();
+
+    if (!records.length) {
+      return res.status(200).json([]);
+    }
+
+    const userIds = new Set();
+    records.forEach((record) => {
+      (record.intakeSubmissions || []).forEach((submission) => {
+        if (submission?.userId) {
+          userIds.add(String(submission.userId));
+        }
+      });
+    });
+
+    const users = await User.find({ _id: { $in: [...userIds] } })
+      .select("username email phone plan")
+      .lean();
+    const usersById = new Map(users.map((user) => [String(user._id), user]));
+
+    const inquiries = records
+      .flatMap((record) =>
+        (record.intakeSubmissions || []).map((submission) => {
+          const user = usersById.get(String(submission.userId));
+          return {
+            serviceId: record?.serviceId?._id || record?.serviceId || null,
+            serviceName: record?.serviceId?.name || "Unknown service",
+            submissionId: submission?._id || null,
+            userId: submission?.userId || null,
+            userName: user?.username || "",
+            userEmail: user?.email || "",
+            userPhone: user?.phone || "",
+            userPlan: user?.plan || "",
+            submittedAt: submission?.submittedAt || null,
+            progressStatus: INQUIRY_PROGRESS_STATUSES.has(submission?.progressStatus)
+              ? submission.progressStatus
+              : "Pending",
+            fieldValues: Array.isArray(submission?.fieldValues) ? submission.fieldValues : [],
+          };
+        })
+      )
+      .sort((a, b) => new Date(b.submittedAt || 0).getTime() - new Date(a.submittedAt || 0).getTime());
+
+    return res.status(200).json(inquiries);
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to fetch service inquiries" });
+  }
+};
+
+export const getServiceInquiryById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid inquiry id" });
+    }
+
+    const record = await ServiceDetails.findOne({ "intakeSubmissions._id": id })
+      .select("serviceId intakeSubmissions")
+      .populate("serviceId", "name")
+      .lean();
+
+    if (!record) {
+      return res.status(404).json({ message: "Inquiry not found" });
+    }
+
+    const submission = (record.intakeSubmissions || []).find((item) => String(item?._id) === String(id));
+    if (!submission) {
+      return res.status(404).json({ message: "Inquiry not found" });
+    }
+
+    let user = null;
+    if (submission.userId && mongoose.Types.ObjectId.isValid(String(submission.userId))) {
+      user = await User.findById(submission.userId).select("username email phone plan").lean();
+    }
+
+    return res.status(200).json({
+      serviceId: record?.serviceId?._id || record?.serviceId || null,
+      serviceName: record?.serviceId?.name || "Unknown service",
+      submissionId: submission?._id || null,
+      userId: submission?.userId || null,
+      userName: user?.username || "",
+      userEmail: user?.email || "",
+      userPhone: user?.phone || "",
+      userPlan: user?.plan || "",
+      submittedAt: submission?.submittedAt || null,
+      progressStatus: INQUIRY_PROGRESS_STATUSES.has(submission?.progressStatus)
+        ? submission.progressStatus
+        : "Pending",
+      fieldValues: Array.isArray(submission?.fieldValues) ? submission.fieldValues : [],
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to fetch service inquiry" });
+  }
+};
+
 export const submitUserServiceIntake = async (req, res) => {
   try {
     const { serviceId } = req.params;
@@ -219,6 +341,9 @@ export const submitUserServiceIntake = async (req, res) => {
       userId,
       fieldValues: normalized,
       submittedAt: new Date(),
+      progressStatus: idx >= 0 && INQUIRY_PROGRESS_STATUSES.has(record.intakeSubmissions[idx]?.progressStatus)
+        ? record.intakeSubmissions[idx].progressStatus
+        : "Pending",
     };
 
     if (idx >= 0) {
@@ -236,6 +361,60 @@ export const submitUserServiceIntake = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({ message: "Failed to save intake submission" });
+  }
+};
+
+export const updateServiceInquiryProgressStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { progressStatus } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid inquiry id" });
+    }
+
+    if (!INQUIRY_PROGRESS_STATUSES.has(progressStatus)) {
+      return res.status(400).json({ message: "Invalid progress status" });
+    }
+
+    const record = await ServiceDetails.findOne({ "intakeSubmissions._id": id })
+      .populate("serviceId", "name");
+
+    if (!record) {
+      return res.status(404).json({ message: "Inquiry not found" });
+    }
+
+    const submission = (record.intakeSubmissions || []).find((item) => String(item?._id) === String(id));
+    if (!submission) {
+      return res.status(404).json({ message: "Inquiry not found" });
+    }
+
+    submission.progressStatus = progressStatus;
+    await record.save();
+
+    let user = null;
+    if (submission.userId && mongoose.Types.ObjectId.isValid(String(submission.userId))) {
+      user = await User.findById(submission.userId).select("username email phone plan").lean();
+    }
+
+    return res.status(200).json({
+      message: "Inquiry progress updated successfully",
+      inquiry: {
+        serviceId: record?.serviceId?._id || record?.serviceId || null,
+        serviceName: record?.serviceId?.name || "Unknown service",
+        submissionId: submission?._id || null,
+        userId: submission?.userId || null,
+        userName: user?.username || "",
+        userEmail: user?.email || "",
+        userPhone: user?.phone || "",
+        userPlan: user?.plan || "",
+        submittedAt: submission?.submittedAt || null,
+        progressStatus: submission?.progressStatus || "Pending",
+        fieldValues: Array.isArray(submission?.fieldValues) ? submission.fieldValues : [],
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to update inquiry progress" });
   }
 };
 
@@ -268,7 +447,7 @@ export const createServiceDetails = async (req, res) => {
     const created = await ServiceDetails.create({
       serviceId,
       formFields: ff,
-      linkedDocuments: ld,
+      linkedDocuments: check.links,
     });
 
     const populated = await ServiceDetails.findById(created._id)
@@ -310,10 +489,10 @@ export const upsertServiceDetailsByServiceId = async (req, res) => {
 
     let record = await ServiceDetails.findOne({ serviceId });
     if (!record) {
-      record = new ServiceDetails({ serviceId, formFields: ff, linkedDocuments: ld });
+      record = new ServiceDetails({ serviceId, formFields: ff, linkedDocuments: check.links });
     } else {
       record.formFields = ff;
-      record.linkedDocuments = ld;
+      record.linkedDocuments = check.links;
       if (record.intakeSubmissions?.length) {
         for (const sub of record.intakeSubmissions) {
           if (sub.fieldValues?.length) {
