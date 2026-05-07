@@ -535,12 +535,10 @@ function UserServiceFormPage() {
                 </div>
               </div>
 
-              <div className="w-full rounded-xl border border-[#F0B429]/35 bg-[#0D214D]/70 p-4 sm:p-5">
-                <label className={labelUi}>Documents on file</label>
-                <p className="mb-3 text-xs text-[#C8D6FF]">Files stored in your account for this checklist.</p>
-                {linkedDocuments.length === 0 ? (
-                  <p className="text-sm text-white/55">No documents were required for this service.</p>
-                ) : (
+              {linkedDocuments.length > 0 ? (
+                <div className="w-full rounded-xl border border-[#F0B429]/35 bg-[#0D214D]/70 p-4 sm:p-5">
+                  <label className={labelUi}>Documents on file</label>
+                  <p className="mb-3 text-xs text-[#C8D6FF]">Files stored in your account for this checklist.</p>
                   <div className="overflow-x-auto rounded-lg border border-[#F0B429]/35">
                     <table className="w-full min-w-[300px] text-left text-sm">
                       <thead className="bg-[#152B57] text-[11px] uppercase tracking-[0.08em] text-[#F0B429]">
@@ -590,8 +588,8 @@ function UserServiceFormPage() {
                       </tbody>
                     </table>
                   </div>
-                )}
-              </div>
+                </div>
+              ) : null}
             </>
           ) : null}
 
@@ -657,16 +655,13 @@ function UserServiceFormPage() {
             )}
           </div>
 
-          <div className="w-full rounded-xl border border-[#F0B429]/30 bg-[#0D214D]/60 p-5">
-            <label className={labelUi}>Documents you may need</label>
-           
+          {linkedDocuments.length > 0 ? (
+            <div className="w-full rounded-xl border border-[#F0B429]/30 bg-[#0D214D]/60 p-5">
+              <label className={labelUi}>Documents you may need</label>
 
-            {saveError ? <p className="mb-3 text-sm text-red-300">{saveError}</p> : null}
+              {saveError ? <p className="mb-3 text-sm text-red-300">{saveError}</p> : null}
 
-            <div className="overflow-x-auto rounded-lg border border-[#F0B429]/30">
-              {linkedDocuments.length === 0 ? (
-                <p className="text-sm text-white/55">No document checklist linked for this service yet.</p>
-              ) : (
+              <div className="overflow-x-auto rounded-lg border border-[#F0B429]/30">
                 <table className="w-full min-w-[320px] text-left">
                   <thead className="border-b border-[#F0B429]/35 bg-[#152B57] text-[11px] uppercase tracking-[0.1em] text-[#F0B429]">
                     <tr>
@@ -751,9 +746,9 @@ function UserServiceFormPage() {
                     })}
                   </tbody>
                 </table>
-              )}
+              </div>
             </div>
-          </div>
+          ) : null}
 
           <div className="w-full rounded-xl border border-[#F0B429]/30 bg-[#0D214D]/60 p-5">
             <button

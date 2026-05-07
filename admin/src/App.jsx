@@ -20,17 +20,46 @@ import ServiceDetailsPage from "./pages/ServiceDetailsPage";
 import ServiceInquiryDetailsPage from "./pages/ServiceInquiryDetailsPage";
 import ServicesInquiryPage from "./pages/ServicesInquiryPage";
 import UsersPage from "./pages/UsersPage";
+import AdminLoginPage from "./pages/AdminLoginPage";
+import AdminAccountPage from "./pages/AdminAccountPage";
 import useAdminPanel from "./hooks/useAdminPanel";
+
+const ADMIN_AUTH_STORAGE_KEY = "mfc_admin_auth_user";
 
 function App() {
   const admin = useAdminPanel();
+  const adminUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem(ADMIN_AUTH_STORAGE_KEY) || "null");
+    } catch {
+      return null;
+    }
+  })();
+  const isAdminAuthenticated = Boolean(adminUser && adminUser.role === "admin");
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
-      <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+      <Route
+        path="/"
+        element={<Navigate to={isAdminAuthenticated ? "/admin/dashboard" : "/admin/login"} replace />}
+      />
+      <Route
+        path="/admin"
+        element={<Navigate to={isAdminAuthenticated ? "/admin/dashboard" : "/admin/login"} replace />}
+      />
+      <Route
+        path="/admin/login"
+        element={isAdminAuthenticated ? <Navigate to="/admin/dashboard" replace /> : <AdminLoginPage />}
+      />
 
-      <Route path="/admin" element={<AdminLayout />}>
+      <Route
+        path="/admin"
+        element={isAdminAuthenticated ? <AdminLayout /> : <Navigate to="/admin/login" replace />}
+      >
+        <Route
+          path="account"
+          element={<AdminAccountPage />}
+        />
         <Route
           path="dashboard"
           element={
@@ -263,7 +292,10 @@ function App() {
         />
       </Route>
 
-      <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+      <Route
+        path="*"
+        element={<Navigate to={isAdminAuthenticated ? "/admin/dashboard" : "/admin/login"} replace />}
+      />
     </Routes>
   );
 }

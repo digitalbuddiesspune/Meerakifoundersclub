@@ -15,6 +15,7 @@ const sanitizeUser = (user) => ({
   phone: user.phone,
   plan: user.plan || "",
   status: user.status || "inactive",
+  role: user.role || "user",
 });
 
 export const getUsers = async (req, res) => {
@@ -28,7 +29,7 @@ export const getUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { username, email, phone } = req.body;
+    const { username, email, phone, role } = req.body;
 
     if (!username || !email || !phone) {
       return res
@@ -36,7 +37,17 @@ export const createUser = async (req, res) => {
         .json({ message: "username, email and phone are required" });
     }
 
-    const newUser = await User.create({ username, email, phone });
+    const normalizedRole = String(role || "user").trim().toLowerCase();
+    if (!["user", "admin"].includes(normalizedRole)) {
+      return res.status(400).json({ message: "Role must be user or admin" });
+    }
+
+    const newUser = await User.create({
+      username,
+      email,
+      phone,
+      role: normalizedRole,
+    });
 
     res.status(201).json({
       message: "User created successfully",

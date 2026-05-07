@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ChevronIcon,
   SearchIcon,
@@ -18,6 +18,7 @@ import {
 } from "./AdminIcons";
 
 function AdminLayout() {
+  const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [openMenu, setOpenMenu] = useState("");
@@ -28,6 +29,7 @@ function AdminLayout() {
   const toggleMenu = (name) => setOpenMenu((prev) => (prev === name ? "" : name));
   const searchValue = searchParams.get("q") || "";
   const showSearch = location.pathname.includes("/services/my-services");
+  const showDashboardActions = location.pathname === "/admin/dashboard";
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
@@ -70,6 +72,21 @@ function AdminLayout() {
         ? "border-[#F0B429]/45 bg-[#152b59] text-white"
         : "border-transparent bg-transparent text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5 hover:text-slate-100"
     }`;
+
+  const adminUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem("mfc_admin_auth_user") || "null");
+    } catch {
+      return null;
+    }
+  })();
+
+  const adminName = adminUser?.username || "Admin";
+
+  const handleAdminLogout = () => {
+    localStorage.removeItem("mfc_admin_auth_user");
+    navigate("/admin/login", { replace: true });
+  };
 
   return (
     <div
@@ -355,9 +372,9 @@ function AdminLayout() {
         </div>
       </aside>
 
-      <main className="p-5 lg:min-h-0 lg:overflow-y-auto lg:p-7">
-        {showSearch ? (
-          <div className="mb-6 flex justify-end">
+      <main className="p-5 pt-3 lg:min-h-0 lg:overflow-y-auto lg:p-7 lg:pt-4">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          {showSearch ? (
             <div className="flex min-w-0 w-full max-w-[310px] items-center gap-2.5 rounded-full border border-[#F0B429]/30 bg-[#142e62] px-4 py-3">
               <SearchIcon className="h-5 w-5 shrink-0 text-cyan-300" />
               <input
@@ -369,8 +386,35 @@ function AdminLayout() {
                 className="w-full border-0 bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
               />
             </div>
-          </div>
-        ) : null}
+          ) : (
+            <div />
+          )}
+
+          {showDashboardActions ? (
+            <div className="inline-flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => navigate("/admin/account")}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#F0B429]/35 bg-[#132b5c] px-2.5 py-1.5 text-xs font-semibold text-white transition hover:border-[#F0B429]/70 hover:bg-[#1a3a7a]"
+              >
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#F0B429] text-[#07112a]">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+                    <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z" />
+                  </svg>
+                </span>
+                <span className="max-w-[120px] truncate leading-none">{adminName}</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleAdminLogout}
+                className="rounded-full border border-red-400/40 bg-red-500/10 px-2.5 py-1.5 text-xs font-semibold text-red-200 transition hover:bg-red-500/20"
+              >
+                Logout
+              </button>
+            </div>
+          ) : null}
+        </div>
+
         <Outlet />
       </main>
     </div>

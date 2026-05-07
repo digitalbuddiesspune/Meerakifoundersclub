@@ -8,6 +8,7 @@ import ScrollToTop from './components/scrolltotop';
 
 const AUTH_STORAGE_KEY = 'mfc_auth_user'
 const API_BASE_URL = import.meta.env.VITE_API_URL
+const ADMIN_PANEL_URL = import.meta.env.VITE_ADMIN_PANEL_URL || 'http://localhost:5174/admin/dashboard'
 const LEGAL_PAGE_PATHS = new Set(['/privacy-policy', '/terms-and-conditions', '/cookie-policy'])
 
 const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
@@ -21,6 +22,7 @@ const normalizeUser = (user = {}) => ({
   phone: user.phone || '',
   plan: user.plan || '',
   status: user.status || 'inactive',
+  role: user.role || 'user',
 })
 
 function App() {
@@ -119,7 +121,12 @@ function App() {
         phone: data.user?.phone || phone,
         plan: data.user?.plan,
         status: data.user?.status,
+        role: data.user?.role || 'user',
       })
+      if (createdUser.role === 'admin') {
+        window.location.href = ADMIN_PANEL_URL
+        return
+      }
       persistAndLoginUser(createdUser)
       setSignupForm({ name: '', email: '', phone: '' })
     } catch {
@@ -166,7 +173,12 @@ function App() {
         phone: data.user?.phone || '',
         plan: data.user?.plan,
         status: data.user?.status,
+        role: data.user?.role || 'user',
       })
+      if (loggedInUser.role === 'admin') {
+        window.location.href = ADMIN_PANEL_URL
+        return
+      }
       persistAndLoginUser(loggedInUser)
       setLoginForm({ identifier: '' })
     } catch {

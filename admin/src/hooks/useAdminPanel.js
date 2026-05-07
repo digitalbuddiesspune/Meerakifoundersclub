@@ -229,7 +229,10 @@ function useAdminPanel() {
         throw new Error("Failed to fetch users");
       }
       const result = await response.json();
-      setUsersList(Array.isArray(result) ? result : []);
+      const visibleUsers = Array.isArray(result)
+        ? result.filter((user) => String(user?.role || "user").toLowerCase() !== "admin")
+        : [];
+      setUsersList(visibleUsers);
     } catch (error) {
       setUsersList([]);
       setUsersError(error.message || "Cannot connect to user API");
