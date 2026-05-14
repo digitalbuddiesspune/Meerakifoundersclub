@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL } from "../config/apiBaseUrl.js";
 const ADMIN_AUTH_STORAGE_KEY = "mfc_admin_auth_user";
 
 const initialForm = {

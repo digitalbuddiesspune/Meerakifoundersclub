@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL } from "../config/apiBaseUrl.js";
 const PROGRESS_OPTIONS = ["Pending", "In Progress", "Applied", "Issued", "Closed"];
 
 function formatDate(iso) {

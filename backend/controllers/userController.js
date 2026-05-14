@@ -18,6 +18,40 @@ const sanitizeUser = (user) => ({
   role: user.role || "user",
 });
 
+/** Emails that should always resolve to admin on login (legacy rows missing role, or after signup). */
+const parseBootstrapAdminEmails = () => {
+  const fromEnv = String(process.env.ADMIN_BOOTSTRAP_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  const defaults = ["admin@meraakifoundersclub.com"];
+  return [...new Set([...defaults, ...fromEnv])];
+};
+
+const findUserForLogin = async (identifier) => {
+  const trimmed = String(identifier ?? "").trim();
+  const lower = trimmed.toLowerCase();
+
+  if (lower.includes("@")) {
+    return User.findOne({ email: lower });
+  }
+
+  const digits = trimmed.replace(/\D/g, "");
+  const phoneCandidates = new Set();
+  if (trimmed) phoneCandidates.add(trimmed);
+  if (digits) {
+    phoneCandidates.add(digits);
+    if (digits.length >= 10) phoneCandidates.add(digits.slice(-10));
+  }
+
+  const list = [...phoneCandidates];
+  if (list.length === 0) {
+    return null;
+  }
+
+  return User.findOne({ phone: { $in: list } });
+};
+
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -72,13 +106,23 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Email or phone is required" });
     }
 
-    const normalizedIdentifier = String(identifier).trim().toLowerCase();
-    const user = await User.findOne({
-      $or: [{ email: normalizedIdentifier }, { phone: normalizedIdentifier }],
-    });
+    let user = await findUserForLogin(identifier);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
+    }
+
+    const bootstrapEmails = parseBootstrapAdminEmails();
+    const emailLc = String(user.email || "").toLowerCase();
+    if (bootstrapEmails.includes(emailLc) && user.role !== "admin") {
+      const updated = await User.findByIdAndUpdate(
+        user._id,
+        { $set: { role: "admin" } },
+        { returnDocument: "after", runValidators: true }
+      );
+      if (updated) {
+        user = updated;
+      }
     }
 
     return res.status(200).json({
