@@ -34,7 +34,94 @@ function ContactUs() {
   }, [API_BASE_URL])
 
   return (
-    <section className="min-h-[70vh] bg-white">
+    <>
+      {/* ── Dark hero banner ── */}
+      <section className="relative overflow-hidden bg-[#070D1A] px-4 py-20 text-white md:py-28">
+        {/* Grid pattern */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(242,101,39,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.06) 1px, transparent 1px)',
+            backgroundSize: '64px 64px',
+          }}
+        />
+        {/* Orbs */}
+        <div
+          className="pointer-events-none absolute -top-32 right-[6%] h-[460px] w-[460px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(242,101,39,0.2) 0%, transparent 70%)' }}
+        />
+        <div
+          className="pointer-events-none absolute -bottom-24 -left-20 h-[360px] w-[360px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%)' }}
+        />
+
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 md:grid-cols-2">
+          {/* Left: text */}
+          <div>
+            <p className="mb-5 inline-flex items-center rounded-full border border-[#F26527]/40 bg-[#F26527]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-[#FF9C73]">
+              ✦ &nbsp; Contact Us
+            </p>
+            <h1 className="text-[clamp(2rem,4.5vw,3.5rem)] font-extrabold leading-[1.08] tracking-tight">
+              Let&apos;s Build Something{' '}
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg,#F26527,#FFB382)' }}
+              >
+                Great Together
+              </span>
+            </h1>
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-white/55 md:text-lg">
+              Share your requirement and get a founder-friendly execution plan from our team. No commitments, just clarity.
+            </p>
+
+            {/* Quick contact pills */}
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="mailto:info@meraakifoundersclub.com"
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-5 py-2.5 text-sm font-medium text-white/80 transition hover:border-[#F26527]/40 hover:bg-[#F26527]/10 hover:text-[#FF9C73]"
+              >
+                📧 info@meraakifoundersclub.com
+              </a>
+              <a
+                href="tel:+919970570102"
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-5 py-2.5 text-sm font-medium text-white/80 transition hover:border-[#F26527]/40 hover:bg-[#F26527]/10 hover:text-[#FF9C73]"
+              >
+                📞 +91 99705 70102
+              </a>
+            </div>
+          </div>
+
+          {/* Right: hero image */}
+          <div className="relative hidden md:block">
+            {/* Glow halo */}
+            <div
+              className="absolute -inset-3 rounded-3xl blur-2xl"
+              style={{ background: 'linear-gradient(135deg,rgba(242,101,39,0.28),rgba(255,140,66,0.2))' }}
+            />
+            {/* Floating badge */}
+            <div className="absolute -bottom-5 -left-5 z-20 flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 shadow-xl backdrop-blur">
+              <span className="text-sm">⚡</span>
+              <span className="text-xs font-bold text-white">Quick 24h Response</span>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80"
+              alt="Startup team at work"
+              className="relative h-[300px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[400px]"
+            />
+          </div>
+        </div>
+
+        {/* Wave divider */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0" style={{ lineHeight: 0 }}>
+          <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
+            <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill="#ffffff" />
+          </svg>
+        </div>
+      </section>
+
+      {/* ── Contact content ── */}
+      <section className="min-h-[60vh] bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-10 md:px-0 md:py-14">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
           <div
@@ -126,6 +213,7 @@ function ContactUs() {
         </div>
       </div>
     </section>
+    </>
   )
 }
 

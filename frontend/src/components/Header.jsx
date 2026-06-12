@@ -21,6 +21,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
   const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_URL
   const hasActivePlan = Boolean(authUser?.plan) && String(authUser?.status || '').toLowerCase() === 'active'
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -94,9 +95,10 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
     onOpenAuth()
   }
 
+
   return (
     <header
-      className={`sticky top-0 z-[100] bg-white md:backdrop-blur transition-transform duration-300 ease-out ${
+      className={`sticky top-0 z-[100] bg-white border-b border-slate-100 shadow-sm transition-transform duration-300 ease-out ${
         hidden && !isMobileMenuOpen ? '-translate-y-full pointer-events-none' : ''
       }`}
     >
@@ -148,9 +150,8 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
         </Link>
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-5 text-sm font-medium md:flex">
-         
-          <Link to="/about-us" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">About Us</Link>
-          <Link to="/community" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Community</Link>
+          <Link to="/about-us" onClick={scrollToTop} className="text-slate-700 transition hover:text-[#F26527]">About Us</Link>
+          <Link to="/community" onClick={scrollToTop} className="text-slate-700 transition hover:text-[#F26527]">Community</Link>
           <div
             ref={servicesMenuRef}
             className="relative"
@@ -160,19 +161,19 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             <button
               type="button"
               onClick={goToServicesPage}
-              className="text-black transition hover:text-[#F26527]"
+              className="text-slate-700 transition hover:text-[#F26527]"
             >
               Services
             </button>
             {isServicesOpen ? (
-              <div className="absolute left-0 top-full w-72 rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+              <div className="absolute left-0 top-full mt-1 w-72 rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
                 {services.length > 0 ? (
                   services.map((service) => (
                     <button
                       key={service._id}
                       type="button"
                       onClick={() => goToServiceDetails(service.name)}
-                      className="block w-full rounded-lg px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-slate-100"
+                      className="block w-full rounded-lg px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-slate-100 hover:text-[#F26527]"
                     >
                       {service.name}
                     </button>
@@ -183,12 +184,12 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
               </div>
             ) : null}
           </div>
-          <Link to="/contact-us" onClick={scrollToTop} className="text-black transition hover:text-[#F26527]">Contact</Link>
+          <Link to="/contact-us" onClick={scrollToTop} className="text-slate-700 transition hover:text-[#F26527]">Contact</Link>
           {isAuthenticated && hasActivePlan ? (
             <Link
               to="/user/dashboard"
               onClick={scrollToTop}
-              className="rounded-full border border-[#F26527] bg-[#FFF3EE] px-3 py-1.5 text-[#F26527] transition hover:bg-[#F26527] hover:text-white"
+              className="rounded-full border border-[#F26527]/60 bg-[#F26527]/15 px-3 py-1.5 text-[#F26527] transition hover:bg-[#F26527] hover:text-white"
             >
               Dashboard
             </Link>
@@ -200,7 +201,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
             <button
               type="button"
               onClick={handleAccountClick}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-800 text-white transition hover:border-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/60 bg-slate-800 text-white transition hover:bg-[#F26527]"
               aria-label="User account"
             >
               {authUser?.name ? authUser.name[0].toUpperCase() : 'U'}
@@ -217,7 +218,7 @@ function Header({ hidden = false, isAuthenticated, authUser, onOpenAuth }) {
           {!isAuthenticated ? (
             <a
               href="/partners"
-              className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-emerald-400 text-white"
+              className="rounded-full bg-[#F26527] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#d9551f]"
             >
               Become a Partner
             </a>

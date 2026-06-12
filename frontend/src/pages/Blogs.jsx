@@ -56,34 +56,105 @@ function Blogs() {
 
   return (
     <main className="min-h-screen bg-[#FAFAF8] text-[#0F0F0D]">
-      <section className="relative overflow-hidden bg-[#0F0F0D] px-4 py-16 text-white md:py-20">
+      <section className="relative overflow-hidden bg-[#070D1A] px-4 py-20 text-white md:py-28">
+        {/* Grid pattern */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(242,101,39,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.08) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
+              'linear-gradient(rgba(242,101,39,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.07) 1px, transparent 1px)',
+            backgroundSize: '64px 64px',
           }}
         />
+        {/* Orbs */}
         <div
-          className="pointer-events-none absolute -top-24 right-[10%] h-[460px] w-[460px] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(242,101,39,0.25) 0%, transparent 70%)' }}
+          className="pointer-events-none absolute -top-28 right-[8%] h-[500px] w-[500px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(242,101,39,0.24) 0%, transparent 70%)' }}
         />
         <div
-          className="pointer-events-none absolute -bottom-20 -left-20 h-[340px] w-[340px] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%)' }}
+          className="pointer-events-none absolute -bottom-24 -left-24 h-[380px] w-[380px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(255,140,66,0.14) 0%, transparent 70%)' }}
         />
+        {/* Wavy accent */}
+        <svg
+          className="pointer-events-none absolute right-0 top-8 hidden h-56 w-64 opacity-10 md:block"
+          viewBox="0 0 200 200" fill="none"
+        >
+          {[40, 80, 120, 160].map((y, i) => (
+            <path
+              key={y}
+              d={`M0 ${y} Q100 ${y - 40} 200 ${y}`}
+              stroke="#F26527"
+              strokeWidth="1.5"
+              strokeOpacity={0.7 - i * 0.12}
+            />
+          ))}
+        </svg>
 
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="inline-flex rounded-full border border-[#F26527]/40 bg-[#F26527]/10 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF9C73]">
-            Blogs
-          </p>
-          <h1 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
-            Insights For <span className="text-[#F26527]">Founders</span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-white/65 md:text-base">
-            Explore practical startup guides, compliance updates, growth ideas, and founder stories.
-          </p>
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 md:grid-cols-2">
+          {/* Left: text */}
+          <div>
+            <p className="mb-5 inline-flex items-center rounded-full border border-[#F26527]/40 bg-[#F26527]/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FF9C73]">
+              ✦ &nbsp; Meraaki Blog
+            </p>
+            <h1 className="text-[clamp(2.4rem,5.5vw,4.2rem)] font-extrabold leading-[1.06] tracking-tight">
+              Insights For{' '}
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg,#F26527,#FFB382)' }}
+              >
+                Founders
+              </span>
+            </h1>
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-white/55 md:text-lg">
+              Practical startup guides, compliance updates, growth playbooks, and real founder stories — written for builders, not buzzwords.
+            </p>
+
+            {/* Mini stats */}
+            <div className="mt-8 flex flex-wrap gap-6">
+              {[
+                { val: '50+', label: 'Articles' },
+                { val: '10+', label: 'Categories' },
+                { val: '5K+', label: 'Monthly Readers' },
+              ].map((s) => (
+                <div key={s.label}>
+                  <p
+                    className="text-2xl font-extrabold"
+                    style={{ backgroundImage: 'linear-gradient(135deg,#F26527,#FFB382)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
+                  >
+                    {s.val}
+                  </p>
+                  <p className="mt-0.5 text-xs font-medium uppercase tracking-widest text-white/40">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: hero image */}
+          <div className="relative hidden md:block">
+            {/* Glow halo */}
+            <div
+              className="absolute -inset-3 rounded-3xl blur-2xl"
+              style={{ background: 'linear-gradient(135deg,rgba(242,101,39,0.28),rgba(255,140,66,0.2))' }}
+            />
+            {/* Floating badge */}
+            <div className="absolute -bottom-5 -left-5 z-20 flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 shadow-xl backdrop-blur">
+              <span className="text-sm">✍️</span>
+              <span className="text-xs font-bold text-white">50+ Founder Guides</span>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80"
+              alt="Founder reading insights"
+              className="relative h-[320px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[420px]"
+            />
+          </div>
+        </div>
+
+        {/* Bottom wave divider */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0" style={{ lineHeight: 0 }}>
+          <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
+            <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill="#FAFAF8" />
+          </svg>
         </div>
       </section>
 

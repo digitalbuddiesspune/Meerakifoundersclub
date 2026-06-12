@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Sparkles, Users, Clock, CalendarDays } from 'lucide-react'
 
 const communityBenefits = [
   {
@@ -122,80 +123,7 @@ const style = `
   .com-root * { box-sizing: border-box; }
   .com-root { font-family: 'Montserrat', sans-serif; background: #FAFAF8; color: #0F0F0D; }
 
-  /* ── Hero ── */
-  .hero {
-    position: relative;
-    overflow: hidden;
-    background: #0F0F0D;
-    padding: 100px 0 80px;
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(242,101,39,0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(242,101,39,0.08) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-  .hero-orb-1 {
-    position: absolute; top: -80px; right: 10%;
-    width: 480px; height: 480px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(242,101,39,0.25) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-orb-2 {
-    position: absolute; bottom: -60px; left: -80px;
-    width: 360px; height: 360px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    position: relative; max-width: 1280px; margin: 0 auto;
-  }
-  .hero-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid rgba(242,101,39,0.4);
-    background: rgba(242,101,39,0.1);
-    padding: 6px 14px; border-radius: 100px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
-    text-transform: uppercase; color: #FF9C73;
-    font-family: 'Montserrat', sans-serif;
-  }
-  .hero-pill::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: #F26527; animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.4); }
-  }
-  .hero-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(38px, 6vw, 76px);
-    font-weight: 800; line-height: 1.0; margin-top: 20px;
-    color: #ffffff; letter-spacing: -0.02em;
-  }
-  .hero-title em {
-    font-style: normal;
-    background: linear-gradient(110deg, #F26527, #FFB382 60%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-sub {
-    margin-top: 20px; font-size: 16px; line-height: 1.65;
-    color: rgba(255,255,255,0.55); max-width: 560px; font-weight: 300;
-  }
-  .hero-stats {
-    display: flex; gap: 40px; margin-top: 48px; flex-wrap: wrap;
-  }
-  .hero-stat-val {
-    font-family: 'Montserrat', sans-serif; font-size: 36px;
-    font-weight: 800; color: #fff;
-  }
-  .hero-stat-val span { color: #F26527; }
-  .hero-stat-label {
-    font-size: 12px; color: rgba(255,255,255,0.4);
-    letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px;
-  }
+  /* hero handled inline */
 
   /* ── Section wrapper ── */
   .section { padding: 80px 0; }
@@ -453,32 +381,93 @@ function Community() {
       <main className="com-root">
 
         {/* ── HERO ── */}
-        <section className="hero">
-          <div className="hero-grid" />
-          <div className="hero-orb-1" />
-          <div className="hero-orb-2" />
-          <div className="hero-inner px-4 md:px-0">
-            <div className="hero-pill">Community</div>
-            <h1 className="hero-title">
-              Where Founders<br /><em>Build Together</em>
-            </h1>
-            <p className="hero-sub">
-              500+ founders, mentors, and partners in one tight-knit ecosystem. Real support. Real connections. Real growth.
-            </p>
-            <div className="hero-stats">
-              <div>
-                <div className="hero-stat-val">500<span>+</span></div>
-                <div className="hero-stat-label">Active Members</div>
-              </div>
-              <div>
-                <div className="hero-stat-val">24<span>h</span></div>
-                <div className="hero-stat-label">Mentor Response</div>
-              </div>
-              <div>
-                <div className="hero-stat-val">12<span>+</span></div>
-                <div className="hero-stat-label">Events Per Year</div>
+        <section className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-[#070D1A] px-4 pb-24 pt-14 md:px-8">
+          {/* Grid pattern */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(242,101,39,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.06) 1px, transparent 1px)',
+              backgroundSize: '64px 64px',
+            }}
+          />
+          {/* Orbs */}
+          <div
+            className="pointer-events-none absolute -top-32 right-[6%] h-[460px] w-[460px] rounded-full"
+            style={{ background: 'radial-gradient(circle, rgba(242,101,39,0.2) 0%, transparent 70%)' }}
+          />
+          <div
+            className="pointer-events-none absolute -bottom-24 -left-20 h-[360px] w-[360px] rounded-full"
+            style={{ background: 'radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%)' }}
+          />
+
+          <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-4 md:grid-cols-2 md:px-8">
+            {/* Left: text */}
+            <div className="flex flex-col items-start text-left">
+              <p className="mb-5 inline-flex items-center rounded-full border border-[#F26527]/40 bg-[#F26527]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#FF9C73]">
+                <Sparkles size={13} className="mr-2" />
+                Community
+              </p>
+              <h1 className="text-[clamp(2rem,4.5vw,3.5rem)] font-extrabold leading-[1.08] tracking-tight text-white">
+                Where Founders{' '}
+                <span className="relative inline-block">
+                  <span
+                    className="relative z-10 bg-clip-text text-transparent"
+                    style={{ backgroundImage: 'linear-gradient(135deg,#F26527,#FFB382)' }}
+                  >
+                    Build Together
+                  </span>
+                  <span
+                    className="absolute bottom-1 left-0 right-0 -z-10 h-2.5 rounded"
+                    style={{ background: 'linear-gradient(90deg,rgba(242,101,39,0.25),rgba(255,179,130,0.25))' }}
+                  />
+                </span>
+              </h1>
+              <p className="mt-5 text-base leading-relaxed text-white/55 md:text-lg">
+                500+ founders, mentors, and partners in one tight-knit ecosystem. Real support. Real connections. Real growth.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                {[
+                  { icon: Users,        val: '500+', label: 'Active Members' },
+                  { icon: Clock,        val: '24h',  label: 'Mentor Response' },
+                  { icon: CalendarDays, val: '12+',  label: 'Events Per Year' },
+                // eslint-disable-next-line no-unused-vars
+              ].map(({ icon: StatIcon, val, label }) => (
+                  <div key={label} className="flex items-center gap-2 text-sm font-medium text-white/65">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F26527]/20 text-[#F26527]">
+                      <StatIcon size={13} />
+                    </span>
+                    <span>{val} {label}</span>
+                  </div>
+                ))}
               </div>
             </div>
+
+            {/* Right: hero image */}
+            <div className="relative hidden md:block">
+              {/* Glow halo */}
+              <div
+                className="absolute -inset-3 rounded-3xl blur-2xl"
+                style={{ background: 'linear-gradient(135deg,rgba(242,101,39,0.28),rgba(255,140,66,0.2))' }}
+              />
+              {/* Floating badge */}
+              <div className="absolute -bottom-5 -left-5 z-20 flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 shadow-xl backdrop-blur">
+                <span className="text-sm">🤝</span>
+                <span className="text-xs font-bold text-white">500+ Active Founders</span>
+              </div>
+              <img
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
+                alt="Founder community networking"
+                className="relative h-[320px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[440px]"
+              />
+            </div>
+          </div>
+
+          {/* Wave divider to light content below */}
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0" style={{ lineHeight: 0 }}>
+            <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
+              <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill="#FAFAF8" />
+            </svg>
           </div>
         </section>
 

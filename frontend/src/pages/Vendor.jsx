@@ -146,22 +146,32 @@ const notAccepted = [
 const style = `
   .partners-root * { box-sizing: border-box; }
   .partners-root { font-family: 'Montserrat', sans-serif; background: #FAFAF8; color: #0F0F0D; }
-  .hero { position: relative; overflow: hidden; background: #0F0F0D; padding: 100px 0 80px; }
-  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(242,101,39,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.08) 1px, transparent 1px); background-size: 60px 60px; }
-  .hero-orb-1 { position: absolute; top: -80px; right: 10%; width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, rgba(242,101,39,0.25) 0%, transparent 70%); }
-  .hero-orb-2 { position: absolute; bottom: -60px; left: -80px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%); }
+  .hero { position: relative; overflow: hidden; background: #070D1A; padding: 100px 0 100px; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(242,101,39,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.07) 1px, transparent 1px); background-size: 64px 64px; }
+  .hero-orb-1 { position: absolute; top: -100px; right: 6%; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(242,101,39,0.22) 0%, transparent 70%); }
+  .hero-orb-2 { position: absolute; bottom: -80px; left: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,140,66,0.14) 0%, transparent 70%); }
   .hero-inner, .inner { max-width: 1280px; margin: 0 auto; position: relative; }
   .hero-pill, .sec-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F26527; }
   .hero-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(242,101,39,0.4); background: rgba(242,101,39,0.1); padding: 6px 14px; border-radius: 999px; color: #FF9C73; }
   .hero-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #F26527; }
   .hero-title, .sec-title { font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; line-height: 1.05; }
-  .hero-title { margin-top: 20px; font-size: clamp(38px, 6vw, 74px); font-weight: 800; color: #fff; }
+  .hero-title { margin-top: 20px; font-size: clamp(36px, 5.5vw, 68px); font-weight: 800; color: #fff; }
   .hero-title em { font-style: normal; background: linear-gradient(110deg, #F26527, #FFB382 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero-sub { margin-top: 18px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.58); max-width: 720px; }
+  .hero-sub { margin-top: 18px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.55); max-width: 560px; }
   .hero-stats { display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
   .hero-stat-val { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 800; color: #fff; }
   .hero-stat-val span { color: #F26527; }
   .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
+  .hero-right-cards { display: none; }
+  @media (min-width: 768px) {
+    .hero-layout { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; }
+    .hero-right-cards { display: flex; flex-direction: column; gap: 14px; }
+  }
+  .hero-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; transition: background 0.25s, border-color 0.25s; }
+  .hero-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(242,101,39,0.3); }
+  .hero-card-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(242,101,39,0.15); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .hero-card-title { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #fff; }
+  .hero-card-desc { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.5; margin-top: 3px; }
   .section { padding: 80px 0; }
   .section + .section { border-top: 1px solid #EBEBEA; }
   .sec-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: #0F0F0D; margin-top: 10px; }
@@ -279,25 +289,60 @@ function Vendor() {
           <div className="hero-orb-1" />
           <div className="hero-orb-2" />
           <div className="hero-inner px-6 md:px-0">
-            <div className="hero-pill">Partners</div>
-            <h1 className="hero-title">
-              Join Our Partner Network<br /><em>And Grow Faster</em>
-            </h1>
-            <p className="hero-sub">
-              Reach verified founders actively looking for your services. No middlemen. No commissions. Just direct, paying clients.
-            </p>
-            <div className="hero-stats">
+            <div className="hero-layout">
+              {/* Left: text */}
               <div>
-                <div className="hero-stat-val">10<span>+</span></div>
-                <div className="hero-stat-label">Active  Partners</div>
+                <div className="hero-pill">Partners</div>
+                <h1 className="hero-title">
+                  Join Our Partner Network<br /><em>And Grow Faster</em>
+                </h1>
+                <p className="hero-sub">
+                  Reach verified founders actively looking for your services. No middlemen. No commissions. Just direct, paying clients.
+                </p>
+                <div className="hero-stats">
+                  <div>
+                    <div className="hero-stat-val">10<span>+</span></div>
+                    <div className="hero-stat-label">Active Partners</div>
+                  </div>
+                  <div>
+                    <div className="hero-stat-val">20<span>+</span></div>
+                    <div className="hero-stat-label">Services</div>
+                  </div>
+                  <div>
+                    <div className="hero-stat-val">10<span>+</span></div>
+                    <div className="hero-stat-label">Active Mentors</div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <div className="hero-stat-val">20<span>+</span></div>
-                <div className="hero-stat-label">Services</div>
-              </div>
-              <div>
-                <div className="hero-stat-val">10<span>+</span></div>
-                <div className="hero-stat-label">Active Mentors</div>
+
+              {/* Right: hero image */}
+              <div className="hero-right-cards" style={{ position: 'relative' }}>
+                {/* Glow halo */}
+                <div style={{
+                  position: 'absolute', inset: '-12px', borderRadius: '24px',
+                  background: 'linear-gradient(135deg,rgba(242,101,39,0.28),rgba(255,140,66,0.2))',
+                  filter: 'blur(24px)',
+                }} />
+                {/* Floating badge */}
+                <div style={{
+                  position: 'absolute', bottom: '-20px', left: '-20px', zIndex: 20,
+                  display: 'flex', alignItems: 'center', gap: '8px',
+                  background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: '16px', padding: '10px 16px', backdropFilter: 'blur(12px)',
+                }}>
+                  <span style={{ fontSize: '14px' }}>🤝</span>
+                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#fff' }}>10+ Active Partners</span>
+                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+                  alt="Partner network"
+                  style={{
+                    position: 'relative', width: '100%', height: '420px',
+                    objectFit: 'cover', borderRadius: '24px',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    boxShadow: '0 25px 60px rgba(0,0,0,0.4)',
+                  }}
+                />
               </div>
             </div>
           </div>

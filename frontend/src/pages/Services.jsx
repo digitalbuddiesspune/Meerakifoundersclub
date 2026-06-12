@@ -35,7 +35,7 @@ function FloatingOrbs() {
           height: 420,
           top: '-120px',
           right: '-80px',
-          background: 'radial-gradient(circle, rgba(103,232,249,0.18) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(242,101,39,0.2) 0%, transparent 70%)',
           animation: 'floatOrb1 9s ease-in-out infinite',
         }}
       />
@@ -46,7 +46,7 @@ function FloatingOrbs() {
           height: 320,
           bottom: '-60px',
           left: '-60px',
-          background: 'radial-gradient(circle, rgba(217,70,239,0.13) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255,140,66,0.13) 0%, transparent 70%)',
           animation: 'floatOrb2 11s ease-in-out infinite',
         }}
       />
@@ -57,7 +57,7 @@ function FloatingOrbs() {
           height: 200,
           top: '45%',
           left: '38%',
-          background: 'radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(242,101,39,0.08) 0%, transparent 70%)',
           animation: 'floatOrb3 13s ease-in-out infinite',
         }}
       />
@@ -69,12 +69,12 @@ function FloatingOrbs() {
 function GridLines() {
   return (
     <svg
-      className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.06]"
+      className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.07]"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
         <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0e7490" strokeWidth="0.8" />
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#F26527" strokeWidth="0.8" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#grid)" />
@@ -93,7 +93,7 @@ function DotPattern({ className = '' }) {
     >
       <defs>
         <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1.5" fill="#0e7490" />
+          <circle cx="2" cy="2" r="1.5" fill="#F26527" />
         </pattern>
       </defs>
       <rect width="240" height="240" fill="url(#dots)" />
@@ -321,21 +321,21 @@ function Services() {
           {/* ══════════════════════════════════════════════════════════
               HERO SECTION
           ══════════════════════════════════════════════════════════ */}
-          <section className="relative z-10 overflow-hidden bg-white px-4 py-14 md:px-8 md:py-20">
+          <section className="relative z-10 overflow-hidden bg-[#070D1A] px-4 py-14 md:px-8 md:py-20">
             <FloatingOrbs />
             <GridLines />
             <DotPattern className="right-10 top-24" />
 
             {/* Decorative spinning ring */}
             <div className="pointer-events-none absolute right-0 top-0 hidden md:block"
-              style={{ width: 340, height: 340, opacity: 0.15 }}>
+              style={{ width: 340, height: 340, opacity: 0.18 }}>
               <svg className="spin-slow h-full w-full" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="170" cy="170" r="160" stroke="url(#ringGrad)" strokeWidth="1.5" strokeDasharray="14 8" />
                 <circle cx="170" cy="170" r="120" stroke="url(#ringGrad)" strokeWidth="1" strokeDasharray="8 12" />
                 <defs>
                   <linearGradient id="ringGrad" x1="0" y1="0" x2="340" y2="340" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#06b6d4" />
-                    <stop offset="1" stopColor="#818cf8" />
+                    <stop stopColor="#F26527" />
+                    <stop offset="1" stopColor="#FFB382" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -343,14 +343,14 @@ function Services() {
 
             {/* Wavy lines SVG accent */}
             <svg
-              className="pointer-events-none absolute right-0 top-10 hidden h-64 w-72 opacity-20 md:block"
+              className="pointer-events-none absolute right-0 top-10 hidden h-64 w-72 opacity-15 md:block"
               viewBox="0 0 200 200" fill="none"
             >
               {[50, 90, 130, 170].map((y, i) => (
                 <path
                   key={y}
                   d={`M0 ${y} Q100 ${y - 50} 200 ${y}`}
-                  stroke={['#c4b5fd', '#93c5fd', '#67e8f9', '#a5f3fc'][i]}
+                  stroke={['#FFB382', '#FF8C42', '#F26527', '#E8521F'][i]}
                   strokeWidth="2"
                   style={{ animationDelay: `${i * 0.3}s` }}
                 />
@@ -360,25 +360,25 @@ function Services() {
             <div className="mx-auto grid w-full max-w-7xl items-center gap-8 md:gap-10 md:grid-cols-2">
               {/* Left copy */}
               <div>
-                <p className="hero-badge shimmer-tag badge-pulse inline-flex items-center rounded-full border border-cyan-300/40 bg-cyan-300/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">
-                  <Sparkles size={13} className="mr-2 text-cyan-500" />
+                <p className="hero-badge inline-flex items-center rounded-full border border-[#F26527]/40 bg-[#F26527]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#FF9C73]">
+                  <Sparkles size={13} className="mr-2 text-[#F26527]" />
                   Premium Startup Services
                 </p>
 
-                <h1 className="hero-h1 mt-5 text-2xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-[2.75rem]">
+                <h1 className="hero-h1 mt-5 text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-3xl md:text-[2.75rem]">
                   Build, Fund and{' '}
                   <span className="relative inline-block">
                     <span className="relative z-10 text-transparent bg-clip-text"
-                      style={{ backgroundImage: 'linear-gradient(135deg,#06b6d4,#818cf8)' }}>
+                      style={{ backgroundImage: 'linear-gradient(135deg,#F26527,#FFB382)' }}>
                       Scale Your Startup
                     </span>
-                    <span className="absolute bottom-1 left-0 right-0 h-3 -z-10 rounded"
-                      style={{ background: 'linear-gradient(90deg,rgba(6,182,212,0.14),rgba(129,140,248,0.14))' }} />
+                    <span className="absolute bottom-1 left-0 right-0 h-2.5 -z-10 rounded"
+                      style={{ background: 'linear-gradient(90deg,rgba(242,101,39,0.25),rgba(255,179,130,0.25))' }} />
                   </span>{' '}
                   With Confidence
                 </h1>
 
-                <p className="hero-p mt-5 max-w-xl text-base leading-relaxed text-slate-500">
+                <p className="hero-p mt-5 max-w-xl text-base leading-relaxed text-white/55">
                   From launch strategy to investor readiness and growth execution, our experts partner with you at every
                   stage of your business journey.
                 </p>
@@ -392,8 +392,8 @@ function Services() {
                   ].map((item) => {
                     const ServiceIcon = item.icon
                     return (
-                      <div key={item.label} className="flex items-center gap-2 text-sm font-medium text-slate-600">
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-100 text-cyan-600">
+                      <div key={item.label} className="flex items-center gap-2 text-sm font-medium text-white/65">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F26527]/20 text-[#F26527]">
                           <ServiceIcon size={13} />
                         </span>
                         {item.label}
@@ -406,17 +406,17 @@ function Services() {
                   <button
                     type="button"
                     onClick={scrollToExpertServices}
-                    className="btn-shine inline-flex items-center rounded-full px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition-all hover:scale-105 hover:shadow-cyan-300/40"
-                    style={{ background: 'linear-gradient(135deg,#22d3ee,#818cf8)' }}
+                    className="btn-shine inline-flex items-center rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-xl transition-all hover:scale-105 hover:shadow-[#F26527]/30"
+                    style={{ background: 'linear-gradient(135deg,#F26527,#FF8C42)' }}
                   >
                     Explore Services
                     <ArrowRight size={15} className="ml-2" />
                   </button>
                   <a
                     href="mailto:info@meraakifoundersclub.com"
-                    className="inline-flex items-center rounded-full border border-slate-200 bg-white/80 px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition-all hover:border-cyan-400 hover:bg-cyan-50 hover:scale-105"
+                    className="inline-flex items-center rounded-full border border-white/20 bg-white/[0.07] px-7 py-3.5 text-sm font-semibold text-white/90 backdrop-blur transition-all hover:bg-white/[0.13] hover:border-white/30 hover:scale-105"
                   >
-                    <Handshake size={15} className="mr-2 text-cyan-600" />
+                    <Handshake size={15} className="mr-2 text-[#F26527]" />
                     Free Consultation
                   </a>
                 </div>
@@ -426,21 +426,21 @@ function Services() {
               <div className="hero-img relative">
                 {/* Glow halo */}
                 <div className="absolute -inset-3 rounded-3xl blur-2xl"
-                  style={{ background: 'linear-gradient(135deg,rgba(6,182,212,0.28),rgba(129,140,248,0.22))' }} />
+                  style={{ background: 'linear-gradient(135deg,rgba(242,101,39,0.28),rgba(255,140,66,0.2))' }} />
                 {/* Floating badge */}
-                <div className="absolute -bottom-5 -left-5 z-20 flex items-center gap-2 rounded-2xl border border-white/60 bg-white/90 px-4 py-2.5 shadow-xl backdrop-blur">
-                  <Zap size={14} className="text-amber-500" />
-                  <span className="text-xs font-bold text-slate-800">Trusted by 100+ Founders</span>
+                <div className="absolute -bottom-5 -left-5 z-20 flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 shadow-xl backdrop-blur">
+                  <Zap size={14} className="text-[#F26527]" />
+                  <span className="text-xs font-bold text-white">Trusted by 100+ Founders</span>
                 </div>
                 <img
                   src={heroImageUrl}
                   alt="Service strategy discussion"
-                  className="relative h-[260px] w-full rounded-3xl border border-white/60 object-cover shadow-2xl sm:h-[320px] md:h-[420px]"
+                  className="relative h-[260px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl sm:h-[320px] md:h-[420px]"
                 />
               </div>
             </div>
 
-            <WaveDivider color="#f1f5f9" />
+            <WaveDivider color="#ffffff" />
           </section>
 
           {/* ══════════════════════════════════════════════════════════

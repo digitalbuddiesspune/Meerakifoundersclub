@@ -40,19 +40,98 @@ function Memberships() {
   }, [API_BASE_URL])
 
   return (
-    <main className="min-h-screen bg-[#FAFAF8] px-4 py-14 md:px-8 md:py-20">
-      <section className="mx-auto w-full max-w-7xl">
-        <div className="text-center">
-          <p className="inline-flex items-center rounded-full border border-[#F26527]/30 bg-[#F26527]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F26527]">
-            Membership
-          </p>
-          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-[#0F0F0D] md:text-5xl">
-            Choose Your Plan
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
-            Access founder-first benefits, exclusive events, and practical support with a plan that fits your startup stage.
-          </p>
+    <main className="min-h-screen">
+      {/* ── Dark hero header ── */}
+      <section className="relative overflow-hidden bg-[#070D1A] px-4 py-20 text-white md:py-28">
+        {/* Grid pattern */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(242,101,39,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(242,101,39,0.06) 1px, transparent 1px)',
+            backgroundSize: '64px 64px',
+          }}
+        />
+        {/* Orbs */}
+        <div
+          className="pointer-events-none absolute -top-32 right-[8%] h-[460px] w-[460px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(242,101,39,0.2) 0%, transparent 70%)' }}
+        />
+        <div
+          className="pointer-events-none absolute -bottom-24 -left-20 h-[360px] w-[360px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(255,140,66,0.12) 0%, transparent 70%)' }}
+        />
+
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 md:grid-cols-2">
+          {/* Left: text */}
+          <div>
+            <p className="mb-5 inline-flex items-center rounded-full border border-[#F26527]/40 bg-[#F26527]/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#FF9C73]">
+              ✦ &nbsp; Membership Plans
+            </p>
+            <h1 className="text-[clamp(2rem,4.5vw,3.5rem)] font-extrabold leading-[1.08] tracking-tight">
+              Choose Your{' '}
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg,#F26527,#FFB382)' }}
+              >
+                Plan
+              </span>
+            </h1>
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-white/55 md:text-lg">
+              Access founder-first benefits, exclusive events, and practical support with a plan that fits your startup stage.
+            </p>
+
+            {/* Value highlights */}
+            <div className="mt-8 flex flex-wrap gap-3">
+              {[
+                { icon: '🤝', label: 'Expert Mentors' },
+                { icon: '📅', label: 'Exclusive Events' },
+                { icon: '⚡', label: 'Priority Support' },
+                { icon: '🌐', label: 'Partner Network' },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-2 rounded-full border border-white/[0.09] bg-white/[0.05] px-4 py-2 text-sm font-medium text-white/65"
+                >
+                  <span>{item.icon}</span>
+                  {item.label}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: hero image */}
+          <div className="relative hidden md:block">
+            {/* Glow halo */}
+            <div
+              className="absolute -inset-3 rounded-3xl blur-2xl"
+              style={{ background: 'linear-gradient(135deg,rgba(242,101,39,0.28),rgba(255,140,66,0.2))' }}
+            />
+            {/* Floating badge */}
+            <div className="absolute -bottom-5 -left-5 z-20 flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 shadow-xl backdrop-blur">
+              <span className="text-sm">🚀</span>
+              <span className="text-xs font-bold text-white">Plans Starting at ₹999</span>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80"
+              alt="Startup growth and success"
+              className="relative h-[300px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[400px]"
+            />
+          </div>
         </div>
+
+        {/* Wave divider */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0" style={{ lineHeight: 0 }}>
+          <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
+            <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill="#FAFAF8" />
+          </svg>
+        </div>
+      </section>
+
+      {/* ── Membership cards ── */}
+      <section className="bg-[#FAFAF8] px-4 py-12 md:px-8 md:py-16">
+      <div className="mx-auto w-full max-w-7xl">
+        <div>
 
         {loading ? (
           <div className="mt-12 text-center text-slate-500">Loading membership plans...</div>
@@ -105,6 +184,8 @@ function Memberships() {
         {!loading && !error && memberships.length === 0 ? (
           <p className="mt-12 text-center text-slate-500">No membership plans found.</p>
         ) : null}
+        </div>
+      </div>
       </section>
     </main>
   )
