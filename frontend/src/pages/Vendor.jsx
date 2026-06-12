@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import heroVendorImg from '../assets/hero-vendor.jpg'
 
 const partnerBenefits = [
   {
@@ -334,7 +335,7 @@ function Vendor() {
                   <span style={{ fontSize: '12px', fontWeight: 700, color: '#fff' }}>10+ Active Partners</span>
                 </div>
                 <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+                  src={heroVendorImg}
                   alt="Partner network"
                   style={{
                     position: 'relative', width: '100%', height: '420px',

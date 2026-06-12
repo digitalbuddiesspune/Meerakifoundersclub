@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import heroBlogsImg from '../assets/hero-blogs.jpg'
+import heroBlogDefaultImg from '../assets/hero-blog-default.jpg'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL
 
@@ -131,7 +133,7 @@ function Blogs() {
           </div>
 
           {/* Right: hero image */}
-          <div className="relative hidden md:block">
+          <div className="relative mt-8 md:mt-0">
             {/* Glow halo */}
             <div
               className="absolute -inset-3 rounded-3xl blur-2xl"
@@ -143,7 +145,7 @@ function Blogs() {
               <span className="text-xs font-bold text-white">50+ Founder Guides</span>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80"
+              src={heroBlogsImg}
               alt="Founder reading insights"
               className="relative h-[320px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[420px]"
             />
@@ -190,7 +192,7 @@ function Blogs() {
                 className="group flex h-full min-h-[420px] flex-col overflow-hidden border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-xl"
               >
                 <img
-                  src={blog.featuredImage || 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80'}
+                  src={blog.featuredImage || heroBlogDefaultImg}
                   alt={blog.title}
                   className="h-56 w-full object-cover"
                   loading="lazy"

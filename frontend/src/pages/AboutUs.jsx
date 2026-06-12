@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Sparkles, Users, BriefcaseBusiness, Handshake, GraduationCap, CalendarDays } from 'lucide-react'
+import heroAboutImg from '../assets/hero-about.jpg'
+import { Sparkles, Users, BriefcaseBusiness, Handshake, CalendarDays } from 'lucide-react'
 
 const pillars = [
   {
@@ -164,11 +165,10 @@ function AboutUs() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 {[
-                  { icon: Users,             val: '500+', label: 'Startups Consulted' },
-                  { icon: BriefcaseBusiness, val: '20+',  label: 'Active Members' },
-                  { icon: Handshake,         val: '10+',  label: 'Trusted Partners' },
-                  { icon: GraduationCap,     val: '10+',  label: 'Industry Mentors' },
-                  { icon: CalendarDays,      val: '50+',  label: 'Events Conducted' },
+                  { icon: Users,             val: '5000+', label: 'Startups Consulted' },
+                  { icon: BriefcaseBusiness, val: '100+',  label: 'Active Members' },
+                  { icon: Handshake,         val: '50+',   label: 'Trusted Partners' },
+                  { icon: CalendarDays,      val: '100+',  label: 'Events Conducted Across India' },
                 // eslint-disable-next-line no-unused-vars
               ].map(({ icon: StatIcon, val, label }) => (
                   <div key={label} className="flex items-center gap-2 text-sm font-medium text-white/65">
@@ -182,7 +182,7 @@ function AboutUs() {
             </div>
 
             {/* Right: hero image */}
-            <div className="relative hidden md:block">
+            <div className="relative mt-8 md:mt-0">
               {/* Glow halo */}
               <div
                 className="absolute -inset-3 rounded-3xl blur-2xl"
@@ -194,7 +194,7 @@ function AboutUs() {
                 <span className="text-xs font-bold text-white">Founder-First, Always</span>
               </div>
               <img
-                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?auto=format&fit=crop&w=800&q=80"
+                src={heroAboutImg}
                 alt="Founders collaborating"
                 className="relative h-[320px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[440px]"
               />

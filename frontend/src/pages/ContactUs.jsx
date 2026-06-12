@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import heroContactImg from '../assets/hero-contact.jpg'
 import ContactForm from '../components/ContactForm'
 
 function ContactUs() {
@@ -93,7 +94,7 @@ function ContactUs() {
           </div>
 
           {/* Right: hero image */}
-          <div className="relative hidden md:block">
+          <div className="relative mt-8 md:mt-0">
             {/* Glow halo */}
             <div
               className="absolute -inset-3 rounded-3xl blur-2xl"
@@ -105,7 +106,7 @@ function ContactUs() {
               <span className="text-xs font-bold text-white">Quick 24h Response</span>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80"
+              src={heroContactImg}
               alt="Startup team at work"
               className="relative h-[300px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[400px]"
             />

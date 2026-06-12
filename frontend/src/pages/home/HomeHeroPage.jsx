@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import heroHomeImg from '../../assets/hero-home.jpg'
 import {
   ArrowRight,
   Handshake,
@@ -215,7 +216,7 @@ function HomeHeroPage() {
           </div>
 
           {/* Right: hero image */}
-          <div className="hero-img relative hidden md:block">
+          <div className="hero-img relative mt-8 md:mt-0">
             {/* Glow halo */}
             <div
               className="absolute -inset-3 rounded-3xl blur-2xl"
@@ -227,7 +228,7 @@ function HomeHeroPage() {
               <span className="text-xs font-bold text-slate-800">Trusted by 2000+ Founders</span>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+              src={heroHomeImg}
               alt="Founders building their business"
               className="img-float relative h-[320px] w-full rounded-3xl border border-slate-100 object-cover shadow-2xl md:h-[440px]"
             />

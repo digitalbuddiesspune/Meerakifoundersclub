@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
+import heroMembershipsImg from '../assets/hero-memberships.jpg'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 
 function Memberships() {
@@ -101,7 +102,7 @@ function Memberships() {
           </div>
 
           {/* Right: hero image */}
-          <div className="relative hidden md:block">
+          <div className="relative mt-8 md:mt-0">
             {/* Glow halo */}
             <div
               className="absolute -inset-3 rounded-3xl blur-2xl"
@@ -113,7 +114,7 @@ function Memberships() {
               <span className="text-xs font-bold text-white">Plans Starting at ₹999</span>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80"
+              src={heroMembershipsImg}
               alt="Startup growth and success"
               className="relative h-[300px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[400px]"
             />

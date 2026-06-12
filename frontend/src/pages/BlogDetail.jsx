@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import heroBlogDefaultImg from '../assets/hero-blog-default.jpg'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL
 
@@ -73,7 +74,7 @@ function BlogDetail() {
         {!isLoading && !error && blog ? (
           <article className="mt-6 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <img
-              src={blog.featuredImage || 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80'}
+              src={blog.featuredImage || heroBlogDefaultImg}
               alt={blog.title}
               className="h-[280px] w-full object-cover md:h-[420px]"
             />

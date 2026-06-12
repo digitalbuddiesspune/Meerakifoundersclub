@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import heroCommunityImg from '../assets/hero-community.jpg'
 import { Sparkles, Users, Clock, CalendarDays } from 'lucide-react'
 
 const communityBenefits = [
@@ -444,7 +445,7 @@ function Community() {
             </div>
 
             {/* Right: hero image */}
-            <div className="relative hidden md:block">
+            <div className="relative mt-8 md:mt-0">
               {/* Glow halo */}
               <div
                 className="absolute -inset-3 rounded-3xl blur-2xl"
@@ -456,7 +457,7 @@ function Community() {
                 <span className="text-xs font-bold text-white">500+ Active Founders</span>
               </div>
               <img
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
+                src={heroCommunityImg}
                 alt="Founder community networking"
                 className="relative h-[320px] w-full rounded-3xl border border-white/20 object-cover shadow-2xl md:h-[440px]"
               />
