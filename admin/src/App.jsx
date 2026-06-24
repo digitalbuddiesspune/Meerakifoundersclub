@@ -63,7 +63,22 @@ function App() {
         <Route
           path="dashboard"
           element={
-            <DashboardPage dashboardStats={admin.dashboardStats} />
+            <DashboardPage
+              usersList={admin.usersList}
+              servicesList={admin.servicesList}
+              blogsList={admin.blogsList}
+              serviceInquiries={admin.serviceInquiries}
+              memberships={admin.memberships}
+              adminName={
+                (() => {
+                  try {
+                    return JSON.parse(localStorage.getItem("mfc_admin_auth_user") || "null")?.username || "Admin";
+                  } catch {
+                    return "Admin";
+                  }
+                })()
+              }
+            />
           }
         />
         <Route

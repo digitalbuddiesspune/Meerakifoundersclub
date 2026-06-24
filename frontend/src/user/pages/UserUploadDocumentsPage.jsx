@@ -224,13 +224,13 @@ function UserUploadDocumentsPage() {
     <>
       <div className="mb-7">
         <h1 className="text-2xl font-extrabold tracking-tight">Upload Documents</h1>
-        <p className="mt-1 text-sm text-white/65">Each document must be less than 2MB.</p>
+        <p className="mt-1 text-sm text-slate-600">Each document must be less than 2MB.</p>
       </div>
 
-      <section className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5">
+      <section className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="parentCategory" className="mb-1 block text-sm font-medium text-white/85">
+            <label htmlFor="parentCategory" className="mb-1 block text-sm font-medium text-slate-800">
               Parent Category
             </label>
             <select
@@ -249,7 +249,7 @@ function UserUploadDocumentsPage() {
                   return {}
                 })
               }}
-              className="w-full rounded-xl border border-white/15 bg-[#0B1D3A]/70 px-4 py-2.5 text-sm text-white focus:border-[#E8621A]/60 focus:outline-none"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 focus:border-[#E8621A]/60 focus:outline-none"
               required
               disabled={isLoadingDocumentTypes}
             >
@@ -265,8 +265,8 @@ function UserUploadDocumentsPage() {
           </div>
 
           {selectedCategoryId ? (
-            <div className="space-y-3 rounded-xl border border-white/10 bg-[#0B1D3A]/45 p-3">
-              <p className="text-sm font-semibold text-white/90">Upload all required documents</p>
+            <div className="space-y-3 rounded-xl border border-slate-200 bg-white/45 p-3">
+              <p className="text-sm font-semibold text-slate-900">Upload all required documents</p>
               {requiredDocuments.length ? (
                 requiredDocuments.map((item) => {
                   const documentName = String(item.name || '').trim()
@@ -274,7 +274,7 @@ function UserUploadDocumentsPage() {
                   const previewUrl = previewUrlsByDocument[documentName]
                   return (
                     <div key={item._id || documentName}>
-                      <label htmlFor={`doc-${documentName}`} className="mb-1 block text-sm font-medium text-white/85">
+                      <label htmlFor={`doc-${documentName}`} className="mb-1 block text-sm font-medium text-slate-800">
                         {documentName}
                       </label>
                       <input
@@ -282,22 +282,22 @@ function UserUploadDocumentsPage() {
                         type="file"
                         accept=".jpg,.jpeg,.png,.webp,.pdf,.doc,.docx,image/*"
                         onChange={(event) => handleDocumentFileChange(documentName, event)}
-                        className="w-full rounded-xl border border-white/15 bg-[#0B1D3A]/70 px-4 py-2.5 text-sm text-white file:mr-3 file:rounded-lg file:border-0 file:bg-[#E8621A] file:px-3 file:py-1.5 file:text-white"
+                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 file:mr-3 file:rounded-lg file:border-0 file:bg-[#E8621A] file:px-3 file:py-1.5 file:text-white"
                         required
                       />
                       {selectedFile ? (
-                        <div className="mt-2 rounded-lg border border-white/10 bg-white/5 p-2.5">
-                          <p className="text-xs text-white/80">
+                        <div className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-2.5">
+                          <p className="text-xs text-slate-700">
                             Selected: <span className="font-semibold">{selectedFile.name}</span>
                           </p>
-                          <p className="mt-0.5 text-[11px] text-white/60">
+                          <p className="mt-0.5 text-[11px] text-slate-500">
                             Size: {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                           </p>
                           {previewUrl ? (
                             <img
                               src={previewUrl}
                               alt={`${documentName} preview`}
-                              className="mt-2 h-24 w-24 rounded-lg border border-white/10 object-cover"
+                              className="mt-2 h-24 w-24 rounded-lg border border-slate-200 object-cover"
                             />
                           ) : null}
                         </div>
@@ -306,7 +306,7 @@ function UserUploadDocumentsPage() {
                   )
                 })
               ) : (
-                <p className="text-sm text-white/65">No document types found in this category.</p>
+                <p className="text-sm text-slate-600">No document types found in this category.</p>
               )}
             </div>
           ) : null}
@@ -314,7 +314,7 @@ function UserUploadDocumentsPage() {
           <button
             type="submit"
             disabled={isSubmitting || !selectedCategoryId}
-            className="inline-flex items-center justify-center rounded-xl bg-[#E8621A] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
+            className="inline-flex items-center justify-center rounded-xl bg-[#E8621A] px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? 'Uploading...' : 'Upload Documents'}
           </button>
@@ -324,21 +324,21 @@ function UserUploadDocumentsPage() {
         {error ? <p className="mt-3 text-sm text-red-300">{error}</p> : null}
       </section>
 
-      <section className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5">
+      <section className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
         <h2 className="text-lg font-bold">My Documents</h2>
-        {isLoadingDocuments ? <p className="mt-2 text-sm text-white/65">Loading documents...</p> : null}
+        {isLoadingDocuments ? <p className="mt-2 text-sm text-slate-600">Loading documents...</p> : null}
         {!isLoadingDocuments && !existingDocuments.length ? (
-          <p className="mt-2 text-sm text-white/65">No documents uploaded yet.</p>
+          <p className="mt-2 text-sm text-slate-600">No documents uploaded yet.</p>
         ) : null}
         {!isLoadingDocuments && existingDocuments.length ? (
           <div className="mt-3 space-y-3">
             {existingDocuments.map((entry) => (
-              <div key={entry._id} className="rounded-xl border border-white/10 bg-[#0B1D3A]/60 p-3">
+              <div key={entry._id} className="rounded-xl border border-slate-200 bg-white/60 p-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[#F0B429]">
                   {entry.parentCategory ? `${entry.parentCategory} - ` : ''}
                   {entry.documentType}
                 </p>
-                <ul className="mt-2 space-y-1 text-sm text-white/80">
+                <ul className="mt-2 space-y-1 text-sm text-slate-700">
                   {(entry.documents || []).map((doc) => (
                     <li key={`${doc.url}-${doc.uploadedAt}`}>
                       <a href={doc.url} target="_blank" rel="noreferrer" className="text-[#9EC5FF] hover:underline">

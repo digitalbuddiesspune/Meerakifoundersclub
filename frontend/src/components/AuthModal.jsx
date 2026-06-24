@@ -1,3 +1,31 @@
+import { useState } from 'react'
+
+function PasswordField({ value, onChange, placeholder, minLength }) {
+  const [showPassword, setShowPassword] = useState(false)
+
+  return (
+    <div className="relative">
+      <input
+        type={showPassword ? 'text' : 'password'}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="w-full rounded-lg border border-slate-300 px-3 py-2 pr-16 text-sm focus:border-slate-500 focus:outline-none"
+        required
+        minLength={minLength}
+      />
+      <button
+        type="button"
+        onClick={() => setShowPassword((prev) => !prev)}
+        className="absolute right-2 top-1/2 -translate-y-1/2 rounded px-2 py-1 text-xs font-semibold text-slate-500 hover:text-slate-800"
+        aria-label={showPassword ? 'Hide password' : 'Show password'}
+      >
+        {showPassword ? 'Hide' : 'Show'}
+      </button>
+    </div>
+  )
+}
+
 function AuthModal({
   visible,
   authTab,
@@ -89,6 +117,12 @@ function AuthModal({
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-slate-500 focus:outline-none"
               required
             />
+            <PasswordField
+              value={signupForm.password}
+              onChange={(event) => setSignupForm((prev) => ({ ...prev, password: event.target.value }))}
+              placeholder="Password (min 6 characters)"
+              minLength={6}
+            />
             <button
               type="submit"
               className="w-full rounded-lg bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
@@ -99,12 +133,17 @@ function AuthModal({
         ) : (
           <form onSubmit={onLogin} className="space-y-3">
             <input
-              type="text"
-              value={loginForm.identifier}
-              onChange={(event) => setLoginForm({ identifier: event.target.value })}
-              placeholder="Email or Phone Number"
+              type="email"
+              value={loginForm.email}
+              onChange={(event) => setLoginForm((prev) => ({ ...prev, email: event.target.value }))}
+              placeholder="Email"
               className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-slate-500 focus:outline-none"
               required
+            />
+            <PasswordField
+              value={loginForm.password}
+              onChange={(event) => setLoginForm((prev) => ({ ...prev, password: event.target.value }))}
+              placeholder="Password"
             />
             <button
               type="submit"

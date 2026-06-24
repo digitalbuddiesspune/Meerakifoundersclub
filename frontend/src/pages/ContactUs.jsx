@@ -37,7 +37,7 @@ function ContactUs() {
   return (
     <>
       {/* ── Dark hero banner ── */}
-      <section className="relative overflow-hidden bg-[#070D1A] px-4 py-20 text-white md:py-28">
+      <section className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-[#070D1A] px-4 pb-24 pt-14 text-white md:px-8">
         {/* Grid pattern */}
         <div
           className="pointer-events-none absolute inset-0"

@@ -76,11 +76,11 @@ function UserServicesPage() {
     <>
       <div className="mb-7">
         <h1 className="text-2xl font-extrabold tracking-tight">Services</h1>
-        <p className="mt-1 text-sm text-white/55">Select a service to open its full form and document checklist.</p>
+        <p className="mt-1 text-sm text-slate-500">Select a service to open its full form and document checklist.</p>
       </div>
 
-      <section className="mb-5 rounded-2xl border border-white/10 bg-white/5 p-4">
-        <label htmlFor="service-search" className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.1em] text-white/50">
+      <section className="mb-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+        <label htmlFor="service-search" className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500">
           Search Services
         </label>
         <input
@@ -89,12 +89,12 @@ function UserServicesPage() {
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
           placeholder="Search by name, category, info or support..."
-          className="w-full rounded-xl border border-white/15 bg-[#0B1D3A]/70 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-[#E8621A]/60 focus:outline-none"
+          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#E8621A]/60 focus:outline-none"
         />
       </section>
 
       {isLoading ? (
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70">Loading services...</div>
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">Loading services...</div>
       ) : null}
 
       {error ? (
@@ -102,10 +102,10 @@ function UserServicesPage() {
       ) : null}
 
       {!isLoading && !error ? (
-        <section className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
           <div className="overflow-x-auto">
             <table className="min-w-[980px] w-full text-left">
-              <thead className="bg-white/5 text-[11px] uppercase tracking-[0.1em] text-white/50">
+              <thead className="bg-slate-50 text-[11px] uppercase tracking-[0.1em] text-slate-500">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Image</th>
                   <th className="px-4 py-3 font-semibold">Name</th>
@@ -125,7 +125,7 @@ function UserServicesPage() {
                     tabIndex={0}
                     onClick={() => openService(service)}
                     onKeyDown={(e) => handleRowKeyDown(e, service)}
-                    className="cursor-pointer border-t border-white/10 align-top transition-colors hover:bg-[#E8621A]/10 focus:bg-[#E8621A]/15 focus:outline-none"
+                    className="cursor-pointer border-t border-slate-200 align-top transition-colors hover:bg-[#E8621A]/10 focus:bg-[#E8621A]/15 focus:outline-none"
                   >
                     <td className="px-4 py-3">
                       <img
@@ -136,31 +136,31 @@ function UserServicesPage() {
                       />
                     </td>
                     <td className="px-4 py-3">
-                      <p className="text-sm font-semibold text-white">{service.name}</p>
+                      <p className="text-sm font-semibold text-slate-900">{service.name}</p>
                     </td>
                     <td className="px-4 py-3">
                       <span className="rounded-full border border-[#E8621A]/30 bg-[#E8621A]/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#E8621A]">
                         {service.category || 'General'}
                       </span>
                     </td>
-                    <td className="max-w-[320px] px-4 py-3 text-xs text-white/70">
+                    <td className="max-w-[320px] px-4 py-3 text-xs text-slate-600">
                       <p className="line-clamp-3">{service.information}</p>
                     </td>
-                    <td className="px-4 py-3 text-xs text-white/50">{formatCurrency(service.price)}</td>
+                    <td className="px-4 py-3 text-xs text-slate-500">{formatCurrency(service.price)}</td>
                     <td className="px-4 py-3 text-sm font-extrabold text-[#F0B429]">
                       {formatCurrency(service.discountedPrice)}
                     </td>
                     <td className="px-4 py-3">
-                      <span className="rounded-full border border-blue-300/30 bg-blue-400/10 px-2.5 py-1 text-[10px] font-bold text-blue-300">
+                      <span className="rounded-full border border-blue-200 bg-blue-400/10 px-2.5 py-1 text-[10px] font-bold text-blue-700">
                         {service.projectsCount || 0}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-xs text-white/60">{service.support || '-'}</td>
+                    <td className="px-4 py-3 text-xs text-slate-500">{service.support || '-'}</td>
                   </tr>
                 ))}
                 {!filteredServices.length ? (
-                  <tr className="border-t border-white/10">
-                    <td colSpan={8} className="px-4 py-6 text-center text-sm text-white/60">
+                  <tr className="border-t border-slate-200">
+                    <td colSpan={8} className="px-4 py-6 text-center text-sm text-slate-500">
                       No services found for this search.
                     </td>
                   </tr>

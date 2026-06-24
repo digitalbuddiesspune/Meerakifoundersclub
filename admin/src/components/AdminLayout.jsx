@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import {
   ChevronIcon,
   SearchIcon,
@@ -18,7 +18,6 @@ import {
 } from "./AdminIcons";
 
 function AdminLayout() {
-  const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [openMenu, setOpenMenu] = useState("");
@@ -29,7 +28,7 @@ function AdminLayout() {
   const toggleMenu = (name) => setOpenMenu((prev) => (prev === name ? "" : name));
   const searchValue = searchParams.get("q") || "";
   const showSearch = location.pathname.includes("/services/my-services");
-  const showDashboardActions = location.pathname === "/admin/dashboard";
+  const isDashboard = location.pathname === "/admin/dashboard";
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
@@ -49,49 +48,34 @@ function AdminLayout() {
   };
 
   const primaryLinkClass = ({ isActive }) =>
-    `group relative flex items-center rounded-xl border text-left text-sm transition-all duration-200 ${
-      isDesktopCollapsed ? "justify-center px-2 py-3" : "gap-3 px-4 py-3.5"
+    `group relative flex items-center rounded-xl text-left text-sm transition-all duration-200 ${
+      isDesktopCollapsed ? "justify-center px-2 py-3" : "gap-3 px-4 py-3"
     } ${
       isActive
-        ? "border-[#F0B429]/60 bg-gradient-to-r from-[#1d3364] to-[#1a2a4d] font-bold text-white shadow-[0_0_0_1px_rgba(240,180,41,0.15)]"
-        : "border-transparent bg-transparent font-semibold text-slate-300 hover:border-[#F0B429]/35 hover:bg-white/5 hover:text-slate-100"
+        ? "bg-indigo-600 font-semibold text-white shadow-sm"
+        : "font-medium text-slate-400 hover:bg-white/5 hover:text-white"
     }`;
 
   const submenuLinkClass = ({ isActive }) =>
-    `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+    `flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
       isActive
-        ? "border border-[#F0B429]/40 bg-[#F0B429]/10 font-bold text-[#FFE199]"
-        : "border border-transparent font-semibold text-slate-300 hover:border-white/10 hover:bg-white/5 hover:text-white"
+        ? "bg-indigo-600/80 font-semibold text-white"
+        : "font-medium text-slate-400 hover:bg-white/5 hover:text-white"
     }`;
 
   const menuToggleClass = (isOpen) =>
-    `flex w-full items-center rounded-xl border text-left text-sm font-semibold transition ${
-      isDesktopCollapsed ? "justify-center px-2 py-3" : "justify-between px-4 py-3.5"
+    `flex w-full items-center rounded-xl text-left text-sm font-medium transition ${
+      isDesktopCollapsed ? "justify-center px-2 py-3" : "justify-between px-4 py-3"
     } ${
       isOpen
-        ? "border-[#F0B429]/45 bg-[#152b59] text-white"
-        : "border-transparent bg-transparent text-slate-300 hover:border-[#F0B429]/30 hover:bg-white/5 hover:text-slate-100"
+        ? "bg-white/10 text-white"
+        : "text-slate-400 hover:bg-white/5 hover:text-white"
     }`;
-
-  const adminUser = (() => {
-    try {
-      return JSON.parse(localStorage.getItem("mfc_admin_auth_user") || "null");
-    } catch {
-      return null;
-    }
-  })();
-
-  const adminName = adminUser?.username || "Admin";
-
-  const handleAdminLogout = () => {
-    localStorage.removeItem("mfc_admin_auth_user");
-    navigate("/admin/login", { replace: true });
-  };
 
   return (
     <div
-      className={`min-h-screen bg-[#070f26] text-slate-100 lg:grid lg:h-screen lg:overflow-hidden ${
-        desktopSidebarOpen ? "lg:grid-cols-[286px_1fr]" : "lg:grid-cols-[88px_1fr]"
+      className={`min-h-screen bg-[#f0f2f5] text-slate-900 lg:grid lg:h-screen lg:overflow-hidden ${
+        desktopSidebarOpen ? "lg:grid-cols-[260px_1fr]" : "lg:grid-cols-[88px_1fr]"
       }`}
     >
       {sidebarOpen ? (
@@ -106,7 +90,7 @@ function AdminLayout() {
       {!sidebarOpen ? (
         <button
           type="button"
-          className="fixed left-3 top-3 z-40 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#F0B429]/40 bg-[#132b5c] text-xl text-white shadow-lg transition hover:border-[#F0B429]/70 lg:hidden"
+          className="fixed left-3 top-3 z-40 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-xl text-slate-900 shadow-lg lg:hidden"
           aria-label="Open sidebar"
           onClick={() => {
             setSidebarOpen(true);
@@ -117,7 +101,7 @@ function AdminLayout() {
       ) : null}
 
       <aside
-        className={`hide-scrollbar fixed left-0 top-0 z-40 flex h-screen w-[286px] flex-col gap-6 overflow-y-auto border-r border-[#F0B429]/35 bg-gradient-to-b from-[#091b44] via-[#081a3f] to-[#061430] px-[18px] py-7 shadow-[inset_-1px_0_0_rgba(240,180,41,0.16)] transition-transform duration-300 ${
+        className={`hide-scrollbar fixed left-0 top-0 z-40 flex h-screen w-[260px] flex-col overflow-y-auto bg-[#1e2139] px-4 py-6 text-white transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } ${
           desktopSidebarOpen
@@ -128,7 +112,7 @@ function AdminLayout() {
         <div className={`${isDesktopCollapsed ? "px-0" : "px-2"}`}>
           <div className="flex items-start justify-between gap-3">
             {isDesktopCollapsed ? (
-              <div className="hidden lg:flex h-9 w-9 items-center justify-center rounded-lg border border-[#F0B429]/45 bg-white/5 text-base font-extrabold text-white">
+              <div className="hidden lg:flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 text-base font-extrabold text-white">
                 M
               </div>
             ) : (
@@ -136,12 +120,12 @@ function AdminLayout() {
                 <p className="text-xl font-extrabold tracking-tight text-white">
                   Meraaki <span className="text-[#E8621A]">FC</span>
                 </p>
-                <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50">Founders Club</p>
+                <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">Founders Club</p>
               </div>
             )}
             <button
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#F0B429]/35 bg-white/5 text-lg text-white transition hover:border-[#F0B429]/65 hover:bg-white/10 lg:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-lg text-white lg:hidden"
               aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
               onClick={() => {
                 setSidebarOpen((prev) => !prev);
@@ -151,7 +135,7 @@ function AdminLayout() {
             </button>
             <button
               type="button"
-              className="hidden h-9 w-9 items-center justify-center rounded-lg border border-[#F0B429]/35 bg-white/5 text-lg text-white transition hover:border-[#F0B429]/65 hover:bg-white/10 lg:inline-flex"
+              className="hidden h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-lg text-white lg:inline-flex"
               aria-label={isDesktopCollapsed ? "Expand sidebar" : "Collapse sidebar"}
               onClick={() => setDesktopSidebarOpen((prev) => !prev)}
             >
@@ -160,9 +144,9 @@ function AdminLayout() {
           </div>
         </div>
         <div className={`px-2 ${isDesktopCollapsed ? "hidden lg:block" : ""}`}>
-          <div className="mt-2 h-px w-full bg-gradient-to-r from-[#F0B429]/45 via-[#F0B429]/15 to-transparent" />
+          <div className="mt-4 h-px w-full bg-white/10" />
         </div>
-        <nav className="flex flex-col gap-2.5 font-semibold">
+        <nav className="mt-6 flex flex-1 flex-col gap-1">
           <NavLink
             to="/admin/dashboard"
             className={primaryLinkClass}
@@ -359,61 +343,44 @@ function AdminLayout() {
             </div>
           )}
         </nav>
-        <div className={`mt-auto rounded-[20px] border border-[#F0B429]/40 bg-gradient-to-br from-[#102a60] to-[#0a1e46] p-[18px] shadow-[0_8px_24px_rgba(5,10,30,0.35)] ${isDesktopCollapsed ? "hidden lg:block lg:p-2" : ""}`}>
+        <div className={`mt-auto rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 p-4 ${isDesktopCollapsed ? "hidden lg:block lg:p-2" : ""}`}>
           {isDesktopCollapsed ? (
             <p className="m-0 text-center text-lg">⚡</p>
           ) : (
             <>
-          <p className="m-0 text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#C8D6FF]">Admin Workspace</p>
-          <strong className="mt-2.5 block text-[15px] font-bold leading-6 text-white">Manage services, blogs and users from one dashboard.</strong>
-          <p className="mt-2 text-xs text-slate-300">Improved navigation for faster daily operations.</p>
+              <p className="m-0 text-[11px] font-bold uppercase tracking-wider text-indigo-100">Upgrade to Pro</p>
+              <p className="mt-2 text-sm font-semibold leading-snug text-white">Unlock advanced analytics & reports</p>
+              <button type="button" className="mt-3 w-full rounded-lg bg-white px-3 py-2 text-xs font-bold text-indigo-700">
+                Upgrade Now
+              </button>
             </>
           )}
         </div>
+        {!isDesktopCollapsed ? (
+          <p className="mt-4 text-center text-[10px] text-slate-500">© 2026 Meraaki FC</p>
+        ) : null}
       </aside>
 
-      <main className="p-5 pt-3 lg:min-h-0 lg:overflow-y-auto lg:p-7 lg:pt-4">
+      <main className={`lg:min-h-0 lg:overflow-y-auto ${isDashboard ? "p-4 md:p-6" : "p-5 pt-3 lg:p-7 lg:pt-4"}`}>
+        {!isDashboard ? (
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           {showSearch ? (
-            <div className="flex min-w-0 w-full max-w-[310px] items-center gap-2.5 rounded-full border border-[#F0B429]/30 bg-[#142e62] px-4 py-3">
-              <SearchIcon className="h-5 w-5 shrink-0 text-cyan-300" />
+            <div className="flex min-w-0 w-full max-w-[310px] items-center gap-2.5 rounded-full border border-slate-200 bg-white px-4 py-3 shadow-sm">
+              <SearchIcon className="h-5 w-5 shrink-0 text-slate-400" />
               <input
                 type="text"
                 placeholder="Search by service name"
                 aria-label="Search"
                 value={searchValue}
                 onChange={handleSearchChange}
-                className="w-full border-0 bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
+                className="w-full border-0 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400"
               />
             </div>
           ) : (
             <div />
           )}
-
-          {showDashboardActions ? (
-            <div className="inline-flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => navigate("/admin/account")}
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#F0B429]/35 bg-[#132b5c] px-2.5 py-1.5 text-xs font-semibold text-white transition hover:border-[#F0B429]/70 hover:bg-[#1a3a7a]"
-              >
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#F0B429] text-[#07112a]">
-                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
-                    <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z" />
-                  </svg>
-                </span>
-                <span className="max-w-[120px] truncate leading-none">{adminName}</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleAdminLogout}
-                className="rounded-full border border-red-400/40 bg-red-500/10 px-2.5 py-1.5 text-xs font-semibold text-red-200 transition hover:bg-red-500/20"
-              >
-                Logout
-              </button>
-            </div>
-          ) : null}
         </div>
+        ) : null}
 
         <Outlet />
       </main>

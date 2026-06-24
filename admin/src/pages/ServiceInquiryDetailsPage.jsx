@@ -163,7 +163,7 @@ function ServiceInquiryDetailsPage({ onLoadServiceInquiry, onUpdateProgressStatu
   if (loading) {
     return (
       <section className="grid gap-5">
-        <p className="text-sm text-slate-300">Loading inquiry details...</p>
+        <p className="text-sm text-slate-600">Loading inquiry details...</p>
       </section>
     );
   }
@@ -171,12 +171,12 @@ function ServiceInquiryDetailsPage({ onLoadServiceInquiry, onUpdateProgressStatu
   if (!inquiry || error) {
     return (
       <section className="grid gap-5">
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-7">
-          <h4 className="m-0 text-lg font-semibold text-white">Inquiry not found</h4>
-          <p className="mt-2 text-sm text-slate-300">{error || "This inquiry could not be loaded."}</p>
+        <div className="rounded-3xl border border-slate-200 bg-white p-7">
+          <h4 className="m-0 text-lg font-semibold text-slate-900">Inquiry not found</h4>
+          <p className="mt-2 text-sm text-slate-600">{error || "This inquiry could not be loaded."}</p>
           <button
             type="button"
-            className="mt-4 rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100"
+            className="mt-4 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900"
             onClick={() => navigate("/admin/services/inquiry")}
           >
             Back to inquiries
@@ -192,43 +192,43 @@ function ServiceInquiryDetailsPage({ onLoadServiceInquiry, onUpdateProgressStatu
     <section className="grid gap-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="m-0 inline-flex rounded-full bg-[#1c3b79] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-200">
+          <p className="m-0 inline-flex rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
             Services Inquiry
           </p>
-          <h1 className="mt-3 text-2xl font-bold tracking-tight text-[#F0B429] md:text-3xl">{inquiry.serviceName || "Unknown service"}</h1>
-          <p className="mt-2 text-sm text-slate-300">Submitted on {formatDate(inquiry.submittedAt)}</p>
+          <h1 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">{inquiry.serviceName || "Unknown service"}</h1>
+          <p className="mt-2 text-sm text-slate-600">Submitted on {formatDate(inquiry.submittedAt)}</p>
         </div>
         <button
           type="button"
-          className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100"
+          className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900"
           onClick={() => navigate("/admin/services/inquiry")}
         >
           Back
         </button>
       </div>
 
-      <div className="rounded-2xl border border-[#F0B429]/30 bg-[#0d214d] p-4">
-        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-400">User details</p>
+      <div className="rounded-2xl border border-slate-200 bg-white p-4">
+        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-500">User details</p>
         <div className="mt-3 grid gap-2 text-sm text-slate-200 md:grid-cols-3">
-          <p className="m-0 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-            <span className="text-slate-400">Name:</span> {inquiry.userName || "Unknown user"}
+          <p className="m-0 rounded-lg border border-white/10 bg-white px-3 py-2">
+            <span className="text-slate-500">Name:</span> {inquiry.userName || "Unknown user"}
           </p>
-          <p className="m-0 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-            <span className="text-slate-400">Email:</span> {inquiry.userEmail || "—"}
+          <p className="m-0 rounded-lg border border-white/10 bg-white px-3 py-2">
+            <span className="text-slate-500">Email:</span> {inquiry.userEmail || "—"}
           </p>
-          <p className="m-0 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-            <span className="text-slate-400">Phone:</span> {inquiry.userPhone || "—"}
+          <p className="m-0 rounded-lg border border-white/10 bg-white px-3 py-2">
+            <span className="text-slate-500">Phone:</span> {inquiry.userPhone || "—"}
           </p>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-[#F0B429]/30 bg-[#0d214d] p-4">
-        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-400">Actions & Progress</p>
+      <div className="rounded-2xl border border-slate-200 bg-white p-4">
+        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-500">Actions & Progress</p>
         <div className="mt-3 flex flex-wrap items-center gap-3">
           <select
             value={progressStatus}
             onChange={(event) => setProgressStatus(event.target.value)}
-            className="min-w-[190px] rounded-xl border border-white/20 bg-[#142e62] px-3 py-2 text-sm font-semibold text-white outline-none focus:border-cyan-400/40"
+            className="min-w-[190px] rounded-xl border border-slate-200 bg-slate-100 px-3 py-2 text-sm font-semibold text-slate-900 outline-none focus:border-cyan-400/40"
             disabled={statusSaving}
           >
             {PROGRESS_OPTIONS.map((option) => (
@@ -246,34 +246,34 @@ function ServiceInquiryDetailsPage({ onLoadServiceInquiry, onUpdateProgressStatu
             {statusSaving ? "Updating..." : "Update progress"}
           </button>
         </div>
-        {statusMessage ? <p className="mt-2 text-xs text-slate-300">{statusMessage}</p> : null}
+        {statusMessage ? <p className="mt-2 text-xs text-slate-600">{statusMessage}</p> : null}
       </div>
 
-      <div className="grid gap-3 rounded-2xl border border-[#F0B429]/30 bg-[#0d214d] p-4">
-        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-400">Submitted fields</p>
+      <div className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-500">Submitted fields</p>
         {fields.length ? (
           fields.map((field, index) => (
-            <div key={`${field.label || "field"}-${index}`} className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-              <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-400">{field.label || "Field"}</p>
-              <p className="mt-1 text-sm text-slate-100 break-words">{field.value || "—"}</p>
+            <div key={`${field.label || "field"}-${index}`} className="rounded-xl border border-white/10 bg-white px-3 py-2">
+              <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-500">{field.label || "Field"}</p>
+              <p className="mt-1 text-sm text-slate-900 break-words">{field.value || "—"}</p>
             </div>
           ))
         ) : (
-          <p className="m-0 text-sm text-slate-400">No field values submitted.</p>
+          <p className="m-0 text-sm text-slate-500">No field values submitted.</p>
         )}
       </div>
 
-      <div className="grid gap-3 rounded-2xl border border-[#F0B429]/30 bg-[#0d214d] p-4">
-        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-400">Submitted documents</p>
+      <div className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+        <p className="m-0 text-xs font-semibold uppercase tracking-wide text-slate-500">Submitted documents</p>
 
-        {documentsLoading ? <p className="m-0 text-sm text-slate-300">Loading documents...</p> : null}
-        {!documentsLoading && documentsError ? <p className="m-0 text-sm text-red-200">{documentsError}</p> : null}
+        {documentsLoading ? <p className="m-0 text-sm text-slate-600">Loading documents...</p> : null}
+        {!documentsLoading && documentsError ? <p className="m-0 text-sm text-red-600">{documentsError}</p> : null}
 
         {!documentsLoading && !documentsError ? (
           serviceLinkedDocuments.length > 0 ? (
             <div className="overflow-x-auto rounded-xl border border-white/10">
               <table className="w-full min-w-[420px] text-left text-sm">
-                <thead className="bg-white/5 text-xs uppercase tracking-wide text-slate-400">
+                <thead className="bg-white text-xs uppercase tracking-wide text-slate-500">
                   <tr>
                     <th className="px-3 py-2.5">Document</th>
                     <th className="px-3 py-2.5">Category</th>
@@ -285,14 +285,14 @@ function ServiceInquiryDetailsPage({ onLoadServiceInquiry, onUpdateProgressStatu
                     const existing = findUserDocEntryForLink(userDocEntries, doc);
                     return (
                       <tr key={`${doc.documentType}-${doc.documentItem}-${index}`} className="border-t border-white/10 align-top">
-                        <td className="px-3 py-2.5 text-slate-100">{doc.documentItemName || "Document"}</td>
-                        <td className="px-3 py-2.5 text-slate-300">{doc.documentTypeName || "—"}</td>
+                        <td className="px-3 py-2.5 text-slate-900">{doc.documentItemName || "Document"}</td>
+                        <td className="px-3 py-2.5 text-slate-600">{doc.documentTypeName || "—"}</td>
                         <td className="px-3 py-2.5 text-xs">
                           {existing?.documents?.length ? (
                             <ul className="m-0 list-none space-y-1 p-0">
                               {existing.documents.map((file) => (
                                 <li key={`${file.url}-${file.uploadedAt || file.fileName}`}>
-                                  <a href={file.url} target="_blank" rel="noreferrer" className="break-all text-cyan-200 hover:underline">
+                                  <a href={file.url} target="_blank" rel="noreferrer" className="break-all text-cyan-700 hover:underline">
                                     {file.fileName || "View file"}
                                   </a>
                                 </li>
@@ -311,14 +311,14 @@ function ServiceInquiryDetailsPage({ onLoadServiceInquiry, onUpdateProgressStatu
           ) : userDocEntries.length > 0 ? (
             <div className="grid gap-2">
               {userDocEntries.map((entry) => (
-                <div key={entry._id} className="rounded-lg border border-white/10 bg-white/5 p-3">
-                  <p className="m-0 text-sm font-semibold text-white">{entry.documentType || "Document"}</p>
-                  <p className="m-0 mt-0.5 text-xs text-slate-400">{entry.parentCategory || "—"}</p>
+                <div key={entry._id} className="rounded-lg border border-white/10 bg-white p-3">
+                  <p className="m-0 text-sm font-semibold text-slate-900">{entry.documentType || "Document"}</p>
+                  <p className="m-0 mt-0.5 text-xs text-slate-500">{entry.parentCategory || "—"}</p>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="m-0 text-sm text-slate-400">No documents uploaded by this user yet.</p>
+            <p className="m-0 text-sm text-slate-500">No documents uploaded by this user yet.</p>
           )
         ) : null}
       </div>

@@ -1,12 +1,14 @@
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import User from "../models/User.js";
+import { hashPassword } from "../utils/password.js";
 
 dotenv.config();
 
 const ADMIN_EMAIL = "admin@meraakifoundersclub.com";
 const ADMIN_PHONE = "9970255658";
 const ADMIN_USERNAME = "Admin";
+const ADMIN_PASSWORD = process.env.ADMIN_DEFAULT_PASSWORD || "Admin@12345";
 
 const run = async () => {
   const mongoUri = process.env.Mongo_URI;
@@ -26,6 +28,7 @@ const run = async () => {
         role: "admin",
         status: "active",
         plan: "",
+        password: hashPassword(ADMIN_PASSWORD),
       },
     },
     {
@@ -42,7 +45,9 @@ const run = async () => {
     phone: result.phone,
     role: result.role,
     status: result.status,
+    passwordSet: true,
   });
+  console.log(`Admin login: ${ADMIN_EMAIL} / ${ADMIN_PASSWORD}`);
 
   await mongoose.disconnect();
 };

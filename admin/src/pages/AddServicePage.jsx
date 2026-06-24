@@ -18,16 +18,16 @@ function AddServicePage({
   uploadingImageFor,
 }) {
   const inputClassName =
-    "w-full rounded-2xl border border-[#F0B429]/30 bg-white/5 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-400 focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20";
+    "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-500 focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20";
 
   return (
     <section className="grid gap-5">
       {isEditingService && editingProjectIndex !== null && (
-        <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">Project {editingProjectIndex + 1} is ready for editing below.</p>
+        <p className="rounded-2xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">Project {editingProjectIndex + 1} is ready for editing below.</p>
       )}
       <form className="grid gap-[18px]" onSubmit={onSubmit}>
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
-          <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+        <div className="rounded-3xl border border-slate-200 bg-white p-[22px]">
+          <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
             <BriefcaseIcon className="h-5 w-5 text-amber-300" />
             Service details
           </h4>
@@ -42,26 +42,26 @@ function AddServicePage({
               required
             />
             <div className="grid gap-2">
-              <label className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-300">Service image</label>
+              <label className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-600">Service image</label>
               <input
                 className={inputClassName}
                 type="file"
                 accept="image/*"
                 onChange={onServiceImageUpload}
               />
-              {uploadingImageFor === "service-main" ? <p className="text-xs text-cyan-300">Uploading image...</p> : null}
-              {!serviceForm.image ? <p className="text-xs text-slate-300">Please upload a service image from gallery.</p> : null}
+              {uploadingImageFor === "service-main" ? <p className="text-xs text-cyan-700">Uploading image...</p> : null}
+              {!serviceForm.image ? <p className="text-xs text-slate-600">Please upload a service image from gallery.</p> : null}
               {serviceForm.image ? (
                 <div className="relative h-20 w-20">
                   <img
                     src={serviceForm.image}
                     alt="Service preview"
-                    className="h-20 w-20 rounded-xl border border-[#F0B429]/30 object-cover"
+                    className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
                   />
                   <button
                     type="button"
                     aria-label="Remove service image"
-                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-red-300/30 bg-[#0d214d] text-sm font-bold leading-none text-red-200 hover:bg-red-500/20"
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-red-300/30 bg-white text-sm font-bold leading-none text-red-600 hover:bg-red-100"
                     onClick={onClearServiceImage}
                   >
                     ×
@@ -100,16 +100,16 @@ function AddServicePage({
           </div>
         </div>
 
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
-          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+        <div className="rounded-3xl border border-slate-200 bg-white p-[22px]">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900">
             <PlusSquareIcon className="h-5 w-5 text-emerald-300" />
             Projects
           </h3>
           {serviceForm.projects.map((project, index) => (
-            <div className="mb-4 grid gap-3 rounded-3xl border border-[#F0B429]/30 bg-[#132c61] p-4" key={index}>
+            <div className="mb-4 grid gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4" key={index}>
               <div className="flex items-center justify-between gap-3">
-                <h4 className="text-base font-semibold text-white">Project {index + 1}</h4>
-                <button type="button" className="rounded-2xl border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100" onClick={() => onRemoveProject(index)}>
+                <h4 className="text-base font-semibold text-slate-900">Project {index + 1}</h4>
+                <button type="button" className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900" onClick={() => onRemoveProject(index)}>
                   Remove
                 </button>
               </div>
@@ -127,19 +127,19 @@ function AddServicePage({
                 accept="image/*"
                 onChange={(event) => onProjectImageUpload(index, event)}
               />
-              {uploadingImageFor === `project-${index}` ? <p className="text-xs text-cyan-300">Uploading project image...</p> : null}
-              {!project.image ? <p className="text-xs text-slate-300">Please upload project image from gallery.</p> : null}
+              {uploadingImageFor === `project-${index}` ? <p className="text-xs text-cyan-700">Uploading project image...</p> : null}
+              {!project.image ? <p className="text-xs text-slate-600">Please upload project image from gallery.</p> : null}
               {project.image ? (
                 <div className="relative h-20 w-20">
                   <img
                     src={project.image}
                     alt={`Project ${index + 1} preview`}
-                    className="h-20 w-20 rounded-xl border border-[#F0B429]/30 object-cover"
+                    className="h-20 w-20 rounded-xl border border-slate-200 object-cover"
                   />
                   <button
                     type="button"
                     aria-label={`Remove project ${index + 1} image`}
-                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-red-300/30 bg-[#0d214d] text-sm font-bold leading-none text-red-200 hover:bg-red-500/20"
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-red-300/30 bg-white text-sm font-bold leading-none text-red-600 hover:bg-red-100"
                     onClick={() => onClearProjectImage(index)}
                   >
                     ×
@@ -198,7 +198,7 @@ function AddServicePage({
               />
             </div>
           ))}
-          <button type="button" className="rounded-2xl border border-white/20 bg-white/5 px-4 py-3 text-sm font-semibold text-slate-100" onClick={onAddProject}>
+          <button type="button" className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900" onClick={onAddProject}>
             + Add Another Project
           </button>
         </div>
@@ -211,7 +211,7 @@ function AddServicePage({
           {isSubmittingService ? "Saving..." : isEditingService ? "Update Service" : "Add Service"}
         </button>
       </form>
-      {serviceMessage && <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{serviceMessage}</p>}
+      {serviceMessage && <p className="rounded-2xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">{serviceMessage}</p>}
     </section>
   );
 }

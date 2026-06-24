@@ -2,6 +2,7 @@ import crypto from "crypto";
 import mongoose from "mongoose";
 import Razorpay from "razorpay";
 import User from "../models/User.js";
+import { hashPassword, isValidPassword, verifyPassword } from "../utils/password.js";
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -28,28 +29,12 @@ const parseBootstrapAdminEmails = () => {
   return [...new Set([...defaults, ...fromEnv])];
 };
 
-const findUserForLogin = async (identifier) => {
-  const trimmed = String(identifier ?? "").trim();
-  const lower = trimmed.toLowerCase();
-
-  if (lower.includes("@")) {
-    return User.findOne({ email: lower });
-  }
-
-  const digits = trimmed.replace(/\D/g, "");
-  const phoneCandidates = new Set();
-  if (trimmed) phoneCandidates.add(trimmed);
-  if (digits) {
-    phoneCandidates.add(digits);
-    if (digits.length >= 10) phoneCandidates.add(digits.slice(-10));
-  }
-
-  const list = [...phoneCandidates];
-  if (list.length === 0) {
+const findUserByEmail = async (email) => {
+  const normalizedEmail = String(email ?? "").trim().toLowerCase();
+  if (!normalizedEmail) {
     return null;
   }
-
-  return User.findOne({ phone: { $in: list } });
+  return User.findOne({ email: normalizedEmail }).select("+password");
 };
 
 export const getUsers = async (req, res) => {
@@ -63,12 +48,16 @@ export const getUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { username, email, phone, role } = req.body;
+    const { username, email, phone, role, password } = req.body;
 
-    if (!username || !email || !phone) {
+    if (!username || !email || !phone || !password) {
       return res
         .status(400)
-        .json({ message: "username, email and phone are required" });
+        .json({ message: "username, email, phone and password are required" });
+    }
+
+    if (!isValidPassword(password)) {
+      return res.status(400).json({ message: "Password must be at least 6 characters" });
     }
 
     const normalizedRole = String(role || "user").trim().toLowerCase();
@@ -78,9 +67,10 @@ export const createUser = async (req, res) => {
 
     const newUser = await User.create({
       username,
-      email,
+      email: String(email).trim().toLowerCase(),
       phone,
       role: normalizedRole,
+      password: hashPassword(password),
     });
 
     res.status(201).json({
@@ -100,16 +90,16 @@ export const createUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { identifier } = req.body;
+    const { email, password } = req.body;
 
-    if (!identifier) {
-      return res.status(400).json({ message: "Email or phone is required" });
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
     }
 
-    let user = await findUserForLogin(identifier);
+    let user = await findUserByEmail(email);
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    if (!user || !user.password || !verifyPassword(password, user.password)) {
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const bootstrapEmails = parseBootstrapAdminEmails();

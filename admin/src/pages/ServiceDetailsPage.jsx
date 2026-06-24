@@ -18,10 +18,10 @@ const newCategoryFormInitial = {
 };
 
 const inputCls =
-  "rounded-xl border border-white/15 bg-[#0d214d] px-3 py-2 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-cyan-400/40";
+  "rounded-xl border border-white/15 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-500 focus:border-cyan-400/40";
 
 const iconBtn =
-  "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-slate-300 transition hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-100";
+  "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white text-slate-600 transition hover:border-cyan-400/40 hover:bg-cyan-50 hover:text-cyan-100";
 
 function IconPencil({ className = "h-4 w-4" }) {
   return (
@@ -450,12 +450,12 @@ function ServiceDetailsPage({
   if (!service) {
     return (
       <section className="grid gap-5">
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-7">
-          <h4 className="m-0 text-lg font-semibold text-white">Service not found</h4>
-          <p className="mt-2 text-sm text-slate-300">This service could not be loaded.</p>
+        <div className="rounded-3xl border border-slate-200 bg-white p-7">
+          <h4 className="m-0 text-lg font-semibold text-slate-900">Service not found</h4>
+          <p className="mt-2 text-sm text-slate-600">This service could not be loaded.</p>
           <button
             type="button"
-            className="mt-4 rounded-2xl border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100"
+            className="mt-4 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900"
             onClick={() => navigate("/admin/services/my-services")}
           >
             Back to Services
@@ -467,13 +467,13 @@ function ServiceDetailsPage({
 
   return (
     <section className="grid gap-4">
-      {serviceMessage ? <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{serviceMessage}</p> : null}
+      {serviceMessage ? <p className="rounded-2xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">{serviceMessage}</p> : null}
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="m-0 text-lg font-bold text-white">{service.name}</h2>
+        <h2 className="m-0 text-lg font-bold text-slate-900">{service.name}</h2>
         <button
           type="button"
-          className="rounded-2xl border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100"
+          className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900"
           onClick={() => navigate("/admin/services/my-services")}
         >
           Back
@@ -484,19 +484,19 @@ function ServiceDetailsPage({
         <p className="max-w-6xl rounded-xl border border-amber-400/25 bg-amber-500/10 px-3 py-2 text-sm font-semibold text-amber-100">{serviceDetailsMessage}</p>
       ) : null}
       {documentTypeMessage ? (
-        <p className="max-w-6xl rounded-xl border border-cyan-400/25 bg-cyan-500/10 px-3 py-2 text-sm font-semibold text-cyan-100">{documentTypeMessage}</p>
+        <p className="max-w-6xl rounded-xl border border-cyan-400/25 bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-100">{documentTypeMessage}</p>
       ) : null}
 
       <div className="grid w-full max-w-6xl gap-4 lg:grid-cols-[1fr_min(100%,380px)] lg:items-start lg:gap-5">
-        <div className="rounded-2xl border border-white/10 bg-[#0d214d]/80 p-4 shadow-sm md:p-5">
-          <p className="mb-4 border-b border-white/10 pb-3 text-xs font-medium text-slate-400">Add fields &amp; documents</p>
+        <div className="rounded-2xl border border-white/10 bg-white/80 p-4 shadow-sm md:p-5">
+          <p className="mb-4 border-b border-white/10 pb-3 text-xs font-medium text-slate-500">Add fields &amp; documents</p>
           {configLoading ? (
-            <p className="text-sm text-slate-400">Loading configuration…</p>
+            <p className="text-sm text-slate-500">Loading configuration…</p>
           ) : (
             <div className="space-y-5">
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-end gap-2">
-                    <label className="grid min-w-[140px] flex-1 gap-1 text-xs text-slate-400">
+                    <label className="grid min-w-[140px] flex-1 gap-1 text-xs text-slate-500">
                       Label
                       <input
                         type="text"
@@ -506,7 +506,7 @@ function ServiceDetailsPage({
                         className={inputCls}
                       />
                     </label>
-                    <label className="grid min-w-[100px] gap-1 text-xs text-slate-400">
+                    <label className="grid min-w-[100px] gap-1 text-xs text-slate-500">
                       Type
                       <select
                         value={draftFieldType}
@@ -520,7 +520,7 @@ function ServiceDetailsPage({
                         ))}
                       </select>
                     </label>
-                    <label className="flex cursor-pointer items-center gap-2 pb-2 text-xs text-slate-400">
+                    <label className="flex cursor-pointer items-center gap-2 pb-2 text-xs text-slate-500">
                       <input type="checkbox" checked={draftRequired} onChange={(event) => setDraftRequired(event.target.checked)} className="rounded border-white/30" />
                       Required
                     </label>
@@ -536,7 +536,7 @@ function ServiceDetailsPage({
                       <button
                         type="button"
                         disabled={configSaving}
-                        className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold text-slate-200 disabled:opacity-50"
+                        className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-200 disabled:opacity-50"
                         onClick={handleCancelEditField}
                       >
                         Cancel
@@ -550,7 +550,7 @@ function ServiceDetailsPage({
 
                 <div className="space-y-2 border-t border-white/10 pt-4">
                   <div className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end">
-                    <label className="grid min-w-0 gap-1 text-xs text-slate-400">
+                    <label className="grid min-w-0 gap-1 text-xs text-slate-500">
                       Category
                       <select
                         value={draftDocTypeId}
@@ -565,7 +565,7 @@ function ServiceDetailsPage({
                         ))}
                       </select>
                     </label>
-                    <label className="grid min-w-0 gap-1 text-xs text-slate-400">
+                    <label className="grid min-w-0 gap-1 text-xs text-slate-500">
                       Document
                       <select
                         value={draftDocItemId}
@@ -611,7 +611,7 @@ function ServiceDetailsPage({
                         className={inputCls}
                       />
                     </div>
-                    <label className="flex items-center gap-2 text-xs text-slate-400">
+                    <label className="flex items-center gap-2 text-xs text-slate-500">
                       <input
                         type="checkbox"
                         checked={newCategoryForm.isActive}
@@ -622,7 +622,7 @@ function ServiceDetailsPage({
                     </label>
 
                     <div className="flex justify-end">
-                      <button type="button" className="text-xs font-bold text-cyan-200 hover:text-cyan-100" onClick={addNewCategoryItem}>
+                      <button type="button" className="text-xs font-bold text-cyan-700 hover:text-cyan-100" onClick={addNewCategoryItem}>
                         + Item
                       </button>
                     </div>
@@ -659,7 +659,7 @@ function ServiceDetailsPage({
                               type="file"
                               accept="image/*"
                               disabled={uploadingDocItemIndex === i || !uploadAdminImage}
-                              className="max-w-[200px] text-xs text-slate-400 file:mr-2 file:rounded-lg file:border-0 file:bg-white/10 file:px-2 file:py-1 file:text-slate-200"
+                              className="max-w-[200px] text-xs text-slate-500 file:mr-2 file:rounded-lg file:border-0 file:bg-white/10 file:px-2 file:py-1 file:text-slate-200"
                               onChange={(e) => {
                                 const file = e.target.files?.[0];
                                 e.target.value = "";
@@ -667,7 +667,7 @@ function ServiceDetailsPage({
                               }}
                             />
                             {uploadingDocItemIndex === i ? <span className="text-xs text-slate-500">…</span> : null}
-                            <label className="ml-auto flex items-center gap-2 text-xs text-slate-400">
+                            <label className="ml-auto flex items-center gap-2 text-xs text-slate-500">
                               <input
                                 type="checkbox"
                                 checked={item.isActive}
@@ -678,7 +678,7 @@ function ServiceDetailsPage({
                             </label>
                             <button
                               type="button"
-                              className="rounded-lg border border-red-300/30 bg-red-500/10 px-2 py-1 text-xs font-semibold text-red-200"
+                              className="rounded-lg border border-red-300/30 bg-red-50 px-2 py-1 text-xs font-semibold text-red-600"
                               onClick={() => removeNewCategoryItem(i)}
                             >
                               Remove
@@ -711,7 +711,7 @@ function ServiceDetailsPage({
                   <button
                     type="button"
                     disabled={configSaving}
-                    className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200 disabled:opacity-50"
+                    className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-200 disabled:opacity-50"
                     onClick={handleDeleteServiceFormConfig}
                   >
                     Clear all
@@ -721,10 +721,10 @@ function ServiceDetailsPage({
           )}
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-[#0d214d]/80 p-4 shadow-sm md:p-5">
-          <p className="mb-4 border-b border-white/10 pb-3 text-xs font-medium text-slate-400">On this service</p>
+        <div className="rounded-2xl border border-white/10 bg-white/80 p-4 shadow-sm md:p-5">
+          <p className="mb-4 border-b border-white/10 pb-3 text-xs font-medium text-slate-500">On this service</p>
           {configLoading ? (
-            <p className="text-sm text-slate-400">Loading…</p>
+            <p className="text-sm text-slate-500">Loading…</p>
           ) : (
             <div className="space-y-5">
               <div>
@@ -734,12 +734,12 @@ function ServiceDetailsPage({
                     {formFields.map((field, index) => (
                       <li
                         key={`${field.label}-${index}`}
-                        className={`flex items-start justify-between gap-2 rounded-lg border bg-white/5 px-3 py-2 text-sm text-slate-200 ${
+                        className={`flex items-start justify-between gap-2 rounded-lg border bg-white px-3 py-2 text-sm text-slate-200 ${
                           editingFieldIndex === index ? "border-cyan-400/35 ring-1 ring-cyan-400/25" : "border-white/5"
                         }`}
                       >
                         <span className="min-w-0">
-                          <span className="font-medium text-white">{field.label}</span>
+                          <span className="font-medium text-slate-900">{field.label}</span>
                           <span className="mt-0.5 block text-[11px] text-slate-500">
                             {FIELD_TYPE_OPTIONS.find((o) => o.value === field.fieldType)?.label || field.fieldType}
                             {field.required ? " · required" : ""}
@@ -758,7 +758,7 @@ function ServiceDetailsPage({
                           </button>
                           <button
                             type="button"
-                            className={`${iconBtn} hover:border-red-400/40 hover:bg-red-500/10 hover:text-red-100`}
+                            className={`${iconBtn} hover:border-red-200 hover:bg-red-50 hover:text-red-100`}
                             title="Remove field"
                             aria-label="Remove field"
                             disabled={configSaving}
@@ -782,15 +782,15 @@ function ServiceDetailsPage({
                     {linkedDocuments.map((row, index) => (
                       <li
                         key={`${row.documentType}-${row.documentItem}-${index}`}
-                        className="flex items-start justify-between gap-2 rounded-lg border border-white/5 bg-white/5 px-3 py-2 text-sm text-slate-200"
+                        className="flex items-start justify-between gap-2 rounded-lg border border-white/5 bg-white px-3 py-2 text-sm text-slate-200"
                       >
                         <span className="min-w-0">
-                          <span className="font-medium text-white">{row.documentItemName || "Document"}</span>
+                          <span className="font-medium text-slate-900">{row.documentItemName || "Document"}</span>
                           <span className="mt-0.5 block text-[11px] text-slate-500">{row.documentTypeName || "—"}</span>
                         </span>
                         <button
                           type="button"
-                          className={`${iconBtn} hover:border-red-400/40 hover:bg-red-500/10 hover:text-red-100`}
+                          className={`${iconBtn} hover:border-red-200 hover:bg-red-50 hover:text-red-100`}
                           title="Unlink document"
                           aria-label="Unlink document"
                           disabled={configSaving}

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { getBlogStatusBadgeClass } from "../utils/dashboardData";
 
 function EyeIcon({ className = "" }) {
   return (
@@ -51,47 +52,47 @@ function MyBlogsPage({ blogsLoading, blogsError, blogsList, blogMessage, onDelet
 
   return (
     <section className="grid gap-5">
-      {blogMessage ? <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{blogMessage}</p> : null}
+      {blogMessage ? <p className="rounded-2xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">{blogMessage}</p> : null}
       {blogsLoading ? (
-        <p className="text-sm text-slate-300">Loading blogs...</p>
+        <p className="text-sm text-slate-600">Loading blogs...</p>
       ) : blogsError ? (
-        <p className="rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-200">{blogsError}. Check backend server and API URL.</p>
+        <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">{blogsError}. Check backend server and API URL.</p>
       ) : blogsList.length === 0 ? (
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-7">
-          <h4 className="m-0 text-lg font-semibold text-white">No blogs found</h4>
-          <p className="mt-2 text-sm text-slate-300">Start adding blogs to fill this section.</p>
+        <div className="rounded-3xl border border-slate-200 bg-white p-7">
+          <h4 className="m-0 text-lg font-semibold text-slate-900">No blogs found</h4>
+          <p className="mt-2 text-sm text-slate-600">Start adding blogs to fill this section.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-[18px] border border-[#F0B429]/30 bg-[#0d214d]">
+        <div className="overflow-x-auto rounded-[18px] border border-slate-200 bg-white">
           <div className="min-w-[940px]">
-            <div className="grid grid-cols-[90px_minmax(220px,1.8fr)_minmax(110px,0.9fr)_minmax(140px,1fr)_220px] gap-3 border-b border-[#F0B429]/30 bg-[#142e62] px-3.5 py-3">
-              <span className="text-xs font-extrabold uppercase text-[#F0B429]">Image</span>
-              <span className="text-xs font-extrabold uppercase text-[#F0B429]">Title</span>
-              <span className="text-xs font-extrabold uppercase text-[#F0B429]">Status</span>
-              <span className="text-xs font-extrabold uppercase text-[#F0B429]">Author</span>
-              <span className="text-center text-xs font-extrabold uppercase text-[#F0B429]">Actions</span>
+            <div className="grid grid-cols-[90px_minmax(220px,1.8fr)_minmax(110px,0.9fr)_minmax(140px,1fr)_220px] gap-3 border-b border-slate-200 bg-slate-100 px-3.5 py-3">
+              <span className="text-xs font-extrabold uppercase text-slate-900">Image</span>
+              <span className="text-xs font-extrabold uppercase text-slate-900">Title</span>
+              <span className="text-xs font-extrabold uppercase text-slate-900">Status</span>
+              <span className="text-xs font-extrabold uppercase text-slate-900">Author</span>
+              <span className="text-center text-xs font-extrabold uppercase text-slate-900">Actions</span>
             </div>
 
             {blogsList.map((blog) => (
               <div
                 key={blog._id}
-                className="grid grid-cols-[90px_minmax(220px,1.8fr)_minmax(110px,0.9fr)_minmax(140px,1fr)_220px] gap-3 border-b border-[#F0B429]/20 px-3.5 py-3 last:border-b-0"
+                className="grid grid-cols-[90px_minmax(220px,1.8fr)_minmax(110px,0.9fr)_minmax(140px,1fr)_220px] gap-3 border-b border-slate-200 px-3.5 py-3 last:border-b-0"
               >
                 <div className="grid content-start">
                   {blog.featuredImage ? (
                     <img src={blog.featuredImage} alt={blog.title || "Blog image"} className="h-[72px] w-[72px] rounded-xl object-cover" />
                   ) : (
-                    <div className="flex h-[72px] w-[72px] items-center justify-center rounded-xl bg-white/10 text-xs font-semibold text-slate-300">No image</div>
+                    <div className="flex h-[72px] w-[72px] items-center justify-center rounded-xl bg-white/10 text-xs font-semibold text-slate-600">No image</div>
                   )}
                 </div>
 
                 <div className="grid content-start gap-1">
-                  <strong className="line-clamp-2 text-[13px] text-white">{blog.title || "Untitled blog"}</strong>
-                  <p className="line-clamp-2 text-xs text-slate-300">{blog.excerpt || "No excerpt available."}</p>
+                  <strong className="line-clamp-2 text-[13px] text-slate-900">{blog.title || "Untitled blog"}</strong>
+                  <p className="line-clamp-2 text-xs text-slate-600">{blog.excerpt || "No excerpt available."}</p>
                 </div>
 
                 <div className="grid content-start">
-                  <span className={`inline-flex w-fit rounded-full px-2.5 py-1 text-xs font-bold ${blog.status === "published" ? "bg-emerald-500/20 text-emerald-200" : "bg-amber-500/20 text-amber-200"}`}>
+                  <span className={`inline-flex w-fit rounded-full border px-2.5 py-1 text-xs font-bold ${getBlogStatusBadgeClass(blog.status)}`}>
                     {blog.status || "draft"}
                   </span>
                 </div>
@@ -104,7 +105,7 @@ function MyBlogsPage({ blogsLoading, blogsError, blogsList, blogMessage, onDelet
                     onClick={() => handleDetailBlog(blog)}
                     aria-label="View blog details"
                     title="View details"
-                    className="rounded-xl border border-cyan-300/30 bg-cyan-500/10 p-2 text-cyan-200 hover:bg-cyan-500/20"
+                    className="rounded-xl border border-cyan-300/30 bg-cyan-50 p-2 text-cyan-700 hover:bg-cyan-500/20"
                   >
                     <EyeIcon className="h-4 w-4" />
                   </button>
@@ -122,7 +123,7 @@ function MyBlogsPage({ blogsLoading, blogsError, blogsList, blogMessage, onDelet
                     onClick={() => handleDeleteClick(blog)}
                     aria-label="Delete blog"
                     title="Delete"
-                    className="rounded-xl border border-red-300/30 bg-red-500/10 p-2 text-red-200 transition hover:bg-red-500/20"
+                    className="rounded-xl border border-red-300/30 bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
                   >
                     <TrashIcon className="h-4 w-4" />
                   </button>

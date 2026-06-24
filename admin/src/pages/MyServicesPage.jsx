@@ -35,23 +35,23 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
 
   return (
     <section className="grid gap-5">
-      {serviceMessage ? <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{serviceMessage}</p> : null}
+      {serviceMessage ? <p className="rounded-2xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">{serviceMessage}</p> : null}
       {servicesLoading ? (
-        <p className="text-sm text-slate-300">Loading services...</p>
+        <p className="text-sm text-slate-600">Loading services...</p>
       ) : servicesError ? (
-        <p className="rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-200">{servicesError}. Check backend server and API URL.</p>
+        <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">{servicesError}. Check backend server and API URL.</p>
       ) : servicesList.length === 0 ? (
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-7">
-          <h4 className="m-0 text-lg font-semibold text-white">No services found</h4>
-          <p className="mt-2 text-sm text-slate-300">Add your first premium service to populate this section.</p>
+        <div className="rounded-3xl border border-slate-200 bg-white p-7">
+          <h4 className="m-0 text-lg font-semibold text-slate-900">No services found</h4>
+          <p className="mt-2 text-sm text-slate-600">Add your first premium service to populate this section.</p>
         </div>
       ) : filteredServices.length === 0 ? (
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-7">
-          <h4 className="m-0 text-lg font-semibold text-white">No matching services</h4>
-          <p className="mt-2 text-sm text-slate-300">No service name matches `{searchParams.get("q")}`.</p>
+        <div className="rounded-3xl border border-slate-200 bg-white p-7">
+          <h4 className="m-0 text-lg font-semibold text-slate-900">No matching services</h4>
+          <p className="mt-2 text-sm text-slate-600">No service name matches `{searchParams.get("q")}`.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-3xl border border-[#F0B429]/30 bg-[#0d214d]">
+        <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white">
           <table className="min-w-[720px] w-full table-fixed border-collapse text-left">
             <colgroup>
               <col className="w-[100px]" />
@@ -59,8 +59,8 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
               <col className="w-[140px]" />
               <col className="w-[220px]" />
             </colgroup>
-            <thead className="bg-[#142e62]">
-              <tr className="text-xs uppercase tracking-[0.08em] text-[#F0B429]">
+            <thead className="bg-slate-100">
+              <tr className="text-xs uppercase tracking-[0.08em] text-slate-900">
                 <th className="px-4 py-3 font-semibold">Image</th>
                 <th className="px-4 py-3 font-semibold">Name</th>
                 <th className="px-4 py-3 font-semibold text-center">Discount Price</th>
@@ -75,33 +75,33 @@ function MyServicesPage({ servicesLoading, servicesError, servicesList, serviceM
                   tabIndex={0}
                   onClick={() => goToDetails(service)}
                   onKeyDown={(event) => handleRowKeyDown(event, service)}
-                  className="cursor-pointer border-t border-[#F0B429]/20 align-middle text-sm text-slate-200 transition-colors hover:bg-[#142e62]/80 focus:bg-[#142e62]/80 focus:outline-none"
+                  className="cursor-pointer border-t border-slate-200 align-middle text-sm text-slate-200 transition-colors hover:bg-slate-100/80 focus:bg-slate-100/80 focus:outline-none"
                 >
                   <td className="px-4 py-3">
                     {service.image ? (
                       <img src={service.image} alt={service.name} className="h-14 w-14 rounded-xl object-cover" />
                     ) : (
-                      <span className="text-xs text-slate-400">N/A</span>
+                      <span className="text-xs text-slate-500">N/A</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <p className="truncate font-semibold text-white" title={formatValue(service.name)}>
+                    <p className="truncate font-semibold text-slate-900" title={formatValue(service.name)}>
                       {formatValue(service.name)}
                     </p>
                   </td>
-                  <td className="px-4 py-3 text-center font-semibold text-white">{formatValue(service.discountedPrice)}</td>
+                  <td className="px-4 py-3 text-center font-semibold text-slate-900">{formatValue(service.discountedPrice)}</td>
                   <td className="px-4 py-3" onClick={(event) => event.stopPropagation()} onKeyDown={(event) => event.stopPropagation()}>
                     <div className="flex items-center justify-end gap-2 whitespace-nowrap">
                       <button
                         type="button"
-                        className="rounded-xl border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-100"
+                        className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-900"
                         onClick={() => navigate("/admin/services/add-service", { state: { service } })}
                       >
                         Edit
                       </button>
                       <button
                         type="button"
-                        className="rounded-xl border border-red-300/30 bg-red-500/10 px-3 py-1.5 text-xs font-semibold text-red-200"
+                        className="rounded-xl border border-red-300/30 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600"
                         onClick={() => handleServiceDelete(service._id)}
                       >
                         Delete

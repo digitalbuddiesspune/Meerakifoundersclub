@@ -48,8 +48,8 @@ function mapPartnerToForm(p = {}) {
   };
 }
 
-const inputCls = "w-full rounded-2xl border border-[#F0B429]/30 bg-white/5 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-400 focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20";
-const selectCls = "w-full rounded-2xl border border-[#F0B429]/30 bg-[#0d214d] px-4 py-3 text-sm text-slate-100 outline-none focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20";
+const inputCls = "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-500 focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20";
+const selectCls = "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20";
 
 function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partnerList }) {
   const navigate = useNavigate();
@@ -150,23 +150,23 @@ function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partne
 
   return (
     <section className="grid gap-5">
-      <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-6">
+      <div className="rounded-3xl border border-slate-200 bg-white p-6">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="m-0 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-300">Management</p>
-            <h3 className="mt-1 text-2xl font-bold text-white">{editingId ? "Edit Partner" : "Add Partner"}</h3>
-            <p className="mt-2 text-sm leading-7 text-slate-300">{editingId ? "Update partner information." : "Add a new partner to the system."}</p>
+            <p className="m-0 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-600">Management</p>
+            <h3 className="mt-1 text-2xl font-bold text-slate-900">{editingId ? "Edit Partner" : "Add Partner"}</h3>
+            <p className="mt-2 text-sm leading-7 text-slate-600">{editingId ? "Update partner information." : "Add a new partner to the system."}</p>
           </div>
         </div>
       </div>
 
       {partnersMessage ? (
-        <p className="rounded-2xl border border-cyan-400/30 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200">{partnersMessage}</p>
+        <p className="rounded-2xl border border-cyan-200 bg-cyan-50 px-4 py-3 text-sm font-semibold text-cyan-700">{partnersMessage}</p>
       ) : null}
 
       <form className="grid gap-5" onSubmit={handleSubmit}>
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
-          <h4 className="mb-4 text-base font-semibold text-white">Basic Info</h4>
+        <div className="rounded-3xl border border-slate-200 bg-white p-[22px]">
+          <h4 className="mb-4 text-base font-semibold text-slate-900">Basic Info</h4>
           <div className="grid gap-3.5 md:grid-cols-2">
             <input className={inputCls} name="name" placeholder="Name *" value={form.name} onChange={handleChange} required />
             <input className={inputCls} name="businessName" placeholder="Business Name" value={form.businessName} onChange={handleChange} />
@@ -181,8 +181,8 @@ function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partne
           <textarea className={`${inputCls} mt-3.5`} name="description" placeholder="Description *" value={form.description} onChange={handleChange} rows={3} required />
         </div>
 
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
-          <h4 className="mb-4 text-base font-semibold text-white">Location & Stats</h4>
+        <div className="rounded-3xl border border-slate-200 bg-white p-[22px]">
+          <h4 className="mb-4 text-base font-semibold text-slate-900">Location & Stats</h4>
           <div className="grid gap-3.5 md:grid-cols-3">
             <input className={inputCls} name="city" placeholder="City" value={form.city} onChange={handleChange} />
             <input className={inputCls} name="state" placeholder="State" value={form.state} onChange={handleChange} />
@@ -197,7 +197,7 @@ function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partne
               <option value="rejected">Rejected</option>
               <option value="suspended">Suspended</option>
             </select>
-            <label className="flex items-center gap-2 self-center text-sm text-slate-300">
+            <label className="flex items-center gap-2 self-center text-sm text-slate-600">
               <input type="checkbox" name="isVerified" checked={form.isVerified} onChange={handleChange} className="h-4 w-4 accent-[#F0B429]" />
               Verified
             </label>
@@ -205,25 +205,25 @@ function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partne
           <textarea className={`${inputCls} mt-3.5`} name="notes" placeholder="Notes" value={form.notes} onChange={handleChange} rows={2} />
         </div>
 
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
-          <h4 className="mb-3 text-base font-semibold text-white">Specializations</h4>
+        <div className="rounded-3xl border border-slate-200 bg-white p-[22px]">
+          <h4 className="mb-3 text-base font-semibold text-slate-900">Specializations</h4>
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setDropdownOpen((prev) => !prev)}
-              className="flex w-full items-center justify-between rounded-2xl border border-[#F0B429]/30 bg-white/5 px-4 py-3 text-sm text-slate-100 outline-none focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20"
+              className="flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none focus:border-[#F0B429] focus:ring-2 focus:ring-[#F0B429]/20"
             >
-              <span className={form.specializations.length === 0 ? "text-slate-400" : "text-slate-100"}>
+              <span className={form.specializations.length === 0 ? "text-slate-500" : "text-slate-900"}>
                 {form.specializations.length === 0
                   ? "Select specializations"
                   : `${form.specializations.length} selected`}
               </span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-4 w-4 shrink-0 text-slate-400 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}><path d="m6 9 6 6 6-6" /></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-4 w-4 shrink-0 text-slate-500 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}><path d="m6 9 6 6 6-6" /></svg>
             </button>
             {dropdownOpen && (
-              <div className="absolute z-20 mt-1 max-h-56 w-full overflow-y-auto rounded-2xl border border-[#F0B429]/30 bg-[#0d214d] shadow-xl">
+              <div className="absolute z-20 mt-1 max-h-56 w-full overflow-y-auto rounded-2xl border border-slate-200 bg-white shadow-xl">
                 {partnerListOptions.length === 0 ? (
-                  <p className="px-4 py-3 text-sm text-slate-400">No options available.</p>
+                  <p className="px-4 py-3 text-sm text-slate-500">No options available.</p>
                 ) : (
                   partnerListOptions.map((opt) => {
                     const selected = form.specializations.includes(opt);
@@ -232,11 +232,11 @@ function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partne
                         key={opt}
                         type="button"
                         onClick={() => toggleSpecialization(opt)}
-                        className={`flex w-full items-center justify-between px-4 py-2.5 text-sm transition hover:bg-white/5 ${selected ? "text-[#F0B429]" : "text-slate-200"}`}
+                        className={`flex w-full items-center justify-between px-4 py-2.5 text-sm transition hover:bg-slate-100 ${selected ? "text-slate-900" : "text-slate-200"}`}
                       >
                         <span>{opt}</span>
                         {selected && (
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-4 w-4 shrink-0 text-[#F0B429]"><path d="m5 13 4 4L19 7" /></svg>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-4 w-4 shrink-0 text-slate-900"><path d="m5 13 4 4L19 7" /></svg>
                         )}
                       </button>
                     );
@@ -248,41 +248,41 @@ function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partne
           {form.specializations.length > 0 && (
             <div className="mt-2.5 flex flex-wrap gap-1.5">
               {form.specializations.map((s) => (
-                <span key={s} className="flex items-center gap-1 rounded-xl border border-[#F0B429]/30 bg-[#F0B429]/10 px-2.5 py-1 text-xs font-semibold text-[#F0B429]">
+                <span key={s} className="flex items-center gap-1 rounded-xl border border-slate-200 bg-[#F0B429]/10 px-2.5 py-1 text-xs font-semibold text-slate-900">
                   {s}
-                  <button type="button" onClick={() => toggleSpecialization(s)} className="leading-none text-[#F0B429]/60 hover:text-[#F0B429]">×</button>
+                  <button type="button" onClick={() => toggleSpecialization(s)} className="leading-none text-slate-900/60 hover:text-slate-900">×</button>
                 </span>
               ))}
             </div>
           )}
         </div>
 
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
+        <div className="rounded-3xl border border-slate-200 bg-white p-[22px]">
           <div className="mb-3 flex items-center justify-between">
-            <h4 className="text-base font-semibold text-white">Portfolio Links</h4>
-            <button type="button" onClick={addPortfolioLink} className="rounded-xl border border-[#F0B429]/30 bg-[#F0B429]/10 px-3 py-1.5 text-xs font-bold text-[#F0B429] hover:bg-[#F0B429]/20">+ Add Link</button>
+            <h4 className="text-base font-semibold text-slate-900">Portfolio Links</h4>
+            <button type="button" onClick={addPortfolioLink} className="rounded-xl border border-slate-200 bg-[#F0B429]/10 px-3 py-1.5 text-xs font-bold text-slate-900 hover:bg-[#F0B429]/20">+ Add Link</button>
           </div>
           <div className="grid gap-2.5">
             {form.portfolioLinks.map((link, i) => (
               <div key={i} className="flex gap-2">
                 <input className={`${inputCls} flex-1`} placeholder={`Portfolio link ${i + 1}`} value={link} onChange={(e) => updatePortfolioLink(i, e.target.value)} />
-                <button type="button" onClick={() => removePortfolioLink(i)} className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 text-xs font-semibold text-red-300 hover:bg-red-500/20">Remove</button>
+                <button type="button" onClick={() => removePortfolioLink(i)} className="rounded-xl border border-red-400/30 bg-red-50 px-3 text-xs font-semibold text-red-600 hover:bg-red-100">Remove</button>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-3xl border border-[#F0B429]/30 bg-[#0d214d] p-[22px]">
+        <div className="rounded-3xl border border-slate-200 bg-white p-[22px]">
           <div className="mb-3 flex items-center justify-between">
-            <h4 className="text-base font-semibold text-white">Services</h4>
-            <button type="button" onClick={addService} className="rounded-xl border border-[#F0B429]/30 bg-[#F0B429]/10 px-3 py-1.5 text-xs font-bold text-[#F0B429] hover:bg-[#F0B429]/20">+ Add Service</button>
+            <h4 className="text-base font-semibold text-slate-900">Services</h4>
+            <button type="button" onClick={addService} className="rounded-xl border border-slate-200 bg-[#F0B429]/10 px-3 py-1.5 text-xs font-bold text-slate-900 hover:bg-[#F0B429]/20">+ Add Service</button>
           </div>
           <div className="grid gap-4">
             {form.services.map((svc, si) => (
-              <div key={si} className="rounded-2xl border border-[#F0B429]/20 bg-white/5 p-4">
+              <div key={si} className="rounded-2xl border border-slate-200 bg-white p-4">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase text-slate-400">Service {si + 1}</span>
-                  <button type="button" onClick={() => removeService(si)} className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-300 hover:bg-red-500/20">Remove</button>
+                  <span className="text-xs font-bold uppercase text-slate-500">Service {si + 1}</span>
+                  <button type="button" onClick={() => removeService(si)} className="rounded-xl border border-red-400/30 bg-red-50 px-3 py-1 text-xs font-semibold text-red-600 hover:bg-red-100">Remove</button>
                 </div>
                 <div className="grid gap-2.5 md:grid-cols-2">
                   <input className={inputCls} placeholder="Service name *" value={svc.name} onChange={(e) => updateService(si, "name", e.target.value)} required />
@@ -292,15 +292,15 @@ function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partne
                 </div>
                 <div className="mt-2.5">
                   <div className="mb-1.5 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-400">Technologies</span>
-                    <button type="button" onClick={() => addServiceTech(si)} className="rounded-lg border border-[#F0B429]/20 bg-[#F0B429]/10 px-2 py-1 text-xs text-[#F0B429] hover:bg-[#F0B429]/20">+ Add</button>
+                    <span className="text-xs font-semibold text-slate-500">Technologies</span>
+                    <button type="button" onClick={() => addServiceTech(si)} className="rounded-lg border border-slate-200 bg-[#F0B429]/10 px-2 py-1 text-xs text-slate-900 hover:bg-[#F0B429]/20">+ Add</button>
                   </div>
                   <div className="grid gap-2">
                     {svc.technologies.map((tech, ti) => (
                       <div key={ti} className="flex gap-2">
                         <input className={`${inputCls} flex-1`} placeholder={`Technology ${ti + 1}`} value={tech} onChange={(e) => updateServiceTech(si, ti, e.target.value)} />
                         {svc.technologies.length > 1 && (
-                          <button type="button" onClick={() => removeServiceTech(si, ti)} className="rounded-xl border border-red-400/30 bg-red-500/10 px-3 text-xs font-semibold text-red-300 hover:bg-red-500/20">Remove</button>
+                          <button type="button" onClick={() => removeServiceTech(si, ti)} className="rounded-xl border border-red-400/30 bg-red-50 px-3 text-xs font-semibold text-red-600 hover:bg-red-100">Remove</button>
                         )}
                       </div>
                     ))}
@@ -315,7 +315,7 @@ function AddPartnerPage({ partnersMessage, onAddPartner, onUpdatePartner, partne
           <button type="submit" disabled={isSubmitting} className="rounded-2xl bg-[#F0B429] px-6 py-2.5 text-sm font-bold text-[#070f26] transition hover:bg-[#e0a820] disabled:opacity-60">
             {isSubmitting ? "Saving..." : editingId ? "Update Partner" : "Add Partner"}
           </button>
-          <button type="button" onClick={handleCancel} className="rounded-2xl border border-[#F0B429]/30 bg-white/5 px-6 py-2.5 text-sm font-semibold text-slate-300 transition hover:bg-white/10">
+          <button type="button" onClick={handleCancel} className="rounded-2xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-white/10">
             Cancel
           </button>
         </div>

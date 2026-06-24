@@ -45,8 +45,8 @@ function App() {
   const lastScrollYRef = useRef(0)
   const [authTab, setAuthTab] = useState('signup')
   const [authError, setAuthError] = useState('')
-  const [signupForm, setSignupForm] = useState({ name: '', email: '', phone: '' })
-  const [loginForm, setLoginForm] = useState({ identifier: '' })
+  const [signupForm, setSignupForm] = useState({ name: '', email: '', phone: '', password: '' })
+  const [loginForm, setLoginForm] = useState({ email: '', password: '' })
 
   const openAuthModal = () => {
     if (isAuthenticated) return
@@ -83,6 +83,7 @@ function App() {
     const name = signupForm.name.trim()
     const email = signupForm.email.trim().toLowerCase()
     const phone = signupForm.phone.trim()
+    const password = signupForm.password
 
     if (!isValidName(name)) {
       setAuthError('Name must contain at least 3 letters.')
@@ -96,6 +97,10 @@ function App() {
       setAuthError('Phone must start with 9, 8, 7, or 6 and contain 10 digits.')
       return
     }
+    if (!password || password.length < 6) {
+      setAuthError('Password must be at least 6 characters.')
+      return
+    }
 
     try {
       const response = await fetch(`${API_BASE_URL}/create-user`, {
@@ -105,6 +110,7 @@ function App() {
           username: name,
           email,
           phone,
+          password,
         }),
       })
 
@@ -128,7 +134,7 @@ function App() {
         return
       }
       persistAndLoginUser(createdUser)
-      setSignupForm({ name: '', email: '', phone: '' })
+      setSignupForm({ name: '', email: '', phone: '', password: '' })
     } catch {
       setAuthError(NETWORK_ERROR_MESSAGE)
     }
@@ -138,19 +144,19 @@ function App() {
     event.preventDefault()
     setAuthError('')
 
-    const identifier = loginForm.identifier.trim().toLowerCase()
-    if (!identifier) {
-      setAuthError('Enter your email or phone number.')
-      return
-    }
+    const email = loginForm.email.trim().toLowerCase()
+    const password = loginForm.password
 
-    const isPhoneInput = /^\d+$/.test(identifier)
-    if (isPhoneInput && !isValidPhone(identifier)) {
-      setAuthError('Phone must start with 9, 8, 7, or 6 and contain 10 digits.')
+    if (!email) {
+      setAuthError('Enter your email address.')
       return
     }
-    if (!isPhoneInput && !isValidEmail(identifier)) {
-      setAuthError('Enter a valid email or phone number.')
+    if (!isValidEmail(email)) {
+      setAuthError('Enter a valid email address.')
+      return
+    }
+    if (!password) {
+      setAuthError('Enter your password.')
       return
     }
 
@@ -158,7 +164,7 @@ function App() {
       const response = await fetch(`${API_BASE_URL}/login-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier }),
+        body: JSON.stringify({ email, password }),
       })
       const data = await response.json()
       if (!response.ok) {
@@ -180,7 +186,7 @@ function App() {
         return
       }
       persistAndLoginUser(loggedInUser)
-      setLoginForm({ identifier: '' })
+      setLoginForm({ email: '', password: '' })
     } catch {
       setAuthError(NETWORK_ERROR_MESSAGE)
     }

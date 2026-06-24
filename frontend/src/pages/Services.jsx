@@ -321,7 +321,7 @@ function Services() {
           {/* ══════════════════════════════════════════════════════════
               HERO SECTION
           ══════════════════════════════════════════════════════════ */}
-          <section className="relative z-10 overflow-hidden bg-[#070D1A] px-4 py-14 md:px-8 md:py-20">
+          <section className="relative z-10 flex min-h-svh flex-col justify-center overflow-hidden bg-[#070D1A] px-4 pb-24 pt-14 md:px-8">
             <FloatingOrbs />
             <GridLines />
             <DotPattern className="right-10 top-24" />

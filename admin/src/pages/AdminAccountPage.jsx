@@ -136,99 +136,99 @@ function AdminAccountPage() {
   };
 
   return (
-    <section className="mx-auto w-full max-w-3xl rounded-2xl border border-[#F0B429]/25 bg-[#0d1f4d] p-5 shadow-xl md:p-7">
-      <h1 className="text-2xl font-bold text-white">Admin Account Settings</h1>
-      <p className="mt-2 text-sm text-slate-300">
+    <section className="mx-auto w-full max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-xl md:p-7">
+      <h1 className="text-2xl font-bold text-slate-900">Admin Account Settings</h1>
+      <p className="mt-2 text-sm text-slate-600">
         Update your admin profile details here.
       </p>
 
       {message ? (
-        <p className="mt-4 rounded-lg border border-[#F0B429]/30 bg-[#142e62] px-3 py-2 text-sm text-slate-100">
+        <p className="mt-4 rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-900">
           {message}
         </p>
       ) : null}
 
       {isLoading ? (
-        <p className="mt-5 text-sm text-slate-300">Loading profile...</p>
+        <p className="mt-5 text-sm text-slate-600">Loading profile...</p>
       ) : (
         <form onSubmit={handleSubmit} className="mt-6 grid gap-4 md:grid-cols-2">
-          <label className="grid gap-1 text-sm text-slate-300">
+          <label className="grid gap-1 text-sm text-slate-600">
             Name
             <input
               type="text"
               name="username"
               value={form.username}
               onChange={handleInputChange}
-              className={`rounded-lg border px-3 py-2 text-white outline-none ${
+              className={`rounded-lg border px-3 py-2 text-slate-900 outline-none ${
                 isEditing
-                  ? "border-[#F0B429]/25 bg-[#102a60] focus:border-[#F0B429]/60"
-                  : "border-[#F0B429]/15 bg-[#0f234f] text-slate-300"
+                  ? "border-slate-200 bg-white focus:border-orange-200"
+                  : "border-slate-200 bg-white text-slate-600"
               }`}
               disabled={!isEditing}
               required
             />
           </label>
 
-          <label className="grid gap-1 text-sm text-slate-300">
+          <label className="grid gap-1 text-sm text-slate-600">
             Email
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleInputChange}
-              className={`rounded-lg border px-3 py-2 text-white outline-none ${
+              className={`rounded-lg border px-3 py-2 text-slate-900 outline-none ${
                 isEditing
-                  ? "border-[#F0B429]/25 bg-[#102a60] focus:border-[#F0B429]/60"
-                  : "border-[#F0B429]/15 bg-[#0f234f] text-slate-300"
+                  ? "border-slate-200 bg-white focus:border-orange-200"
+                  : "border-slate-200 bg-white text-slate-600"
               }`}
               disabled={!isEditing}
               required
             />
           </label>
 
-          <label className="grid gap-1 text-sm text-slate-300">
+          <label className="grid gap-1 text-sm text-slate-600">
             Phone
             <input
               type="text"
               name="phone"
               value={form.phone}
               onChange={handleInputChange}
-              className={`rounded-lg border px-3 py-2 text-white outline-none ${
+              className={`rounded-lg border px-3 py-2 text-slate-900 outline-none ${
                 isEditing
-                  ? "border-[#F0B429]/25 bg-[#102a60] focus:border-[#F0B429]/60"
-                  : "border-[#F0B429]/15 bg-[#0f234f] text-slate-300"
+                  ? "border-slate-200 bg-white focus:border-orange-200"
+                  : "border-slate-200 bg-white text-slate-600"
               }`}
               disabled={!isEditing}
               required
             />
           </label>
 
-          <label className="grid gap-1 text-sm text-slate-300">
+          <label className="grid gap-1 text-sm text-slate-600">
             Role
             <input
               type="text"
               value={form.role || "admin"}
-              className="rounded-lg border border-[#F0B429]/15 bg-[#0f234f] px-3 py-2 text-slate-300 outline-none"
+              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-600 outline-none"
               disabled
             />
           </label>
 
-          <label className="grid gap-1 text-sm text-slate-300">
+          <label className="grid gap-1 text-sm text-slate-600">
             Status
             <input
               type="text"
               value={form.status || "inactive"}
-              className="rounded-lg border border-[#F0B429]/15 bg-[#0f234f] px-3 py-2 text-slate-300 outline-none"
+              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-600 outline-none"
               disabled
             />
           </label>
 
-          <label className="grid gap-1 text-sm text-slate-300">
+          <label className="grid gap-1 text-sm text-slate-600">
             Plan
             <input
               type="text"
               value={form.plan || "-"}
-              className="rounded-lg border border-[#F0B429]/15 bg-[#0f234f] px-3 py-2 text-slate-300 outline-none"
+              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-600 outline-none"
               disabled
             />
           </label>

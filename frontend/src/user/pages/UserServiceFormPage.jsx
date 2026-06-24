@@ -4,10 +4,10 @@ import { Link, useLocation, useNavigate, useOutletContext, useParams } from 'rea
 const API_BASE_URL = import.meta.env.VITE_API_URL
 const MAX_FILE_SIZE = 2 * 1024 * 1024
 
-const labelUi = 'mb-2 block text-[11px] font-bold uppercase tracking-[0.1em] text-[#F8D27A]'
+const labelUi = 'mb-2 block text-[11px] font-bold uppercase tracking-[0.1em] text-slate-600'
 
 const inputUi =
-  'w-full rounded-xl border border-[#F0B429]/45 bg-[#0B1D3A]/90 px-4 py-2.5 text-sm font-medium text-[#F6F8FF] placeholder:text-[#CBD6FF]/65 focus:border-[#E8621A] focus:ring-2 focus:ring-[#E8621A]/35 focus:outline-none'
+  'w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#E8621A] focus:ring-2 focus:ring-[#E8621A]/35 focus:outline-none'
 
 function buildInitialFormValues(fields) {
   const next = {}
@@ -420,7 +420,7 @@ function UserServiceFormPage() {
 
   if (serviceLoading) {
     return (
-      <section className="py-8 text-sm text-white/70">Loading service…</section>
+      <section className="py-8 text-sm text-slate-600">Loading service…</section>
     )
   }
 
@@ -432,7 +432,7 @@ function UserServiceFormPage() {
         </div>
         <Link
           to="/user/services"
-          className="inline-flex w-fit rounded-xl border border-white/15 bg-[#0B1D3A]/70 px-4 py-2.5 text-sm font-semibold text-white hover:border-[#E8621A]/50"
+          className="inline-flex w-fit rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 hover:border-[#E8621A]/50"
         >
           ← Back to services
         </Link>
@@ -451,18 +451,18 @@ function UserServiceFormPage() {
     : []
 
   return (
-    <div className="w-full max-w-[1200px] pb-10 text-[#EEF3FF]">
+    <div className="w-full max-w-[1200px] pb-10 text-slate-900">
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <nav className="mb-1 flex flex-wrap items-center gap-2 text-xs font-semibold text-[#BFD1FF]">
-            <Link to="/user/services" className="text-[#F0B429] hover:text-[#F0B429]/90">
+          <nav className="mb-1 flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-500">
+            <Link to="/user/services" className="text-[#E8621A] hover:text-[#E8621A]/90">
               Services
             </Link>
             <span aria-hidden="true">/</span>
-            <span className="text-[#E9EEFF]">Intake</span>
+            <span className="text-slate-900">Intake</span>
           </nav>
-          <h1 className="text-2xl font-extrabold tracking-tight text-[#F9FBFF]">{service.name}</h1>
-          <p className="mt-1 text-sm text-[#C8D6FF]">
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">{service.name}</h1>
+          <p className="mt-1 text-sm text-slate-600">
             {showSubmittedSummary
               ? 'Your submission for this service is below. Use Edit submission to change it.'
               : ''}
@@ -471,14 +471,14 @@ function UserServiceFormPage() {
         <button
           type="button"
           onClick={() => navigate('/user/services')}
-          className="shrink-0 rounded-xl border border-[#F0B429]/45 bg-[#0B1D3A] px-4 py-2.5 text-sm font-semibold text-[#F9FBFF] hover:border-[#E8621A]"
+          className="shrink-0 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 hover:border-[#E8621A]"
         >
           ← All services
         </button>
       </div>
 
       {configLoading ? (
-        <p className="py-6 text-sm text-white/60">Loading form…</p>
+        <p className="py-6 text-sm text-slate-500">Loading form…</p>
       ) : (
         <div className="flex w-full flex-col gap-10">
           {fetchError ? (
@@ -492,7 +492,7 @@ function UserServiceFormPage() {
                   <div>
                     <label className={labelUi}>Submitted details</label>
                     {savedSubmission.submittedAt ? (
-                      <p className="text-xs text-[#D6FFE7]">
+                      <p className="text-xs text-green-700">
                         Last saved:{' '}
                         {new Date(savedSubmission.submittedAt).toLocaleString(undefined, {
                           dateStyle: 'medium',
@@ -504,14 +504,14 @@ function UserServiceFormPage() {
                   <button
                     type="button"
                     onClick={handleEditSubmission}
-                    className="rounded-xl border border-[#F0B429]/45 bg-[#0B1D3A]/70 px-4 py-2 text-sm font-semibold text-[#F8FBFF] hover:border-[#E8621A]"
+                    className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:border-[#E8621A]"
                   >
                     Edit submission
                   </button>
                 </div>
-                <div className="overflow-x-auto rounded-lg border border-[#F0B429]/35">
+                <div className="overflow-x-auto rounded-lg border border-slate-200">
                   <table className="w-full min-w-[280px] text-left text-sm">
-                    <thead className="bg-[#152B57] text-[11px] uppercase tracking-[0.08em] text-[#F0B429]">
+                    <thead className="bg-slate-100 text-[11px] uppercase tracking-[0.08em] text-[#E8621A]">
                       <tr>
                         <th className="px-4 py-3 font-semibold">Field</th>
                         <th className="px-4 py-3 font-semibold">Your answer</th>
@@ -519,13 +519,13 @@ function UserServiceFormPage() {
                     </thead>
                     <tbody>
                       {sortedSavedFieldRows.map((row, idx) => (
-                        <tr key={`${row.label}-${idx}`} className="border-t border-[#F0B429]/20">
-                          <td className="px-4 py-3 font-semibold text-[#F6F9FF]">{row.label}</td>
-                          <td className="px-4 py-3 text-[#DEE8FF]">
+                        <tr key={`${row.label}-${idx}`} className="border-t border-slate-200">
+                          <td className="px-4 py-3 font-semibold text-slate-900">{row.label}</td>
+                          <td className="px-4 py-3 text-slate-700">
                             {row.value ? (
                               <span className="whitespace-pre-wrap break-words">{row.value}</span>
                             ) : (
-                              <span className="text-white/40">—</span>
+                              <span className="text-slate-400">—</span>
                             )}
                           </td>
                         </tr>
@@ -536,12 +536,12 @@ function UserServiceFormPage() {
               </div>
 
               {linkedDocuments.length > 0 ? (
-                <div className="w-full rounded-xl border border-[#F0B429]/35 bg-[#0D214D]/70 p-4 sm:p-5">
+                <div className="w-full rounded-xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
                   <label className={labelUi}>Documents on file</label>
-                  <p className="mb-3 text-xs text-[#C8D6FF]">Files stored in your account for this checklist.</p>
-                  <div className="overflow-x-auto rounded-lg border border-[#F0B429]/35">
+                  <p className="mb-3 text-xs text-slate-600">Files stored in your account for this checklist.</p>
+                  <div className="overflow-x-auto rounded-lg border border-slate-200">
                     <table className="w-full min-w-[300px] text-left text-sm">
-                      <thead className="bg-[#152B57] text-[11px] uppercase tracking-[0.08em] text-[#F0B429]">
+                      <thead className="bg-slate-100 text-[11px] uppercase tracking-[0.08em] text-[#E8621A]">
                         <tr>
                           <th className="px-4 py-3 font-semibold">Document</th>
                           <th className="px-4 py-3 font-semibold">Category</th>
@@ -553,8 +553,8 @@ function UserServiceFormPage() {
                           const rowKey = docRowKey(doc, i)
                           const existing = findUserDocEntryForLink(userDocEntries, doc)
                           return (
-                            <tr key={rowKey} className="border-t border-[#F0B429]/20 align-top">
-                              <td className="px-4 py-3 font-semibold text-[#F8FBFF]">
+                            <tr key={rowKey} className="border-t border-slate-200 align-top">
+                              <td className="px-4 py-3 font-semibold text-slate-900">
                                 {doc.documentItemName || 'Document'}
                               </td>
                               <td className="px-4 py-3">
@@ -562,7 +562,7 @@ function UserServiceFormPage() {
                                   {doc.documentTypeName || '—'}
                                 </span>
                               </td>
-                              <td className="max-w-[280px] px-4 py-3 text-xs text-[#DEE8FF]">
+                              <td className="max-w-[280px] px-4 py-3 text-xs text-slate-700">
                                 {existing?.documents?.length ? (
                                   <ul className="m-0 list-none space-y-1 p-0">
                                     {existing.documents.map((d) => (
@@ -571,7 +571,7 @@ function UserServiceFormPage() {
                                           href={d.url}
                                           target="_blank"
                                           rel="noreferrer"
-                                          className="break-all text-[#9EC5FF] hover:underline"
+                                          className="break-all text-blue-600 hover:underline"
                                         >
                                           {d.fileName || 'View file'}
                                         </a>
@@ -579,7 +579,7 @@ function UserServiceFormPage() {
                                     ))}
                                   </ul>
                                 ) : (
-                                  <span className="text-white/45">—</span>
+                                  <span className="text-slate-400">—</span>
                                 )}
                               </td>
                             </tr>
@@ -598,7 +598,7 @@ function UserServiceFormPage() {
           <div className="w-full">
             <label className={labelUi}>Your details</label>
             {formFields.length === 0 ? (
-              <p className="text-sm text-white/55">
+              <p className="text-sm text-slate-500">
                 There is no custom intake form for this service yet. Contact the team if you need help getting started.
               </p>
             ) : (
@@ -656,14 +656,14 @@ function UserServiceFormPage() {
           </div>
 
           {linkedDocuments.length > 0 ? (
-            <div className="w-full rounded-xl border border-[#F0B429]/30 bg-[#0D214D]/60 p-5">
+            <div className="w-full rounded-xl border border-slate-200 bg-slate-50 p-5">
               <label className={labelUi}>Documents you may need</label>
 
               {saveError ? <p className="mb-3 text-sm text-red-300">{saveError}</p> : null}
 
-              <div className="overflow-x-auto rounded-lg border border-[#F0B429]/30">
+              <div className="overflow-x-auto rounded-lg border border-slate-200">
                 <table className="w-full min-w-[320px] text-left">
-                  <thead className="border-b border-[#F0B429]/35 bg-[#152B57] text-[11px] uppercase tracking-[0.1em] text-[#F0B429]">
+                  <thead className="border-b border-slate-200 bg-slate-100 text-[11px] uppercase tracking-[0.1em] text-[#E8621A]">
                     <tr>
                       <th className="px-2 py-3 font-semibold sm:px-4"> </th>
                       <th className="px-2 py-3 font-semibold sm:px-4">Document</th>
@@ -681,7 +681,7 @@ function UserServiceFormPage() {
                       const pending = pendingDocFiles[rowKey]
 
                       return (
-                        <tr key={rowKey} className="border-t border-[#F0B429]/20 align-top">
+                        <tr key={rowKey} className="border-t border-slate-200 align-top">
                           <td className="px-2 py-3 sm:px-4">
                             {doc.documentItemImage ? (
                               <img
@@ -690,13 +690,13 @@ function UserServiceFormPage() {
                                 className="h-10 w-10 rounded-lg object-cover ring-1 ring-white/10"
                               />
                             ) : (
-                              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-base" aria-hidden>
+                              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-50 text-base" aria-hidden>
                                 📄
                               </span>
                             )}
                           </td>
                           <td className="px-2 py-3 sm:px-4">
-                            <p className="text-sm font-semibold text-[#F8FBFF]">{doc.documentItemName || 'Document'}</p>
+                            <p className="text-sm font-semibold text-slate-900">{doc.documentItemName || 'Document'}</p>
                           </td>
                           <td className="px-2 py-3 sm:px-4">
                             <span className="inline-flex rounded-full border border-[#E8621A]/30 bg-[#E8621A]/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#E8621A]">
@@ -705,9 +705,9 @@ function UserServiceFormPage() {
                           </td>
                           <td className="max-w-[220px] px-2 py-3 sm:px-4">
                             {userDocsLoading ? (
-                              <span className="text-xs text-white/45">…</span>
+                              <span className="text-xs text-slate-400">…</span>
                             ) : (
-                              <div className="space-y-1 text-xs text-white/80">
+                              <div className="space-y-1 text-xs text-slate-700">
                                 {existing?.documents?.length ? (
                                   <ul className="m-0 list-none space-y-1 p-0">
                                     {existing.documents.map((d) => (
@@ -716,7 +716,7 @@ function UserServiceFormPage() {
                                           href={d.url}
                                           target="_blank"
                                           rel="noreferrer"
-                                          className="break-all text-[#9EC5FF] hover:underline"
+                                          className="break-all text-blue-600 hover:underline"
                                         >
                                           {d.fileName || 'View file'}
                                         </a>
@@ -725,9 +725,9 @@ function UserServiceFormPage() {
                                   </ul>
                                 ) : null}
                                 {pending ? (
-                                  <p className="text-[#F0B429]">Pending: {pending.name}</p>
+                                  <p className="text-[#E8621A]">Pending: {pending.name}</p>
                                 ) : !existing?.documents?.length ? (
-                                  <span className="text-white/45">—</span>
+                                  <span className="text-slate-400">—</span>
                                 ) : null}
                               </div>
                             )}
@@ -738,7 +738,7 @@ function UserServiceFormPage() {
                               accept=".jpg,.jpeg,.png,.webp,.pdf,.doc,.docx,image/*"
                               disabled={saving || !authUser?._id}
                               onChange={(e) => handlePendingDocFile(rowKey, doc, e)}
-                              className="max-w-[200px] text-xs text-[#E4ECFF] file:mr-2 file:rounded-lg file:border-0 file:bg-[#E8621A] file:px-2 file:py-1.5 file:text-white disabled:opacity-50"
+                              className="max-w-[200px] text-xs text-slate-700 file:mr-2 file:rounded-lg file:border-0 file:bg-[#E8621A] file:px-2 file:py-1.5 file:text-white disabled:opacity-50"
                             />
                           </td>
                         </tr>
@@ -750,7 +750,7 @@ function UserServiceFormPage() {
             </div>
           ) : null}
 
-          <div className="w-full rounded-xl border border-[#F0B429]/30 bg-[#0D214D]/60 p-5">
+          <div className="w-full rounded-xl border border-slate-200 bg-slate-50 p-5">
             <button
               type="button"
               disabled={saving || !authUser?._id || intakeSaved}
@@ -763,7 +763,7 @@ function UserServiceFormPage() {
             >
               {saving ? 'Saving…' : intakeSaved ? 'Saved' : 'Save'}
             </button>
-            {!authUser?._id ? <p className="mt-2 text-xs text-[#C8D6FF]">Log in to save.</p> : null}
+            {!authUser?._id ? <p className="mt-2 text-xs text-slate-600">Log in to save.</p> : null}
           </div>
             </>
           ) : null}
@@ -777,11 +777,11 @@ function UserServiceFormPage() {
           aria-modal="true"
           aria-labelledby="intake-success-title"
         >
-          <div className="w-full max-w-md rounded-2xl border border-[#F0B429]/45 bg-[#0B1D3A] p-6 shadow-xl">
-            <h2 id="intake-success-title" className="text-lg font-bold text-[#F8FBFF]">
+          <div className="w-full max-w-md rounded-2xl border border-slate-300 bg-white p-6 shadow-xl">
+            <h2 id="intake-success-title" className="text-lg font-bold text-slate-900">
               Document added successfully
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#D9E4FF]">
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
               Your submission is saved. You can review it in the summary below.
             </p>
             <button
